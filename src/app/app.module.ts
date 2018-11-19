@@ -28,7 +28,6 @@ import { MyTableComponent } from './components/my-table/my-table.component';
 import { FirstPageComponent } from './pages/first-page/first-page.component';
 import { SecondPageComponent } from './pages/second-page/second-page.component';
 import { ThirdPageComponent } from './pages/third-page/third-page.component';
-import { MyStepperComponent } from './components/my-stepper/my-stepper.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -39,8 +38,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MyTableComponent,
     FirstPageComponent,
     SecondPageComponent,
-    ThirdPageComponent,
-    MyStepperComponent
+    ThirdPageComponent
   ],
   imports: [
     BrowserModule,
