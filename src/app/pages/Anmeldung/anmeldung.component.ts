@@ -9,11 +9,11 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'app-third-page',
-  templateUrl: './third-page.component.html',
-  styleUrls: ['./third-page.component.scss']
+  selector: 'app-anmeldung',
+  templateUrl: './anmeldung.component.html',
+  styleUrls: ['./anmeldung.component.scss']
 })
-export class ThirdPageComponent implements OnInit {
+export class AnmeldungComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
