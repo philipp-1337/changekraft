@@ -1,2 +1,3 @@
-- Get data into table
+- Was passiert wenn Absage (Schritt nach Name & Email)
 - Connect to firebase Database
+- Get data into table
