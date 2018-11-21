@@ -9,15 +9,11 @@ import { RsvpData } from '../models/rsvp-data.model';
 export class RsvpDataService {
   rsvpDataChanged = new Subject<RsvpData[]>();
 
-  private rsvpdata: RsvpData[] = [
-    new RsvpData(
-      'Jon Doe',
-      'jon@doe.com',
-      'Lange Str. 17, 10555 Berlin',
-    )
+  rsvpdata: RsvpData[] = [
+    new RsvpData('Jon Doe', 'jon@doe.com', 'Lange Str. 17, 10555 Berlin')
   ];
 
-  constructor() { }
+  constructor() {}
 
   getRsvpData() {
     return this.rsvpdata.slice();
@@ -27,4 +23,8 @@ export class RsvpDataService {
     return this.rsvpdata[index];
   }
 
+  addRsvp(rsvpdata: RsvpData) {
+    this.rsvpdata.push(rsvpdata);
+    this.rsvpDataChanged.next(this.rsvpdata.slice());
+  }
 }

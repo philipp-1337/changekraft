@@ -27,9 +27,9 @@ import { MyTableComponent } from './components/my-table/my-table.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AnmeldungComponent } from './pages/anmeldung/anmeldung.component';
 import { ZusagenComponent } from './pages/zusagen/zusagen.component';
-import { RsvpComponent } from './pages/zusagen/rsvp/rsvp.component';
+import { ParticipantComponent } from './pages/zusagen/participant/participant.component';
+import { RsvpComponent } from './pages/rsvp/rsvp.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +37,9 @@ import { RsvpComponent } from './pages/zusagen/rsvp/rsvp.component';
     MyNavComponent,
     MyDashboardComponent,
     MyTableComponent,
-    AnmeldungComponent,
+    RsvpComponent,
     ZusagenComponent,
-    RsvpComponent
+    ParticipantComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@ import { MyTableDataSource } from './my-table-datasource';
 @Component({
   selector: 'app-my-table',
   templateUrl: './my-table.component.html',
-  styleUrls: ['./my-table.component.scss'],
+  styleUrls: ['./my-table.component.scss']
 })
 export class MyTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -13,7 +13,7 @@ export class MyTableComponent implements OnInit {
   dataSource: MyTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['name', 'email', 'address'];
 
   ngOnInit() {
     this.dataSource = new MyTableDataSource(this.paginator, this.sort);

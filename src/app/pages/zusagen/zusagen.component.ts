@@ -13,11 +13,14 @@ export class ZusagenComponent implements OnInit {
   rsvpdata: RsvpData[] = [];
   subscription: Subscription;
 
-
-  constructor(private rsvpDataService: RsvpDataService) { }
+  constructor(private rsvpDataService: RsvpDataService) {}
 
   ngOnInit() {
+    this.subscription = this.rsvpDataService.rsvpDataChanged.subscribe(
+      (rsvpdata: RsvpData[]) => {
+        this.rsvpdata = rsvpdata;
+      }
+    );
     this.rsvpdata = this.rsvpDataService.getRsvpData();
   }
-
 }

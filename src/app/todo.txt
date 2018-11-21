@@ -1,0 +1,4 @@
+- Close Menu if clicked/touched
+- Disable the seconde Step if invalid
+- Get data into table
+- Connect to firebase Database

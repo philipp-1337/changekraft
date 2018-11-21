@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import { SecondPageComponent } from './pages/second-page/second-page.component';
-// import { FirstPageComponent } from './pages/first-page/first-page.component';
-import { AnmeldungComponent } from './pages/anmeldung/anmeldung.component';
 import { ZusagenComponent } from './pages/zusagen/zusagen.component';
+import { RsvpComponent } from './pages/rsvp/rsvp.component';
 
 const routes: Routes = [
-  // { path: 'first-page', component: FirstPageComponent },
-  // { path: 'second-page', component: SecondPageComponent },
-  { path: 'anmeldung', component: AnmeldungComponent },
+  { path: 'anmeldung', component: RsvpComponent },
   { path: 'zusagen', component: ZusagenComponent }
 ];
 

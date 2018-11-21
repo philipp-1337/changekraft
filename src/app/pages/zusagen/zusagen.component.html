@@ -1,1 +1,6 @@
-<app-rsvp *ngFor="let rsvpdataEl of rsvpdata; let i = index" [rsvpdata]="rsvpdataEl" [index]="i"></app-rsvp>
+<app-participant
+  *ngFor="let rsvpdataEl of rsvpdata; let i = index"
+  [rsvpdata]="rsvpdataEl"
+  [index]="i"></app-participant>
+
+<!-- <app-my-table></app-my-table> -->
