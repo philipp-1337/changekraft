@@ -3,5 +3,5 @@ export class RsvpData {
         public name: string,
         public email: string,
         public address: string
-    ) { }
+    ) {}
 }

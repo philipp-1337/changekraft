@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { RsvpDataService } from 'src/app/services/rsvp-data.service';
-// import { RsvpData } from 'src/app/models/rsvp-data.model';
+import { RsvpData } from 'src/app/models/rsvp-data.model';
 
 @Component({
   selector: 'app-rsvp',
@@ -12,20 +12,31 @@ import { RsvpDataService } from 'src/app/services/rsvp-data.service';
 export class RsvpComponent implements OnInit {
   constructor(private rsvpDataService: RsvpDataService) {}
 
-  rsvpForm: FormGroup;
-  formGroup1: FormGroup;
-  formGroup2: FormGroup;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
+  newRsvpData: RsvpData;
 
   ngOnInit() {
-    this.rsvpForm = new FormGroup({
+    this.firstFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required)
+    });
+    this.secondFormGroup = new FormGroup({
       address: new FormControl('', Validators.required)
     });
   }
 
+  mergeFG() {
+    this.newRsvpData = {
+      ...this.firstFormGroup.value,
+      ...this.secondFormGroup.value
+    };
+  }
+
   onSubmit() {
-    console.log(this.rsvpForm.value);
-    this.rsvpDataService.addRsvp(this.rsvpForm.value);
+    this.mergeFG();
+    console.log(this.newRsvpData);
+    this.rsvpDataService.addRsvp(this.newRsvpData);
   }
 }
