@@ -21,6 +21,24 @@
             </div>
         </form>
     </mat-step>
+    <mat-step [stepControl]="teilnahmeFormGroup">
+        <form [formGroup]="teilnahmeFormGroup">
+            <ng-template matStepLabel>Teilnahme</ng-template>
+            <p>
+                <mat-slide-toggle color="primary" formControlName="teilnahme">Ich/wir nehmen teil.</mat-slide-toggle>
+            </p>
+            <div>
+                <p *ngIf="!teilnahmeFormGroup.controls['teilnahme'].value">
+                    <button type="button" mat-button matStepperPrevious>Back</button>
+                    <button type="button" mat-button (click)="onEarlyExit()">Schade :(</button>
+                </p>
+                <p *ngIf="teilnahmeFormGroup.controls['teilnahme'].value">
+                    <button type="button" mat-button matStepperPrevious>Back</button>
+                    <button type="button" mat-button matStepperNext>Ok, cool. Weiter..</button>
+                </p>
+            </div>
+        </form>
+    </mat-step>
     <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Fill out your address</ng-template>

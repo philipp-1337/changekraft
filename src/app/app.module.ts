@@ -20,6 +20,8 @@ import {
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 import { MyDashboardComponent } from './components/my-dashboard/my-dashboard.component';
@@ -31,6 +33,11 @@ import { ZusagenComponent } from './pages/zusagen/zusagen.component';
 import { ParticipantComponent } from './pages/zusagen/participant/participant.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 
+import { QuestionableBooleanPipe } from './pages/zusagen/participant/questionableBoolean.pipe';
+import { HomeComponent } from './pages/home/home.component';
+import { SuccessComponent } from './pages/rsvp/success/success.component';
+import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +46,11 @@ import { RsvpComponent } from './pages/rsvp/rsvp.component';
     MyTableComponent,
     RsvpComponent,
     ZusagenComponent,
-    ParticipantComponent
+    ParticipantComponent,
+    QuestionableBooleanPipe,
+    HomeComponent,
+    SuccessComponent,
+    CancellationComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +73,9 @@ import { RsvpComponent } from './pages/rsvp/rsvp.component';
     MatSortModule,
     MatSlideToggleModule,
     MatStepperModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

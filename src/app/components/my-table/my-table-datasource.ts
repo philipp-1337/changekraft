@@ -8,26 +8,7 @@ import { RsvpDataService } from '../../services/rsvp-data.service';
 // TODO: replace this with real data from your application
 
 const EXAMPLE_DATA: RsvpData[] = [
-  { address: '', email: '1', name: 'Hydrogen' },
-  { address: '', email: '2', name: 'Helium' },
-  { address: '', email: '3', name: 'Lithium' },
-  { address: '', email: '4', name: 'Beryllium' },
-  { address: '', email: '5', name: 'Boron' },
-  { address: '', email: '6', name: 'Carbon' },
-  { address: '', email: '7', name: 'Nitrogen' },
-  { address: '', email: '8', name: 'Oxygen' },
-  { address: '', email: '9', name: 'Fluorine' },
-  { address: '', email: '10', name: 'Neon' },
-  { address: '', email: '11', name: 'Sodium' },
-  { address: '', email: '12', name: 'Magnesium' },
-  { address: '', email: '13', name: 'Aluminum' },
-  { address: '', email: '14', name: 'Silicon' },
-  { address: '', email: '15', name: 'Phosphorus' },
-  { address: '', email: '16', name: 'Sulfur' },
-  { address: '', email: '17', name: 'Chlorine' },
-  { address: '', email: '18', name: 'Argon' },
-  { address: '', email: '19', name: 'Potassium' },
-  { address: '', email: '20', name: 'Calcium' }
+  { address: '', email: '1', teilnahme: true, name: 'Hydrogen' },
 ];
 
 /**
