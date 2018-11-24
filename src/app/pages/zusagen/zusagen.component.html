@@ -1,6 +1,29 @@
-<app-participant
-  *ngFor="let rsvpdataEl of rsvpdata; let i = index"
-  [rsvpdata]="rsvpdataEl"
-  [index]="i"></app-participant>
+<mat-accordion *ngFor="let rsvp of rsvpdata; let i = index">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        #{{i + 1}} {{ rsvp.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        Teilnahme: {{ rsvp.teilnahme | questionableBoolean }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <ul>
+        <li class="mb-1">{{ rsvp.email }}</li>
+        <li class="mb-1">{{ rsvp.address }}</li>
+      </ul>
+      <mat-action-row>
+        <button mat-button>Click me</button>
+      </mat-action-row>
+    </ng-template>
+  </mat-expansion-panel>
+</mat-accordion>
 
-<!-- <app-my-table></app-my-table> -->
+Teilnehmer:
+<button
+  mat-raised-button
+  matBadgePosition="before"
+  matBadgeColor="accent"
+  color="primary"
+  (click)="exportAsXLSX()">Download</button>

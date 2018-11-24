@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { RsvpData } from '../../models/rsvp-data.model';
 import { RsvpDataService } from '../../services/rsvp-data.service';
+import { ExcelService } from '../../services/excel.service';
 
 @Component({
   selector: 'app-zusagen',
@@ -10,10 +11,14 @@ import { RsvpDataService } from '../../services/rsvp-data.service';
   styleUrls: ['./zusagen.component.scss']
 })
 export class ZusagenComponent implements OnInit {
-  rsvpdata: RsvpData[] = [];
+  rsvpdata: RsvpData[];
   subscription: Subscription;
+  index: number;
 
-  constructor(private rsvpDataService: RsvpDataService) {}
+  constructor(
+    private rsvpDataService: RsvpDataService,
+    private excelService: ExcelService
+  ) {}
 
   ngOnInit() {
     this.subscription = this.rsvpDataService.rsvpDataChanged.subscribe(
@@ -22,5 +27,9 @@ export class ZusagenComponent implements OnInit {
       }
     );
     this.rsvpdata = this.rsvpDataService.getRsvpData();
+  }
+
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(this.rsvpdata, 'rsvp');
   }
 }

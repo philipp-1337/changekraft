@@ -22,31 +22,31 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
-import { MyDashboardComponent } from './components/my-dashboard/my-dashboard.component';
-import { MyTableComponent } from './components/my-table/my-table.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ZusagenComponent } from './pages/zusagen/zusagen.component';
-import { ParticipantComponent } from './pages/zusagen/participant/participant.component';
+// import { ParticipantComponent } from './pages/zusagen/participant/participant.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 
-import { QuestionableBooleanPipe } from './pages/zusagen/participant/questionableBoolean.pipe';
+import { QuestionableBooleanPipe } from './shared/questionableBoolean.pipe';
 import { HomeComponent } from './pages/home/home.component';
 import { SuccessComponent } from './pages/rsvp/success/success.component';
 import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
+
+import { ExcelService } from './services/excel.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyNavComponent,
-    MyDashboardComponent,
-    MyTableComponent,
     RsvpComponent,
     ZusagenComponent,
-    ParticipantComponent,
+    // ParticipantComponent,
     QuestionableBooleanPipe,
     HomeComponent,
     SuccessComponent,
@@ -75,9 +75,11 @@ import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.co
     MatStepperModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatExpansionModule,
+    MatBadgeModule
   ],
-  providers: [],
+  providers: [ExcelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
