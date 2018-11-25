@@ -1,13 +1,13 @@
 <mat-vertical-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="firstFormGroup" optional>
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Fill out your name</ng-template>
             <mat-form-field>
-                <input 
-                    matInput 
-                    placeholder="Last name, First name *" 
+                <input
+                    matInput
+                    placeholder="Last name, First name *"
                     type="text"
-                    id="name" 
+                    id="name"
                     formControlName="name">
             </mat-form-field>
             <br />
@@ -21,7 +21,7 @@
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="teilnahmeFormGroup">
+    <mat-step [stepControl]="teilnahmeFormGroup" optional>
         <form [formGroup]="teilnahmeFormGroup">
             <ng-template matStepLabel>Teilnahme</ng-template>
             <p>
@@ -39,12 +39,29 @@
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-            <input matInput placeholder="Anschrift *" formControlName="address">
-        </mat-form-field>
+    <mat-step [stepControl]="anzahlFormGroup" optional>
+        <form [formGroup]="anzahlFormGroup">
+        <ng-template matStepLabel>Anzahl</ng-template>
+        <p>
+          Ich komme zusammen mit:
+          <mat-slide-toggle color="primary" formControlName="partner">PartnerIn</mat-slide-toggle>
+       </p>
+        <p>
+          Ich bringe einen Hund mit:
+          <mat-slide-toggle color="primary" formControlName="hund">Hund</mat-slide-toggle>
+        </p>
+        <p>
+          Ich bringe Kinder mit:
+          <mat-slider
+            class="example-margin"
+            max="2"
+            min="0"
+            step="1"
+            thumbLabel
+            tickInterval="1"
+            formControlName="kinder">
+          </mat-slider>
+        </p>
         <div>
             <button type="button" mat-button matStepperPrevious>Back</button>
             <button type="button" mat-button matStepperNext>Next</button>

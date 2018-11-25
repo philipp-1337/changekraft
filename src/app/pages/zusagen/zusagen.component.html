@@ -11,7 +11,9 @@
     <ng-template matExpansionPanelContent>
       <ul>
         <li class="mb-1">{{ rsvp.email }}</li>
-        <li class="mb-1">{{ rsvp.address }}</li>
+        <li class="mb-1">{{ rsvp.partner | questionableBoolean}}</li>
+        <li class="mb-1">{{ rsvp.hund | questionableBoolean}}</li>
+        <li class="mb-1">{{ rsvp.kinder }}</li>
       </ul>
       <mat-action-row>
         <button mat-button>Click me</button>

@@ -5,19 +5,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RsvpDataService } from 'src/app/services/rsvp-data.service';
 import { RsvpData } from 'src/app/models/rsvp-data.model';
 
-
 @Component({
   selector: 'app-rsvp',
   templateUrl: './rsvp.component.html',
   styleUrls: ['./rsvp.component.scss']
 })
 export class RsvpComponent implements OnInit {
-  constructor(private rsvpDataService: RsvpDataService, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private rsvpDataService: RsvpDataService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   checked = true;
 
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  anzahlFormGroup: FormGroup;
   teilnahmeFormGroup: FormGroup;
 
   newRsvpData: RsvpData;
@@ -30,8 +33,10 @@ export class RsvpComponent implements OnInit {
     this.teilnahmeFormGroup = new FormGroup({
       teilnahme: new FormControl('')
     });
-    this.secondFormGroup = new FormGroup({
-      address: new FormControl('', Validators.required)
+    this.anzahlFormGroup = new FormGroup({
+      partner: new FormControl(''),
+      hund: new FormControl(''),
+      kinder: new FormControl('')
     });
   }
 
@@ -39,7 +44,7 @@ export class RsvpComponent implements OnInit {
     this.newRsvpData = {
       ...this.firstFormGroup.value,
       ...this.teilnahmeFormGroup.value,
-      ...this.secondFormGroup.value
+      ...this.anzahlFormGroup.value
     };
   }
 

@@ -24,13 +24,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ZusagenComponent } from './pages/zusagen/zusagen.component';
-// import { ParticipantComponent } from './pages/zusagen/participant/participant.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 
 import { QuestionableBooleanPipe } from './shared/questionableBoolean.pipe';
@@ -46,7 +46,6 @@ import { ExcelService } from './services/excel.service';
     MyNavComponent,
     RsvpComponent,
     ZusagenComponent,
-    // ParticipantComponent,
     QuestionableBooleanPipe,
     HomeComponent,
     SuccessComponent,
@@ -77,7 +76,8 @@ import { ExcelService } from './services/excel.service';
     MatCheckboxModule,
     MatRadioModule,
     MatExpansionModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSliderModule
   ],
   providers: [ExcelService],
   bootstrap: [AppComponent]
