@@ -43,15 +43,15 @@
         <form [formGroup]="anzahlFormGroup">
         <ng-template matStepLabel>Anzahl</ng-template>
         <p>
-          Ich komme zusammen mit:
-          <mat-slide-toggle color="primary" formControlName="partner">PartnerIn</mat-slide-toggle>
+          Ich komme mit Begeleitung:<br />
+          <mat-slide-toggle color="primary" formControlName="begleitung"></mat-slide-toggle>
        </p>
         <p>
-          Ich bringe einen Hund mit:
-          <mat-slide-toggle color="primary" formControlName="hund">Hund</mat-slide-toggle>
+          Ich bringe einen Hund mit:<br />
+          <mat-slide-toggle color="primary" formControlName="hund"></mat-slide-toggle>
         </p>
         <p>
-          Ich bringe Kinder mit:
+          Ich bringe Kinder mit:<br />
           <mat-slider
             class="example-margin"
             max="2"

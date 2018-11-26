@@ -3,7 +3,7 @@ export class RsvpData {
     public name: string,
     public email: string,
     public teilnahme: boolean,
-    public partner: boolean,
+    public begleitung: boolean,
     public hund: boolean,
     public kinder: number
   ) {}

@@ -10,22 +10,28 @@
     </mat-expansion-panel-header>
     <ng-template matExpansionPanelContent>
       <ul>
-        <li class="mb-1">{{ rsvp.email }}</li>
-        <li class="mb-1">{{ rsvp.partner | questionableBoolean}}</li>
-        <li class="mb-1">{{ rsvp.hund | questionableBoolean}}</li>
-        <li class="mb-1">{{ rsvp.kinder }}</li>
+        <li class="mb-1">Begleitung: {{ rsvp.begleitung | questionableBoolean}}</li>
+        <li class="mb-1">Hund: {{ rsvp.hund | questionableBoolean}}</li>
+        <li class="mb-1">Kind(er): {{ rsvp.kinder }}</li>
       </ul>
       <mat-action-row>
-        <button mat-button>Click me</button>
+        <a mat-button href="mailto:{{rsvp.email}}">E-Mail schreiben</a>
       </mat-action-row>
     </ng-template>
   </mat-expansion-panel>
 </mat-accordion>
 
-Teilnehmer:
-<button
-  mat-raised-button
-  matBadgePosition="before"
-  matBadgeColor="accent"
-  color="primary"
-  (click)="exportAsXLSX()">Download</button>
+<mat-card>
+  Teilnehmer:
+  <button 
+    mat-raised-button 
+    matBadgePosition="before" 
+    matBadgeColor="accent" 
+    color="primary" 
+    (click)="exportAsXLSX()">Download
+  </button>
+</mat-card>
+
+<p>
+  
+</p>

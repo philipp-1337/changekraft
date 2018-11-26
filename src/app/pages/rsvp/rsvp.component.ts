@@ -34,7 +34,7 @@ export class RsvpComponent implements OnInit {
       teilnahme: new FormControl('')
     });
     this.anzahlFormGroup = new FormGroup({
-      partner: new FormControl(''),
+      begleitung: new FormControl(''),
       hund: new FormControl(''),
       kinder: new FormControl('')
     });
