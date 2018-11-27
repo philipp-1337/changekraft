@@ -25,6 +25,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 
@@ -77,7 +79,9 @@ import { ExcelService } from './services/excel.service';
     MatRadioModule,
     MatExpansionModule,
     MatBadgeModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSnackBarModule,
+    MatSelectModule
   ],
   providers: [ExcelService],
   bootstrap: [AppComponent]

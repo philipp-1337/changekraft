@@ -1,5 +1,5 @@
-<mat-accordion *ngFor="let rsvp of rsvpdata; let i = index">
-  <mat-expansion-panel>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let rsvp of rsvpdata; let i = index">
     <mat-expansion-panel-header>
       <mat-panel-title>
         #{{i + 1}} {{ rsvp.name }}
@@ -14,24 +14,28 @@
         <li class="mb-1">Hund: {{ rsvp.hund | questionableBoolean}}</li>
         <li class="mb-1">Kind(er): {{ rsvp.kinder }}</li>
       </ul>
-      <mat-action-row>
-        <a mat-button href="mailto:{{rsvp.email}}">E-Mail schreiben</a>
+      <mat-action-row *ngIf="rsvp.email">
+        <a
+          mat-stroked-button
+          color="accent"
+          href="mailto:{{rsvp.email}}"
+          target="_blank">
+          E-Mail schreiben
+        </a>
       </mat-action-row>
     </ng-template>
   </mat-expansion-panel>
 </mat-accordion>
 
-<mat-card>
-  Teilnehmer:
-  <button 
-    mat-raised-button 
-    matBadgePosition="before" 
-    matBadgeColor="accent" 
-    color="primary" 
-    (click)="exportAsXLSX()">Download
+<mat-card class="mat-expansion-panel-spacing">
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="exportAsXLSX()">
+    Excel Download
   </button>
 </mat-card>
 
 <p>
-  
+
 </p>

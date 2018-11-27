@@ -3,21 +3,23 @@
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Fill out your name</ng-template>
             <mat-form-field>
-                <input
-                    matInput
-                    placeholder="Last name, First name *"
-                    type="text"
-                    id="name"
-                    formControlName="name">
+              <input
+                matInput
+                placeholder="Last name, First name *"
+                type="text"
+                id="name"
+                formControlName="name">
             </mat-form-field>
             <br />
             <mat-form-field>
-                <input matInput placeholder="E-Mail *" formControlName="email" email>
+              <input matInput placeholder="E-Mail *" formControlName="email" email>
             </mat-form-field>
             <div>
-                <button
+              <button
                 type="button"
-                mat-button matStepperNext>Next</button>
+                mat-button matStepperNext>
+                Next
+              </button>
             </div>
         </form>
     </mat-step>
@@ -52,7 +54,17 @@
         </p>
         <p>
           Ich bringe Kinder mit:<br />
-          <mat-slider
+          <mat-form-field>
+            <mat-select placeholder="Anzahl Kinder" name="kinder" formControlName="kinder">
+              <mat-option value="1">
+                1
+              </mat-option>
+              <mat-option value="2">
+                2
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-slider
             class="example-margin"
             max="2"
             min="0"
@@ -60,7 +72,7 @@
             thumbLabel
             tickInterval="1"
             formControlName="kinder">
-          </mat-slider>
+          </mat-slider> -->
         </p>
         <div>
             <button type="button" mat-button matStepperPrevious>Back</button>
