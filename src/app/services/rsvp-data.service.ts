@@ -10,7 +10,7 @@ export class RsvpDataService {
   rsvpDataChanged = new Subject<RsvpData[]>();
 
   rsvpdata: RsvpData[] = [
-    new RsvpData('Jon Doe', 'jon@doe.com', true, true, true, 1)
+    new RsvpData('Jon Doe', 'jon@doe.com', true, true, true, 1, 'Lorem')
   ];
 
   constructor() {}

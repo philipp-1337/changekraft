@@ -13,6 +13,7 @@
         <li class="mb-1">Begleitung: {{ rsvp.begleitung | questionableBoolean}}</li>
         <li class="mb-1">Hund: {{ rsvp.hund | questionableBoolean}}</li>
         <li class="mb-1">Kind(er): {{ rsvp.kinder }}</li>
+        <li class="mb-1">Anreise: {{ rsvp.anreise }}</li>
       </ul>
       <mat-action-row *ngIf="rsvp.email">
         <a

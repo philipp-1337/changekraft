@@ -26,6 +26,7 @@ export class RsvpComponent implements OnInit {
   firstFormGroup: FormGroup;
   anzahlFormGroup: FormGroup;
   teilnahmeFormGroup: FormGroup;
+  anreiseFormGroup: FormGroup;
 
   newRsvpData: RsvpData;
 
@@ -42,6 +43,9 @@ export class RsvpComponent implements OnInit {
       hund: new FormControl(''),
       kinder: new FormControl('')
     });
+    this.anreiseFormGroup = new FormGroup({
+      anreise: new FormControl('')
+    });
   }
 
   openSnackBar(message: string, action: string) {
@@ -54,7 +58,8 @@ export class RsvpComponent implements OnInit {
     this.newRsvpData = {
       ...this.firstFormGroup.value,
       ...this.teilnahmeFormGroup.value,
-      ...this.anzahlFormGroup.value
+      ...this.anzahlFormGroup.value,
+      ...this.anreiseFormGroup.value
     };
   }
 

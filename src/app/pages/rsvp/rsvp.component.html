@@ -56,29 +56,20 @@
           Ich bringe Kinder mit:<br />
           <mat-form-field>
             <mat-select name="kinder" formControlName="kinder">
-                <mat-option value="0">
-                    0
-                </mat-option>
-                <mat-option value="1">
-                    1
-                </mat-option>
-                <mat-option value="2">
-                    2
-                </mat-option>
-                <mat-option value="3">
-                    3
-                </mat-option>
+              <mat-option value="0">
+                  0
+              </mat-option>
+              <mat-option value="1">
+                  1
+              </mat-option>
+              <mat-option value="2">
+                  2
+              </mat-option>
+              <mat-option value="3">
+                  3
+              </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <mat-slider
-            class="example-margin"
-            max="2"
-            min="0"
-            step="1"
-            thumbLabel
-            tickInterval="1"
-            formControlName="kinder">
-          </mat-slider> -->
         </p>
         <div>
             <button type="button" mat-button matStepperPrevious>Back</button>
@@ -91,9 +82,23 @@
         <form [formGroup]="anreiseFormGroup">
             <ng-template matStepLabel>Anreise</ng-template>
             <p>
-                <mat-slide-toggle color="primary" formControlName="teilnahme">Eigener PKW</mat-slide-toggle>
-                <mat-slide-toggle color="primary" formControlName="teilnahme">Mitfahrgelegenheit</mat-slide-toggle>
-                <mat-slide-toggle color="primary" formControlName="teilnahme">Zug (benötige Abholung)</mat-slide-toggle>
+              Ich reise an mit:<br />
+              <mat-form-field>
+                <mat-select name="anreise" formControlName="anreise">
+                  <mat-option value="PKW">
+                    Eigener PKW
+                  </mat-option>
+                  <mat-option value="Mitfahrgelegenheit">
+                    Mitfahrgelegenheit
+                  </mat-option>
+                  <mat-option value="Zug">
+                    Zug (benötige Abholung)
+                  </mat-option>
+                  <mat-option value="Sonstige">
+                    Sonstige
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </p>
             <div>
                 <button type="button" mat-button matStepperPrevious>Back</button>
