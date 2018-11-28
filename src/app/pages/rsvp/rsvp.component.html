@@ -55,13 +55,19 @@
         <p>
           Ich bringe Kinder mit:<br />
           <mat-form-field>
-            <mat-select placeholder="Anzahl Kinder" name="kinder" formControlName="kinder">
-              <mat-option value="1">
-                1
-              </mat-option>
-              <mat-option value="2">
-                2
-              </mat-option>
+            <mat-select name="kinder" formControlName="kinder">
+                <mat-option value="0">
+                    0
+                </mat-option>
+                <mat-option value="1">
+                    1
+                </mat-option>
+                <mat-option value="2">
+                    2
+                </mat-option>
+                <mat-option value="3">
+                    3
+                </mat-option>
             </mat-select>
           </mat-form-field>
           <!-- <mat-slider
@@ -80,6 +86,22 @@
         </div>
         </form>
     </mat-step>
+
+    <mat-step [stepControl]="anreiseFormGroup" optional>
+        <form [formGroup]="anreiseFormGroup">
+            <ng-template matStepLabel>Anreise</ng-template>
+            <p>
+                <mat-slide-toggle color="primary" formControlName="teilnahme">Eigener PKW</mat-slide-toggle>
+                <mat-slide-toggle color="primary" formControlName="teilnahme">Mitfahrgelegenheit</mat-slide-toggle>
+                <mat-slide-toggle color="primary" formControlName="teilnahme">Zug (benötige Abholung)</mat-slide-toggle>
+            </p>
+            <div>
+                <button type="button" mat-button matStepperPrevious>Back</button>
+                <button type="button" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <div>
