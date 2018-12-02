@@ -1,42 +1,42 @@
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let rsvp of rsvpdata; let i = index">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        #{{i + 1}} {{ rsvp.name }}
-      </mat-panel-title>
-      <mat-panel-description>
-        Teilnahme: {{ rsvp.teilnahme | questionableBoolean }}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <ng-template matExpansionPanelContent>
-      <ul>
-        <li class="mb-1">Begleitung: {{ rsvp.begleitung | questionableBoolean}}</li>
-        <li class="mb-1">Hund: {{ rsvp.hund | questionableBoolean}}</li>
-        <li class="mb-1">Kind(er): {{ rsvp.kinder }}</li>
-        <li class="mb-1">Anreise: {{ rsvp.anreise }}</li>
-      </ul>
-      <mat-action-row *ngIf="rsvp.email">
-        <a
-          mat-stroked-button
-          color="accent"
-          href="mailto:{{rsvp.email}}"
-          target="_blank">
-          E-Mail schreiben
-        </a>
-      </mat-action-row>
-    </ng-template>
-  </mat-expansion-panel>
-</mat-accordion>
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let rsvp of rsvpdata; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          #{{i + 1}} {{ rsvp.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          Teilnahme: {{ rsvp.teilnahme | questionableBoolean }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <ul>
+          <li class="mb-1">Begleitung: {{ rsvp.begleitung | questionableBoolean}}</li>
+          <li class="mb-1">Hund: {{ rsvp.hund | questionableBoolean}}</li>
+          <li class="mb-1">Kind(er): {{ rsvp.kinder }}</li>
+          <li class="mb-1">Anreise: {{ rsvp.anreise }}</li>
+          <li class="mb-1">Ankunft: {{ rsvp.anDate | date:'d. MMMM' }}</li>
+          <li class="mb-1">Abreise: {{ rsvp.abDate | date:'d. MMMM' }}</li>
+        </ul>
+        <mat-action-row *ngIf="rsvp.email">
+          <a
+            mat-stroked-button
+            color="accent"
+            href="mailto:{{rsvp.email}}"
+            target="_blank">
+            E-Mail schreiben
+          </a>
+        </mat-action-row>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-<mat-card class="mat-expansion-panel-spacing">
-  <button
-    mat-flat-button
-    color="primary"
-    (click)="exportAsXLSX()">
-    Excel Download
-  </button>
-</mat-card>
-
-<p>
-
-</p>
+  <mat-card class="mat-expansion-panel-spacing">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="exportAsXLSX()">
+      Excel Download
+    </button>
+  </mat-card>
+</div>

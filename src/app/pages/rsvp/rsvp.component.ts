@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { RsvpDataService } from 'src/app/services/rsvp-data.service';
 import { RsvpData } from 'src/app/models/rsvp-data.model';
@@ -23,6 +23,9 @@ export class RsvpComponent implements OnInit {
 
   checked = true;
 
+  minDate = new Date(2019, 6, 19);
+  maxDate = new Date(2019, 6, 21);
+
   firstFormGroup: FormGroup;
   anzahlFormGroup: FormGroup;
   teilnahmeFormGroup: FormGroup;
@@ -44,7 +47,9 @@ export class RsvpComponent implements OnInit {
       kinder: new FormControl('')
     });
     this.anreiseFormGroup = new FormGroup({
-      anreise: new FormControl('')
+      anreise: new FormControl(''),
+      anDate: new FormControl('', Validators.required),
+      abDate: new FormControl('', Validators.required)
     });
   }
 

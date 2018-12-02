@@ -6,6 +6,8 @@ export class RsvpData {
     public begleitung: boolean,
     public hund: boolean,
     public kinder: number,
-    public anreise: string
+    public anreise: string,
+    public anDate: Date,
+    public abDate: Date
   ) {}
 }

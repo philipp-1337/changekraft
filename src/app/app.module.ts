@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -15,7 +17,8 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatInputModule
+  MatInputModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -27,6 +30,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter } from '@angular/material/core';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 
@@ -41,6 +46,7 @@ import { SuccessComponent } from './pages/rsvp/success/success.component';
 import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
 
 import { ExcelService } from './services/excel.service';
+import { GermanWeek } from './shared/germanWeek.class';
 
 @NgModule({
   declarations: [
@@ -62,6 +68,7 @@ import { ExcelService } from './services/excel.service';
     ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
+    MatNativeDateModule,
     MatSidenavModule,
     MatIconModule,
     MatInputModule,
@@ -81,9 +88,18 @@ import { ExcelService } from './services/excel.service';
     MatBadgeModule,
     MatSliderModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule
   ],
-  providers: [ExcelService],
+  providers: [
+    ExcelService,
+    { provide: LOCALE_ID, useValue: 'de' },
+    { provide: DateAdapter, useClass: GermanWeek }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    registerLocaleData(localeDe);
+  }
+}
