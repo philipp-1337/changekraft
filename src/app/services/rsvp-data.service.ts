@@ -18,8 +18,8 @@ export class RsvpDataService {
       true,
       1,
       'Lorem',
-      new Date('19. Juli 2019'),
-      new Date('21. Juli 2019')
+      new Date('7/19/19, 0:00 AM'),
+      new Date('7/21/19, 0:00 AM')
     )
   ];
 

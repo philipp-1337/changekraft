@@ -33,6 +33,28 @@ export class RsvpComponent implements OnInit {
 
   newRsvpData: RsvpData;
 
+  freitag = new Date(2019, 6, 19);
+  samstag = new Date(2019, 6, 20);
+  sonntag = new Date(2019, 6, 21, 0, 0, 0, 0);
+
+  nights = 0;
+
+  calcNights() {
+    console.log(this.anreiseFormGroup.controls['anDate'].value);
+    console.log(this.anreiseFormGroup.controls['abDate'].value);
+    console.log(this.freitag);
+    console.log(this.samstag);
+    console.log(this.sonntag);
+    this.nights = 11;
+  }
+
+  onChanges(): void {
+    this.anreiseFormGroup.valueChanges.subscribe(val => {
+      this.calcNights();
+      console.log('Changes');
+    });
+  }
+
   ngOnInit() {
     this.firstFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -51,11 +73,12 @@ export class RsvpComponent implements OnInit {
       anDate: new FormControl('', Validators.required),
       abDate: new FormControl('', Validators.required)
     });
+    this.onChanges();
   }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000
+      duration: 2500
     });
   }
 

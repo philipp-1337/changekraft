@@ -143,6 +143,9 @@
                 <mat-datepicker touchUi #pickerAb></mat-datepicker>
               </mat-form-field>
             </p>
+            <p *ngIf="anreiseFormGroup.controls['anDate'].valid && anreiseFormGroup.controls['abDate'].valid">
+              Anzahl Nächte: {{ nights }}
+            </p>
             <div>
                 <button type="button" mat-button matStepperPrevious>Back</button>
                 <button type="button" mat-button matStepperNext>Next</button>
