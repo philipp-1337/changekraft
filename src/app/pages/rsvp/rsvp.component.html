@@ -122,7 +122,7 @@
                     Bitte ein korrektes Datum angeben.
                   </mat-error>
                 <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
-                <mat-datepicker touchUi #pickerAn></mat-datepicker>
+                <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
               </mat-form-field>
             </p>
             <p>
@@ -140,15 +140,18 @@
                     Bitte ein korrektes Datum angeben.
                   </mat-error>
                 <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
-                <mat-datepicker touchUi #pickerAb></mat-datepicker>
+                <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
               </mat-form-field>
             </p>
             <p *ngIf="anreiseFormGroup.controls['anDate'].valid && anreiseFormGroup.controls['abDate'].valid">
-              Anzahl Nächte: {{ nights }}
+              <span *ngIf="checkRange()">Anzahl Nächte: {{ nights }}</span>
+              <span *ngIf="!checkRange()" class="rsvp-error">
+                Das Datum der Abreise darf nicht vor dem Datum der Anreise liegen.
+              </span>
             </p>
             <div>
                 <button type="button" mat-button matStepperPrevious>Back</button>
-                <button type="button" mat-button matStepperNext>Next</button>
+                <button type="button" mat-button matStepperNext [disabled]="!range">Next</button>
             </div>
           </form>
         </mat-step>

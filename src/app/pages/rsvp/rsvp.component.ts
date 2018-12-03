@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { BreakpointObserver } from '@angular/cdk/layout';
+
 import { RsvpDataService } from 'src/app/services/rsvp-data.service';
 import { RsvpData } from 'src/app/models/rsvp-data.model';
 
@@ -16,8 +18,8 @@ export class RsvpComponent implements OnInit {
   constructor(
     private rsvpDataService: RsvpDataService,
     private router: Router,
-    public snackBar: MatSnackBar
-  ) {}
+    public snackBar: MatSnackBar,
+    private breakpointObserver: BreakpointObserver ) {}
 
   @ViewChild('stepper') stepper;
 
@@ -37,28 +39,45 @@ export class RsvpComponent implements OnInit {
   samstag = new Date(2019, 6, 20);
   sonntag = new Date(2019, 6, 21, 0, 0, 0, 0);
 
+  anreise: number;
+  abreise: number;
   nights = 0;
+  range: boolean;
 
   calcNights() {
-    console.log(this.anreiseFormGroup.controls['anDate'].value);
-    console.log(this.anreiseFormGroup.controls['abDate'].value);
-    console.log(this.freitag);
-    console.log(this.samstag);
-    console.log(this.sonntag);
-    this.nights = 11;
+    this.anreise = this.anreiseFormGroup.controls['anDate'].value;
+    this.abreise = this.anreiseFormGroup.controls['abDate'].value;
+    this.nights = (this.abreise - this.anreise) / 8.64 / 10000000;
+    console.log(this.nights);
+    if (this.abreise < this.anreise) {
+      console.log('Das Datum der Abreise darf nicht vor dem Datum der Anreise liegen.');
+      this.range = false;
+    } else {
+      this.range = true;
+      console.log('Alles schick.');
+    }
+  }
+
+  checkRange() {
+    const anreise = this.anreiseFormGroup.controls['anDate'].value;
+    const abreise = this.anreiseFormGroup.controls['abDate'].value;
+    if (abreise < anreise) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   onChanges(): void {
     this.anreiseFormGroup.valueChanges.subscribe(val => {
       this.calcNights();
-      console.log('Changes');
     });
   }
 
   ngOnInit() {
     this.firstFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required)
+      email: new FormControl(''),
     });
     this.teilnahmeFormGroup = new FormGroup({
       teilnahme: new FormControl('')
@@ -74,6 +93,10 @@ export class RsvpComponent implements OnInit {
       abDate: new FormControl('', Validators.required)
     });
     this.onChanges();
+  }
+
+  isMobile() {
+    return this.breakpointObserver.isMatched('(max-width: 599px)');
   }
 
   openSnackBar(message: string, action: string) {

@@ -1,5 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'assets/scss/custom-app-theme.scss';
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$primary: mat-palette($mat-light-blue, 700);
+$accent: mat-palette($mat-pink, 700);
+$warn: mat-palette($mat-deep-orange, A400);
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+.rsvp-error {
+  color: mat-color($warn);
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
