@@ -1,3 +1,10 @@
-::ng-deep .mat-expansion-panel-content .mat-expansion-panel-body {
-  padding: 0px 0px 0px 0px;
+.headers-align {
+   .mat-expansion-panel-header-title,
+   .mat-expansion-panel-header-description {
+    flex-basis: 0;
+   }
+   .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
 }

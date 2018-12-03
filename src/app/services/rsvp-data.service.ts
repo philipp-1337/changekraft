@@ -19,7 +19,9 @@ export class RsvpDataService {
       1,
       'Lorem',
       new Date('7/19/19, 0:00 AM'),
-      new Date('7/21/19, 0:00 AM')
+      new Date('7/21/19, 0:00 AM'),
+      2,
+      ['Zelt', 'Mehrbettzimmer']
     )
   ];
 

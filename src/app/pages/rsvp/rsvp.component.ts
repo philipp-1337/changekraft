@@ -19,7 +19,8 @@ export class RsvpComponent implements OnInit {
     private rsvpDataService: RsvpDataService,
     private router: Router,
     public snackBar: MatSnackBar,
-    private breakpointObserver: BreakpointObserver ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   @ViewChild('stepper') stepper;
 
@@ -32,6 +33,7 @@ export class RsvpComponent implements OnInit {
   anzahlFormGroup: FormGroup;
   teilnahmeFormGroup: FormGroup;
   anreiseFormGroup: FormGroup;
+  unterkunftFormGroup: FormGroup;
 
   newRsvpData: RsvpData;
 
@@ -42,20 +44,18 @@ export class RsvpComponent implements OnInit {
   anreise: number;
   abreise: number;
   nights = 0;
-  range: boolean;
+
+  unterkunftListe: string[] = [
+    'Zelt/Bulli',
+    'Mehrbettzimmer',
+    'Einzelzimmer',
+    'Gästehaus'
+  ];
 
   calcNights() {
     this.anreise = this.anreiseFormGroup.controls['anDate'].value;
     this.abreise = this.anreiseFormGroup.controls['abDate'].value;
     this.nights = (this.abreise - this.anreise) / 8.64 / 10000000;
-    console.log(this.nights);
-    if (this.abreise < this.anreise) {
-      console.log('Das Datum der Abreise darf nicht vor dem Datum der Anreise liegen.');
-      this.range = false;
-    } else {
-      this.range = true;
-      console.log('Alles schick.');
-    }
   }
 
   checkRange() {
@@ -71,13 +71,17 @@ export class RsvpComponent implements OnInit {
   onChanges(): void {
     this.anreiseFormGroup.valueChanges.subscribe(val => {
       this.calcNights();
+      this.unterkunftFormGroup = new FormGroup({
+        naechte: new FormControl(this.nights),
+        unterkuenfte: new FormControl('')
+      });
     });
   }
 
   ngOnInit() {
     this.firstFormGroup = new FormGroup({
       name: new FormControl('', Validators.required),
-      email: new FormControl(''),
+      email: new FormControl('')
     });
     this.teilnahmeFormGroup = new FormGroup({
       teilnahme: new FormControl('')
@@ -91,6 +95,10 @@ export class RsvpComponent implements OnInit {
       anreise: new FormControl(''),
       anDate: new FormControl('', Validators.required),
       abDate: new FormControl('', Validators.required)
+    });
+    this.unterkunftFormGroup = new FormGroup({
+      naechte: new FormControl(''),
+      unterkuenfte: new FormControl('')
     });
     this.onChanges();
   }
@@ -110,7 +118,8 @@ export class RsvpComponent implements OnInit {
       ...this.firstFormGroup.value,
       ...this.teilnahmeFormGroup.value,
       ...this.anzahlFormGroup.value,
-      ...this.anreiseFormGroup.value
+      ...this.anreiseFormGroup.value,
+      ...this.unterkunftFormGroup.value
     };
   }
 

@@ -8,11 +8,11 @@
     <mat-vertical-stepper linear #stepper>
         <mat-step [stepControl]="firstFormGroup" optional>
             <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Fill out your name</ng-template>
+                <ng-template matStepLabel>Perönliche Dazen</ng-template>
                 <mat-form-field>
                   <input
                     matInput
-                    placeholder="Last name, First name *"
+                    placeholder="Name *"
                     type="text"
                     id="name"
                     formControlName="name">
@@ -85,7 +85,7 @@
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="anreiseFormGroup">
+        <mat-step [stepControl]="anreiseFormGroup" optional>
           <form [formGroup]="anreiseFormGroup">
             <ng-template matStepLabel>Anreise</ng-template>
             <p>
@@ -113,6 +113,7 @@
                 <input matInput
                   [min]="minDate" [max]="maxDate"
                   [matDatepicker]="pickerAn"
+                  (focus)="pickerAn.open()"
                   formControlName="anDate">
                   <mat-hint
                     *ngIf="!anreiseFormGroup.controls['anDate'].valid && !anreiseFormGroup.controls['anDate'].touched">
@@ -131,9 +132,10 @@
                 <input matInput
                   [min]="minDate" [max]="maxDate"
                   [matDatepicker]="pickerAb"
+                  (focus)="pickerAb.open()"
                   formControlName="abDate">
                   <mat-hint
-                    *ngIf="!anreiseFormGroup.controls['anDate'].valid && !anreiseFormGroup.controls['anDate'].touched">
+                    *ngIf="!anreiseFormGroup.controls['abDate'].valid && !anreiseFormGroup.controls['abDate'].touched">
                     Bsp. Datum-Format: 21.7.2019</mat-hint>
                   <mat-error
                     *ngIf="anreiseFormGroup.controls['abDate'].invalid && anreiseFormGroup.controls['abDate'].touched">
@@ -151,7 +153,36 @@
             </p>
             <div>
                 <button type="button" mat-button matStepperPrevious>Back</button>
-                <button type="button" mat-button matStepperNext [disabled]="!range">Next</button>
+                <button type="button" mat-button matStepperNext [disabled]="!checkRange()">Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="unterkunftFormGroup" optional>
+          <form [formGroup]="unterkunftFormGroup">
+            <ng-template matStepLabel>Übernachtung</ng-template>
+          <p>
+            <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Anzahl Nächte: {{ nights }}"
+                  type="text"
+                  id="naechte"
+                  formControlName="naechte"
+                  readonly>
+              </mat-form-field>
+            </p>
+            <p>
+              <mat-form-field>
+                <mat-select placeholder="Unterkunft" formControlName="unterkuenfte" multiple>
+                  <mat-option *ngFor="let unterkunft of unterkunftListe" [value]="unterkunft">{{ unterkunft }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </p>
+
+            <div>
+              <button type="button" mat-button matStepperPrevious>Back</button>
+              <button type="button" mat-button matStepperNext>Next</button>
             </div>
           </form>
         </mat-step>

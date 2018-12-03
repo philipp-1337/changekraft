@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-accordion>
+  <mat-accordion class="headers-align">
     <mat-expansion-panel *ngFor="let rsvp of rsvpdata; let i = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -9,7 +9,6 @@
           Teilnahme: {{ rsvp.teilnahme | questionableBoolean }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <ng-template matExpansionPanelContent>
         <ul>
           <li class="mb-1">Begleitung: {{ rsvp.begleitung | questionableBoolean}}</li>
           <li class="mb-1">Hund: {{ rsvp.hund | questionableBoolean}}</li>
@@ -17,17 +16,18 @@
           <li class="mb-1">Anreise: {{ rsvp.anreise }}</li>
           <li class="mb-1">Ankunft: {{ rsvp.anDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Abreise: {{ rsvp.abDate | date:'d. MMMM' }}</li>
+          <li class="mb-1">Nächte: {{ rsvp.naechte }}</li>
+          <li class="mb-1">Unterkunft: {{ rsvp.unterkuenfte }}</li>
         </ul>
         <mat-action-row *ngIf="rsvp.email">
           <a
-            mat-stroked-button
+            mat-button
             color="accent"
             href="mailto:{{rsvp.email}}"
             target="_blank">
             E-Mail schreiben
           </a>
         </mat-action-row>
-      </ng-template>
     </mat-expansion-panel>
   </mat-accordion>
 

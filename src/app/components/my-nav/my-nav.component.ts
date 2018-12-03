@@ -19,12 +19,21 @@ export class MyNavComponent implements AfterViewInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private _focusMonitor: FocusMonitor,
+    private _focusMonitor: FocusMonitor
   ) {}
 
+  showToggle() {
+    if (!this.breakpointObserver.isMatched('(min-width: 960px)')) {
+      return true;
+    }
+  }
 
   toggleOnlyMobile() {
-    if (this.breakpointObserver.isMatched('(max-width: 599px)')) {
+    if (
+      this.breakpointObserver.isMatched('(max-width: 599px)') ||
+      (this.breakpointObserver.isMatched('(min-width: 599px)') &&
+        this.breakpointObserver.isMatched('(max-width: 960px)'))
+    ) {
       this.drawer.toggle();
     }
   }

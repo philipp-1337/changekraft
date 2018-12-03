@@ -6,3 +6,7 @@
 .mat-slide-toggle {
   padding-top: 8px;
 }
+
+::ng-deep .mat-form-field-wrapper .mat-form-field-infix {
+  width: 220px;
+}
