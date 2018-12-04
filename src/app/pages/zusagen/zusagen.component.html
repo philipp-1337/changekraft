@@ -1,9 +1,9 @@
 <div class="container">
   <mat-accordion class="headers-align">
-    <mat-expansion-panel *ngFor="let rsvp of rsvpdata; let i = index">
+    <mat-expansion-panel *ngFor="let rsvp of rsvpdata; let irsvp = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          #{{i + 1}} {{ rsvp.name }}
+          #{{irsvp + 1}} {{ rsvp.name }}
         </mat-panel-title>
         <mat-panel-description>
           Teilnahme: {{ rsvp.teilnahme | questionableBoolean }}
@@ -17,7 +17,11 @@
           <li class="mb-1">Ankunft: {{ rsvp.anDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Abreise: {{ rsvp.abDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Nächte: {{ rsvp.naechte }}</li>
-          <li class="mb-1">Unterkunft: {{ rsvp.unterkuenfte }}</li>
+          <!-- <li class="mb-1">Unterkunft: {{ rsvp.unterkuenfte }}</li> -->
+          <li class="mb-1">Unterkunft: <ul *ngFor='let unterkunft of rsvp.unterkuenfte; let iuk = index'>
+              <li>#{{iuk + 1}} {{ unterkunft }}</li>
+            </ul>
+          </li>
         </ul>
         <mat-action-row *ngIf="rsvp.email">
           <a
