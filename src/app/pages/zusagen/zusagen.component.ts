@@ -13,7 +13,6 @@ import { ExcelService } from '../../services/excel.service';
 export class ZusagenComponent implements OnInit {
   rsvpdata: RsvpData[];
   subscription: Subscription;
-  index: number;
 
   constructor(
     private rsvpDataService: RsvpDataService,

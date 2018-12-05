@@ -158,10 +158,11 @@
           </form>
         </mat-step>
 
-        <mat-step [stepControl]="unterkunftFormGroup" optional>
+        <!-- <mat-step [stepControl]="unterkunftFormGroup" *ngIf="nights > 0"> -->
+          <mat-step [stepControl]="unterkunftFormGroup" optional>
           <form [formGroup]="unterkunftFormGroup">
             <ng-template matStepLabel>Übernachtung</ng-template>
-          <p>
+          <p *ngIf="checkRange()">
             <mat-form-field>
                 <input
                   matInput
@@ -182,7 +183,7 @@
 
             <div>
               <button type="button" mat-button matStepperPrevious>Back</button>
-              <button type="button" mat-button matStepperNext>Next</button>
+              <button type="button" mat-button (click)="randomFunc()" matStepperNext>Next</button>
             </div>
           </form>
         </mat-step>
