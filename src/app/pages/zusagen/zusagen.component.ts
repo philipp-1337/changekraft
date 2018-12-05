@@ -26,6 +26,8 @@ export class ZusagenComponent implements OnInit {
       }
     );
     this.rsvpdata = this.rsvpDataService.getRsvpData();
+    const unterkuenfte = this.rsvpdata.map(e => e.unterkuenfte).join();
+    console.log('Unterkünfte: ' + unterkuenfte);
   }
 
   exportAsXLSX(): void {

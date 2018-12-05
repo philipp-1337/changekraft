@@ -6,7 +6,7 @@
       </div>
     </div>
     <mat-vertical-stepper linear #stepper>
-        <mat-step [stepControl]="firstFormGroup" optional>
+        <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
                 <ng-template matStepLabel>Perönliche Dazen</ng-template>
                 <mat-form-field>
@@ -30,7 +30,7 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step [stepControl]="teilnahmeFormGroup" optional>
+        <mat-step [stepControl]="teilnahmeFormGroup">
             <form [formGroup]="teilnahmeFormGroup">
                 <ng-template matStepLabel>Teilnahme</ng-template>
                 <p>
@@ -63,21 +63,13 @@
               Ich bringe Kinder mit:<br />
               <mat-form-field>
                 <mat-select name="kinder" formControlName="kinder">
-                  <mat-option value="0">
-                      0
-                  </mat-option>
-                  <mat-option value="1">
-                      1
-                  </mat-option>
-                  <mat-option value="2">
-                      2
-                  </mat-option>
-                  <mat-option value="3">
-                      3
-                  </mat-option>
+                  <mat-option value="0">0</mat-option>
+                  <mat-option value="1">1</mat-option>
+                  <mat-option value="2">2</mat-option>
+                  <mat-option value="3">3</mat-option>
                 </mat-select>
               </mat-form-field>
-            </p>
+             </p>
             <div>
                 <button type="button" mat-button matStepperPrevious>Back</button>
                 <button type="button" mat-button matStepperNext>Next</button>
@@ -85,7 +77,7 @@
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="anreiseFormGroup" optional>
+        <mat-step [stepControl]="anreiseFormGroup">
           <form [formGroup]="anreiseFormGroup">
             <ng-template matStepLabel>Anreise</ng-template>
             <p>
@@ -158,8 +150,8 @@
           </form>
         </mat-step>
 
-        <!-- <mat-step [stepControl]="unterkunftFormGroup" *ngIf="nights > 0"> -->
-          <mat-step [stepControl]="unterkunftFormGroup" optional>
+        <mat-step [stepControl]="unterkunftFormGroup" *ngIf="nights > 0">
+          <!-- <mat-step [stepControl]="unterkunftFormGroup" optional> -->
           <form [formGroup]="unterkunftFormGroup">
             <ng-template matStepLabel>Übernachtung</ng-template>
           <p *ngIf="checkRange()">

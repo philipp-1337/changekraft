@@ -44,6 +44,7 @@ export class RsvpComponent implements OnInit {
   anreise: number;
   abreise: number;
   nights: number;
+  unterkuenfte: any;
 
   unterkunftListe: string[] = [
     'Zelt/Bulli',
@@ -56,6 +57,7 @@ export class RsvpComponent implements OnInit {
     this.anreise = this.anreiseFormGroup.controls['anDate'].value;
     this.abreise = this.anreiseFormGroup.controls['abDate'].value;
     this.nights = (this.abreise - this.anreise) / 8.64 / 10000000;
+    this.unterkuenfte = this.unterkunftFormGroup.controls['unterkuenfte'].value;
   }
 
   checkRange() {
@@ -73,7 +75,7 @@ export class RsvpComponent implements OnInit {
       this.calcNights();
       this.unterkunftFormGroup = new FormGroup({
         naechte: new FormControl(this.nights),
-        unterkuenfte: new FormControl('')
+        unterkuenfte: new FormControl(this.unterkuenfte)
       });
     });
   }
