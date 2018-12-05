@@ -17,7 +17,7 @@ export class ZusagenComponent implements OnInit {
   constructor(
     private rsvpDataService: RsvpDataService,
     private excelService: ExcelService
-  ) {}
+    ) {}
 
   ngOnInit() {
     this.subscription = this.rsvpDataService.rsvpDataChanged.subscribe(

@@ -16,8 +16,8 @@
           <li class="mb-1">Anreise: {{ rsvp.anreise }}</li>
           <li class="mb-1">Ankunft: {{ rsvp.anDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Abreise: {{ rsvp.abDate | date:'d. MMMM' }}</li>
-          <li class="mb-1">Nächte: {{ rsvp.nights }}</li>
-          <li class="mb-1">Unterkunft: {{ rsvp.unterkunft }} </li>
+          <li class="mb-1">Nächte: {{ rsvp.naechte }}</li>
+          <li class="mb-1">Unterkunft: {{ rsvp.unterkuenfte }} </li>
         </ul>
         <mat-action-row *ngIf="rsvp.email">
           <a

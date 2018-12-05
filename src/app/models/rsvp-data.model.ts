@@ -9,7 +9,7 @@ export class RsvpData {
     public anreise: string,
     public anDate: Date,
     public abDate: Date,
-    public nights: number,
-    public unterkunft: string
+    public naechte: number,
+    public unterkuenfte: Array<string>
   ) {}
 }

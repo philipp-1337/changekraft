@@ -34,7 +34,6 @@ export class RsvpComponent implements OnInit {
   teilnahmeFormGroup: FormGroup;
   anreiseFormGroup: FormGroup;
   unterkunftFormGroup: FormGroup;
-  uebernachtung: Array<any>;
 
   newRsvpData: RsvpData;
 
@@ -44,8 +43,7 @@ export class RsvpComponent implements OnInit {
 
   anreise: number;
   abreise: number;
-  nights = 0;
-  unterkunft: string;
+  nights: number;
 
   unterkunftListe: string[] = [
     'Zelt/Bulli',
@@ -78,14 +76,6 @@ export class RsvpComponent implements OnInit {
         unterkuenfte: new FormControl('')
       });
     });
-  }
-
-  randomFunc() {
-    this.unterkunft = this.unterkunftFormGroup.controls[
-      'unterkuenfte'
-    ].value.join(', ');
-    this.uebernachtung = [this.nights, this.unterkunft];
-    console.log(this.uebernachtung);
   }
 
   ngOnInit() {
@@ -129,7 +119,7 @@ export class RsvpComponent implements OnInit {
       ...this.teilnahmeFormGroup.value,
       ...this.anzahlFormGroup.value,
       ...this.anreiseFormGroup.value,
-      ...this.uebernachtung
+      ...this.unterkunftFormGroup.value
     };
   }
 

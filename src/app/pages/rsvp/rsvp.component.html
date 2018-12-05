@@ -166,10 +166,11 @@
             <mat-form-field>
                 <input
                   matInput
-                  placeholder="Anzahl Nächte: {{ nights }}"
+                  placeholder="Anzahl Nächte:"
                   type="text"
                   id="naechte"
                   formControlName="naechte"
+                  value="{{ nights }}"
                   readonly>
               </mat-form-field>
             </p>
@@ -183,7 +184,7 @@
 
             <div>
               <button type="button" mat-button matStepperPrevious>Back</button>
-              <button type="button" mat-button (click)="randomFunc()" matStepperNext>Next</button>
+              <button type="button" mat-button matStepperNext>Next</button>
             </div>
           </form>
         </mat-step>
