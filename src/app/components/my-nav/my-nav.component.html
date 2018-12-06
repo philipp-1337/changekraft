@@ -8,7 +8,9 @@
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list>
         <a mat-list-item routerLink="/anmeldung">Anmeldung</a>
-        <a mat-list-item routerLink="/zusagen">Zusagen</a>
+        <!-- <ng-template [ngIf]="authService.isAuthenticated()">
+          <a mat-list-item routerLink="/zusagen">Zusagen</a>
+        </ng-template> -->
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -27,17 +29,21 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item routerLink="/login">
-            <mat-icon>lock</mat-icon>
-            <span>Login</span>
-          </button>
-          <button mat-menu-item disabled>
-            <mat-icon>voicemail</mat-icon>
-            <span>Check voicemail</span>
-          </button>
-          <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon>
-            <span>Disable alerts</span>
+          <ng-template [ngIf]="!authService.isAuthenticated()">
+            <button mat-menu-item routerLink="/login">
+              <mat-icon>lock</mat-icon>
+              <span>Login</span>
+            </button>
+          </ng-template>
+          <ng-template [ngIf]="authService.isAuthenticated()">
+            <button mat-menu-item (click)="onLogout()">
+              <mat-icon>lock_open</mat-icon>
+              <span>Logout</span>
+            </button>
+          </ng-template>
+          <button mat-menu-item [disabled]="!authService.isAuthenticated()" routerLink="/zusagen">
+            <mat-icon>supervisor_account</mat-icon>
+            <span>Übersicht Teilnehmer</span>
           </button>
         </mat-menu>
       </mat-toolbar>

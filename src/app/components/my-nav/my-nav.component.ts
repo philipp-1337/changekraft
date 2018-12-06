@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatDrawer } from '@angular/material';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-my-nav',
@@ -19,7 +20,8 @@ export class MyNavComponent implements AfterViewInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private _focusMonitor: FocusMonitor
+    private _focusMonitor: FocusMonitor,
+    public authService: AuthService,
   ) {}
 
   showToggle() {
@@ -40,5 +42,9 @@ export class MyNavComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this._focusMonitor.stopMonitoring(document.getElementById('drawerButton'));
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

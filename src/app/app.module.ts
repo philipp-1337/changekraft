@@ -35,6 +35,7 @@ import { DateAdapter } from '@angular/material/core';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 
+import { AuthGuard } from './services/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ZusagenComponent } from './pages/zusagen/zusagen.component';
@@ -49,6 +50,8 @@ import { ExcelService } from './services/excel.service';
 import { GermanWeek } from './shared/germanWeek.class';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AuthService } from './services/auth.service';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,7 @@ import { RegisterComponent } from './pages/register/register.component';
     LayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpModule,
     MatToolbarModule,
     MatButtonModule,
     MatNativeDateModule,
@@ -96,7 +100,7 @@ import { RegisterComponent } from './pages/register/register.component';
     MatDatepickerModule
   ],
   providers: [
-    ExcelService,
+    ExcelService, AuthGuard, AuthService,
     { provide: LOCALE_ID, useValue: 'de' },
     { provide: DateAdapter, useClass: GermanWeek }
   ],

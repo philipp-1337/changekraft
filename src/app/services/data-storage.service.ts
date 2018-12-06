@@ -16,7 +16,7 @@ export class DataStorageService {
     private authService: AuthService
   ) {}
 
-  storeRecipes() {
+  storeRsvpData() {
     const token = this.authService.getToken();
     return this.http.put(
       'https://wildwildwuerlich.firebaseio.com/rsvp.json?auth=' + token,
@@ -24,7 +24,7 @@ export class DataStorageService {
     );
   }
 
-  getRecipes() {
+  getRsvpData() {
     const token = this.authService.getToken();
     this.authService.getToken();
     this.http
