@@ -47,6 +47,8 @@ import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.co
 
 import { ExcelService } from './services/excel.service';
 import { GermanWeek } from './shared/germanWeek.class';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { GermanWeek } from './shared/germanWeek.class';
     QuestionableBooleanPipe,
     HomeComponent,
     SuccessComponent,
-    CancellationComponent
+    CancellationComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

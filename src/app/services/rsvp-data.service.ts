@@ -27,6 +27,11 @@ export class RsvpDataService {
 
   constructor() {}
 
+  setRsvpData(rsvpdata: RsvpData[]) {
+    this.rsvpdata = rsvpdata;
+    this.rsvpDataChanged.next(this.rsvpdata.slice());
+  }
+
   getRsvpData() {
     return this.rsvpdata.slice();
   }
