@@ -6,7 +6,8 @@
           #{{irsvp + 1}} {{ rsvp.name }}
         </mat-panel-title>
         <mat-panel-description>
-          Teilnahme: {{ rsvp.teilnahme | questionableBoolean }}
+          <mat-icon *ngIf="!rsvp.teilnahme">block</mat-icon>
+          <mat-icon *ngIf="rsvp.teilnahme">check</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
         <ul>

@@ -7,7 +7,14 @@
         id="navButton_1">
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item routerLink="/anmeldung">Anmeldung</a>
+        <button mat-menu-item routerLink="/home">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-menu-item routerLink="/anmeldung">
+          <mat-icon>lock</mat-icon>
+          <span>Anmeldung</span>
+        </button>
         <!-- <ng-template [ngIf]="authService.isAuthenticated()">
           <a mat-list-item routerLink="/zusagen">Zusagen</a>
         </ng-template> -->
