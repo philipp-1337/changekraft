@@ -16,11 +16,11 @@ export class DataStorageService {
     private authService: AuthService
   ) {}
 
-  storeRsvpData() {
-    const token = this.authService.getToken();
-    return this.http.put(
-      'https://wildwildwuerlich.firebaseio.com/rsvp.json?auth=' + token,
-      this.rsvpDataService.getRsvpData()
+  storeRsvpData(data) {
+    // const token = this.authService.getToken();
+    return this.http.post(
+      'https://wildwildwuerlich.firebaseio.com/rsvp.json',
+      data
     );
   }
 

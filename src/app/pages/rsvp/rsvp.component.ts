@@ -132,7 +132,7 @@ export class RsvpComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.rsvpDataService.addRsvp(this.newRsvpData);
-    this.onSaveData();
+    this.onSaveData(this.newRsvpData);
     this.router.navigate(['home']);
     this.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
     this.stepper.reset();
@@ -141,13 +141,14 @@ export class RsvpComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.rsvpDataService.addRsvp(this.newRsvpData);
+    this.onSaveData(this.newRsvpData);
     this.router.navigate(['home']);
     this.openSnackBar('Schade, du wirst nicht eingeplant.', 'Schließen');
     this.stepper.reset();
   }
 
-  onSaveData() {
-    this.dataStorageService.storeRsvpData().subscribe((response: Response) => {
+  onSaveData(newRsvpData) {
+    this.dataStorageService.storeRsvpData(newRsvpData).subscribe((response: Response) => {
       console.log(response);
     });
   }
