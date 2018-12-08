@@ -22,7 +22,7 @@ export class RsvpComponent implements OnInit {
     private router: Router,
     public snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
-    private dataStorageService: DataStorageService,
+    private dataStorageService: DataStorageService
   ) {}
 
   @ViewChild('stepper') stepper;
@@ -131,7 +131,7 @@ export class RsvpComponent implements OnInit {
   onSubmit() {
     this.mergeFG();
     console.log(this.newRsvpData);
-    this.rsvpDataService.addRsvp(this.newRsvpData);
+    // this.rsvpDataService.addRsvp(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
     this.router.navigate(['home']);
     this.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
@@ -140,7 +140,7 @@ export class RsvpComponent implements OnInit {
   onEarlyExit() {
     this.mergeFG();
     console.log(this.newRsvpData);
-    this.rsvpDataService.addRsvp(this.newRsvpData);
+    // this.rsvpDataService.addRsvp(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
     this.router.navigate(['home']);
     this.openSnackBar('Schade, du wirst nicht eingeplant.', 'Schließen');
@@ -148,8 +148,10 @@ export class RsvpComponent implements OnInit {
   }
 
   onSaveData(newRsvpData) {
-    this.dataStorageService.storeRsvpData(newRsvpData).subscribe((response: Response) => {
-      console.log(response);
-    });
+    this.dataStorageService
+      .storeRsvpData(newRsvpData)
+      .subscribe((response: Response) => {
+        console.log(response);
+      });
   }
 }

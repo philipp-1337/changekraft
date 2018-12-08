@@ -2,8 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { HttpModule } from '@angular/http';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { LayoutModule } from '@angular/cdk/layout';
 import {
   MatToolbarModule,
@@ -51,7 +57,6 @@ import { GermanWeek } from './shared/germanWeek.class';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthService } from './services/auth.service';
-import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -69,6 +74,8 @@ import { HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(AppComponent),
+    AngularFireDatabaseModule,
     BrowserAnimationsModule,
     LayoutModule,
     FormsModule,
@@ -100,7 +107,9 @@ import { HttpModule } from '@angular/http';
     MatDatepickerModule
   ],
   providers: [
-    ExcelService, AuthGuard, AuthService,
+    ExcelService,
+    AuthGuard,
+    AuthService,
     { provide: LOCALE_ID, useValue: 'de' },
     { provide: DateAdapter, useClass: GermanWeek }
   ],

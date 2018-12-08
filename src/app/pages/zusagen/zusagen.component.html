@@ -1,30 +1,30 @@
 <div class="container">
   <mat-accordion class="headers-align">
-    <mat-expansion-panel *ngFor="let rsvp of rsvpdata; let irsvp = index">
+    <mat-expansion-panel *ngFor="let participant of rsvp; let irsvp = index">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          #{{irsvp + 1}} {{ rsvp.name }}
+          #{{irsvp + 1}} {{ participant.name }}
         </mat-panel-title>
         <mat-panel-description>
-          <mat-icon *ngIf="!rsvp.teilnahme">block</mat-icon>
-          <mat-icon *ngIf="rsvp.teilnahme">check</mat-icon>
+          <mat-icon *ngIf="!participant.teilnahme">block</mat-icon>
+          <mat-icon *ngIf="participant.teilnahme">check</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
         <ul>
-          <li class="mb-1">Begleitung: {{ rsvp.begleitung | questionableBoolean}}</li>
-          <li class="mb-1">Hund: {{ rsvp.hund | questionableBoolean}}</li>
-          <li class="mb-1">Kind(er): {{ rsvp.kinder }}</li>
-          <li class="mb-1">Anreise: {{ rsvp.anreise }}</li>
-          <li class="mb-1">Ankunft: {{ rsvp.anDate | date:'d. MMMM' }}</li>
-          <li class="mb-1">Abreise: {{ rsvp.abDate | date:'d. MMMM' }}</li>
-          <li class="mb-1">Nächte: {{ rsvp.naechte }}</li>
-          <li class="mb-1">Unterkunft: {{ rsvp.unterkuenfte }} </li>
+          <li class="mb-1">Begleitung: {{ participant.begleitung | questionableBoolean}}</li>
+          <li class="mb-1">Hund: {{ participant.hund | questionableBoolean}}</li>
+          <li class="mb-1">Kind(er): {{ participant.kinder }}</li>
+          <li class="mb-1">Anreise: {{ participant.anreise }}</li>
+          <li class="mb-1">Ankunft: {{ participant.anDate | date:'d. MMMM' }}</li>
+          <li class="mb-1">Abreise: {{ participant.abDate | date:'d. MMMM' }}</li>
+          <li class="mb-1">Nächte: {{ participant.naechte }}</li>
+          <li class="mb-1">Unterkunft: {{ participant.unterkuenfte }} </li>
         </ul>
-        <mat-action-row *ngIf="rsvp.email">
+        <mat-action-row *ngIf="participant.email">
           <a
             mat-button
             color="accent"
-            href="mailto:{{rsvp.email}}"
+            href="mailto:{{participant.email}}"
             target="_blank">
             E-Mail schreiben
           </a>
