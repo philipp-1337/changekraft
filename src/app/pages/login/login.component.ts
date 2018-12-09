@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
+  hide = true;
+
   ngOnInit() {}
 
   onSignin(form: NgForm) {

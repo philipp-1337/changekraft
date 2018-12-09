@@ -38,6 +38,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter } from '@angular/material/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 
@@ -104,7 +105,8 @@ import { AuthService } from './services/auth.service';
     MatSliderModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatProgressBarModule
   ],
   providers: [
     ExcelService,

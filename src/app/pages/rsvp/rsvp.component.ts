@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Response } from '@angular/http';
 
-import { RsvpDataService } from 'src/app/services/rsvp-data.service';
 import { RsvpData } from 'src/app/models/rsvp-data.model';
 
 import { MatSnackBar } from '@angular/material';
@@ -18,7 +17,6 @@ import { DataStorageService } from 'src/app/services/data-storage.service';
 })
 export class RsvpComponent implements OnInit {
   constructor(
-    private rsvpDataService: RsvpDataService,
     private router: Router,
     public snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
@@ -47,7 +45,7 @@ export class RsvpComponent implements OnInit {
   anreise: number;
   abreise: number;
   nights: number;
-  unterkuenfte: any;
+  unterkuenfte: Array<string>;
 
   unterkunftListe: string[] = [
     'Zelt/Bulli',
@@ -131,7 +129,6 @@ export class RsvpComponent implements OnInit {
   onSubmit() {
     this.mergeFG();
     console.log(this.newRsvpData);
-    // this.rsvpDataService.addRsvp(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
     this.router.navigate(['home']);
     this.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
@@ -140,7 +137,6 @@ export class RsvpComponent implements OnInit {
   onEarlyExit() {
     this.mergeFG();
     console.log(this.newRsvpData);
-    // this.rsvpDataService.addRsvp(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
     this.router.navigate(['home']);
     this.openSnackBar('Schade, du wirst nicht eingeplant.', 'Schließen');
