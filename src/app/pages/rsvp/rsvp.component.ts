@@ -3,12 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Response } from '@angular/http';
+import { Response, Http } from '@angular/http';
 
 import { RsvpData } from 'src/app/models/rsvp-data.model';
 
 import { MatSnackBar } from '@angular/material';
-import { DataStorageService } from 'src/app/services/data-storage.service';
 
 @Component({
   selector: 'app-rsvp',
@@ -20,7 +19,7 @@ export class RsvpComponent implements OnInit {
     private router: Router,
     public snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
-    private dataStorageService: DataStorageService
+    private http: Http
   ) {}
 
   @ViewChild('stepper') stepper;
@@ -144,10 +143,16 @@ export class RsvpComponent implements OnInit {
   }
 
   onSaveData(newRsvpData) {
-    this.dataStorageService
-      .storeRsvpData(newRsvpData)
+    this.storeRsvpData(newRsvpData)
       .subscribe((response: Response) => {
         console.log(response);
       });
+  }
+
+  storeRsvpData(data) {
+    return this.http.post(
+      'https://wildwildwuerlich.firebaseio.com/rsvp.json',
+      data
+    );
   }
 }
