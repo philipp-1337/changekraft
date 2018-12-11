@@ -24,6 +24,7 @@
           <li class="mb-1">Abreise: {{ participant.abDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Nächte: {{ participant.naechte }}</li>
           <li class="mb-1">Unterkunft: {{ participant.unterkuenfte }} </li>
+          <li class="mb-1">Key: {{ participant.$key }}</li>
         </ul>
         <mat-action-row *ngIf="participant.email">
           <a
@@ -33,6 +34,9 @@
             target="_blank">
             E-Mail schreiben
           </a>
+          <button mat-flat-button color="primary" (click)="deleteParticipant(participant.$key)">
+            xyz löschen
+          </button>
         </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
@@ -44,5 +48,16 @@
       (click)="exportAsXLSX()">
       Excel Download
     </button>
+  </mat-card>
+
+  <mat-card>
+    <!-- {{ keys }}<br>
+    {{ rsvp }}<br>
+    {{ snapshot }}<br> -->
+    <ul>
+      <li *ngFor="let snap of snapshot">
+        {{ snap.key }}
+      </li>
+    </ul>
   </mat-card>
 </div>
