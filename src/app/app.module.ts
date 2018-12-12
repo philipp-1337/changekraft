@@ -58,6 +58,7 @@ import { GermanWeek } from './shared/germanWeek.class';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthService } from './services/auth.service';
+import { TestComponent } from './pages/test/test.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { AuthService } from './services/auth.service';
     SuccessComponent,
     CancellationComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

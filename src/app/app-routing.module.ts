@@ -8,6 +8,7 @@ import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.co
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { TestComponent } from './pages/test/test.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'login', component: LoginComponent },
+  { path: 'test', component: TestComponent },
   { path: 'register', component: RegisterComponent },
   { path: '404', component: HomeComponent },
   { path: '**', redirectTo: '/404' }

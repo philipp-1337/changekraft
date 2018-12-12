@@ -15,6 +15,10 @@
           <mat-icon>loyalty</mat-icon>
           <span>Anmeldung</span>
         </button>
+        <button mat-menu-item routerLink="/test">
+          <mat-icon>star</mat-icon>
+          <span>Try&Error</span>
+        </button>
         <ng-template [ngIf]="authService.isAuthenticated()">
           <button mat-menu-item routerLink="/zusagen">
             <mat-icon>supervisor_account</mat-icon>
