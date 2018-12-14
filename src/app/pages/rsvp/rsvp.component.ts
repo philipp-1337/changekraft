@@ -56,7 +56,7 @@ export class RsvpComponent implements OnInit {
   calcNights() {
     this.anreise = this.anreiseFormGroup.controls['anDate'].value;
     this.abreise = this.anreiseFormGroup.controls['abDate'].value;
-    this.nights = (this.abreise - this.anreise) / 8.64 / 10000000;
+    this.nights = (this.abreise - this.anreise) / 86400000; // 86400000 = 1 day (in ms)
     this.unterkuenfte = this.unterkunftFormGroup.controls['unterkuenfte'].value;
   }
 
