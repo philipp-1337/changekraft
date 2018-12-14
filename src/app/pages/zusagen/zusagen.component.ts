@@ -34,7 +34,6 @@ export class ZusagenComponent implements OnInit {
         ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
-    console.log(this.rsvp);
     this.fetchDataforExcel();
   }
 
@@ -53,12 +52,33 @@ export class ZusagenComponent implements OnInit {
     return result;
   }
 
+  fuerendeNullen(nummer: number) {
+    if (nummer > 10) {
+      return nummer + '';
+    } else {
+      return '0' + nummer;
+    }
+  }
+
   formilan() {
     for (let x = 0; x < this.excelData.length; x++) {
       this.excelData[x].unterkuenfte = this.join(this.excelData[x].unterkuenfte, ', ');
 
       const abDate: Date = new Date(this.excelData[x].abDate);
       const anDate: Date = new Date(this.excelData[x].anDate);
+
+      const abDateFormatted: string = this.fuerendeNullen(abDate.getDate())
+                                    + '.' + this.fuerendeNullen(abDate.getMonth() + 1)
+                                    + '.' + abDate.getFullYear();
+
+      const anDateFormatted: string = this.fuerendeNullen(anDate.getDate())
+                                    + '.' + this.fuerendeNullen(anDate.getMonth() + 1)
+                                    + '.' + anDate.getFullYear(); // 01.01.2018
+
+      this.excelData[x].abDate = abDateFormatted;
+      this.excelData[x].anDate = anDateFormatted;
+
+      this.excelData[x].kinder = parseInt(this.excelData[x].kinder, 10);
 
       const night: number = (abDate.getTime() - anDate.getTime()) / 86400000;
 
