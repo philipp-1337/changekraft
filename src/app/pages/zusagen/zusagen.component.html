@@ -16,7 +16,14 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
         <ul>
-          <li class="mb-1">Begleitung: {{ participant?.begleitung | questionableBoolean}}</li>
+          <li class="mb-1">
+            Begleitung:
+            <mat-slide-toggle
+              [disabled]="!editMode"
+              color="primary"
+              #begleitung
+              [checked]="participant?.begleitung">
+            </mat-slide-toggle></li>
           <li class="mb-1">Hund: {{ participant?.hund | questionableBoolean}}</li>
           <li class="mb-1">Kind(er): {{ participant?.kinder }}</li>
           <li class="mb-1">Anreise: {{ participant?.anreise }}</li>
@@ -24,19 +31,30 @@
           <li class="mb-1">Abreise: {{ participant?.abDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Nächte: {{ participant?.naechte }}</li>
           <li class="mb-1">Unterkunft: {{ participant?.unterkuenfte }} </li>
-          <li class="mb-1">Key: {{ participant?.key }}</li>
         </ul>
         <mat-action-row>
+          <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-button
+            *ngIf="editMode"
+            color="primary"
+            (click)="editMode = !editMode; updateItem(participant.key, begleitung.checked)"
+            title="Teilnehmer bearbeiten">
+            <mat-icon>save</mat-icon>
+          </button>
           <a
             *ngIf="participant?.email"
             mat-button
-            color="accent"
+            color="primary"
             href="mailto:{{participant?.email}}"
-            target="_blank">
-            E-Mail schreiben
+            target="_blank"
+            title="E-Mail schreiben">
+            <mat-icon>email</mat-icon>
           </a>
-          <button mat-button color="warn" (click)="deleteItem(participant.key)">
-            Teilnehmer entfernen
+          <button mat-button color="warn" (click)="deleteItem(participant.key)" title="Teilnehmer entfernen">
+            <mat-icon>delete</mat-icon>
           </button>
         </mat-action-row>
     </mat-expansion-panel>

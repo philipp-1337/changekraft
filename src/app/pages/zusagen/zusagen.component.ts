@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -18,6 +18,8 @@ export class ZusagenComponent implements OnInit {
 
   nights: any = [];
 
+  editMode = false;
+
   constructor(
     private excelService: ExcelService,
     private db: AngularFireDatabase
@@ -27,18 +29,25 @@ export class ZusagenComponent implements OnInit {
     this.rsvpData = this.db.list('rsvp');
     // Use snapshotChanges().map() to store the key
     this.rsvp = this.rsvpData
-    .snapshotChanges()
-    .pipe(
-      map(changes =>
-        changes.map(c =>
-        ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      );
     this.fetchDataforExcel();
+  }
+
+  updateItem(key: string, newValue: any) {
+    this.rsvpData.update(key, { begleitung: newValue });
   }
 
   deleteItem(key: string) {
     this.rsvpData.remove(key);
+  }
+
+  switchEditMode() {
+    this.editMode = true;
   }
 
   public join(array: Array<string>, seperator: string) {
@@ -62,18 +71,27 @@ export class ZusagenComponent implements OnInit {
 
   formilan() {
     for (let x = 0; x < this.excelData.length; x++) {
-      this.excelData[x].unterkuenfte = this.join(this.excelData[x].unterkuenfte, ', ');
+      this.excelData[x].unterkuenfte = this.join(
+        this.excelData[x].unterkuenfte,
+        ', '
+      );
 
       const abDate: Date = new Date(this.excelData[x].abDate);
       const anDate: Date = new Date(this.excelData[x].anDate);
 
-      const abDateFormatted: string = this.fuerendeNullen(abDate.getDate())
-                                    + '.' + this.fuerendeNullen(abDate.getMonth() + 1)
-                                    + '.' + abDate.getFullYear();
+      const abDateFormatted: string =
+        this.fuerendeNullen(abDate.getDate()) +
+        '.' +
+        this.fuerendeNullen(abDate.getMonth() + 1) +
+        '.' +
+        abDate.getFullYear();
 
-      const anDateFormatted: string = this.fuerendeNullen(anDate.getDate())
-                                    + '.' + this.fuerendeNullen(anDate.getMonth() + 1)
-                                    + '.' + anDate.getFullYear(); // 01.01.2018
+      const anDateFormatted: string =
+        this.fuerendeNullen(anDate.getDate()) +
+        '.' +
+        this.fuerendeNullen(anDate.getMonth() + 1) +
+        '.' +
+        anDate.getFullYear(); // 01.01.2018
 
       this.excelData[x].abDate = abDateFormatted;
       this.excelData[x].anDate = anDateFormatted;
@@ -86,7 +104,6 @@ export class ZusagenComponent implements OnInit {
 
       console.log(night);
     }
-
   }
 
   exportAsXLSX(): void {
