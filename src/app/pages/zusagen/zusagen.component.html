@@ -30,7 +30,11 @@
           <li class="mb-1">Ankunft: {{ participant?.anDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Abreise: {{ participant?.abDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Nächte: {{ participant?.naechte }}</li>
-          <li class="mb-1">Unterkunft: {{ participant?.unterkuenfte }} </li>
+          <li class="mb-1">Unterkunft:
+            <ul *ngFor="let unterkunft of participant?.unterkuenfte;">
+              <li>{{ unterkunft }}</li>
+            </ul>
+          </li>
         </ul>
         <mat-action-row>
           <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">

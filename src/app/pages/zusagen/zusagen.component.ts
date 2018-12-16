@@ -35,6 +35,8 @@ export class ZusagenComponent implements OnInit {
           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
+    console.log(this.rsvp);
+    console.log(this.rsvpData);
     this.fetchDataforExcel();
   }
 
@@ -44,29 +46,6 @@ export class ZusagenComponent implements OnInit {
 
   deleteItem(key: string) {
     this.rsvpData.remove(key);
-  }
-
-  switchEditMode() {
-    this.editMode = true;
-  }
-
-  public join(array: Array<string>, seperator: string) {
-    let result: any = '';
-    for (let x = 0; x < array.length; x++) {
-      if (x !== 0) {
-        result += seperator;
-      }
-      result += array[x];
-    }
-    return result;
-  }
-
-  fuerendeNullen(nummer: number) {
-    if (nummer > 10) {
-      return nummer + '';
-    } else {
-      return '0' + nummer;
-    }
   }
 
   formilan() {
@@ -91,7 +70,7 @@ export class ZusagenComponent implements OnInit {
         '.' +
         this.fuerendeNullen(anDate.getMonth() + 1) +
         '.' +
-        anDate.getFullYear(); // 01.01.2018
+        anDate.getFullYear();
 
       this.excelData[x].abDate = abDateFormatted;
       this.excelData[x].anDate = anDateFormatted;
@@ -118,5 +97,24 @@ export class ZusagenComponent implements OnInit {
         this.excelData = rsvp;
         this.formilan();
       });
+  }
+
+  public join(array: Array<string>, seperator: string) {
+    let result: any = '';
+    for (let x = 0; x < array.length; x++) {
+      if (x !== 0) {
+        result += seperator;
+      }
+      result += array[x];
+    }
+    return result;
+  }
+
+  fuerendeNullen(nummer: number) {
+    if (nummer > 10) {
+      return nummer + '';
+    } else {
+      return '0' + nummer;
+    }
   }
 }
