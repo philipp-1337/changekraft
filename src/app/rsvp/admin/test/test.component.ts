@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-test',
+  selector: 'app-admin-test',
   template: `
     <ul>
       <li *ngFor="let item of (items | async)">

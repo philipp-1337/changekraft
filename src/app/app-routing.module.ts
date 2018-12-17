@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ZusagenComponent } from './pages/zusagen/zusagen.component';
+import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SuccessComponent } from './pages/rsvp/success/success.component';
 import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { AuthGuard } from './services/auth-guard.service';
-import { TestComponent } from './pages/test/test.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,14 +13,11 @@ const routes: Routes = [
   { path: 'anmeldung/success', component: SuccessComponent },
   { path: 'anmeldung/cancellation', component: CancellationComponent },
   {
-    path: 'zusagen',
-    component: ZusagenComponent,
+    path: 'admin',
+    loadChildren: './rsvp/admin/admin.module#AdminModule',
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'test', component: TestComponent },
-  { path: 'register', component: RegisterComponent },
   { path: '404', component: HomeComponent },
   { path: '**', redirectTo: '/404' }
 ];

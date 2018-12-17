@@ -6,21 +6,16 @@ import { AdminRegisterComponent } from './register/register.component';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { AdminTestComponent } from './test/test.component';
 
-const routes: Routes = [
+const adminRoutes: Routes = [
   { path: 'admin', component: AdminLoginComponent },
-  {
-    path: 'admin/zusagen',
-    component: AdminZusagenComponent,
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard]
-  },
+  { path: 'admin/zusagen', component: AdminZusagenComponent },
   { path: 'admin/login', component: AdminLoginComponent },
   { path: 'admin/test', component: AdminTestComponent },
-  { path: 'admin/register', component: AdminRegisterComponent },
+  { path: 'admin/register', component: AdminRegisterComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(adminRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AdminRoutingModule {}

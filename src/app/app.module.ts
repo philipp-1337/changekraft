@@ -7,111 +7,53 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MaterialModule } from './shared/material.module';
+import { SharedModule } from './shared/shared.module';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from '@angular/cdk/layout';
-import {
-  MatToolbarModule,
-  MatButtonModule,
-  MatSidenavModule,
-  MatIconModule,
-  MatListModule,
-  MatGridListModule,
-  MatCardModule,
-  MatMenuModule,
-  MatTableModule,
-  MatPaginatorModule,
-  MatSortModule,
-  MatInputModule,
-  MatNativeDateModule
-} from '@angular/material';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter } from '@angular/material/core';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ZusagenComponent } from './pages/zusagen/zusagen.component';
-import { RsvpComponent } from './pages/rsvp/rsvp.component';
 
-import { QuestionableBooleanPipe } from './shared/questionableBoolean.pipe';
+import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SuccessComponent } from './pages/rsvp/success/success.component';
 import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
 
-import { ExcelService } from './services/excel.service';
+import { DateAdapter } from '@angular/material/core';
 import { GermanWeek } from './shared/germanWeek.class';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+
 import { AuthService } from './services/auth.service';
-import { TestComponent } from './pages/test/test.component';
+
+import { AdminModule } from './rsvp/admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MyNavComponent,
     RsvpComponent,
-    ZusagenComponent,
-    QuestionableBooleanPipe,
     HomeComponent,
     SuccessComponent,
-    CancellationComponent,
-    LoginComponent,
-    RegisterComponent,
-    TestComponent
+    CancellationComponent
   ],
   imports: [
+    MaterialModule,
     BrowserModule,
-    AppRoutingModule,
+    SharedModule,
+    AdminModule,
     AngularFireModule.initializeApp(AppComponent),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
     LayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatNativeDateModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSlideToggleModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatExpansionModule,
-    MatBadgeModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatProgressBarModule
+    AppRoutingModule
   ],
   providers: [
-    ExcelService,
     AuthGuard,
     AuthService,
     { provide: LOCALE_ID, useValue: 'de' },

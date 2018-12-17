@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-adminlogin',
+  selector: 'app-admin-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })

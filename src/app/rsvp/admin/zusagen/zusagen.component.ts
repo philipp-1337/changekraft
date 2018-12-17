@@ -6,7 +6,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { ExcelService } from '../../../services/excel.service';
 
 @Component({
-  selector: 'app-zusagen',
+  selector: 'app-admin-zusagen',
   templateUrl: './zusagen.component.html',
   styleUrls: ['./zusagen.component.scss']
 })
