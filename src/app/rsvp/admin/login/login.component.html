@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="title">
+      <div class="title-spacer">
+        Anmeldung
+      </div>
+    </div>
+    <div class="content">
+      <form (ngSubmit)="onSignin(f)" #f="ngForm">
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="E-Mail"
+            type="email"
+            color="accent"
+            id="email"
+            name="email"
+            ngModel
+            class="form-control">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="Passwort"
+            [type]="hide ? 'password' : 'text'"
+            color="accent"
+            id="password"
+            name="password"
+            ngModel
+            class="form-control">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit" [disabled]="!f.valid">Anmelden</button>
+      </form>
+    </div>
+  </div>
+</div>
