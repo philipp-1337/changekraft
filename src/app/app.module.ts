@@ -30,7 +30,7 @@ import { GermanWeek } from './shared/germanWeek.class';
 
 import { AuthService } from './services/auth.service';
 
-import { AdminModule } from './rsvp/admin/admin.module';
+import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [

@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SuccessComponent } from './pages/rsvp/success/success.component';
 import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { AdminModule } from './components/admin/admin.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,16 +15,18 @@ const routes: Routes = [
   { path: 'anmeldung/cancellation', component: CancellationComponent },
   {
     path: 'admin',
-    loadChildren: './rsvp/admin/admin.module#AdminModule',
+    loadChildren: () => AdminModule,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
   },
-  { path: '404', component: HomeComponent },
+  { path: '404', redirectTo: '/' },
   { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

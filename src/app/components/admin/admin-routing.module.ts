@@ -6,6 +6,8 @@ import { AdminRegisterComponent } from './register/register.component';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { AdminTestComponent } from './test/test.component';
 
+// TODO: Add AuthGuard to Routes
+
 const adminRoutes: Routes = [
   { path: 'admin', component: AdminLoginComponent },
   { path: 'admin/zusagen', component: AdminZusagenComponent },
