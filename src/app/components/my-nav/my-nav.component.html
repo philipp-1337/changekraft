@@ -44,13 +44,13 @@
         </button>
         <mat-menu #menu="matMenu">
           <ng-template [ngIf]="!authService.isAuthenticated()">
-            <button mat-menu-item routerLink="/admin/login">
+            <button mat-menu-item routerLink="/admin/">
               <mat-icon>lock</mat-icon>
               <span>Login</span>
             </button>
           </ng-template>
           <ng-template [ngIf]="authService.isAuthenticated()">
-            <button mat-menu-item (click)="onLogout()" routerLink="/admin/login">
+            <button mat-menu-item (click)="onLogout()" routerLink="/">
               <mat-icon>lock_open</mat-icon>
               <span>Logout</span>
             </button>

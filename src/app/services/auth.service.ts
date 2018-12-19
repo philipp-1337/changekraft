@@ -62,6 +62,6 @@ export class AuthService {
     firebase.auth().signOut();
     this._token = null;
     this.loggedIn = false;
-    this.router.navigate(['/admin/login']);
+    this.router.navigate(['/login']);
   }
 }

@@ -1,19 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
-import { AdminLoginComponent } from './login/login.component';
-import { AdminRegisterComponent } from './register/register.component';
 import { AuthGuard } from '../../services/auth-guard.service';
 import { AdminTestComponent } from './test/test.component';
-
-// TODO: Add AuthGuard to Routes
+import { AdminComponent } from './admin.component';
 
 const adminRoutes: Routes = [
-  { path: 'admin', component: AdminLoginComponent },
-  { path: 'admin/zusagen', component: AdminZusagenComponent },
-  { path: 'admin/login', component: AdminLoginComponent },
-  { path: 'admin/test', component: AdminTestComponent },
-  { path: 'admin/register', component: AdminRegisterComponent }
+  {
+    path: '',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'zusagen',
+        component: AdminZusagenComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'test',
+        component: AdminTestComponent,
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
 ];
 
 @NgModule({

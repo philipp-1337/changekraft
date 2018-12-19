@@ -129,7 +129,7 @@ export class RsvpComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    this.router.navigate(['home']);
+    this.router.navigate(['/']);
     this.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
     this.stepper.reset();
   }
@@ -137,7 +137,7 @@ export class RsvpComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    this.router.navigate(['home']);
+    this.router.navigate(['/']);
     this.openSnackBar('Schade, du wirst nicht eingeplant.', 'Schließen');
     this.stepper.reset();
   }

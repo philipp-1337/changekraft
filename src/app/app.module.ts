@@ -7,30 +7,29 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
+import { LayoutModule } from '@angular/cdk/layout';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { SharedModule } from './shared/shared.module';
+// import { AdminModule } from './components/admin/admin.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { LayoutModule } from '@angular/cdk/layout';
-
-import { MyNavComponent } from './components/my-nav/my-nav.component';
+import { AuthService } from './services/auth.service';
 
 import { AuthGuard } from './services/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { MyNavComponent } from './components/my-nav/my-nav.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SuccessComponent } from './pages/rsvp/success/success.component';
 import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 import { DateAdapter } from '@angular/material/core';
 import { GermanWeek } from './shared/germanWeek.class';
 
-import { AuthService } from './services/auth.service';
-
-import { AdminModule } from './components/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +37,8 @@ import { AdminModule } from './components/admin/admin.module';
     MyNavComponent,
     RsvpComponent,
     HomeComponent,
+    LoginComponent,
+    RegisterComponent,
     SuccessComponent,
     CancellationComponent
   ],
@@ -45,7 +46,7 @@ import { AdminModule } from './components/admin/admin.module';
     MaterialModule,
     BrowserModule,
     SharedModule,
-    AdminModule,
+    // AdminModule,
     AngularFireModule.initializeApp(AppComponent),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,

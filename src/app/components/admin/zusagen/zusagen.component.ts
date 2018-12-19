@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -11,7 +10,6 @@ import { ExcelService } from '../../../services/excel.service';
   styleUrls: ['./zusagen.component.scss']
 })
 export class AdminZusagenComponent implements OnInit {
-  subscription: Subscription;
   rsvp: any;
   rsvpData: AngularFireList<any>;
   excelData: any = [];
@@ -48,7 +46,7 @@ export class AdminZusagenComponent implements OnInit {
     this.rsvpData.remove(key);
   }
 
-  formilan() {
+  formatDataForExcel() {
     for (let x = 0; x < this.excelData.length; x++) {
       this.excelData[x].unterkuenfte = this.join(
         this.excelData[x].unterkuenfte,
@@ -95,7 +93,7 @@ export class AdminZusagenComponent implements OnInit {
       .valueChanges()
       .subscribe(rsvp => {
         this.excelData = rsvp;
-        this.formilan();
+        this.formatDataForExcel();
       });
   }
 
