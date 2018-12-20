@@ -11,6 +11,11 @@ const adminRoutes: Routes = [
     component: AdminComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'zusagen',
+        pathMatch: 'full'
+      },
+      {
         path: 'zusagen',
         component: AdminZusagenComponent,
         canActivate: [AuthGuard]

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Response, Http } from '@angular/http';
@@ -10,16 +10,17 @@ import { RsvpData } from 'src/app/models/rsvp-data.model';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
-  selector: 'app-rsvp',
-  templateUrl: './rsvp.component.html',
-  styleUrls: ['./rsvp.component.scss']
+  selector: 'app-anmeldung',
+  templateUrl: './anmeldung.component.html',
+  styleUrls: ['./anmeldung.component.scss']
 })
-export class RsvpComponent implements OnInit {
+export class AnmeldungComponent implements OnInit {
   constructor(
     private router: Router,
     public snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
-    private http: Http
+    private http: Http,
+    private route: ActivatedRoute,
   ) {}
 
   @ViewChild('stepper') stepper;
@@ -129,7 +130,7 @@ export class RsvpComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    this.router.navigate(['/']);
+    this.router.navigate(['../success'], { relativeTo: this.route });
     this.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
     this.stepper.reset();
   }
@@ -137,7 +138,7 @@ export class RsvpComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    this.router.navigate(['/']);
+    this.router.navigate(['../cancellation'], { relativeTo: this.route });
     this.openSnackBar('Schade, du wirst nicht eingeplant.', 'Schließen');
     this.stepper.reset();
   }

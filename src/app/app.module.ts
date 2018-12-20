@@ -11,7 +11,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { SharedModule } from './shared/shared.module';
-// import { AdminModule } from './components/admin/admin.module';
 
 import { AuthService } from './services/auth.service';
 
@@ -20,10 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MyNavComponent } from './components/my-nav/my-nav.component';
-import { RsvpComponent } from './pages/rsvp/rsvp.component';
 import { HomeComponent } from './pages/home/home.component';
-import { SuccessComponent } from './pages/rsvp/success/success.component';
-import { CancellationComponent } from './pages/rsvp/cancellation/cancellation.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
@@ -35,18 +31,14 @@ import { GermanWeek } from './shared/germanWeek.class';
   declarations: [
     AppComponent,
     MyNavComponent,
-    RsvpComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    SuccessComponent,
-    CancellationComponent
   ],
   imports: [
     MaterialModule,
     BrowserModule,
     SharedModule,
-    // AdminModule,
     AngularFireModule.initializeApp(AppComponent),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
