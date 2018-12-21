@@ -17,15 +17,15 @@ const rsvpRoutes: Routes = [
       },
       {
         path: 'anmeldung',
-        component: AnmeldungComponent,
+        component: AnmeldungComponent
       },
       {
         path: 'success',
-        component: SuccessComponent,
+        component: SuccessComponent
       },
       {
         path: 'cancellation',
-        component: CancellationComponent,
+        component: CancellationComponent
       }
     ]
   }

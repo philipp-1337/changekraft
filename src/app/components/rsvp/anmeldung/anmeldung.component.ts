@@ -20,7 +20,7 @@ export class AnmeldungComponent implements OnInit {
     public snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
     private http: Http,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   @ViewChild('stepper') stepper;
@@ -144,10 +144,9 @@ export class AnmeldungComponent implements OnInit {
   }
 
   onSaveData(newRsvpData) {
-    this.storeRsvpData(newRsvpData)
-      .subscribe((response: Response) => {
-        console.log(response);
-      });
+    this.storeRsvpData(newRsvpData).subscribe((response: Response) => {
+      console.log(response);
+    });
   }
 
   storeRsvpData(data) {

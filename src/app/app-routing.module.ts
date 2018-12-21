@@ -6,19 +6,19 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'home', redirectTo: '/' },
   {
     path: 'rsvp',
-    loadChildren: './components/rsvp/rsvp.module#RsvpModule',
+    loadChildren: './components/rsvp/rsvp.module#RsvpModule'
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: RegisterComponent
   },
   {
     path: 'admin',
@@ -26,14 +26,12 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
   },
-  { path: '404', redirectTo: '/' },
+  { path: '404', component: HomeComponent },
   { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

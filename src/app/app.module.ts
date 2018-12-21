@@ -23,17 +23,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
-import { DateAdapter } from '@angular/material/core';
-import { GermanWeek } from './shared/germanWeek.class';
-
-
 @NgModule({
   declarations: [
     AppComponent,
     MyNavComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     MaterialModule,
@@ -46,12 +42,7 @@ import { GermanWeek } from './shared/germanWeek.class';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [
-    AuthGuard,
-    AuthService,
-    { provide: LOCALE_ID, useValue: 'de' },
-    { provide: DateAdapter, useClass: GermanWeek }
-  ],
+  providers: [AuthGuard, AuthService, { provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

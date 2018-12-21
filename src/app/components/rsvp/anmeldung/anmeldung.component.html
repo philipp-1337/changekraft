@@ -102,14 +102,18 @@
             <p>
               Ich reise an am:<br />
               <mat-form-field class="example-full-width">
-                <input matInput
+                <!-- <input matInput
                   [min]="minDate" [max]="maxDate"
                   [matDatepicker]="pickerAn"
                   (focus)="pickerAn.open()"
+                  formControlName="anDate"> -->
+                <input matInput
+                  [min]="minDate" [max]="maxDate"
+                  [matDatepicker]="pickerAn"
                   formControlName="anDate">
                   <mat-hint
                     *ngIf="!anreiseFormGroup.controls['anDate'].valid && !anreiseFormGroup.controls['anDate'].touched">
-                    Bsp. Datum-Format: 19.7.2019</mat-hint>
+                    Bsp. Datum-Format: 19.07.2019</mat-hint>
                   <mat-error
                     *ngIf="anreiseFormGroup.controls['anDate'].invalid && anreiseFormGroup.controls['anDate'].touched">
                     Bitte ein korrektes Datum angeben.
@@ -121,14 +125,18 @@
             <p>
               Ich reise ab am:<br />
               <mat-form-field class="example-full-width">
-                <input matInput
+                <!-- <input matInput
                   [min]="minDate" [max]="maxDate"
                   [matDatepicker]="pickerAb"
                   (focus)="pickerAb.open()"
+                  formControlName="abDate"> -->
+                <input matInput
+                  [min]="minDate" [max]="maxDate"
+                  [matDatepicker]="pickerAb"
                   formControlName="abDate">
                   <mat-hint
                     *ngIf="!anreiseFormGroup.controls['abDate'].valid && !anreiseFormGroup.controls['abDate'].touched">
-                    Bsp. Datum-Format: 21.7.2019</mat-hint>
+                    Bsp. Datum-Format: 21.07.2019</mat-hint>
                   <mat-error
                     *ngIf="anreiseFormGroup.controls['abDate'].invalid && anreiseFormGroup.controls['abDate'].touched">
                     Bitte ein korrektes Datum angeben.
