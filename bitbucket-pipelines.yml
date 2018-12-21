@@ -8,12 +8,24 @@ image: bartholomej/angular-firebase
 pipelines:
   default:
     - step:
+        name: install dependcies
         caches:
           - node
-        script: # Modify the commands below to build your repository.
+        script: 
           - npm install
           - npm update
           - npm audit fix
+    - step:
+        name: build for production
+        caches:
+          - node
+        script: 
           - ng build --prod
+    - step:
+        name: deployment to production
+        caches:
+          - node
+        script: 
           - firebase deploy --token "$FIREBASE_TOKEN"
+
 
