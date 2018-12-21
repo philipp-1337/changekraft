@@ -9,10 +9,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CoreComponent } from './core.component';
 
 @NgModule({
   imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],
   declarations: [
+    CoreComponent,
     HeaderComponent,
     HomeComponent,
     LoginComponent,
