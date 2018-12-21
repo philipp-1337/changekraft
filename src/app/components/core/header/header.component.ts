@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatDrawer } from '@angular/material';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-my-nav',
-  templateUrl: './my-nav.component.html',
-  styleUrls: ['./my-nav.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class MyNavComponent implements AfterViewInit {
+export class HeaderComponent implements AfterViewInit {
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
@@ -21,7 +21,7 @@ export class MyNavComponent implements AfterViewInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private _focusMonitor: FocusMonitor,
-    public authService: AuthService,
+    public authService: AuthService
   ) {}
 
   showToggle() {

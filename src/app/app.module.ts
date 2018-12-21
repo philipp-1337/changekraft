@@ -7,31 +7,19 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
+import { CoreModule } from './components/core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { SharedModule } from './shared/shared.module';
 
-import { AuthService } from './services/auth.service';
-
-import { AuthGuard } from './services/auth-guard.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MyNavComponent } from './components/my-nav/my-nav.component';
-import { HomeComponent } from './pages/home/home.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    MyNavComponent,
-    HomeComponent,
-    LoginComponent,
-    RegisterComponent
-  ],
+  declarations: [AppComponent],
   imports: [
+    CoreModule,
     MaterialModule,
     BrowserModule,
     SharedModule,
@@ -42,7 +30,7 @@ import { RegisterComponent } from './pages/register/register.component';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [AuthGuard, AuthService, { provide: LOCALE_ID, useValue: 'de' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'de' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
