@@ -26,7 +26,7 @@ const adminRoutes: Routes = [
         canActivate: [AuthGuard]
       }
     ]
-  },
+  }
 ];
 
 @NgModule({

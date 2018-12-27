@@ -64,11 +64,14 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-  <mat-card class="mat-expansion-panel-spacing" *ngIf="(rsvp | async)">
+  <mat-card class="custom-mat-card-spacing" *ngIf="(rsvp | async)">
     <button
       mat-flat-button
       color="primary"
-      (click)="exportAsXLSX()">
+      (click)="exportAsXLSX()"
+      matBadge="{{ counter }}"
+      matBadgePosition="above after"
+      matBadgeColor="accent">
       Excel Download
     </button>
   </mat-card>

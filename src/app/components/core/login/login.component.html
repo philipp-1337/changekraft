@@ -1,37 +1,99 @@
 <div class="container">
+  <ng-template [ngIf]="!authService.isAuthenticated()">
   <div class="wrapper">
     <div class="title">
       <div class="title-spacer">
-        Anmeldung
+        <span>Anmeldung</span>
       </div>
     </div>
     <div class="content">
-      <form (ngSubmit)="onSignin(f)" #f="ngForm">
-        <mat-form-field class="full-width">
-          <input
-            matInput
-            placeholder="E-Mail"
-            type="email"
+        <form #loginform="ngForm">
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="E-Mail"
+              type="email"
+              color="accent"
+              id="email"
+              name="email"
+              ngModel
+              class="form-control">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input
+              matInput
+              placeholder="Passwort"
+              [type]="hide ? 'password' : 'text'"
+              color="accent"
+              id="password"
+              name="password"
+              ngModel
+              class="form-control">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+          <button
+            mat-raised-button
             color="accent"
-            id="email"
-            name="email"
-            ngModel
-            class="form-control">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <input
-            matInput
-            placeholder="Passwort"
-            [type]="hide ? 'password' : 'text'"
-            color="accent"
-            id="password"
-            name="password"
-            ngModel
-            class="form-control">
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </mat-form-field>
-        <button mat-raised-button color="accent" type="submit" [disabled]="!f.valid">Anmelden</button>
-      </form>
+            type="button"
+            (click)="onSignin(loginform)"
+            [disabled]="!loginform.valid">Anmelden
+          </button>
+        </form>
+        <span *ngIf="userNotFound">No User</span>
+        <span *ngIf="wrongPassword">Das war das falsche Passwort, Liebesmauserine.</span>
+        <span *ngIf="randomError">ALERT ALERT</span>
+      </div>
     </div>
-  </div>
+  </ng-template>
+  <ng-template [ngIf]="authService.isAuthenticated()">
+  <mat-card class="custom-mat-card-spacing">
+    <mat-card-header>
+      <div mat-card-avatar><mat-icon>account_circle</mat-icon></div>
+      <mat-card-title>{{ name }}</mat-card-title>
+      <mat-card-subtitle>{{ email }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form #profileform="ngForm">
+        <mat-form-field class="full-width">
+          <input
+            matInput
+            placeholder="{{ name }}"
+            type="text"
+            color="accent"
+            id="displayname"
+            name="displayname"
+            ngModel
+            value="{{ name }}"
+            class="form-control">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-button
+        type="button"
+        (click)="updateUser(profileform)"
+        title="Aktualisieren">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="custom-mat-card-spacing" *ngIf="!verfied">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="sendVerification()">E-Mail bestätigen
+      </button>
+    </mat-card>
+    <mat-card class="custom-mat-card-spacing">
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        (click)="onSignout()">Abmelden
+      </button>
+    </mat-card>
+  </ng-template>
 </div>

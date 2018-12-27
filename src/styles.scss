@@ -23,6 +23,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       @media (min-width: 600px){
         padding: 20px 20px 40px 20px;
       }
+      .custom-mat-card-spacing {
+        margin: 16px 0;
+      }
       .wrapper {
         border: 1px solid rgba(0,0,0,.03);
         box-shadow: 0 2px 2px rgba(0,0,0,.24),0 0 2px rgba(0,0,0,.12);

@@ -33,17 +33,17 @@ export class AuthService {
 
   signinUser(email: string, password: string) {
     this.loggedIn = true;
-    firebase
+    const authObject = firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .catch()
       .then(response => {
-        this.router.navigate(['/']);
         firebase
           .auth()
           .currentUser.getIdToken()
           .then((token: string) => (this._token = token));
-      })
-      .catch(error => console.log(error));
+      });
+    return authObject;
   }
 
   getToken() {
@@ -59,9 +59,9 @@ export class AuthService {
   }
 
   logout() {
-    firebase.auth().signOut();
+    this.router.navigate(['/login']);
     this._token = null;
     this.loggedIn = false;
-    this.router.navigate(['/login']);
+    firebase.auth().signOut();
   }
 }

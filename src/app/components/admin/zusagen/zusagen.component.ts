@@ -3,24 +3,29 @@ import { map } from 'rxjs/operators';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { ExcelService } from '../../../services/excel.service';
+import { JoinClass } from 'src/app/shared/join.class';
 
 @Component({
   selector: 'app-admin-zusagen',
   templateUrl: './zusagen.component.html',
-  styleUrls: ['./zusagen.component.scss']
+  styleUrls: ['./zusagen.component.scss'],
+  providers: [JoinClass]
 })
-export class AdminZusagenComponent implements OnInit {
+export class AdminZusagenComponent implements OnInit, OnDestroy {
   rsvp: any;
   rsvpData: AngularFireList<any>;
   excelData: any = [];
 
   nights: any = [];
 
+  counter: number;
+
   editMode = false;
 
   constructor(
     private excelService: ExcelService,
-    private db: AngularFireDatabase
+    private db: AngularFireDatabase,
+    public joinclass: JoinClass
   ) {}
 
   ngOnInit() {
@@ -38,20 +43,30 @@ export class AdminZusagenComponent implements OnInit {
     this.fetchDataforExcel();
   }
 
+  ngOnDestroy() {}
+
   updateItem(key: string, newValue: any) {
-    this.rsvpData.update(key, { begleitung: newValue });
+    const promise = this.rsvpData.update(key, { begleitung: newValue });
+    promise
+      .then(_ => console.log('Erfolgreich geändert.'))
+      .catch(err => console.log(err, 'Änderung nicht erlaubt.'));
   }
 
   deleteItem(key: string) {
-    this.rsvpData.remove(key);
+    const promise = this.rsvpData.remove(key);
+    promise
+      .then(_ => console.log('Erfolgreich gelöscht.'))
+      .catch(err => console.log(err, 'Löschen nicht erlaubt.'));
   }
 
   formatDataForExcel() {
     for (let x = 0; x < this.excelData.length; x++) {
-      this.excelData[x].unterkuenfte = this.join(
+      this.excelData[x].unterkuenfte = this.joinclass.join(
         this.excelData[x].unterkuenfte,
         ', '
       );
+
+      this.counter = 1 + x;
 
       const abDate: Date = new Date(this.excelData[x].abDate);
       const anDate: Date = new Date(this.excelData[x].anDate);
@@ -79,8 +94,9 @@ export class AdminZusagenComponent implements OnInit {
 
       this.nights.push(night);
 
-      console.log(night);
+      // console.log(night);
     }
+    console.log(this.counter);
   }
 
   exportAsXLSX(): void {
@@ -95,17 +111,6 @@ export class AdminZusagenComponent implements OnInit {
         this.excelData = rsvp;
         this.formatDataForExcel();
       });
-  }
-
-  public join(array: Array<string>, seperator: string) {
-    let result: any = '';
-    for (let x = 0; x < array.length; x++) {
-      if (x !== 0) {
-        result += seperator;
-      }
-      result += array[x];
-    }
-    return result;
   }
 
   fuerendeNullen(nummer: number) {

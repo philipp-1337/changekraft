@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CoreComponent } from './core.component';
+import { AuthTestComponent } from './auth-test/auth-test.component';
 
 @NgModule({
   imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],
@@ -18,7 +19,8 @@ import { CoreComponent } from './core.component';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AuthTestComponent
   ],
   exports: [HeaderComponent, AppRoutingModule],
   providers: [AuthGuard, AuthService]
