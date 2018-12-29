@@ -65,6 +65,9 @@
             ngModel
             value="{{ name }}"
             class="form-control">
+            <mat-hint *ngIf="profileform.valid">
+              Benutzername
+            </mat-hint>
         </mat-form-field>
       </form>
     </mat-card-content>
