@@ -8,16 +8,11 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { ExcelService } from '../../services/excel.service';
 
 import { AdminComponent } from './admin.component';
-import { AdminTestComponent } from './test/test.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule],
-  declarations: [
-    AdminComponent,
-    AdminTestComponent,
-    AdminZusagenComponent,
-  ],
+  declarations: [AdminComponent, AdminZusagenComponent],
   providers: [ExcelService]
 })
 export class AdminModule {}

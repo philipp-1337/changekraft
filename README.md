@@ -1,6 +1,5 @@
 # ToDO
 
-- Catch Error on Logout from guarded pages
 - Catch Error on Login-Page
 
 # WwRsvp

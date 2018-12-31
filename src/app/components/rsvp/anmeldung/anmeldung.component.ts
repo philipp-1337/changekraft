@@ -143,13 +143,13 @@ export class AnmeldungComponent implements OnInit {
     this.stepper.reset();
   }
 
-  onSaveData(newRsvpData) {
+  onSaveData(newRsvpData: RsvpData) {
     this.storeRsvpData(newRsvpData).subscribe((response: Response) => {
       console.log(response);
     });
   }
 
-  storeRsvpData(data) {
+  storeRsvpData(data: RsvpData) {
     return this.http.post(
       'https://wildwildwuerlich.firebaseio.com/rsvp.json',
       data

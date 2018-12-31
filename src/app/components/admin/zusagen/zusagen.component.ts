@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { ExcelService } from '../../../services/excel.service';
@@ -15,6 +16,7 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   rsvp: any;
   rsvpData: AngularFireList<any>;
   excelData: any = [];
+  subscription: Subscription;
 
   nights: any = [];
 
@@ -43,7 +45,9 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
     this.fetchDataforExcel();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   updateItem(key: string, newValue: any) {
     const promise = this.rsvpData.update(key, { begleitung: newValue });
@@ -104,7 +108,7 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   }
 
   fetchDataforExcel() {
-    this.db
+    this.subscription = this.db
       .list('rsvp')
       .valueChanges()
       .subscribe(rsvp => {
