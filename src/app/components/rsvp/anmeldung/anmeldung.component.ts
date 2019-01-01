@@ -6,21 +6,21 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Response, Http } from '@angular/http';
 
 import { RsvpData } from 'src/app/models/rsvp-data.model';
-
-import { MatSnackBar } from '@angular/material';
+import { SnackbarClass } from 'src/app/shared/snackbar.class';
 
 @Component({
   selector: 'app-anmeldung',
   templateUrl: './anmeldung.component.html',
-  styleUrls: ['./anmeldung.component.scss']
+  styleUrls: ['./anmeldung.component.scss'],
+  providers: [SnackbarClass]
 })
 export class AnmeldungComponent implements OnInit {
   constructor(
     private router: Router,
-    public snackBar: MatSnackBar,
     private breakpointObserver: BreakpointObserver,
     private http: Http,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public snackbar: SnackbarClass
   ) {}
 
   @ViewChild('stepper') stepper;
@@ -110,12 +110,6 @@ export class AnmeldungComponent implements OnInit {
     return this.breakpointObserver.isMatched('(max-width: 599px)');
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2500
-    });
-  }
-
   mergeFG() {
     this.newRsvpData = {
       ...this.firstFormGroup.value,
@@ -131,7 +125,7 @@ export class AnmeldungComponent implements OnInit {
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
     this.router.navigate(['../success'], { relativeTo: this.route });
-    this.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
+    this.snackbar.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
     this.stepper.reset();
   }
   onEarlyExit() {
@@ -139,7 +133,10 @@ export class AnmeldungComponent implements OnInit {
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
     this.router.navigate(['../cancellation'], { relativeTo: this.route });
-    this.openSnackBar('Schade, du wirst nicht eingeplant.', 'Schließen');
+    this.snackbar.openSnackBar(
+      'Schade, du wirst nicht eingeplant.',
+      'Schließen'
+    );
     this.stepper.reset();
   }
 

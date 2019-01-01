@@ -4,7 +4,6 @@ import { HomeComponent } from './components/core/home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
-import { AuthTestComponent } from './components/core/auth-test/auth-test.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -20,10 +19,6 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  },
-  {
-    path: 'authtest',
-    component: AuthTestComponent
   },
   {
     path: 'admin',

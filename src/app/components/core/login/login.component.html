@@ -8,7 +8,9 @@
     </div>
     <div class="content">
         <form #loginform="ngForm">
-          <mat-form-field class="full-width">
+          <mat-form-field
+            class="full-width"
+            [ngClass]="{'mat-form-field-invalid':userNotFound}">
             <input
               matInput
               placeholder="E-Mail"
@@ -19,7 +21,9 @@
               ngModel
               class="form-control">
           </mat-form-field>
-          <mat-form-field class="full-width">
+          <mat-form-field
+            class="full-width"
+            [ngClass]="{'mat-form-field-invalid':wrongPassword}">
             <input
               matInput
               placeholder="Passwort"
@@ -39,9 +43,6 @@
             [disabled]="!loginform.valid">Anmelden
           </button>
         </form>
-        <span *ngIf="userNotFound">No User</span>
-        <span *ngIf="wrongPassword">Das war das falsche Passwort, Liebesmauserine.</span>
-        <span *ngIf="randomError">ALERT ALERT</span>
       </div>
     </div>
   </ng-template>
