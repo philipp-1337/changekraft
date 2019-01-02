@@ -14,7 +14,6 @@ pipelines:
         script: 
           - npm install
           - npm update
-          - npm audit fix
     - step:
         name: build for production
         caches:
