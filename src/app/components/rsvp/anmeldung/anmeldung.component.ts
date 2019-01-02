@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Response, Http } from '@angular/http';
 
-import { RsvpData } from 'src/app/models/rsvp-data.model';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 
 @Component({
@@ -36,7 +35,7 @@ export class AnmeldungComponent implements OnInit {
   anreiseFormGroup: FormGroup;
   unterkunftFormGroup: FormGroup;
 
-  newRsvpData: RsvpData;
+  newRsvpData: Array<any>;
 
   freitag = new Date(2019, 6, 19);
   samstag = new Date(2019, 6, 20);
@@ -71,6 +70,10 @@ export class AnmeldungComponent implements OnInit {
     }
   }
 
+  onChooseTrain() {
+    console.log(this.anreiseFormGroup.controls['anreise'].value);
+  }
+
   onChanges(): void {
     this.anreiseFormGroup.valueChanges.subscribe(val => {
       this.calcNights();
@@ -83,7 +86,7 @@ export class AnmeldungComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = new FormGroup({
-      name: new FormControl('', Validators.required),
+      name: new FormControl(''),
       email: new FormControl('')
     });
     this.teilnahmeFormGroup = new FormGroup({
@@ -96,6 +99,8 @@ export class AnmeldungComponent implements OnInit {
     });
     this.anreiseFormGroup = new FormGroup({
       anreise: new FormControl(''),
+      abholung: new FormControl(''),
+      zugzeit: new FormControl(''),
       anDate: new FormControl('', Validators.required),
       abDate: new FormControl('', Validators.required)
     });
@@ -140,13 +145,13 @@ export class AnmeldungComponent implements OnInit {
     this.stepper.reset();
   }
 
-  onSaveData(newRsvpData: RsvpData) {
+  onSaveData(newRsvpData: Array<any>) {
     this.storeRsvpData(newRsvpData).subscribe((response: Response) => {
       console.log(response);
     });
   }
 
-  storeRsvpData(data: RsvpData) {
+  storeRsvpData(data: Array<any>) {
     return this.http.post(
       'https://wildwildwuerlich.firebaseio.com/rsvp.json',
       data

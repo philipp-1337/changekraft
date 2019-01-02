@@ -27,6 +27,8 @@
           <li class="mb-1">Hund: {{ participant?.hund | questionableBoolean}}</li>
           <li class="mb-1">Kind(er): {{ participant?.kinder }}</li>
           <li class="mb-1">Anreise: {{ participant?.anreise }}</li>
+          <li class="mb-1">Abholung: {{ participant?.abholung | questionableBoolean }}</li>
+          <li class="mb-1">Bahnhof/Zeit: {{ participant?.zugzeit }}</li>
           <li class="mb-1">Ankunft: {{ participant?.anDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Abreise: {{ participant?.abDate | date:'d. MMMM' }}</li>
           <li class="mb-1">Nächte: {{ participant?.naechte }}</li>

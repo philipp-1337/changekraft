@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { ExcelService } from '../../../services/excel.service';
@@ -13,12 +13,10 @@ import { JoinClass } from 'src/app/shared/join.class';
   providers: [JoinClass]
 })
 export class AdminZusagenComponent implements OnInit, OnDestroy {
-  rsvp: any;
+  rsvp: Observable<any>;
   rsvpData: AngularFireList<any>;
-  excelData: any = [];
+  excelData: Array<any>;
   subscription: Subscription;
-
-  nights: any = [];
 
   counter: number;
 
@@ -40,8 +38,6 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
       );
-    console.log(this.rsvp);
-    console.log(this.rsvpData);
     this.fetchDataforExcel();
   }
 
@@ -89,18 +85,22 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
         '.' +
         anDate.getFullYear();
 
-      this.excelData[x].abDate = abDateFormatted;
-      this.excelData[x].anDate = anDateFormatted;
+      if (this.excelData[x].anDate !== '') {
+        this.excelData[x].anDate = anDateFormatted;
+      }
 
-      this.excelData[x].kinder = parseInt(this.excelData[x].kinder, 10);
+      if (this.excelData[x].abDate !== '') {
+        this.excelData[x].abDate = abDateFormatted;
+      }
 
-      const night: number = (abDate.getTime() - anDate.getTime()) / 86400000;
+      if (this.excelData[x].kinder !== '') {
+        this.excelData[x].kinder = parseInt(this.excelData[x].kinder, 10);
+      } else {
+        this.excelData[x].kinder = '0';
+        this.excelData[x].kinder = parseInt(this.excelData[x].kinder, 10);
+      }
 
-      this.nights.push(night);
-
-      // console.log(night);
     }
-    console.log(this.counter);
   }
 
   exportAsXLSX(): void {

@@ -90,12 +90,33 @@
                   <mat-option value="Mitfahrgelegenheit">
                     Mitfahrgelegenheit
                   </mat-option>
-                  <mat-option value="Zug">
-                    Zug (benötige Abholung)
+                  <mat-option value="Zug" (click)="onChooseTrain()">
+                    Zug
                   </mat-option>
                   <mat-option value="Sonstige">
                     Sonstige
                   </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </p>
+            <p *ngIf="anreiseFormGroup.controls['anreise'].value == 'Zug'">
+              Wird eine Abholung benötigt?<br />
+              <mat-slide-toggle color="primary" formControlName="abholung"></mat-slide-toggle>
+            </p>
+            <p *ngIf="anreiseFormGroup.controls['abholung'].value == true">
+              Zielbahnhof/Ankunfszeit:<br />
+              <mat-form-field>
+                <mat-select name="zugzeit" formControlName="zugzeit">
+                  <mat-optgroup label="Kyritz">
+                    <mat-option value="Kyritz - 11:46">11:46 Uhr</mat-option>
+                    <mat-option value="Kyritz - 13:46">13:46 Uhr</mat-option>
+                    <mat-option value="Kyritz - 15:46">15:46 Uhr</mat-option>
+                  </mat-optgroup>
+                  <mat-optgroup label="Pritzwalk">
+                    <mat-option value="Pritzwalk - 11:39">11:39 Uhr</mat-option>
+                    <mat-option value="Pritzwalk - 13:38">13:38 Uhr</mat-option>
+                    <mat-option value="Pritzwalk - 15:39">15:39 Uhr</mat-option>
+                  </mat-optgroup>
                 </mat-select>
               </mat-form-field>
             </p>
