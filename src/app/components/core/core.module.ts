@@ -10,9 +10,15 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CoreComponent } from './core.component';
+import { UserService } from '../../services/user.service';
 
 @NgModule({
-  imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    SharedModule,
+    MaterialModule
+  ],
   declarations: [
     CoreComponent,
     HeaderComponent,
@@ -21,6 +27,10 @@ import { CoreComponent } from './core.component';
     RegisterComponent
   ],
   exports: [HeaderComponent, AppRoutingModule],
-  providers: [AuthGuard, AuthService]
+  providers: [
+    AuthGuard,
+    AuthService,
+    UserService
+  ]
 })
 export class CoreModule {}

@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import { SnackbarClass } from 'src/app/shared/snackbar.class';
 export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
-    public snackbar: SnackbarClass
+    public snackbar: SnackbarClass,
+    public userService: UserService
   ) {}
 
   loginError: string;
@@ -25,55 +27,21 @@ export class LoginComponent implements OnInit {
 
   hide = true;
 
-  user: firebase.User;
-  email: string;
-  name: string;
-  verfied: boolean;
-
   ngOnInit() {
     this.getUserInfo();
   }
 
+
   updateUser(form: NgForm) {
-    this.name = form.value.displayname;
-    this.user = firebase.auth().currentUser;
-    this.user
-      .updateProfile({
-        displayName: this.name,
-        photoURL: ''
-      })
-      .then(function() {
-        // Update successful.
-      })
-      .catch(function(error) {
-        // An error happened.
-      });
+    this.userService.updateUser(form);
   }
 
   sendVerification() {
-    this.user = firebase.auth().currentUser;
-    this.user
-      .sendEmailVerification()
-      .then(function() {
-        console.log('Email sent');
-      })
-      .catch(function(error) {
-        // An error happened.
-      });
+    this.userService.sendVerification();
   }
 
   getUserInfo() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        // this.user = user;
-        this.email = user.email;
-        this.name = user.displayName;
-        this.verfied = user.emailVerified;
-        console.log(user);
-        console.log(this.name);
-        console.log(this.email);
-      }
-    });
+    this.userService.getUserInfo();
   }
 
   onSignin(form: NgForm) {
@@ -84,6 +52,7 @@ export class LoginComponent implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     this.authService.signinUser(email, password).catch(error => {
+      console.log(error);
       this.loginError = error.code;
       this.defineError();
     });
