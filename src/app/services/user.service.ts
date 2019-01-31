@@ -25,10 +25,11 @@ export class UserService {
         photoURL: ''
       })
       .then(function () {
+        console.log('User updated');
         console.log(this.user);
       })
       .catch(function (error) {
-        // Lorem
+        console.log(error);
       });
   }
 
@@ -40,7 +41,7 @@ export class UserService {
         console.log('Email sent');
       })
       .catch(function (error) {
-        console.log('During sending the verification an error happened:' + error);
+        console.log(error);
       });
   }
 

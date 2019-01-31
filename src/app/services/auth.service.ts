@@ -36,14 +36,12 @@ export class AuthService {
     const authObject = firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .catch()
       .then(response => {
         firebase
           .auth()
           .currentUser.getIdToken()
           .then((token: string) => (this._token = token));
-      })
-      .catch(error => {
-        console.log(error);
       });
     return authObject;
   }
@@ -52,10 +50,7 @@ export class AuthService {
     firebase
       .auth()
       .currentUser.getIdToken()
-      .then((token: string) => (this._token = token))
-      .catch(error => {
-        console.log(error);
-      });
+      .then((token: string) => (this._token = token));
     return this.token;
   }
 
