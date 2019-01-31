@@ -15,6 +15,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+input { font-size: 16px;}
 
 .mat-sidenav-content {
   router-outlet+* {
@@ -23,8 +24,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       @media (min-width: 600px){
         padding: 20px 20px 40px 20px;
       }
-      .custom-mat-card-spacing {
-        margin: 16px 0;
+      mat-card {
+        &.custom-mat-card-spacing {
+          margin: 16px 0;
+        }
+        mat-form-field {
+          font-size: 16px;
+        }
       }
       .wrapper {
         border: 1px solid rgba(0,0,0,.03);
