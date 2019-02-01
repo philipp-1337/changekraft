@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { UserService } from 'src/app/services/user.service';
 
@@ -27,10 +24,11 @@ export class LoginComponent implements OnInit {
 
   hide = true;
 
+  isLoading = false;
+
   ngOnInit() {
     this.getUserInfo();
   }
-
 
   updateUser(form: NgForm) {
     this.userService.updateUser(form);
@@ -48,14 +46,20 @@ export class LoginComponent implements OnInit {
     this.userNotFound = false;
     this.wrongPassword = false;
     this.randomError = false;
+    this.isLoading = true;
     console.log('all errors reset.');
     const email = form.value.email;
     const password = form.value.password;
-    this.authService.signinUser(email, password).catch(error => {
-      console.log(error);
-      this.loginError = error.code;
-      this.defineError();
-    });
+    this.authService
+      .signinUser(email, password)
+      .catch(error => {
+        console.log(error);
+        this.loginError = error.code;
+        this.defineError();
+      })
+      .then(response => {
+        this.isLoading = false;
+      });
   }
 
   onSignout() {

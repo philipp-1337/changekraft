@@ -4,8 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## ToDo
 
-- Loading-Animation after login-click (function onclick sets var loading to true, when logged in loading is set to false, initially loading is set to false, too)
-- Tab-Index for forms (login, anmeldung)
+- design homepage
 
 ## Development server
 

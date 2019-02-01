@@ -1,5 +1,10 @@
 <div class="container">
-  <ng-template [ngIf]="!authService.isAuthenticated()">
+  <mat-card *ngIf="isLoading">
+    <mat-card-content>
+      <mat-progress-bar mode="query"></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+  <ng-template [ngIf]="!authService.isAuthenticated() && !isLoading">
   <div class="wrapper">
     <div class="title">
       <div class="title-spacer">
@@ -7,7 +12,7 @@
       </div>
     </div>
     <div class="content">
-        <form #loginform="ngForm">
+        <form (ngSubmit)="onSignin(loginform)" #loginform="ngForm">
           <mat-form-field
             class="full-width"
             [ngClass]="{'mat-form-field-invalid':userNotFound}">
@@ -38,8 +43,7 @@
           <button
             mat-raised-button
             color="accent"
-            type="button"
-            (click)="onSignin(loginform)"
+            type="submit"
             [disabled]="!loginform.valid">Anmelden
           </button>
         </form>
