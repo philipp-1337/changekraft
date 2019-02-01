@@ -2,6 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
+## ToDo
+
+- Loading-Animation after login-click (function onclick sets var loading to true, when logged in loading is set to false, initially loading is set to false, too)
+- Tab-Index for forms (login, anmeldung)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
