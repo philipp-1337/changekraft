@@ -5,11 +5,17 @@ import { map } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatDrawer } from '@angular/material';
 import { AuthService } from '../../../services/auth.service';
+import { RouterOutlet } from '@angular/router';
+import { slideInAnimation } from 'src/app/app.animations';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  animations: [
+    slideInAnimation
+    // animation triggers go here
+  ]
 })
 export class HeaderComponent implements AfterViewInit {
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -23,6 +29,14 @@ export class HeaderComponent implements AfterViewInit {
     private _focusMonitor: FocusMonitor,
     public authService: AuthService
   ) {}
+
+  prepareRoute(outlet: RouterOutlet) {
+    return (
+      outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
+    );
+  }
 
   showToggle() {
     if (!this.breakpointObserver.isMatched('(min-width: 960px)')) {

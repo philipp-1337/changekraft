@@ -8,6 +8,7 @@ const adminRoutes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    data: { animation: 'AdminPage' },
     children: [
       {
         path: '',

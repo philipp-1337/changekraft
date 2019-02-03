@@ -6,15 +6,26 @@ import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'home', redirectTo: '/' },
+  {
+    path: 'home',
+    component: HomeComponent,
+    data: { animation: 'HomePage' }
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home'
+  },
+
   {
     path: 'rsvp',
-    loadChildren: './components/rsvp/rsvp.module#RsvpModule'
+    loadChildren: './components/rsvp/rsvp.module#RsvpModule',
+    data: { animation: 'RsvpPage' }
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    data: { animation: 'LoginPage' }
   },
   {
     path: 'register',
@@ -24,7 +35,8 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: './components/admin/admin.module#AdminModule',
     canLoad: [AuthGuard],
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { animation: 'AdminPage' }
   },
   { path: '404', component: HomeComponent },
   { path: '**', redirectTo: '/404' }
