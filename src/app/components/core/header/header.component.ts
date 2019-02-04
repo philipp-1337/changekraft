@@ -22,6 +22,10 @@ export class HeaderComponent implements AfterViewInit {
     .observe(Breakpoints.Handset)
     .pipe(map(result => result.matches));
 
+  isTablet$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.TabletPortrait)
+    .pipe(map(result => result.matches));
+
   @ViewChild('drawer') drawer: MatDrawer;
 
   constructor(
@@ -38,20 +42,8 @@ export class HeaderComponent implements AfterViewInit {
     );
   }
 
-  showToggle() {
-    if (!this.breakpointObserver.isMatched('(min-width: 960px)')) {
-      return true;
-    }
-  }
-
-  toggleOnlyMobile() {
-    if (
-      this.breakpointObserver.isMatched('(max-width: 599px)') ||
-      (this.breakpointObserver.isMatched('(min-width: 599px)') &&
-        this.breakpointObserver.isMatched('(max-width: 960px)'))
-    ) {
-      this.drawer.toggle();
-    }
+  toggleDrawer() {
+    this.drawer.toggle();
   }
 
   ngAfterViewInit() {

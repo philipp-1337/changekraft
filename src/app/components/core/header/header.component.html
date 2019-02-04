@@ -1,23 +1,42 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-  [mode]="(isHandset$ | async) ? 'over' : 'side'"
-  [opened]="(isHandset$ | async) ? false : true"
-  (click)="toggleOnlyMobile()"
-  id="navButton_1">
-    <mat-toolbar>Menu</mat-toolbar>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" attr.role="navigation"
+    mode="over" opened="false" (click)="toggleDrawer()" id="navButton_1">
+    <mat-toolbar>Menü</mat-toolbar>
     <mat-nav-list>
       <mat-menu #menu="matMenu"></mat-menu>
-        <button mat-menu-item routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
-          true}">
+        <button 
+          mat-menu-item routerLink="/home"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
           <mat-icon>home</mat-icon>
           <span>Home</span>
+        </button>
+        <button mat-menu-item routerLink="/rsvp" routerLinkActive="active">
+          <mat-icon>location_on</mat-icon>
+          <span>Location</span>
+        </button>
+        <button mat-menu-item routerLink="/rsvp" routerLinkActive="active">
+          <mat-icon>hotel</mat-icon>
+          <span>Übernachtung</span>
+        </button>
+        <button mat-menu-item routerLink="/rsvp" routerLinkActive="active">
+          <mat-icon>local_dining</mat-icon>
+          <span>Versorgung</span>
+        </button>
+        <button mat-menu-item routerLink="/rsvp" routerLinkActive="active">
+          <mat-icon>commute</mat-icon>
+          <span>Anfahrt</span>
+        </button>
+        <button mat-menu-item routerLink="/rsvp" routerLinkActive="active">
+          <mat-icon>event</mat-icon>
+          <span>Programm</span>
         </button>
         <button mat-menu-item routerLink="/rsvp" routerLinkActive="active">
           <mat-icon>loyalty</mat-icon>
           <span>Anmeldung</span>
         </button>
         <ng-template [ngIf]="authService.isAuthenticated()" routerLinkActive="active">
+          <mat-divider></mat-divider>
           <button mat-menu-item routerLink="/login">
             <mat-icon>account_circle</mat-icon>
             <span>Profil</span>
@@ -29,17 +48,54 @@
         </ng-template>
     </mat-nav-list>
   </mat-sidenav>
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <button *ngIf="showToggle()"
-          id="drawerButton"
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()">
+  <mat-sidenav-content>
+    <mat-toolbar color="accent">
+      <mat-toolbar-row>
+        <button *ngIf="(isHandset$ | async); else tabletButton" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <span>www-rsvp</span>
+        <ng-template #tabletButton>
+          <button *ngIf="(isTablet$ | async); else desktopNav" id="drawerButton" type="button" aria-label="Toggle sidenav"
+            mat-icon-button (click)="drawer.toggle()">
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+        </ng-template>
+        <ng-template #desktopNav>
+          <nav mat-tab-nav-bar color="accent">
+            <a 
+              mat-tab-link 
+              routerLink="/home" 
+              routerLinkActive="active" 
+              [routerLinkActiveOptions]="{exact: true}">
+              <mat-icon>home</mat-icon>
+              <span>Einladung</span>
+            </a>
+            <a mat-tab-link routerLink="/rsvp" routerLinkActive="active">
+              <mat-icon>location_on</mat-icon>
+              <span>Location</span>
+            </a>
+            <a mat-tab-link routerLink="/rsvp" routerLinkActive="active">
+              <mat-icon>hotel</mat-icon>
+              <span>Übernachtung</span>
+            </a>
+            <a mat-tab-link routerLink="/rsvp" routerLinkActive="active">
+              <mat-icon>local_dining</mat-icon>
+              <span>Versorgung</span>
+            </a>
+            <a mat-tab-link routerLink="/rsvp" routerLinkActive="active">
+              <mat-icon>commute</mat-icon>
+              <span>Anfahrt</span>
+            </a>
+            <a mat-tab-link routerLink="/rsvp" routerLinkActive="active">
+              <mat-icon>event</mat-icon>
+              <span>Programm</span>
+            </a>
+            <a mat-tab-link routerLink="/rsvp" routerLinkActive="active" active>
+              <mat-icon>loyalty</mat-icon>
+              <span>Anmeldung</span>
+            </a>
+          </nav>
+        </ng-template>
         <span class="example-spacer"></span>
         <ng-template [ngIf]="!authService.isAuthenticated()">
           <button mat-icon-button routerLink="/admin/">
@@ -51,9 +107,10 @@
             <mat-icon aria-label="Logout">lock</mat-icon>
           </button>
         </ng-template>
-      </mat-toolbar>
-      <div [@routeAnimations]="prepareRoute(outlet)" >
-        <router-outlet #outlet="outlet"></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div [@routeAnimations]="prepareRoute(outlet)" >
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

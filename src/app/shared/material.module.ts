@@ -26,7 +26,9 @@ import {
   MatSelectModule,
   MatDatepickerModule,
   MatSnackBarModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatDividerModule,
+  MatTabsModule
 } from '@angular/material';
 
 @NgModule({
@@ -57,7 +59,9 @@ import {
     MatSnackBarModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDividerModule,
+    MatTabsModule
   ],
   exports: [
     CommonModule,
@@ -85,7 +89,9 @@ import {
     MatSnackBarModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDividerModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule {}
