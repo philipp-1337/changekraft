@@ -28,6 +28,39 @@ export class HeaderComponent implements AfterViewInit {
 
   @ViewChild('drawer') drawer: MatDrawer;
 
+  navigation = [
+    {
+      name: 'Location',
+      route: '/home',
+      icon: 'location_on'
+    },
+    {
+      name: 'Übernachtung',
+      route: '/home',
+      icon: 'hotel'
+    },
+    {
+      name: 'Verpflegung',
+      route: '/home',
+      icon: 'local_dining'
+    },
+    {
+      name: 'Anfahrt',
+      route: '/home',
+      icon: 'commute'
+    },
+    {
+      name: 'Programm',
+      route: '/home',
+      icon: 'event'
+    },
+    {
+      name: 'Anmeldung',
+      route: '/rsvp',
+      icon: 'loyalty'
+    }
+  ];
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private _focusMonitor: FocusMonitor,
