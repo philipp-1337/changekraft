@@ -23,6 +23,17 @@
   flex: 1 1 auto;
 }
 
+button.logo {
+  img {
+    width: 25px;
+    margin-right: 16px;
+  }
+  span {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
+}
+
 ::ng-deep {
   .mat-tab-nav-bar {
     border-bottom: none;

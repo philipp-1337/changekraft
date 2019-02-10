@@ -18,12 +18,12 @@ import { slideInAnimation } from 'src/app/app.animations';
   ]
 })
 export class HeaderComponent implements AfterViewInit {
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(map(result => result.matches));
+  // isHandset$: Observable<boolean> = this.breakpointObserver
+  //   .observe(Breakpoints.Handset)
+  //   .pipe(map(result => result.matches));
 
-  isTablet$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.TabletPortrait)
+  isBigScreen$: Observable<boolean> = this.breakpointObserver
+    .observe(['(min-width: 961px)'])
     .pipe(map(result => result.matches));
 
   @ViewChild('drawer') drawer: MatDrawer;

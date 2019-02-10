@@ -2,8 +2,8 @@
 
 @include mat-core();
 
-$primary: mat-palette($mat-light-blue, 700);
-$accent: mat-palette($mat-pink, 700);
+$primary: mat-palette($mat-green, 900);
+$accent: mat-palette($mat-orange, 100);
 $warn: mat-palette($mat-deep-orange, A400);
 $theme: mat-light-theme($primary, $accent, $warn);
 
@@ -29,9 +29,32 @@ input { font-size: 16px;}
 .mat-sidenav-content {
   router-outlet+* {
     > .container {
+      background-image: url('./assets/background.svg');
+      background-repeat: no-repeat;
+      background-position: right bottom;
       flex-grow: 1;
-      @media (min-width: 600px){
+      min-height: calc(100vh - 56px);
+      @media (min-width: 599px){
         padding: 20px 20px 40px 20px;
+        > * {
+          background-color: rgba(255,255,255,0.3);
+          mat-vertical-stepper,
+          mat-expansion-panel,
+          .title {
+            background-color: rgba(255,255,255,0.3);
+          }
+        }
+      }
+      @media (max-width: 600px){
+        padding: 0;
+        > * {
+          background-color: rgba(255,255,255,0.7);
+          mat-vertical-stepper,
+          mat-expansion-panel,
+          .title {
+            background-color: rgba(255,255,255,0.7);
+          }
+        }
       }
       mat-card {
         &.custom-mat-card-spacing {
@@ -51,7 +74,7 @@ input { font-size: 16px;}
         .title {
           align-content: center;
           align-items: center;
-          background: map_get($mat-grey, 50);
+          // background: map_get($mat-grey, 50);
           color: $black-87-opacity;
           display: flex;
           height: 40px;
@@ -63,7 +86,6 @@ input { font-size: 16px;}
         }
         .content {
           padding: 16px;
-          background-color: white;
         }
       }
     }

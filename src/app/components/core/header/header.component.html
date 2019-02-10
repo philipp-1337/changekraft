@@ -32,34 +32,29 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <button mat-button
-          routerLink="/home"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{exact: true}">
-          <mat-icon>home</mat-icon>
-          <span>EINLADUNG</span>
-        </button>
-        <button *ngIf="(isHandset$ | async); else tabletButton" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <button *ngIf="!(isBigScreen$ | async)" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <ng-template #tabletButton>
-          <button *ngIf="(isTablet$ | async); else desktopNav" id="drawerButton" type="button" aria-label="Toggle sidenav"
-            mat-icon-button (click)="drawer.toggle()">
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <nav mat-tab-nav-bar color="accent">
+          <button mat-button
+            class="logo"
+            routerLink="/home"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+            <img src="./assets/icon_s.svg">
+            <span>Sandra</span>
           </button>
-        </ng-template>
-        <span class="example-spacer"></span>
-        <ng-template #desktopNav>
-          <nav mat-tab-nav-bar color="accent">
-            <a mat-tab-link
-              *ngFor="let link of navigation"
-              [routerLink]="link.route"
-              routerLinkActive #rla="routerLinkActive"
-              [active]="rla.isActive">
-              {{link.name}}
-            </a>
-          </nav>
-        </ng-template>
+        <div *ngIf="(isBigScreen$ | async)">
+          <a mat-tab-link
+          *ngFor="let link of navigation"
+          [routerLink]="link.route"
+          routerLinkActive #rla="routerLinkActive"
+          [active]="rla.isActive">
+          {{link.name}}
+        </a>
+      </div>
+    </nav>
+    <span class="example-spacer"></span>
         <ng-template [ngIf]="!authService.isAuthenticated()">
           <button mat-icon-button routerLink="/admin/">
             <mat-icon aria-label="Login">lock_open</mat-icon>
