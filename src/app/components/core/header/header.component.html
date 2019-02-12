@@ -1,32 +1,31 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" attr.role="navigation"
     mode="over" opened="false" (click)="toggleDrawer()" id="navButton_1">
+    <mat-toolbar>
+      <button *ngIf="!(isBigScreen$ | async)" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button>
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Sandra</span>
+    </mat-toolbar>
     <mat-nav-list>
       <mat-menu #menu="matMenu"></mat-menu>
-        <button
-          mat-menu-item routerLink="/home"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{exact: true}">
-          <mat-icon>home</mat-icon>
-          <span>Home</span>
+      <span *ngFor="let nav of navigation">
+        <button mat-menu-item [routerLink]="nav.route" routerLinkActive="active">
+          <mat-icon>{{ nav.icon }}</mat-icon>
+          <span>{{ nav.name }}</span>
         </button>
-        <span *ngFor="let nav of navigation">
-          <button mat-menu-item [routerLink]="nav.route" routerLinkActive="active">
-            <mat-icon>{{ nav.icon }}</mat-icon>
-            <span>{{ nav.name }}</span>
-          </button>
-        </span>
-        <ng-template [ngIf]="authService.isAuthenticated()" routerLinkActive="active">
-          <mat-divider></mat-divider>
-          <button mat-menu-item routerLink="/login">
-            <mat-icon>account_circle</mat-icon>
-            <span>Profil</span>
-          </button>
-          <button mat-menu-item routerLink="/admin/zusagen" routerLinkActive="active">
-            <mat-icon>supervisor_account</mat-icon>
-            <span>Teilnehmer</span>
-          </button>
-        </ng-template>
+      </span>
+      <ng-template [ngIf]="authService.isAuthenticated()" routerLinkActive="active">
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="/login">
+          <mat-icon>account_circle</mat-icon>
+          <span>Profil</span>
+        </button>
+        <button mat-menu-item routerLink="/admin/zusagen" routerLinkActive="active">
+          <mat-icon>supervisor_account</mat-icon>
+          <span>Teilnehmer</span>
+        </button>
+      </ng-template>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -41,7 +40,7 @@
             routerLink="/home"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}">
-            <img src="./assets/icon_s.svg">
+            <!-- <img src="./assets/icon_s.svg"> -->
             <span>Sandra</span>
           </button>
         <div *ngIf="(isBigScreen$ | async)">

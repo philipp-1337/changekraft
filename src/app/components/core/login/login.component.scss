@@ -5,3 +5,9 @@
     width: 40px;
   }
 }
+
+::ng-deep {
+  .mat-card {
+    background-color: transparent;
+  }
+}

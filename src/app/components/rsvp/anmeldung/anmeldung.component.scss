@@ -7,7 +7,13 @@
   padding-top: 8px;
 }
 
-::ng-deep .mat-form-field-wrapper .mat-form-field-infix {
-  width: 220px;
-  line-height: 20px;
+::ng-deep {
+  .mat-form-field-wrapper .mat-form-field-infix {
+    width: 220px;
+    line-height: 20px;
+  }
+  .mat-stepper-horizontal,
+  .mat-stepper-vertical {
+    background-color: transparent;
+  }
 }

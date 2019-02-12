@@ -3,26 +3,26 @@
     <mat-vertical-stepper linear #stepper>
         <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
-                <ng-template matStepLabel>Persönliche Daten</ng-template>
-                <mat-form-field>
-                  <input
-                    matInput
-                    placeholder="Name *"
-                    type="text"
-                    id="name"
-                    formControlName="name">
-                </mat-form-field>
-                <br />
-                <mat-form-field>
-                  <input matInput placeholder="E-Mail *" formControlName="email" email>
-                </mat-form-field>
-                <div>
-                  <button
-                    type="button"
-                    mat-button matStepperNext>
-                    Next
-                  </button>
-                </div>
+              <ng-template matStepLabel>Persönliche Daten</ng-template>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Name *"
+                  type="text"
+                  id="name"
+                  formControlName="name">
+              </mat-form-field>
+              <br />
+              <mat-form-field>
+                <input matInput placeholder="E-Mail *" formControlName="email" email>
+              </mat-form-field>
+              <div>
+                <button
+                  type="button"
+                  mat-button matStepperNext>
+                  Next
+                </button>
+              </div>
             </form>
         </mat-step>
         <mat-step [stepControl]="teilnahmeFormGroup">
