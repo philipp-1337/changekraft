@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.randomError = true;
       this.snackbar.openSnackBar(
-        'Leider ist ein Fehler aufgetreten.',
+        'Bitte überprüfe deine Eingaben.',
         'Schließen'
       );
       console.log('Random error occured.');

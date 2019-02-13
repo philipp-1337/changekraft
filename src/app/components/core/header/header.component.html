@@ -3,9 +3,9 @@
     mode="over" opened="false" (click)="toggleDrawer()" id="navButton_1">
     <mat-toolbar>
       <button *ngIf="!(isBigScreen$ | async)" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button>
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
       </button>
-      <span>Sandra</span>
+      <!-- <span>Sandra</span> -->
     </mat-toolbar>
     <mat-nav-list>
       <mat-menu #menu="matMenu"></mat-menu>
