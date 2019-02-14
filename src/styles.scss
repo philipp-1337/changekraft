@@ -27,10 +27,7 @@ input { font-size: 16px;}
 }
 
 .mat-sidenav-content {
-  router-outlet+* {
-    > .container {
-      flex-grow: 1;
-      &::after {
+  &::after {
         background-attachment: fixed;
         background-image: url('./assets/background.svg');
         background-position: right bottom;
@@ -44,6 +41,9 @@ input { font-size: 16px;}
         z-index: -1;
         // min-height: calc(100vh - 56px);
       }
+  router-outlet+* {
+    > .container {
+      flex-grow: 1;
       @media (min-width: 600px){
         padding: 20px 20px 40px 20px;
       }
@@ -59,6 +59,7 @@ input { font-size: 16px;}
       mat-card,
       .mat-expansion-panel {
         background-color: rgba(255,255,255,0.8);
+        z-index: 1;
       }
       .wrapper {
         @include _mat-theme-overridable-elevation(1, $theme);
