@@ -6,6 +6,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Response, Http } from '@angular/http';
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-anmeldung',
@@ -21,6 +23,10 @@ export class AnmeldungComponent implements OnInit {
     private route: ActivatedRoute,
     public snackbar: SnackbarClass
   ) {}
+
+  isBigScreen$: Observable<boolean> = this.breakpointObserver
+    .observe(['(min-width: 961px)'])
+    .pipe(map(result => result.matches));
 
   @ViewChild('stepper') stepper;
 

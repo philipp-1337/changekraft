@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from 'src/app/app.animations';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-information',
   template: `
     <div [@routeAnimations]="prepareRoute(outlet)">
       <router-outlet #outlet="outlet"></router-outlet>
@@ -14,7 +14,7 @@ import { slideInAnimation } from 'src/app/app.animations';
     // animation triggers go here
   ]
 })
-export class AdminComponent implements OnInit {
+export class InformationComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}

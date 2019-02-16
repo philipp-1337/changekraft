@@ -31,27 +31,27 @@ export class HeaderComponent implements AfterViewInit {
   navigation = [
     {
       name: 'Location',
-      route: '/home',
+      route: '/event/location',
       icon: 'location_on'
     },
     {
       name: 'Übernachtung',
-      route: '/home',
+      route: '/event/stay',
       icon: 'hotel'
     },
     {
       name: 'Verpflegung',
-      route: '/home',
+      route: '/event/food',
       icon: 'local_dining'
     },
     {
       name: 'Anfahrt',
-      route: '/home',
+      route: '/event/transportation',
       icon: 'commute'
     },
     {
       name: 'Programm',
-      route: '/home',
+      route: '/event/program',
       icon: 'event'
     },
     {

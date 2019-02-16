@@ -2,15 +2,19 @@
 
 @include mat-core();
 
-$primary: mat-palette($mat-light-green, 900);
-$accent: mat-palette($mat-orange, 100);
-$warn: mat-palette($mat-deep-orange, A400);
-$theme: mat-light-theme($primary, $accent, $warn);
+$rsvp-primary: mat-palette($mat-light-green, 900);
+$rsvp-accent: mat-palette($mat-orange, 100);
+$rsvp-warn: mat-palette($mat-deep-orange, A400);
+$rsvp-theme: mat-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
-@include angular-material-theme($theme);
+@include angular-material-theme($rsvp-theme);
+
+@import '~roboto-fontface/css/mixins';
+
+@import 'app/shared/bootstrap';
 
 .rsvp-error {
-  color: mat-color($warn);
+  color: mat-color($rsvp-warn);
 }
 
 html, body { height: 100%; }
@@ -23,46 +27,46 @@ input { font-size: 16px;}
       background: map_get($mat-grey, 50);
     }
   }
-
 }
 
 .mat-sidenav-content {
   &::after {
         background-attachment: fixed;
-        background-image: url('./assets/background.svg');
+        background-image: url('./assets/background.jpg');
         background-position: right bottom;
         background-repeat: no-repeat;
+        background-size: contain;
         content: '';
         height: 100%;
-        opacity: 0.4;
+        opacity: 0.6;
         position: fixed;
         top: 0;
         width: 100%;
         z-index: -1;
-        // min-height: calc(100vh - 56px);
       }
   router-outlet+* {
-    > .container {
+    > .container,
+    > .container-fluid {
       flex-grow: 1;
-      @media (min-width: 600px){
-        padding: 20px 20px 40px 20px;
-      }
       mat-card {
-        &.custom-mat-card-spacing {
-          margin: 16px 0;
-        }
         mat-form-field {
           font-size: 16px;
+        }
+        .mat-card-avatar {
+          .mat-icon {
+            font-size: 40px;
+            height: 40px;
+            width: 40px;
+          }
         }
       }
       .wrapper,
       mat-card,
       .mat-expansion-panel {
         background-color: rgba(255,255,255,0.8);
-        z-index: 1;
       }
       .wrapper {
-        @include _mat-theme-overridable-elevation(1, $theme);
+        @include _mat-theme-overridable-elevation(1, $rsvp-theme);
         display: flex;
         flex-direction: column;
         .full-width {
@@ -88,3 +92,9 @@ input { font-size: 16px;}
     }
   }
 }
+
+// ::ng-deep {
+//   .mat-card {
+//     background-color: transparent;
+//   }
+// }

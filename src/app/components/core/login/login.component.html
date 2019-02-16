@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid py-3">
   <mat-card *ngIf="isLoading">
     <mat-card-content>
       <mat-progress-bar mode="query"></mat-progress-bar>
@@ -51,7 +51,7 @@
     </div>
   </ng-template>
   <ng-template [ngIf]="authService.isAuthenticated()">
-    <mat-card class="custom-mat-card-spacing">
+    <mat-card>
       <mat-card-header>
         <div mat-card-avatar><mat-icon>account_circle</mat-icon></div>
         <mat-card-title>{{ userService.name }}</mat-card-title>
@@ -89,7 +89,7 @@
         <!-- <button mat-button>SHARE</button> -->
       </mat-card-actions>
     </mat-card>
-    <mat-card class="custom-mat-card-spacing" *ngIf="!verfied">
+    <mat-card class="my-3" *ngIf="!verfied">
       <button
         mat-raised-button
         color="primary"
@@ -98,7 +98,7 @@
         (click)="sendVerification()">E-Mail bestätigen
       </button>
     </mat-card>
-    <mat-card class="custom-mat-card-spacing">
+    <mat-card class="my-3">
       <button
         mat-stroked-button
         color="warn"

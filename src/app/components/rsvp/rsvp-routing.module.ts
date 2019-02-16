@@ -18,7 +18,8 @@ const rsvpRoutes: Routes = [
       },
       {
         path: 'anmeldung',
-        component: AnmeldungComponent
+        component: AnmeldungComponent,
+        data: { animation: 'AnmeldungPage' }
       },
       {
         path: 'success',

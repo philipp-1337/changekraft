@@ -16,7 +16,12 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: 'home'
   },
-
+  {
+    path: 'event',
+    loadChildren:
+      './components/information/information.module#InformationModule',
+    data: { animation: 'InfoPages' }
+  },
   {
     path: 'rsvp',
     loadChildren: './components/rsvp/rsvp.module#RsvpModule',

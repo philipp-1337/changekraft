@@ -43,27 +43,48 @@
             <!-- <img src="./assets/icon_s.svg"> -->
             <span>Sandra</span>
           </button>
-        <div *ngIf="(isBigScreen$ | async)">
-          <a mat-tab-link
-          *ngFor="let link of navigation"
-          [routerLink]="link.route"
-          routerLinkActive #rla="routerLinkActive"
-          [active]="rla.isActive">
-          {{link.name}}
-        </a>
-      </div>
-    </nav>
-    <span class="example-spacer"></span>
-        <ng-template [ngIf]="!authService.isAuthenticated()">
-          <button mat-icon-button routerLink="/admin/">
-            <mat-icon aria-label="Login">lock_open</mat-icon>
+          <div *ngIf="(isBigScreen$ | async)">
+            <a mat-tab-link
+            *ngFor="let link of navigation"
+            [routerLink]="link.route"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">{{link.name}}
+            </a>
+          </div>
+        </nav>
+        <span class="example-spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <ng-template [ngIf]="!authService.isAuthenticated()">
+            <button mat-menu-item routerLink="/admin/">
+              <mat-icon aria-label="Login">lock_open</mat-icon>
+              <span>Login</span>
+            </button>
+          </ng-template>
+          <ng-template [ngIf]="authService.isAuthenticated()">
+            <button mat-menu-item (click)="onLogout()" routerLink="/">
+              <mat-icon aria-label="Logout">lock</mat-icon>
+              <span>Abmelden</span>
+            </button>
+          </ng-template>
+          <mat-divider></mat-divider>
+          <button mat-menu-item
+            [disabled]="!authService.isAuthenticated()"
+            routerLink="/login"
+            routerLinkActive="active">
+            <mat-icon>account_circle</mat-icon>
+            <span>Profil</span>
           </button>
-        </ng-template>
-        <ng-template [ngIf]="authService.isAuthenticated()">
-          <button mat-icon-button (click)="onLogout()" routerLink="/">
-            <mat-icon aria-label="Logout">lock</mat-icon>
+          <button mat-menu-item
+            [disabled]="!authService.isAuthenticated()"
+            routerLink="/admin/zusagen"
+            routerLinkActive="active">
+            <mat-icon>supervisor_account</mat-icon>
+            <span>Teilnehmer</span>
           </button>
-        </ng-template>
+        </mat-menu>
       </mat-toolbar-row>
     </mat-toolbar>
     <div [@routeAnimations]="prepareRoute(outlet)" >
