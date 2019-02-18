@@ -1,15 +1,19 @@
 @import '~@angular/material/theming';
 
-@include mat-core();
-
 $rsvp-primary: mat-palette($mat-light-green, 900);
 $rsvp-accent: mat-palette($mat-orange, 100);
 $rsvp-warn: mat-palette($mat-deep-orange, A400);
 $rsvp-theme: mat-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
-@include angular-material-theme($rsvp-theme);
+$custom-typography: mat-typography-config(
+  $font-family: 'Raleway, sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
 
-@import '~roboto-fontface/css/mixins';
+// Override the typography in the core CSS.
+@include mat-core($custom-typography);
+@include angular-material-theme($rsvp-theme);
 
 @import 'app/shared/bootstrap';
 
@@ -18,7 +22,7 @@ $rsvp-theme: mat-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Raleway, "Helvetica Neue", sans-serif; }
 input { font-size: 16px;}
 
 .mat-sidenav {
@@ -32,6 +36,7 @@ input { font-size: 16px;}
 .mat-sidenav-content {
   &::after {
         background-attachment: fixed;
+        background-color: white;
         background-image: url('./assets/background.jpg');
         background-position: right bottom;
         background-repeat: no-repeat;
@@ -65,8 +70,20 @@ input { font-size: 16px;}
       .mat-expansion-panel {
         background-color: rgba(255,255,255,0.8);
       }
+      .img-wrapper {
+        @include _mat-theme-overridable-elevation(1, $rsvp-theme);
+        border-radius: 4px;
+        height: 100%;
+        img {
+          border-radius: 4px;
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+      }
       .wrapper {
         @include _mat-theme-overridable-elevation(1, $rsvp-theme);
+        border-radius: 4px;
         display: flex;
         flex-direction: column;
         .full-width {
@@ -75,7 +92,6 @@ input { font-size: 16px;}
         .title {
           align-content: center;
           align-items: center;
-          // background: map_get($mat-grey, 50);
           color: $black-87-opacity;
           display: flex;
           height: 40px;
@@ -92,9 +108,3 @@ input { font-size: 16px;}
     }
   }
 }
-
-// ::ng-deep {
-//   .mat-card {
-//     background-color: transparent;
-//   }
-// }

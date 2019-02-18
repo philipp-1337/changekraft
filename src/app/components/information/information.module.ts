@@ -6,11 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 
 import { InformationComponent } from './information.component';
-import { LocationComponent } from './location/location.component';
-import { StayComponent } from './stay/stay.component';
-import { FoodComponent } from './food/food.component';
-import { TransportationComponent } from './transportation/transportation.component';
-import { ProgramComponent } from './program/program.component';
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   imports: [
@@ -19,6 +15,6 @@ import { ProgramComponent } from './program/program.component';
     SharedModule,
     MaterialModule
   ],
-  declarations: [InformationComponent, LocationComponent, StayComponent, FoodComponent, TransportationComponent, ProgramComponent]
+  declarations: [InformationComponent, EventComponent]
 })
 export class InformationModule {}

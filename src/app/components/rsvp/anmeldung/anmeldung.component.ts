@@ -32,6 +32,9 @@ export class AnmeldungComponent implements OnInit {
 
   checked = true;
 
+  absage = false;
+  zusage = false;
+
   minDate = new Date(2019, 6, 19);
   maxDate = new Date(2019, 6, 21);
 
@@ -135,7 +138,8 @@ export class AnmeldungComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    this.router.navigate(['../success'], { relativeTo: this.route });
+    // this.router.navigate(['/event'], { relativeTo: this.route });
+    this.zusage = true;
     this.snackbar.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
     this.stepper.reset();
   }
@@ -143,7 +147,8 @@ export class AnmeldungComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    this.router.navigate(['../cancellation'], { relativeTo: this.route });
+    // this.router.navigate(['/event'], { relativeTo: this.route });
+    this.absage = true;
     this.snackbar.openSnackBar(
       'Schade, du wirst nicht eingeplant.',
       'Schließen'

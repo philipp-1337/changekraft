@@ -10,8 +10,6 @@ import { MaterialModule } from 'src/app/shared/material.module';
 
 import { RsvpComponent } from './rsvp.component';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
-import { SuccessComponent } from './success/success.component';
-import { CancellationComponent } from './cancellation/cancellation.component';
 
 import {
   MatMomentDateModule,
@@ -32,12 +30,7 @@ import {
     MaterialModule,
     MatMomentDateModule
   ],
-  declarations: [
-    RsvpComponent,
-    AnmeldungComponent,
-    SuccessComponent,
-    CancellationComponent
-  ],
+  declarations: [RsvpComponent, AnmeldungComponent],
   providers: [
     { provide: DateAdapter, useClass: GermanWeek },
     { provide: DateAdapter, useClass: MomentDateAdapter },

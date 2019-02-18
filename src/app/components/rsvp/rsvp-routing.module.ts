@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AnmeldungComponent } from './anmeldung/anmeldung.component';
-import { SuccessComponent } from './success/success.component';
-import { CancellationComponent } from './cancellation/cancellation.component';
 import { RsvpComponent } from './rsvp.component';
 
 const rsvpRoutes: Routes = [
@@ -13,21 +11,8 @@ const rsvpRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'anmeldung',
-        pathMatch: 'full'
-      },
-      {
-        path: 'anmeldung',
         component: AnmeldungComponent,
         data: { animation: 'AnmeldungPage' }
-      },
-      {
-        path: 'success',
-        component: SuccessComponent
-      },
-      {
-        path: 'cancellation',
-        component: CancellationComponent
       }
     ]
   }

@@ -1,56 +1,47 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" attr.role="navigation"
-    mode="over" opened="false" (click)="toggleDrawer()" id="navButton_1">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    attr.role="navigation" *ngIf="!(isBigScreen$ | async)"
+    mode="over" opened="false" id="navButton_1">
     <mat-toolbar>
-      <button *ngIf="!(isBigScreen$ | async)" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button>
+      <button mat-icon-button
+        id="drawerButton" type="button"
+        aria-label="Toggle sidenav"
+        (click)="toggleDrawer()">
         <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
       </button>
-      <!-- <span>Sandra</span> -->
     </mat-toolbar>
     <mat-nav-list>
-      <mat-menu #menu="matMenu"></mat-menu>
-      <span *ngFor="let nav of navigation">
-        <button mat-menu-item [routerLink]="nav.route" routerLinkActive="active">
-          <mat-icon>{{ nav.icon }}</mat-icon>
-          <span>{{ nav.name }}</span>
-        </button>
-      </span>
-      <ng-template [ngIf]="authService.isAuthenticated()" routerLinkActive="active">
-        <mat-divider></mat-divider>
-        <button mat-menu-item routerLink="/login">
-          <mat-icon>account_circle</mat-icon>
-          <span>Profil</span>
-        </button>
-        <button mat-menu-item routerLink="/admin/zusagen" routerLinkActive="active">
-          <mat-icon>supervisor_account</mat-icon>
-          <span>Teilnehmer</span>
-        </button>
-      </ng-template>
+      <button mat-menu-item
+        *ngFor="let link of navigation"
+        [routerLink]="link.route"
+        [fragment]="link.fragment"
+        (click)="toggleDrawer()">
+        <mat-icon>{{link.icon}}</mat-icon>
+        <span>{{link.name}}</span>
+      </button>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <mat-toolbar-row>
+      <mat-toolbar-row class="container">
         <button *ngIf="!(isBigScreen$ | async)" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-        <nav mat-tab-nav-bar color="accent">
-          <button mat-button
+        <nav>
+          <a mat-button
             class="logo"
-            routerLink="/home"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">
+            routerLink="/home">
             <!-- <img src="./assets/icon_s.svg"> -->
             <span>Sandra</span>
-          </button>
-          <div *ngIf="(isBigScreen$ | async)">
-            <a mat-tab-link
-            *ngFor="let link of navigation"
-            [routerLink]="link.route"
-            routerLinkActive #rla="routerLinkActive"
-            [active]="rla.isActive">{{link.name}}
+          </a>
+          <ng-template [ngIf]="(isBigScreen$ | async)">
+            <a mat-button
+              *ngFor="let link of navigation"
+              [routerLink]="link.route"
+              [fragment]="link.fragment">
+              <span>{{link.name}}</span>
             </a>
-          </div>
+          </ng-template>
         </nav>
         <span class="example-spacer"></span>
         <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -72,17 +63,15 @@
           <mat-divider></mat-divider>
           <button mat-menu-item
             [disabled]="!authService.isAuthenticated()"
-            routerLink="/login"
-            routerLinkActive="active">
+            routerLink="/login">
             <mat-icon>account_circle</mat-icon>
             <span>Profil</span>
           </button>
           <button mat-menu-item
             [disabled]="!authService.isAuthenticated()"
-            routerLink="/admin/zusagen"
-            routerLinkActive="active">
+            routerLink="/admin/zusagen">
             <mat-icon>supervisor_account</mat-icon>
-            <span>Teilnehmer</span>
+            <span>Übersicht</span>
           </button>
         </mat-menu>
       </mat-toolbar-row>

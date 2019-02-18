@@ -13,12 +13,7 @@ import { CoreComponent } from './core.component';
 import { UserService } from '../../services/user.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    SharedModule,
-    MaterialModule
-  ],
+  imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],
   declarations: [
     CoreComponent,
     HeaderComponent,
@@ -27,10 +22,6 @@ import { UserService } from '../../services/user.service';
     RegisterComponent
   ],
   exports: [HeaderComponent, AppRoutingModule],
-  providers: [
-    AuthGuard,
-    AuthService,
-    UserService
-  ]
+  providers: [AuthGuard, AuthService, UserService]
 })
 export class CoreModule {}

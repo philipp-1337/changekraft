@@ -13,14 +13,13 @@ $grid-breakpoints: (
 );
 
 $container-max-widths: (
-  sm: 600px,
-  md: 960px,
+  sm: 1024px,
+  md: 1024px,
   lg: 1280px,
-  xl: 1600px
+  xl: 1280px
 );
 
 $grid-gutter-width: (32px);
-
 
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";

@@ -1,111 +1,115 @@
-<div class="container-fluid py-3">
-  <mat-card *ngIf="isLoading">
-    <mat-card-content>
-      <mat-progress-bar mode="query"></mat-progress-bar>
-    </mat-card-content>
-  </mat-card>
-  <ng-template [ngIf]="!authService.isAuthenticated() && !isLoading">
-  <div class="wrapper">
-    <div class="title">
-      <div class="title-spacer">
-        <span>Anmeldung</span>
-      </div>
-    </div>
-    <div class="content">
-        <form (ngSubmit)="onSignin(loginform)" #loginform="ngForm">
-          <mat-form-field
-            class="full-width"
-            [ngClass]="{'mat-form-field-invalid':userNotFound}">
-            <input
-              matInput
-              placeholder="E-Mail"
-              type="email"
-              color="accent"
-              id="email"
-              name="email"
-              ngModel
-              class="form-control">
-          </mat-form-field>
-          <mat-form-field
-            class="full-width"
-            [ngClass]="{'mat-form-field-invalid':wrongPassword}">
-            <input
-              matInput
-              placeholder="Passwort"
-              [type]="hide ? 'password' : 'text'"
-              color="accent"
-              id="password"
-              name="password"
-              ngModel
-              class="form-control">
-            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </mat-form-field>
+<div class="container py-3">
+  <div class="row">
+    <div class="col-12">
+      <mat-card *ngIf="isLoading">
+        <mat-card-content>
+          <mat-progress-bar mode="query"></mat-progress-bar>
+        </mat-card-content>
+      </mat-card>
+      <ng-template [ngIf]="!authService.isAuthenticated() && !isLoading">
+      <div class="wrapper">
+        <div class="title">
+          <div class="title-spacer">
+            <span>Anmeldung</span>
+          </div>
+        </div>
+        <div class="content">
+            <form (ngSubmit)="onSignin(loginform)" #loginform="ngForm">
+              <mat-form-field
+                class="full-width"
+                [ngClass]="{'mat-form-field-invalid':userNotFound}">
+                <input
+                  matInput
+                  placeholder="E-Mail"
+                  type="email"
+                  color="accent"
+                  id="email"
+                  name="email"
+                  ngModel
+                  class="form-control">
+              </mat-form-field>
+              <mat-form-field
+                class="full-width"
+                [ngClass]="{'mat-form-field-invalid':wrongPassword}">
+                <input
+                  matInput
+                  placeholder="Passwort"
+                  [type]="hide ? 'password' : 'text'"
+                  color="accent"
+                  id="password"
+                  name="password"
+                  ngModel
+                  class="form-control">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </mat-form-field>
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="!loginform.valid">Anmelden
+              </button>
+            </form>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template [ngIf]="authService.isAuthenticated()">
+        <mat-card>
+          <mat-card-header>
+            <div class="justify-content-center align-self-center" mat-card-avatar><mat-icon>account_circle</mat-icon></div>
+            <mat-card-title>{{ userService.name }}</mat-card-title>
+            <mat-card-subtitle class="mb-0">{{ userService.email }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="mt-3">
+            <form #profileform="ngForm">
+              <mat-form-field class="full-width" hideRequiredMarker>
+                <input
+                  matInput
+                  type="text"
+                  color="accent"
+                  id="displayname"
+                  name="displayname"
+                  ngModel
+                  [placeholder]="userService.name"
+                  [value]="userService.name"
+                  class="form-control"
+                  required>
+                  <mat-hint *ngIf="profileform.touched && !profileform.valid">
+                    Der Benutzername darf nicht leer sein.
+                  </mat-hint>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-button
+              [disabled]="!profileform.valid"
+              type="button"
+              (click)="updateUser(profileform)"
+              title="Aktualisieren">
+              <mat-icon>autorenew</mat-icon>
+            </button>
+            <!-- <button mat-button>SHARE</button> -->
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="my-3" *ngIf="!verfied">
           <button
             mat-raised-button
             color="primary"
-            type="submit"
-            [disabled]="!loginform.valid">Anmelden
+            type="button"
+            title="E-Mail bestätigen"
+            (click)="sendVerification()">E-Mail bestätigen
           </button>
-        </form>
-      </div>
+        </mat-card>
+        <mat-card class="my-3">
+          <button
+            mat-stroked-button
+            color="warn"
+            type="button"
+            title="Abmelden"
+            (click)="onSignout()">Abmelden
+          </button>
+        </mat-card>
+      </ng-template>
     </div>
-  </ng-template>
-  <ng-template [ngIf]="authService.isAuthenticated()">
-    <mat-card>
-      <mat-card-header>
-        <div mat-card-avatar><mat-icon>account_circle</mat-icon></div>
-        <mat-card-title>{{ userService.name }}</mat-card-title>
-        <mat-card-subtitle>{{ userService.email }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <form #profileform="ngForm">
-          <mat-form-field class="full-width" hideRequiredMarker>
-            <input
-              matInput
-              type="text"
-              color="accent"
-              id="displayname"
-              name="displayname"
-              ngModel
-              [placeholder]="userService.name"
-              [value]="userService.name"
-              class="form-control"
-              required>
-              <mat-hint *ngIf="profileform.touched && !profileform.valid">
-                Der Benutzername darf nicht leer sein.
-              </mat-hint>
-          </mat-form-field>
-        </form>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          mat-button
-          [disabled]="!profileform.valid"
-          type="button"
-          (click)="updateUser(profileform)"
-          title="Aktualisieren">
-          <mat-icon>autorenew</mat-icon>
-        </button>
-        <!-- <button mat-button>SHARE</button> -->
-      </mat-card-actions>
-    </mat-card>
-    <mat-card class="my-3" *ngIf="!verfied">
-      <button
-        mat-raised-button
-        color="primary"
-        type="button"
-        title="E-Mail bestätigen"
-        (click)="sendVerification()">E-Mail bestätigen
-      </button>
-    </mat-card>
-    <mat-card class="my-3">
-      <button
-        mat-stroked-button
-        color="warn"
-        type="button"
-        title="Abmelden"
-        (click)="onSignout()">Abmelden
-      </button>
-    </mat-card>
-  </ng-template>
+  </div>
 </div>
