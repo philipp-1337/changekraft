@@ -4,7 +4,7 @@ import { HomeComponent } from './components/core/home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
-import { InformationComponent } from './components/information/information.component';
+import { EventComponent } from './components/information/event/event.component';
 
 const routes: Routes = [
   {
@@ -19,9 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'event',
-    component: InformationComponent,
-    // loadChildren:
-    //   './components/information/information.module#InformationModule',
+    component: EventComponent,
     data: { animation: 'InfoPages' }
   },
   {

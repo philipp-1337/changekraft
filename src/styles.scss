@@ -15,7 +15,7 @@ $custom-typography: mat-typography-config(
 @include mat-core($custom-typography);
 @include angular-material-theme($rsvp-theme);
 
-@import 'app/shared/bootstrap';
+@import './assets/scss/bootstrap';
 
 .rsvp-error {
   color: mat-color($rsvp-warn);
@@ -37,7 +37,7 @@ input { font-size: 16px;}
   &::after {
         background-attachment: fixed;
         background-color: white;
-        background-image: url('./assets/background.jpg');
+        background-image: url('./assets/img/background.jpg');
         background-position: right bottom;
         background-repeat: no-repeat;
         background-size: contain;
