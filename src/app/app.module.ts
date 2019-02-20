@@ -8,6 +8,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { CoreModule } from './components/core/core.module';
+import { InformationModule } from './components/information/information.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     CoreModule,
+    InformationModule,
     MaterialModule,
     BrowserModule,
     SharedModule,
