@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatDrawer } from '@angular/material';
 import { AuthService } from '../../../services/auth.service';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from 'src/app/app.animations';
 
 @Component({
@@ -14,7 +13,12 @@ import { slideInAnimation } from 'src/app/app.animations';
   styleUrls: ['./header.component.scss'],
   animations: [slideInAnimation]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    public authService: AuthService
+  ) {}
+
   isBigScreen$: Observable<boolean> = this.breakpointObserver
     .observe(['(min-width: 961px)'])
     .pipe(map(result => result.matches));
@@ -60,28 +64,40 @@ export class HeaderComponent {
     }
   ];
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private _focusMonitor: FocusMonitor,
-    public authService: AuthService,
-    router: Router
-  ) {
-    router.events.subscribe(s => {
-      if (s instanceof NavigationEnd) {
-        const tree = router.parseUrl(router.url);
-        if (tree.fragment) {
-          const element = document.querySelector('#' + tree.fragment);
-          if (element) {
-            element.scrollIntoView({
-              inline: 'start',
-              block: 'start',
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
-    });
-  }
+  navigation2 = [
+    {
+      name: 'Location',
+      route: '/event/location',
+      icon: 'location_on'
+    },
+    {
+      name: 'Übernachtung',
+      route: '/event/stay',
+      icon: 'hotel'
+    },
+    {
+      name: 'Verpflegung',
+      route: '/event/food',
+      icon: 'local_dining'
+    },
+    {
+      name: 'Anfahrt',
+      route: '/event/transportation',
+      icon: 'commute'
+    },
+    {
+      name: 'Programm',
+      route: '/event/program',
+      icon: 'event'
+    },
+    {
+      name: 'Anmeldung',
+      route: '/rsvp',
+      icon: 'loyalty'
+    }
+  ];
+
+  ngOnInit() {}
 
   prepareRoute(outlet: RouterOutlet) {
     return (

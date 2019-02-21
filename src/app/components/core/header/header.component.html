@@ -12,9 +12,8 @@
     </mat-toolbar>
     <mat-nav-list>
       <button mat-menu-item
-        *ngFor="let link of navigation"
+        *ngFor="let link of navigation2"
         [routerLink]="link.route"
-        [fragment]="link.fragment"
         (click)="toggleDrawer()">
         <mat-icon>{{link.icon}}</mat-icon>
         <span>{{link.name}}</span>
@@ -36,9 +35,8 @@
           </a>
           <ng-template [ngIf]="(isBigScreen$ | async)">
             <a mat-button
-              *ngFor="let link of navigation"
-              [routerLink]="link.route"
-              [fragment]="link.fragment">
+              *ngFor="let link of navigation2"
+              [routerLink]="link.route">
               <span>{{link.name}}</span>
             </a>
           </ng-template>
