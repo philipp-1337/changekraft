@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-information',
   template: `
     <div [@routeAnimations]="prepareRoute(outlet)">
-      <router-outlet #outlet="outlet"></router-outlet>
+      <router-outlet #outlet="outlet"> </router-outlet>
     </div>
   `,
   animations: [
@@ -14,10 +14,8 @@ import { RouterOutlet } from '@angular/router';
     // animation triggers go here
   ]
 })
-export class InformationComponent implements OnInit {
+export class InformationComponent {
   constructor() {}
-
-  ngOnInit() {}
 
   prepareRoute(outlet: RouterOutlet) {
     return (

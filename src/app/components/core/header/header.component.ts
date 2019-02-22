@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { slideInAnimation } from 'src/app/app.animations';
   styleUrls: ['./header.component.scss'],
   animations: [slideInAnimation]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public authService: AuthService
@@ -96,8 +96,6 @@ export class HeaderComponent implements OnInit {
       icon: 'loyalty'
     }
   ];
-
-  ngOnInit() {}
 
   prepareRoute(outlet: RouterOutlet) {
     return (

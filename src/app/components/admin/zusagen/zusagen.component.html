@@ -1,74 +1,85 @@
-<div class="container py-3">
+<div class="container pb-3">
   <div class="row">
     <div class="col-12">
-      <mat-card *ngIf="!(rsvp | async)">
+      <mat-card *ngIf="!(rsvp | async)" class="mt-3">
         <mat-card-content>
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
       </mat-card>
+      <mat-card *ngIf="(rsvp | async)" class="mt-3">
+        <mat-card-header>
+          <div class="justify-content-center align-self-center" mat-card-avatar>
+            <mat-icon>supervisor_account</mat-icon>
+          </div>
+          <mat-card-title>Übersicht</mat-card-title>
+          <mat-card-subtitle class="mb-0">Alle Zu- & Absagen</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
       <mat-accordion class="headers-align">
-        <mat-expansion-panel *ngFor="let participant of rsvp | async; let irsvp = index">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{ participant?.name }}
-            </mat-panel-title>
-            <mat-panel-description>
-              <mat-icon *ngIf="!participant?.teilnahme">block</mat-icon>
-              <mat-icon *ngIf="participant?.teilnahme">check</mat-icon>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-            <ul>
-              <li class="mb-1">
-                Begleitung:
-                <mat-slide-toggle
-                  [disabled]="!editMode"
+        <div class="mt-3">
+          <mat-expansion-panel *ngFor="let participant of rsvp | async; let irsvp = index">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ participant?.name }}
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon *ngIf="!participant?.teilnahme">block</mat-icon>
+                <mat-icon *ngIf="participant?.teilnahme">check</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+              <ul>
+                <li class="mb-1">
+                  Begleitung:
+                  <mat-slide-toggle
+                    [disabled]="!editMode"
+                    color="primary"
+                    #begleitung
+                    [checked]="participant?.begleitung">
+                  </mat-slide-toggle></li>
+                <li class="mb-1">Hund: {{ participant?.hund | questionableBoolean}}</li>
+                <li class="mb-1">Kind(er): {{ participant?.kinder }}</li>
+                <li class="mb-1">Anreise: {{ participant?.anreise }}</li>
+                <li class="mb-1">Abholung: {{ participant?.abholung | questionableBoolean }}</li>
+                <li class="mb-1">Bahnhof/Zeit: {{ participant?.zugzeit }}</li>
+                <li class="mb-1">Ankunft: {{ participant?.anDate | date:'d. MMMM' }}</li>
+                <li class="mb-1">Abreise: {{ participant?.abDate | date:'d. MMMM' }}</li>
+                <li class="mb-1">Nächte: {{ participant?.naechte }}</li>
+                <li class="mb-1">Unterkunft:
+                  <ul *ngFor="let unterkunft of participant?.unterkuenfte;">
+                    <li>{{ unterkunft }}</li>
+                  </ul>
+                </li>
+              </ul>
+              <mat-action-row>
+                <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-button
+                  *ngIf="editMode"
                   color="primary"
-                  #begleitung
-                  [checked]="participant?.begleitung">
-                </mat-slide-toggle></li>
-              <li class="mb-1">Hund: {{ participant?.hund | questionableBoolean}}</li>
-              <li class="mb-1">Kind(er): {{ participant?.kinder }}</li>
-              <li class="mb-1">Anreise: {{ participant?.anreise }}</li>
-              <li class="mb-1">Abholung: {{ participant?.abholung | questionableBoolean }}</li>
-              <li class="mb-1">Bahnhof/Zeit: {{ participant?.zugzeit }}</li>
-              <li class="mb-1">Ankunft: {{ participant?.anDate | date:'d. MMMM' }}</li>
-              <li class="mb-1">Abreise: {{ participant?.abDate | date:'d. MMMM' }}</li>
-              <li class="mb-1">Nächte: {{ participant?.naechte }}</li>
-              <li class="mb-1">Unterkunft:
-                <ul *ngFor="let unterkunft of participant?.unterkuenfte;">
-                  <li>{{ unterkunft }}</li>
-                </ul>
-              </li>
-            </ul>
-            <mat-action-row>
-              <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button
-                mat-button
-                *ngIf="editMode"
-                color="primary"
-                (click)="editMode = !editMode; updateItem(participant.key, begleitung.checked)"
-                title="Teilnehmer bearbeiten">
-                <mat-icon>save</mat-icon>
-              </button>
-              <a
-                *ngIf="participant?.email"
-                mat-button
-                color="primary"
-                href="mailto:{{participant?.email}}"
-                target="_blank"
-                title="E-Mail schreiben">
-                <mat-icon>email</mat-icon>
-              </a>
-              <button mat-button color="warn" (click)="deleteItem(participant.key)" title="Teilnehmer entfernen">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-action-row>
-        </mat-expansion-panel>
+                  (click)="editMode = !editMode; updateItem(participant.key, begleitung.checked)"
+                  title="Teilnehmer bearbeiten">
+                  <mat-icon>save</mat-icon>
+                </button>
+                <a
+                  *ngIf="participant?.email"
+                  mat-button
+                  color="primary"
+                  href="mailto:{{participant?.email}}"
+                  target="_blank"
+                  title="E-Mail schreiben">
+                  <mat-icon>email</mat-icon>
+                </a>
+                <button mat-button color="warn" (click)="deleteItem(participant.key)" title="Teilnehmer entfernen">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-action-row>
+          </mat-expansion-panel>
+        </div>
       </mat-accordion>
 
-      <mat-card class="my-3" *ngIf="(rsvp | async)">
+      <mat-card class="mt-3" *ngIf="(rsvp | async)">
         <button
           mat-flat-button
           color="primary"

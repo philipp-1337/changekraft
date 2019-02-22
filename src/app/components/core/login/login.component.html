@@ -1,56 +1,58 @@
-<div class="container py-3">
+<div class="container pb-3">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mt-3">
       <mat-card *ngIf="isLoading">
         <mat-card-content>
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
       </mat-card>
       <ng-template [ngIf]="!authService.isAuthenticated() && !isLoading">
-      <div class="wrapper">
-        <div class="title">
-          <div class="title-spacer">
-            <span>Anmeldung</span>
-          </div>
-        </div>
-        <div class="content">
+        <mat-card>
+          <mat-card-header>
+            <div class="justify-content-center align-self-center" mat-card-avatar>
+              <mat-icon>account_circle</mat-icon>
+            </div>
+            <mat-card-title>Anmeldung</mat-card-title>
+            <mat-card-subtitle class="mb-0">Login nur mit Account</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="mt-3">
             <form (ngSubmit)="onSignin(loginform)" #loginform="ngForm">
               <mat-form-field
-                class="full-width"
-                [ngClass]="{'mat-form-field-invalid':userNotFound}">
-                <input
-                  matInput
-                  placeholder="E-Mail"
-                  type="email"
-                  color="accent"
-                  id="email"
-                  name="email"
-                  ngModel
-                  class="form-control">
-              </mat-form-field>
-              <mat-form-field
-                class="full-width"
-                [ngClass]="{'mat-form-field-invalid':wrongPassword}">
-                <input
-                  matInput
-                  placeholder="Passwort"
-                  [type]="hide ? 'password' : 'text'"
-                  color="accent"
-                  id="password"
-                  name="password"
-                  ngModel
-                  class="form-control">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </mat-form-field>
-              <button
-                mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="!loginform.valid">Anmelden
-              </button>
-            </form>
-          </div>
-        </div>
+              class="w-100"
+              [ngClass]="{'mat-form-field-invalid':userNotFound}">
+              <input
+              matInput
+              placeholder="E-Mail"
+              type="email"
+              color="accent"
+              id="email"
+              name="email"
+              ngModel
+              class="form-control">
+            </mat-form-field><br />
+            <mat-form-field
+            class="w-100"
+            [ngClass]="{'mat-form-field-invalid':wrongPassword}">
+            <input
+              matInput
+              placeholder="Passwort"
+              [type]="hide ? 'password' : 'text'"
+              color="accent"
+              id="password"
+              name="password"
+              ngModel
+              class="form-control">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field><br />
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="!loginform.valid">Anmelden
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
       </ng-template>
       <ng-template [ngIf]="authService.isAuthenticated()">
         <mat-card>

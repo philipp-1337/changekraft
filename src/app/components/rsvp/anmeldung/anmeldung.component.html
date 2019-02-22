@@ -7,7 +7,7 @@
               <mat-icon>loyalty</mat-icon>
             </div>
             <mat-card-title>Anmeldung</mat-card-title>
-            <mat-card-subtitle class="mb-0">Vielen Dank für deine Rückmeldung</mat-card-subtitle>
+            <mat-card-subtitle class="mb-0">Cool, dass du dich digital zurückmeldest.</mat-card-subtitle>
           </mat-card-header>
         </mat-card>
       </div>
@@ -37,7 +37,7 @@
                     <button
                       type="button"
                       mat-button matStepperNext>
-                      Next
+                      Weiter
                     </button>
                   </div>
                 </form>
@@ -50,11 +50,11 @@
                       </p>
                       <div>
                           <p *ngIf="!teilnahmeFormGroup.controls['teilnahme'].value">
-                              <button type="button" mat-button matStepperPrevious>Back</button>
+                              <button type="button" mat-button matStepperPrevious>Zurück</button>
                               <button type="button" mat-button (click)="onEarlyExit()">Schade :(</button>
                           </p>
                           <p *ngIf="teilnahmeFormGroup.controls['teilnahme'].value">
-                              <button type="button" mat-button matStepperPrevious>Back</button>
+                              <button type="button" mat-button matStepperPrevious>Zurück</button>
                               <button type="button" mat-button matStepperNext>Ok, cool. Weiter..</button>
                           </p>
                       </div>
@@ -83,8 +83,8 @@
                     </mat-form-field>
                   </p>
                   <div>
-                      <button type="button" mat-button matStepperPrevious>Back</button>
-                      <button type="button" mat-button matStepperNext>Next</button>
+                      <button type="button" mat-button matStepperPrevious>Zurück</button>
+                      <button type="button" mat-button matStepperNext>Weiter</button>
                   </div>
                   </form>
               </mat-step>
@@ -134,7 +134,7 @@
                   </p>
                   <p>
                     Ich reise an am:<br />
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width datepicker">
                       <!-- <input matInput
                         [min]="minDate" [max]="maxDate"
                         [matDatepicker]="pickerAn"
@@ -157,7 +157,7 @@
                   </p>
                   <p>
                     Ich reise ab am:<br />
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width datepicker">
                       <!-- <input matInput
                         [min]="minDate" [max]="maxDate"
                         [matDatepicker]="pickerAb"
@@ -185,8 +185,8 @@
                     </span>
                   </p>
                   <div>
-                      <button type="button" mat-button matStepperPrevious>Back</button>
-                      <button type="button" mat-button matStepperNext [disabled]="!checkRange()">Next</button>
+                      <button type="button" mat-button matStepperPrevious>Zurück</button>
+                      <button type="button" mat-button matStepperNext [disabled]="!checkRange()">Weiter</button>
                   </div>
                 </form>
               </mat-step>
@@ -216,17 +216,17 @@
                   </p>
 
                   <div>
-                    <button type="button" mat-button matStepperPrevious>Back</button>
-                    <button type="button" mat-button matStepperNext>Next</button>
+                    <button type="button" mat-button matStepperPrevious>Zurück</button>
+                    <button type="button" mat-button matStepperNext>Weiter</button>
                   </div>
                 </form>
               </mat-step>
 
               <mat-step>
-                  <ng-template matStepLabel>Done</ng-template>
+                  <ng-template matStepLabel>Fertig</ng-template>
                   <div>
-                      <button type="button" mat-button matStepperPrevious>Back</button>
-                      <button type="submit" mat-button (click)="onSubmit()">Submit</button>
+                      <button type="button" mat-button matStepperPrevious>Zurück</button>
+                      <button type="submit" mat-button (click)="onSubmit()">Absenden</button>
                   </div>
               </mat-step>
           </mat-vertical-stepper>

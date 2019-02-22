@@ -1,11 +1,3 @@
-div.row[id] {
-  @media (min-width: 600px){
-    padding-top: 64px;
-    margin-top: -64px;
-  }
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .mat-slider-horizontal {
   width: 100%;
   max-width: 180px;
@@ -16,6 +8,10 @@ div.row[id] {
 ::ng-deep {
   .mat-form-field-wrapper .mat-form-field-infix {
     width: 204px;
+    line-height: 20px;
+  }
+  .datepicker .mat-form-field-wrapper .mat-form-field-infix {
+    width: 180px;
     line-height: 20px;
   }
   .mat-stepper-horizontal,
