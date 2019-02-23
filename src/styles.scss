@@ -25,33 +25,40 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Raleway, sans-serif; }
 input { font-size: 16px;}
 
-.mat-sidenav {
-  button {
-    &.active {
-      background: map_get($mat-grey, 50);
-    }
+.header-padding {
+  @media (min-width: 600px){
+    padding-top: 64px;
   }
+  padding-top: 56px;
 }
 
-.mat-sidenav-content {
-  &::after {
-        background-attachment: fixed;
-        background-color: white;
-        background-image: url('./assets/img/background.jpg');
-        background-position: right bottom;
-        background-repeat: no-repeat;
-        background-size: contain;
-        content: '';
-        height: 100%;
-        opacity: 0.6;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: -1;
-      }
+.sticky-height {
+  @media (min-width: 600px){
+    height: 64px;
+  }
+  height: 56px;
+}
+
+app-root {
   router-outlet+* {
     > .container,
     > .container-fluid {
+      &::after {
+            background-attachment: scroll;
+            background-color: white;
+            background-image: url('./assets/img/background.jpg');
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: '';
+            left: 0;
+            height: 100%;
+            opacity: 0.6;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: -1;
+          }
       flex-grow: 1;
       mat-card {
         mat-form-field {
@@ -73,11 +80,12 @@ input { font-size: 16px;}
       .img-wrapper {
         @include _mat-theme-overridable-elevation(1, $rsvp-theme);
         border-radius: 4px;
-        height: 100%;
+        // height: 100%;
         img {
           border-radius: 4px;
           height: 100%;
-          object-fit: cover;
+          // object-fit: cover;
+          max-width: 927px;
           width: 100%;
         }
       }

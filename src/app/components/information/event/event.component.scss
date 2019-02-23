@@ -1,11 +1,3 @@
-div.row[id] {
-  @media (min-width: 600px){
-    padding-top: 64px;
-    margin-top: -64px;
-  }
-  padding-top: 56px;
-  margin-top: -56px;
-}
 ::ng-deep {
   .event-page {
     mat-card {

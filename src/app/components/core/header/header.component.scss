@@ -1,19 +1,7 @@
-.sidenav-container {
-  height: 100%;
-}
-
-.sidenav {
-  width: 200px;
-}
-
-.sidenav .mat-toolbar {
-  background: inherit;
-}
-
 .mat-toolbar {
   &.mat-primary,
   &.mat-accent {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 2;
   }
@@ -31,21 +19,5 @@
   span {
     font-size: 1.5rem;
     text-transform: uppercase;
-  }
-}
-
-::ng-deep {
-  .mat-tab-nav-bar {
-    border-bottom: none;
-    .mat-tab-links .mat-tab-link {
-      opacity: 1;
-      font-weight: 400;
-      color: inherit;
-      min-width: auto;
-      padding: 0 12px;
-      .mat-icon {
-        margin-right: 6px;
-      }
-    }
   }
 }

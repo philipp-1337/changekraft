@@ -5,6 +5,7 @@ import 'firebase/auth';
 import 'firebase/database';
 import { AuthService } from './services/auth.service';
 import { slideInAnimation } from './app.animations';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { slideInAnimation } from './app.animations';
 export class AppComponent implements OnInit, OnDestroy {
   name = '';
   authUnsub: firebase.Unsubscribe;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     console.log('firebase init');
@@ -31,6 +32,13 @@ export class AppComponent implements OnInit, OnDestroy {
       messagingSenderId: '807799538199'
     });
     this.authUnsub = this.authService.authChange_$();
+
+    this.router.events.subscribe(evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 
   ngOnDestroy() {

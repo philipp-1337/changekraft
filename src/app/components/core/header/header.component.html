@@ -1,81 +1,71 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
-    attr.role="navigation" *ngIf="!(isBigScreen$ | async)"
-    mode="over" opened="false" id="navButton_1">
-    <mat-toolbar>
+<div class="sticky-height">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row class="container">
       <button mat-icon-button
+        [matMenuTriggerFor]="menu"
+        *ngIf="!(isBigScreen$ | async)"
         id="drawerButton" type="button"
-        aria-label="Toggle sidenav"
-        (click)="toggleDrawer()">
-        <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+        aria-label="Toggle Menu">
+        <mat-icon aria-label="Menu icon">menu</mat-icon>
       </button>
-    </mat-toolbar>
-    <mat-nav-list>
-      <button mat-menu-item
-        *ngFor="let link of navigation2"
-        [routerLink]="link.route"
-        (click)="toggleDrawer()">
-        <mat-icon>{{link.icon}}</mat-icon>
-        <span>{{link.name}}</span>
-      </button>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <mat-toolbar-row class="container">
-        <button *ngIf="!(isBigScreen$ | async)" id="drawerButton" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item
+          *ngFor="let link of navigation2"
+          [routerLink]="link.route">
+          <mat-icon>{{link.icon}}</mat-icon>
+          <span>{{link.name}}</span>
         </button>
-        <nav>
+      </mat-menu>
+      <nav>
+        <a mat-button
+          class="logo"
+          routerLink="/home">
+          <!-- <img src="./assets/img/icon_s.svg"> -->
+          <span>Sandra</span>
+        </a>
+        <ng-template [ngIf]="(isBigScreen$ | async)">
           <a mat-button
-            class="logo"
-            routerLink="/home">
-            <!-- <img src="./assets/img/icon_s.svg"> -->
-            <span>Sandra</span>
+            *ngFor="let link of navigation2"
+            [routerLink]="link.route">
+            <span>{{link.name}}</span>
           </a>
-          <ng-template [ngIf]="(isBigScreen$ | async)">
-            <a mat-button
-              *ngFor="let link of navigation2"
-              [routerLink]="link.route">
-              <span>{{link.name}}</span>
-            </a>
-          </ng-template>
-        </nav>
-        <span class="example-spacer"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
+        </ng-template>
+      </nav>
+      <span class="example-spacer"></span>
+      <button mat-icon-button [matMenuTriggerFor]="admin">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #admin="matMenu">
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <button mat-menu-item routerLink="/admin/">
+            <mat-icon aria-label="Login">lock_open</mat-icon>
+            <span>Login</span>
+          </button>
+        </ng-template>
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <button mat-menu-item (click)="onLogout()" routerLink="/">
+            <mat-icon aria-label="Logout">lock</mat-icon>
+            <span>Abmelden</span>
+          </button>
+        </ng-template>
+        <mat-divider></mat-divider>
+        <button mat-menu-item
+          [disabled]="!authService.isAuthenticated()"
+          routerLink="/login">
+          <mat-icon>account_circle</mat-icon>
+          <span>Profil</span>
         </button>
-        <mat-menu #menu="matMenu">
-          <ng-template [ngIf]="!authService.isAuthenticated()">
-            <button mat-menu-item routerLink="/admin/">
-              <mat-icon aria-label="Login">lock_open</mat-icon>
-              <span>Login</span>
-            </button>
-          </ng-template>
-          <ng-template [ngIf]="authService.isAuthenticated()">
-            <button mat-menu-item (click)="onLogout()" routerLink="/">
-              <mat-icon aria-label="Logout">lock</mat-icon>
-              <span>Abmelden</span>
-            </button>
-          </ng-template>
-          <mat-divider></mat-divider>
-          <button mat-menu-item
-            [disabled]="!authService.isAuthenticated()"
-            routerLink="/login">
-            <mat-icon>account_circle</mat-icon>
-            <span>Profil</span>
-          </button>
-          <button mat-menu-item
-            [disabled]="!authService.isAuthenticated()"
-            routerLink="/admin/zusagen">
-            <mat-icon>supervisor_account</mat-icon>
-            <span>Übersicht</span>
-          </button>
-        </mat-menu>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <div [@routeAnimations]="prepareRoute(outlet)" >
-      <router-outlet #outlet="outlet"></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+        <button mat-menu-item
+          [disabled]="!authService.isAuthenticated()"
+          routerLink="/admin/zusagen">
+          <mat-icon>supervisor_account</mat-icon>
+          <span>Übersicht</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>
+
+<div [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>
