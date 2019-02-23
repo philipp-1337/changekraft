@@ -6,13 +6,13 @@
         *ngIf="!(isBigScreen$ | async)"
         id="drawerButton" type="button"
         aria-label="Toggle Menu">
-        <mat-icon aria-label="Menu icon">menu</mat-icon>
+        <mat-icon aria-label="Menu icon" svgIcon="menu"></mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item
           *ngFor="let link of navigation2"
           [routerLink]="link.route">
-          <mat-icon>{{link.icon}}</mat-icon>
+          <mat-icon [svgIcon]="link.icon"></mat-icon>
           <span>{{link.name}}</span>
         </button>
       </mat-menu>
@@ -33,18 +33,19 @@
       </nav>
       <span class="example-spacer"></span>
       <button mat-icon-button [matMenuTriggerFor]="admin">
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon *ngIf="!authService.isAuthenticated()" svgIcon="account_circle_outline"></mat-icon>
+        <mat-icon *ngIf="authService.isAuthenticated()" svgIcon="account_circle"></mat-icon>
       </button>
       <mat-menu #admin="matMenu">
         <ng-template [ngIf]="!authService.isAuthenticated()">
           <button mat-menu-item routerLink="/admin/">
-            <mat-icon aria-label="Login">lock_open</mat-icon>
+            <mat-icon aria-label="Login" svgIcon="lock_open"></mat-icon>
             <span>Login</span>
           </button>
         </ng-template>
         <ng-template [ngIf]="authService.isAuthenticated()">
           <button mat-menu-item (click)="onLogout()" routerLink="/">
-            <mat-icon aria-label="Logout">lock</mat-icon>
+            <mat-icon aria-label="Logout" svgIcon="lock"></mat-icon>
             <span>Abmelden</span>
           </button>
         </ng-template>
@@ -52,13 +53,17 @@
         <button mat-menu-item
           [disabled]="!authService.isAuthenticated()"
           routerLink="/login">
-          <mat-icon>account_circle</mat-icon>
+          <mat-icon
+            [svgIcon]="!authService.isAuthenticated() ? 'account_circle_outline' : 'account_circle'">
+          </mat-icon>
           <span>Profil</span>
         </button>
         <button mat-menu-item
           [disabled]="!authService.isAuthenticated()"
           routerLink="/admin/zusagen">
-          <mat-icon>supervisor_account</mat-icon>
+          <mat-icon
+            [svgIcon]="!authService.isAuthenticated() ? 'supervisor_account_outline' : 'supervisor_account'">
+          </mat-icon>
           <span>Übersicht</span>
         </button>
       </mat-menu>

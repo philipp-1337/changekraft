@@ -10,7 +10,7 @@
         <mat-card>
           <mat-card-header>
             <div class="justify-content-center align-self-center" mat-card-avatar>
-              <mat-icon>account_circle</mat-icon>
+              <mat-icon svgIcon="account_circle_outline"></mat-icon>
             </div>
             <mat-card-title>Anmeldung</mat-card-title>
             <mat-card-subtitle class="mb-0">Login nur mit Account</mat-card-subtitle>
@@ -42,7 +42,7 @@
               name="password"
               ngModel
               class="form-control">
-              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
             </mat-form-field><br />
             <button
               mat-raised-button
@@ -57,7 +57,9 @@
       <ng-template [ngIf]="authService.isAuthenticated()">
         <mat-card>
           <mat-card-header>
-            <div class="justify-content-center align-self-center" mat-card-avatar><mat-icon>account_circle</mat-icon></div>
+            <div class="justify-content-center align-self-center" mat-card-avatar>
+              <mat-icon svgIcon="account_circle"></mat-icon>
+            </div>
             <mat-card-title>{{ userService.name }}</mat-card-title>
             <mat-card-subtitle class="mb-0">{{ userService.email }}</mat-card-subtitle>
           </mat-card-header>
@@ -88,7 +90,7 @@
               type="button"
               (click)="updateUser(profileform)"
               title="Aktualisieren">
-              <mat-icon>autorenew</mat-icon>
+              <mat-icon svgIcon="autorenew"></mat-icon>
             </button>
             <!-- <button mat-button>SHARE</button> -->
           </mat-card-actions>

@@ -6,17 +6,20 @@ import { MatDrawer } from '@angular/material';
 import { AuthService } from '../../../services/auth.service';
 import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from 'src/app/app.animations';
+import { IconsClass } from 'src/app/shared/icons.class';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  providers: [IconsClass],
   animations: [slideInAnimation]
 })
 export class HeaderComponent {
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public authService: AuthService
+    public authService: AuthService,
+    public icons: IconsClass
   ) {}
 
   isBigScreen$: Observable<boolean> = this.breakpointObserver
