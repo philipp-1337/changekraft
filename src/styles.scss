@@ -44,21 +44,21 @@ app-root {
     > .container,
     > .container-fluid {
       &::after {
-            background-attachment: scroll;
-            background-color: white;
-            background-image: url('./assets/img/background.jpg');
-            background-position: right bottom;
-            background-repeat: no-repeat;
-            background-size: contain;
-            content: '';
-            left: 0;
-            height: 100%;
-            opacity: 0.6;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: -1;
-          }
+        background-attachment: scroll;
+        background-color: white;
+        background-image: url('./assets/img/background.jpg');
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: '';
+        left: 0;
+        height: 100%;
+        opacity: 0.6;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+      }
       flex-grow: 1;
       mat-card {
         mat-form-field {
@@ -69,6 +69,13 @@ app-root {
             font-size: 40px;
             height: 40px;
             width: 40px;
+          }
+        }
+        .mat-card-header-text {
+          overflow-x: hidden;
+          mat-card-subtitle {
+            overflow-x: hidden;
+            text-overflow: ellipsis;
           }
         }
       }
@@ -94,24 +101,6 @@ app-root {
         border-radius: 4px;
         display: flex;
         flex-direction: column;
-        .full-width {
-          width: 100%;
-        }
-        .title {
-          align-content: center;
-          align-items: center;
-          color: $black-87-opacity;
-          display: flex;
-          height: 40px;
-          justify-content: center;
-          padding: 8px 16px;
-          .title-spacer {
-            flex: 1 1 auto;
-          }
-        }
-        .content {
-          padding: 16px;
-        }
       }
     }
   }

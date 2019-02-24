@@ -13,222 +13,217 @@
       </div>
     </div>
   <div class="row">
-    <!-- <div class="offset-md-1"></div> -->
     <div class="col-12 mt-3">
       <ng-template [ngIf]="!zusage && !absage">
         <div class="wrapper">
           <mat-vertical-stepper linear #stepper>
-              <mat-step [stepControl]="firstFormGroup">
-                <form [formGroup]="firstFormGroup">
-                  <ng-template matStepLabel>Persönliche Daten</ng-template>
-                  <mat-form-field>
-                    <input
-                      matInput
-                      placeholder="Name *"
-                      type="text"
-                      id="name"
-                      formControlName="name">
-                  </mat-form-field>
-                  <br />
-                  <mat-form-field>
-                    <input matInput placeholder="E-Mail *" formControlName="email" email>
-                  </mat-form-field>
-                  <div>
-                    <button
-                      type="button"
-                      mat-button matStepperNext>
-                      Weiter
-                    </button>
-                  </div>
+            <ng-template matStepperIcon="edit">
+              <mat-icon svgIcon="edit"></mat-icon>
+            </ng-template>
+
+            <ng-template matStepperIcon="done">
+              <mat-icon svgIcon="check"></mat-icon>
+            </ng-template>
+            <mat-step [stepControl]="firstFormGroup">
+              <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Persönliche Daten</ng-template>
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Name *"
+                    type="text"
+                    id="name"
+                    formControlName="name">
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                  <input matInput placeholder="E-Mail *" formControlName="email" email>
+                </mat-form-field>
+                <div>
+                  <button
+                    type="button"
+                    mat-button matStepperNext>
+                    Weiter
+                  </button>
+                </div>
+              </form>
+            </mat-step>
+            <mat-step [stepControl]="teilnahmeFormGroup">
+                <form [formGroup]="teilnahmeFormGroup">
+                    <ng-template matStepLabel>Teilnahme</ng-template>
+                    <p>
+                      <mat-slide-toggle color="primary" formControlName="teilnahme">Ich/wir nehmen teil.</mat-slide-toggle>
+                    </p>
+                    <div>
+                        <p *ngIf="!teilnahmeFormGroup.controls['teilnahme'].value">
+                          <button type="button" mat-button matStepperPrevious>Zurück</button>
+                          <button type="button" mat-button (click)="onEarlyExit()">Schade :(</button>
+                        </p>
+                        <p *ngIf="teilnahmeFormGroup.controls['teilnahme'].value">
+                          <button type="button" mat-button matStepperPrevious>Zurück</button>
+                          <button type="button" mat-button matStepperNext>Ok, cool. Weiter..</button>
+                        </p>
+                    </div>
                 </form>
-              </mat-step>
-              <mat-step [stepControl]="teilnahmeFormGroup">
-                  <form [formGroup]="teilnahmeFormGroup">
-                      <ng-template matStepLabel>Teilnahme</ng-template>
-                      <p>
-                          <mat-slide-toggle color="primary" formControlName="teilnahme">Ich/wir nehmen teil.</mat-slide-toggle>
-                      </p>
-                      <div>
-                          <p *ngIf="!teilnahmeFormGroup.controls['teilnahme'].value">
-                              <button type="button" mat-button matStepperPrevious>Zurück</button>
-                              <button type="button" mat-button (click)="onEarlyExit()">Schade :(</button>
-                          </p>
-                          <p *ngIf="teilnahmeFormGroup.controls['teilnahme'].value">
-                              <button type="button" mat-button matStepperPrevious>Zurück</button>
-                              <button type="button" mat-button matStepperNext>Ok, cool. Weiter..</button>
-                          </p>
-                      </div>
-                  </form>
-              </mat-step>
-              <mat-step [stepControl]="anzahlFormGroup" optional>
-                  <form [formGroup]="anzahlFormGroup">
-                  <ng-template matStepLabel>Anzahl</ng-template>
-                  <p>
-                    Ich komme mit Begeleitung:<br />
-                    <mat-slide-toggle color="primary" formControlName="begleitung"></mat-slide-toggle>
+            </mat-step>
+            <mat-step [stepControl]="anzahlFormGroup" optional>
+                <form [formGroup]="anzahlFormGroup">
+                <ng-template matStepLabel>Anzahl</ng-template>
+                <p>
+                  Ich komme mit Begeleitung:<br />
+                  <mat-slide-toggle color="primary" formControlName="begleitung"></mat-slide-toggle>
+              </p>
+                <p>
+                  Ich bringe einen Hund mit:<br />
+                  <mat-slide-toggle color="primary" formControlName="hund"></mat-slide-toggle>
                 </p>
-                  <p>
-                    Ich bringe einen Hund mit:<br />
-                    <mat-slide-toggle color="primary" formControlName="hund"></mat-slide-toggle>
-                  </p>
-                  <p>
-                    Ich bringe Kinder mit:<br />
-                    <mat-form-field>
-                      <mat-select name="kinder" formControlName="kinder">
-                        <mat-option value="0">0</mat-option>
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
-                        <mat-option value="3">3</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </p>
-                  <div>
-                      <button type="button" mat-button matStepperPrevious>Zurück</button>
-                      <button type="button" mat-button matStepperNext>Weiter</button>
-                  </div>
-                  </form>
-              </mat-step>
-
-              <mat-step [stepControl]="anreiseFormGroup">
-                <form [formGroup]="anreiseFormGroup">
-                  <ng-template matStepLabel>Anreise</ng-template>
-                  <p>
-                    Ich reise an mit:<br />
-                    <mat-form-field>
-                      <mat-select name="anreise" formControlName="anreise">
-                        <mat-option value="PKW">
-                          Eigener PKW
-                        </mat-option>
-                        <mat-option value="Mitfahrgelegenheit">
-                          Mitfahrgelegenheit
-                        </mat-option>
-                        <mat-option value="Zug" (click)="onChooseTrain()">
-                          Zug
-                        </mat-option>
-                        <mat-option value="Sonstige">
-                          Sonstige
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </p>
-                  <p *ngIf="anreiseFormGroup.controls['anreise'].value == 'Zug'">
-                    Wird eine Abholung benötigt?<br />
-                    <mat-slide-toggle color="primary" formControlName="abholung"></mat-slide-toggle>
-                  </p>
-                  <p *ngIf="anreiseFormGroup.controls['abholung'].value == true">
-                    Zielbahnhof/Ankunfszeit:<br />
-                    <mat-form-field>
-                      <mat-select name="zugzeit" formControlName="zugzeit">
-                        <mat-optgroup label="Kyritz">
-                          <mat-option value="Kyritz - 11:46">11:46 Uhr</mat-option>
-                          <mat-option value="Kyritz - 13:46">13:46 Uhr</mat-option>
-                          <mat-option value="Kyritz - 15:46">15:46 Uhr</mat-option>
-                        </mat-optgroup>
-                        <mat-optgroup label="Pritzwalk">
-                          <mat-option value="Pritzwalk - 11:39">11:39 Uhr</mat-option>
-                          <mat-option value="Pritzwalk - 13:38">13:38 Uhr</mat-option>
-                          <mat-option value="Pritzwalk - 15:39">15:39 Uhr</mat-option>
-                        </mat-optgroup>
-                      </mat-select>
-                    </mat-form-field>
-                  </p>
-                  <p>
-                    Ich reise an am:<br />
-                    <mat-form-field class="example-full-width datepicker">
-                      <!-- <input matInput
-                        [min]="minDate" [max]="maxDate"
-                        [matDatepicker]="pickerAn"
-                        (focus)="pickerAn.open()"
-                        formControlName="anDate"> -->
-                      <input matInput
-                        [min]="minDate" [max]="maxDate"
-                        [matDatepicker]="pickerAn"
-                        formControlName="anDate">
-                        <mat-hint
-                          *ngIf="!anreiseFormGroup.controls['anDate'].valid && !anreiseFormGroup.controls['anDate'].touched">
-                          Bsp. Datum-Format: 19.07.2019</mat-hint>
-                        <mat-error
-                          *ngIf="anreiseFormGroup.controls['anDate'].invalid && anreiseFormGroup.controls['anDate'].touched">
-                          Bitte ein korrektes Datum angeben.
-                        </mat-error>
-                      <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
-                      <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
-                    </mat-form-field>
-                  </p>
-                  <p>
-                    Ich reise ab am:<br />
-                    <mat-form-field class="example-full-width datepicker">
-                      <!-- <input matInput
-                        [min]="minDate" [max]="maxDate"
-                        [matDatepicker]="pickerAb"
-                        (focus)="pickerAb.open()"
-                        formControlName="abDate"> -->
-                      <input matInput
-                        [min]="minDate" [max]="maxDate"
-                        [matDatepicker]="pickerAb"
-                        formControlName="abDate">
-                        <mat-hint
-                          *ngIf="!anreiseFormGroup.controls['abDate'].valid && !anreiseFormGroup.controls['abDate'].touched">
-                          Bsp. Datum-Format: 21.07.2019</mat-hint>
-                        <mat-error
-                          *ngIf="anreiseFormGroup.controls['abDate'].invalid && anreiseFormGroup.controls['abDate'].touched">
-                          Bitte ein korrektes Datum angeben.
-                        </mat-error>
-                      <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
-                      <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
-                    </mat-form-field>
-                  </p>
-                  <p *ngIf="anreiseFormGroup.controls['anDate'].valid && anreiseFormGroup.controls['abDate'].valid">
-                    <span *ngIf="checkRange()">Anzahl Nächte: {{ nights }}</span>
-                    <span *ngIf="!checkRange()" class="rsvp-error">
-                      Das Datum der Abreise darf nicht vor dem Datum der Anreise liegen.
-                    </span>
-                  </p>
-                  <div>
-                      <button type="button" mat-button matStepperPrevious>Zurück</button>
-                      <button type="button" mat-button matStepperNext [disabled]="!checkRange()">Weiter</button>
-                  </div>
-                </form>
-              </mat-step>
-
-              <mat-step [stepControl]="unterkunftFormGroup" *ngIf="nights > 0">
-                <!-- <mat-step [stepControl]="unterkunftFormGroup" optional> -->
-                <form [formGroup]="unterkunftFormGroup">
-                  <ng-template matStepLabel>Übernachtung</ng-template>
-                <p *ngIf="checkRange()">
+                <p>
+                  Ich bringe Kinder mit:<br />
                   <mat-form-field>
-                      <input
-                        matInput
-                        placeholder="Anzahl Nächte:"
-                        type="text"
-                        id="naechte"
-                        formControlName="naechte"
-                        value="{{ nights }}"
-                        readonly>
-                    </mat-form-field>
-                  </p>
-                  <p>
-                    <mat-form-field>
-                      <mat-select placeholder="Unterkunft" formControlName="unterkuenfte" multiple>
-                        <mat-option *ngFor="let unterkunft of unterkunftListe" [value]="unterkunft">{{ unterkunft }}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </p>
-
-                  <div>
-                    <button type="button" mat-button matStepperPrevious>Zurück</button>
-                    <button type="button" mat-button matStepperNext>Weiter</button>
-                  </div>
+                    <mat-select name="kinder" formControlName="kinder">
+                      <mat-option value="0">0</mat-option>
+                      <mat-option value="1">1</mat-option>
+                      <mat-option value="2">2</mat-option>
+                      <mat-option value="3">3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </p>
+                <div>
+                  <button type="button" mat-button matStepperPrevious>Zurück</button>
+                  <button type="button" mat-button matStepperNext>Weiter</button>
+                </div>
                 </form>
-              </mat-step>
+            </mat-step>
 
-              <mat-step>
-                  <ng-template matStepLabel>Fertig</ng-template>
-                  <div>
-                      <button type="button" mat-button matStepperPrevious>Zurück</button>
-                      <button type="submit" mat-button (click)="onSubmit()">Absenden</button>
-                  </div>
-              </mat-step>
+            <mat-step [stepControl]="anreiseFormGroup">
+              <form [formGroup]="anreiseFormGroup">
+                <ng-template matStepLabel>Anreise</ng-template>
+                <p>
+                  Ich reise an mit:<br />
+                  <mat-form-field>
+                    <mat-select name="anreise" formControlName="anreise">
+                      <mat-option value="PKW">
+                        Eigener PKW
+                      </mat-option>
+                      <mat-option value="Mitfahrgelegenheit">
+                        Mitfahrgelegenheit
+                      </mat-option>
+                      <mat-option value="Zug" (click)="onChooseTrain()">
+                        Zug
+                      </mat-option>
+                      <mat-option value="Sonstige">
+                        Sonstige
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </p>
+                <p *ngIf="anreiseFormGroup.controls['anreise'].value == 'Zug'">
+                  Wird eine Abholung benötigt?<br />
+                  <mat-slide-toggle color="primary" formControlName="abholung"></mat-slide-toggle>
+                </p>
+                <p *ngIf="anreiseFormGroup.controls['abholung'].value == true">
+                  Zielbahnhof/Ankunfszeit:<br />
+                  <mat-form-field>
+                    <mat-select name="zugzeit" formControlName="zugzeit">
+                      <mat-optgroup label="Kyritz">
+                        <mat-option value="Kyritz - 11:46">11:46 Uhr</mat-option>
+                        <mat-option value="Kyritz - 13:46">13:46 Uhr</mat-option>
+                        <mat-option value="Kyritz - 15:46">15:46 Uhr</mat-option>
+                      </mat-optgroup>
+                      <mat-optgroup label="Pritzwalk">
+                        <mat-option value="Pritzwalk - 11:39">11:39 Uhr</mat-option>
+                        <mat-option value="Pritzwalk - 13:38">13:38 Uhr</mat-option>
+                        <mat-option value="Pritzwalk - 15:39">15:39 Uhr</mat-option>
+                      </mat-optgroup>
+                    </mat-select>
+                  </mat-form-field>
+                </p>
+                <p>
+                  Ich reise an am:<br />
+                  <mat-form-field class="datepicker">
+                    <input matInput
+                      [min]="minDate" [max]="maxDate"
+                      [matDatepicker]="pickerAn"
+                      formControlName="anDate">
+                      <mat-hint
+                        *ngIf="!anreiseFormGroup.controls['anDate'].valid && !anreiseFormGroup.controls['anDate'].touched">
+                        Bsp. Datum-Format: 19.07.2019</mat-hint>
+                      <mat-error
+                        *ngIf="anreiseFormGroup.controls['anDate'].invalid && anreiseFormGroup.controls['anDate'].touched">
+                        Bitte ein korrektes Datum angeben.
+                      </mat-error>
+                    <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
+                    <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
+                  </mat-form-field>
+                </p>
+                <p>
+                  Ich reise ab am:<br />
+                  <mat-form-field class="datepicker">
+                    <input matInput
+                      [min]="minDate" [max]="maxDate"
+                      [matDatepicker]="pickerAb"
+                      formControlName="abDate">
+                      <mat-hint
+                        *ngIf="!anreiseFormGroup.controls['abDate'].valid && !anreiseFormGroup.controls['abDate'].touched">
+                        Bsp. Datum-Format: 21.07.2019</mat-hint>
+                      <mat-error
+                        *ngIf="anreiseFormGroup.controls['abDate'].invalid && anreiseFormGroup.controls['abDate'].touched">
+                        Bitte ein korrektes Datum angeben.
+                      </mat-error>
+                    <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
+                    <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
+                  </mat-form-field>
+                </p>
+                <p *ngIf="anreiseFormGroup.controls['anDate'].valid && anreiseFormGroup.controls['abDate'].valid">
+                  <span *ngIf="checkRange()">Anzahl Nächte: {{ nights }}</span>
+                  <span *ngIf="!checkRange()" class="rsvp-error">
+                    Das Datum der Abreise darf nicht vor dem Datum der Anreise liegen.
+                  </span>
+                </p>
+                <div>
+                    <button type="button" mat-button matStepperPrevious>Zurück</button>
+                    <button type="button" mat-button matStepperNext [disabled]="!checkRange()">Weiter</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="unterkunftFormGroup" *ngIf="nights > 0">
+              <form [formGroup]="unterkunftFormGroup">
+                <ng-template matStepLabel>Übernachtung</ng-template>
+              <p *ngIf="checkRange()">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Anzahl Nächte:"
+                    type="text"
+                    id="naechte"
+                    formControlName="naechte"
+                    value="{{ nights }}"
+                    readonly>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field>
+                    <mat-select placeholder="Unterkunft" formControlName="unterkuenfte" multiple>
+                      <mat-option *ngFor="let unterkunft of unterkunftListe" [value]="unterkunft">{{ unterkunft }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </p>
+
+                <div>
+                  <button type="button" mat-button matStepperPrevious>Zurück</button>
+                  <button type="button" mat-button matStepperNext>Weiter</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step>
+              <ng-template matStepLabel>Fertig</ng-template>
+              <div>
+                <button type="button" mat-button matStepperPrevious>Zurück</button>
+                <button type="submit" mat-button (click)="onSubmit()">Absenden</button>
+              </div>
+            </mat-step>
           </mat-vertical-stepper>
         </div>
       </ng-template>
