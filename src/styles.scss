@@ -1,3 +1,4 @@
+@import './assets/fonts/raleway/raleway';
 @import '~@angular/material/theming';
 
 $rsvp-primary: mat-palette($mat-light-green, 900);
@@ -22,7 +23,7 @@ $custom-typography: mat-typography-config(
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Raleway, sans-serif; }
+body { margin: 0; font-family: 'Raleway', sans-serif; overflow-x: hidden; }
 input { font-size: 16px;}
 
 .header-padding {
