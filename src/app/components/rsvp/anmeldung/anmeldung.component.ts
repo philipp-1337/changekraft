@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Response, Http } from '@angular/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Observable } from 'rxjs';
@@ -17,10 +16,8 @@ import { map } from 'rxjs/operators';
 })
 export class AnmeldungComponent implements OnInit {
   constructor(
-    private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private http: Http,
-    private route: ActivatedRoute,
+    private httpClient: HttpClient,
     public snackbar: SnackbarClass
   ) {}
 
@@ -138,7 +135,6 @@ export class AnmeldungComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    // this.router.navigate(['/event'], { relativeTo: this.route });
     this.zusage = true;
     this.snackbar.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
     this.stepper.reset();
@@ -147,7 +143,6 @@ export class AnmeldungComponent implements OnInit {
     this.mergeFG();
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
-    // this.router.navigate(['/event'], { relativeTo: this.route });
     this.absage = true;
     this.snackbar.openSnackBar(
       'Schade, du wirst nicht eingeplant.',
@@ -157,13 +152,13 @@ export class AnmeldungComponent implements OnInit {
   }
 
   onSaveData(newRsvpData: Array<any>) {
-    this.storeRsvpData(newRsvpData).subscribe((response: Response) => {
+    this.storeRsvpData(newRsvpData).subscribe((response: HttpResponse<any>) => {
       console.log(response);
     });
   }
 
   storeRsvpData(data: Array<any>) {
-    return this.http.post(
+    return this.httpClient.post(
       'https://wildwildwuerlich.firebaseio.com/rsvp.json',
       data
     );
