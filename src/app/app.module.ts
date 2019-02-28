@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule, FirestoreSettingsToken  } from 'angularfire2/firestore';
 
 import { CoreModule } from './components/core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -27,6 +28,7 @@ import { environment } from '../environments/environment';
     SharedModule,
     AngularFireModule.initializeApp(AppComponent),
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
     BrowserAnimationsModule,
     LayoutModule,
     HttpClientModule,
@@ -35,7 +37,10 @@ import { environment } from '../environments/environment';
       enabled: environment.production
     })
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'de' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'de' },
+    { provide: FirestoreSettingsToken, useValue: {} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

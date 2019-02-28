@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Observable } from 'rxjs';
@@ -18,8 +19,12 @@ export class AnmeldungComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private httpClient: HttpClient,
-    public snackbar: SnackbarClass
-  ) {}
+    public snackbar: SnackbarClass,
+    private afs: AngularFirestore,
+  ) {
+    afs.firestore.settings({ timestampsInSnapshots: true });
+    afs.firestore.enablePersistence();
+  }
 
   isBigScreen$: Observable<boolean> = this.breakpointObserver
     .observe(['(min-width: 961px)'])
@@ -46,6 +51,9 @@ export class AnmeldungComponent implements OnInit {
   freitag = new Date(2019, 6, 19);
   samstag = new Date(2019, 6, 20);
   sonntag = new Date(2019, 6, 21, 0, 0, 0, 0);
+
+  newAnreiseDate: Date;
+  newAbreiseDate: Date;
 
   anreise: number;
   abreise: number;
@@ -76,8 +84,13 @@ export class AnmeldungComponent implements OnInit {
     }
   }
 
-  onChooseTrain() {
-    console.log(this.anreiseFormGroup.controls['anreise'].value);
+  transformDate() {
+    this.anreiseFormGroup.controls['anDate'].valueChanges.subscribe(val => {
+      this.newAnreiseDate = this.anreiseFormGroup.controls['anDate'].value.toDate();
+    });
+    this.anreiseFormGroup.controls['abDate'].valueChanges.subscribe(val => {
+      this.newAbreiseDate = this.anreiseFormGroup.controls['abDate'].value.toDate();
+    });
   }
 
   onChanges(): void {
@@ -87,6 +100,17 @@ export class AnmeldungComponent implements OnInit {
         naechte: new FormControl(this.nights),
         unterkuenfte: new FormControl(this.unterkuenfte)
       });
+      this.transformDate();
+      if (this.anreiseFormGroup.controls['abDate'].touched && this.anreiseFormGroup.controls['anDate'].touched) {
+        this.anreiseFormGroup = new FormGroup({
+          anreise: new FormControl(''),
+          abholung: new FormControl(''),
+          zugzeit: new FormControl(''),
+          anDate: new FormControl(this.newAnreiseDate, Validators.required),
+          abDate: new FormControl(this.newAbreiseDate, Validators.required)
+        });
+      }
+      console.log(this.anreiseFormGroup);
     });
   }
 
@@ -152,15 +176,20 @@ export class AnmeldungComponent implements OnInit {
   }
 
   onSaveData(newRsvpData: Array<any>) {
-    this.storeRsvpData(newRsvpData).subscribe((response: HttpResponse<any>) => {
-      console.log(response);
-    });
+    this.afs.collection('rsvp').add(newRsvpData);
   }
 
-  storeRsvpData(data: Array<any>) {
-    return this.httpClient.post(
-      'https://wildwildwuerlich.firebaseio.com/rsvp.json',
-      data
-    );
-  }
+  // onSaveData(newRsvpData: Array<any>) {
+  //   this.storeRsvpData(newRsvpData).subscribe((response: HttpResponse<any>) => {
+  //     console.log(response);
+  //   });
+  // }
+
+  // storeRsvpData(data: Array<any>) {
+  //   return this.httpClient.post(
+  //     'https://wildwildwuerlich.firebaseio.com/rsvp.json',
+  //     data
+  //   );
+  // }
 }
+
