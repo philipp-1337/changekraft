@@ -6,6 +6,24 @@
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
       </mat-card>
+      <mat-card class="mt-3">
+        <mat-card-content>
+          <ul *ngFor="let item of rsvps | async">
+            <li>Name: {{ item.name }}</li>
+            <li>Teilnahme: {{ item.teilnahme | questionableBoolean }}</li>
+            <li>Begleitung: {{ item.begleitung | questionableBoolean }}</li>
+            <li>Kinder: {{ item.kinder }}</li>
+            <li>Hund: {{ item.hund | questionableBoolean }}</li>
+            <li>Anreise: {{ item.anreise }}</li>
+            <li>Abholung: {{ item.abholung | questionableBoolean }}</li>
+            <li>Bahnhof/Zeit: {{ item.zugzeit }}</li>
+            <li>Ankunft: {{ item.andate | date:'d. MMMM' }}</li>
+            <li>Abreise: {{ item.abdate | date:'d. MMMM' }}</li>
+            <li>Anzahl Nächte: {{ item.naechte }}</li>
+            <li>Übernachtung: {{ item.unterkuenfte }}</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
       <mat-card *ngIf="(rsvp | async)" class="mt-3">
         <mat-card-header>
           <div class="justify-content-center align-self-center" mat-card-avatar>

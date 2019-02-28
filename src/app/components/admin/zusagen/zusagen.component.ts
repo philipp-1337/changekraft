@@ -3,6 +3,10 @@ import { map } from 'rxjs/operators';
 import { Subscription, Observable } from 'rxjs';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
 import { ExcelService } from '../../../services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
 
@@ -22,11 +26,18 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
 
   editMode = false;
 
+  private rsvpCollection: AngularFirestoreCollection;
+  rsvps: Observable<any>;
+
   constructor(
     private excelService: ExcelService,
     private db: AngularFireDatabase,
+    private afs: AngularFirestore,
     public joinclass: JoinClass
-  ) {}
+  ) {
+    this.rsvpCollection = afs.collection('rsvp');
+    this.rsvps = this.rsvpCollection.valueChanges();
+  }
 
   ngOnInit() {
     this.rsvpData = this.db.list('rsvp');
@@ -99,7 +110,6 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
         this.excelData[x].kinder = '0';
         this.excelData[x].kinder = parseInt(this.excelData[x].kinder, 10);
       }
-
     }
   }
 
