@@ -6,7 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFirestoreModule, FirestoreSettingsToken  } from 'angularfire2/firestore';
+import {
+  AngularFirestoreModule,
+  FirestoreSettingsToken
+} from 'angularfire2/firestore';
 
 import { CoreModule } from './components/core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
