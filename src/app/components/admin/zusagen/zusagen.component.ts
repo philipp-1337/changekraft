@@ -1,10 +1,29 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/firestore';
 import { ExcelService } from '../../../services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
+
+export interface Rsvp {
+  name: string;
+  email: string;
+  teilnahme: boolean;
+  begleitung: boolean;
+  kinder: number;
+  hund: boolean;
+  anreise: string;
+  abholung: boolean;
+  zugzeit: string;
+  andate: Date;
+  abdate: Date;
+  naechte: number;
+  unterkuenfte: string;
+}
 
 @Component({
   selector: 'app-admin-zusagen',
@@ -13,8 +32,6 @@ import { JoinClass } from 'src/app/shared/join.class';
   providers: [JoinClass]
 })
 export class AdminZusagenComponent implements OnInit, OnDestroy {
-  rsvp: Observable<any>;
-  rsvpData: AngularFireList<any>;
   excelData: Array<any>;
   subscription: Subscription;
 
@@ -22,22 +39,26 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
 
   editMode = false;
 
+  private rsvpCollection: AngularFirestoreCollection;
+  rsvp$: Observable<any>;
+
   constructor(
     private excelService: ExcelService,
-    private db: AngularFireDatabase,
+    private afs: AngularFirestore,
     public joinclass: JoinClass
   ) {}
 
   ngOnInit() {
-    this.rsvpData = this.db.list('rsvp');
-    // Use snapshotChanges().map() to store the key
-    this.rsvp = this.rsvpData
-      .snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      );
+    this.rsvpCollection = this.afs.collection('rsvp');
+    this.rsvp$ = this.rsvpCollection.snapshotChanges().pipe(
+      map(actions =>
+        actions.map(a => {
+          const data = a.payload.doc.data() as Rsvp;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      )
+    );
     this.fetchDataforExcel();
   }
 
@@ -45,20 +66,32 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  updateItem(key: string, newValue: any) {
-    const promise = this.rsvpData.update(key, { begleitung: newValue });
+  updateItem(id: string, newValue: any) {
+    const promise = this.rsvpCollection
+      .doc(id)
+      .update({ begleitung: newValue });
     promise
       .then(_ => console.log('Erfolgreich geändert.'))
       .catch(err => console.log(err, 'Änderung nicht erlaubt.'));
   }
 
-  deleteItem(key: string) {
-    const promise = this.rsvpData.remove(key);
+  deleteItem(id: string) {
+    const promise = this.rsvpCollection.doc(id).delete();
     promise
       .then(_ => console.log('Erfolgreich gelöscht.'))
       .catch(err => console.log(err, 'Löschen nicht erlaubt.'));
   }
 
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(this.excelData, 'rsvp');
+  }
+
+  fetchDataforExcel() {
+    this.subscription = this.rsvp$.subscribe(rsvp => {
+      this.excelData = rsvp;
+      this.formatDataForExcel();
+    });
+  }
   formatDataForExcel() {
     for (let x = 0; x < this.excelData.length; x++) {
       this.excelData[x].unterkuenfte = this.joinclass.join(
@@ -68,29 +101,46 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
 
       this.counter = 1 + x;
 
-      const abDate: Date = new Date(this.excelData[x].abDate);
-      const anDate: Date = new Date(this.excelData[x].anDate);
-
-      const abDateFormatted: string =
-        this.fuerendeNullen(abDate.getDate()) +
-        '.' +
-        this.fuerendeNullen(abDate.getMonth() + 1) +
-        '.' +
-        abDate.getFullYear();
-
-      const anDateFormatted: string =
-        this.fuerendeNullen(anDate.getDate()) +
-        '.' +
-        this.fuerendeNullen(anDate.getMonth() + 1) +
-        '.' +
-        anDate.getFullYear();
-
-      if (this.excelData[x].anDate !== '') {
-        this.excelData[x].anDate = anDateFormatted;
+      if (!this.excelData[x].hund) {
+        let hund = this.excelData[x].hund;
+        hund = false;
+        this.excelData[x].hund = hund;
       }
 
-      if (this.excelData[x].abDate !== '') {
-        this.excelData[x].abDate = abDateFormatted;
+      if (!this.excelData[x].teilnahme) {
+        let teilnahme = this.excelData[x].teilnahme;
+        teilnahme = false;
+        this.excelData[x].teilnahme = teilnahme;
+      }
+
+      if (!this.excelData[x].abholung) {
+        let abholung = this.excelData[x].abholung;
+        abholung = false;
+        this.excelData[x].abholung = abholung;
+      }
+
+      if (!this.excelData[x].begleitung) {
+        let begleitung = this.excelData[x].begleitung;
+        begleitung = false;
+        this.excelData[x].begleitung = begleitung;
+      }
+
+      if (this.excelData[x].andate) {
+        const newAndate = new Date(
+          (this.excelData[x].andate.seconds + 3600) * 1000
+        );
+        if (this.excelData[x].andate !== '') {
+          this.excelData[x].andate = newAndate;
+        }
+      }
+
+      if (this.excelData[x].abdate) {
+        const newAbdate = new Date(
+          (this.excelData[x].abdate.seconds + 3600) * 1000
+        );
+        if (this.excelData[x].abdate !== '') {
+          this.excelData[x].abdate = newAbdate;
+        }
       }
 
       if (this.excelData[x].kinder !== '') {
@@ -99,29 +149,6 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
         this.excelData[x].kinder = '0';
         this.excelData[x].kinder = parseInt(this.excelData[x].kinder, 10);
       }
-
-    }
-  }
-
-  exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.excelData, 'rsvp');
-  }
-
-  fetchDataforExcel() {
-    this.subscription = this.db
-      .list('rsvp')
-      .valueChanges()
-      .subscribe(rsvp => {
-        this.excelData = rsvp;
-        this.formatDataForExcel();
-      });
-  }
-
-  fuerendeNullen(nummer: number) {
-    if (nummer > 10) {
-      return nummer + '';
-    } else {
-      return '0' + nummer;
     }
   }
 }

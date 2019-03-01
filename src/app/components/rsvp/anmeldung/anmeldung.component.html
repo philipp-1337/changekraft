@@ -108,7 +108,7 @@
                       <mat-option value="Mitfahrgelegenheit">
                         Mitfahrgelegenheit
                       </mat-option>
-                      <mat-option value="Zug" (click)="onChooseTrain()">
+                      <mat-option value="Zug">
                         Zug
                       </mat-option>
                       <mat-option value="Sonstige">
@@ -144,12 +144,12 @@
                     <input matInput
                       [min]="minDate" [max]="maxDate"
                       [matDatepicker]="pickerAn"
-                      formControlName="anDate">
+                      formControlName="andate">
                       <mat-hint
-                        *ngIf="!anreiseFormGroup.controls['anDate'].valid && !anreiseFormGroup.controls['anDate'].touched">
+                        *ngIf="!anreiseFormGroup.controls['andate'].valid && !anreiseFormGroup.controls['andate'].touched">
                         Bsp. Datum-Format: 19.07.2019</mat-hint>
                       <mat-error
-                        *ngIf="anreiseFormGroup.controls['anDate'].invalid && anreiseFormGroup.controls['anDate'].touched">
+                        *ngIf="anreiseFormGroup.controls['andate'].invalid && anreiseFormGroup.controls['andate'].touched">
                         Bitte ein korrektes Datum angeben.
                       </mat-error>
                     <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
@@ -162,19 +162,19 @@
                     <input matInput
                       [min]="minDate" [max]="maxDate"
                       [matDatepicker]="pickerAb"
-                      formControlName="abDate">
+                      formControlName="abdate">
                       <mat-hint
-                        *ngIf="!anreiseFormGroup.controls['abDate'].valid && !anreiseFormGroup.controls['abDate'].touched">
+                        *ngIf="!anreiseFormGroup.controls['abdate'].valid && !anreiseFormGroup.controls['abdate'].touched">
                         Bsp. Datum-Format: 21.07.2019</mat-hint>
                       <mat-error
-                        *ngIf="anreiseFormGroup.controls['abDate'].invalid && anreiseFormGroup.controls['abDate'].touched">
+                        *ngIf="anreiseFormGroup.controls['abdate'].invalid && anreiseFormGroup.controls['abdate'].touched">
                         Bitte ein korrektes Datum angeben.
                       </mat-error>
                     <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
                     <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
                   </mat-form-field>
                 </p>
-                <p *ngIf="anreiseFormGroup.controls['anDate'].valid && anreiseFormGroup.controls['abDate'].valid">
+                <p *ngIf="anreiseFormGroup.controls['andate'].valid && anreiseFormGroup.controls['abdate'].valid">
                   <span *ngIf="checkRange()">Anzahl Nächte: {{ nights }}</span>
                   <span *ngIf="!checkRange()" class="rsvp-error">
                     Das Datum der Abreise darf nicht vor dem Datum der Anreise liegen.

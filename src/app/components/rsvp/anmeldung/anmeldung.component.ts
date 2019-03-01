@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Observable } from 'rxjs';
@@ -17,8 +17,8 @@ import { map } from 'rxjs/operators';
 export class AnmeldungComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private httpClient: HttpClient,
-    public snackbar: SnackbarClass
+    public snackbar: SnackbarClass,
+    private afs: AngularFirestore
   ) {}
 
   isBigScreen$: Observable<boolean> = this.breakpointObserver
@@ -31,6 +31,8 @@ export class AnmeldungComponent implements OnInit {
 
   absage = false;
   zusage = false;
+
+  begleitung = false;
 
   minDate = new Date(2019, 6, 19);
   maxDate = new Date(2019, 6, 21);
@@ -47,6 +49,9 @@ export class AnmeldungComponent implements OnInit {
   samstag = new Date(2019, 6, 20);
   sonntag = new Date(2019, 6, 21, 0, 0, 0, 0);
 
+  newAnreiseDate: Date;
+  newAbreiseDate: Date;
+
   anreise: number;
   abreise: number;
   nights: number;
@@ -60,15 +65,15 @@ export class AnmeldungComponent implements OnInit {
   ];
 
   calcNights() {
-    this.anreise = this.anreiseFormGroup.controls['anDate'].value;
-    this.abreise = this.anreiseFormGroup.controls['abDate'].value;
+    this.anreise = this.anreiseFormGroup.controls['andate'].value;
+    this.abreise = this.anreiseFormGroup.controls['abdate'].value;
     this.nights = (this.abreise - this.anreise) / 86400000; // 86400000 = 1 day (in ms)
     this.unterkuenfte = this.unterkunftFormGroup.controls['unterkuenfte'].value;
   }
 
   checkRange() {
-    const anreise = this.anreiseFormGroup.controls['anDate'].value;
-    const abreise = this.anreiseFormGroup.controls['abDate'].value;
+    const anreise = this.anreiseFormGroup.controls['andate'].value;
+    const abreise = this.anreiseFormGroup.controls['abdate'].value;
     if (abreise < anreise) {
       return false;
     } else {
@@ -76,8 +81,34 @@ export class AnmeldungComponent implements OnInit {
     }
   }
 
-  onChooseTrain() {
-    console.log(this.anreiseFormGroup.controls['anreise'].value);
+  transformDate() {
+    if (
+      this.anreiseFormGroup.controls['andate'].touched &&
+      this.anreiseFormGroup.controls['andate'].valid
+    ) {
+      this.newAnreiseDate = this.anreiseFormGroup.controls[
+        'andate'
+      ].value.toDate();
+    }
+    if (
+      this.anreiseFormGroup.controls['abdate'].touched &&
+      this.anreiseFormGroup.controls['abdate'].valid
+    ) {
+      this.newAbreiseDate = this.anreiseFormGroup.controls[
+        'abdate'
+      ].value.toDate();
+    }
+    const anReise = this.anreiseFormGroup.controls['anreise'].value;
+    const abHolung = this.anreiseFormGroup.controls['abholung'].value;
+    const zugZeit = this.anreiseFormGroup.controls['zugzeit'].value;
+    this.anreiseFormGroup = new FormGroup({
+      anreise: new FormControl(anReise),
+      abholung: new FormControl(abHolung),
+      zugzeit: new FormControl(zugZeit),
+      andate: new FormControl(this.newAnreiseDate, Validators.required),
+      abdate: new FormControl(this.newAbreiseDate, Validators.required)
+    });
+    console.log(this.anreiseFormGroup);
   }
 
   onChanges(): void {
@@ -99,7 +130,7 @@ export class AnmeldungComponent implements OnInit {
       teilnahme: new FormControl('')
     });
     this.anzahlFormGroup = new FormGroup({
-      begleitung: new FormControl(''),
+      begleitung: new FormControl(this.begleitung),
       hund: new FormControl(''),
       kinder: new FormControl('')
     });
@@ -107,8 +138,8 @@ export class AnmeldungComponent implements OnInit {
       anreise: new FormControl(''),
       abholung: new FormControl(''),
       zugzeit: new FormControl(''),
-      anDate: new FormControl('', Validators.required),
-      abDate: new FormControl('', Validators.required)
+      andate: new FormControl('', Validators.required),
+      abdate: new FormControl('', Validators.required)
     });
     this.unterkunftFormGroup = new FormGroup({
       naechte: new FormControl(''),
@@ -122,6 +153,7 @@ export class AnmeldungComponent implements OnInit {
   }
 
   mergeFG() {
+    this.transformDate();
     this.newRsvpData = {
       ...this.firstFormGroup.value,
       ...this.teilnahmeFormGroup.value,
@@ -152,15 +184,19 @@ export class AnmeldungComponent implements OnInit {
   }
 
   onSaveData(newRsvpData: Array<any>) {
-    this.storeRsvpData(newRsvpData).subscribe((response: HttpResponse<any>) => {
-      console.log(response);
-    });
+    this.afs.collection('rsvp').add(newRsvpData);
   }
 
-  storeRsvpData(data: Array<any>) {
-    return this.httpClient.post(
-      'https://wildwildwuerlich.firebaseio.com/rsvp.json',
-      data
-    );
-  }
+  // onSaveData(newRsvpData: Array<any>) {
+  //   this.storeRsvpData(newRsvpData).subscribe((response: HttpResponse<any>) => {
+  //     console.log(response);
+  //   });
+  // }
+
+  // storeRsvpData(data: Array<any>) {
+  //   return this.httpClient.post(
+  //     'https://wildwildwuerlich.firebaseio.com/rsvp.json',
+  //     data
+  //   );
+  // }
 }
