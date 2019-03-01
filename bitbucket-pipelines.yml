@@ -9,15 +9,15 @@ pipelines:
   branches:
     master:
       - step:
-        name: "install dependcies, build & deploy to production"
-        deployment: production
-        caches:
-          - node
-        script: # Modify the commands below to build your repository.
-          - echo "only on master"
-          - npm install --quiet
-          - npm i -g @angular/cli
-          - npm i -g firebase-tools
-          - npm update
-          - ng build --prod
-          - firebase deploy --token "$FIREBASE_TOKEN"
+          name: "install dependcies, build & deploy to production"
+          deployment: production
+          caches:
+            - node
+          script: # Modify the commands below to build your repository.
+            - echo "only on master"
+            - npm install --quiet
+            - npm i -g @angular/cli
+            - npm i -g firebase-tools
+            - npm update
+            - ng build --prod
+            - firebase deploy --token "$FIREBASE_TOKEN"
