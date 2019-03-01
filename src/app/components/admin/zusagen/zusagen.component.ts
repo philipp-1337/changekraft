@@ -10,12 +10,29 @@ import {
 import { ExcelService } from '../../../services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
 
+export interface Rsvp {
+  name: string;
+  email: string;
+  teilnahme: boolean;
+  begleitung: boolean;
+  kinder: number;
+  hund: boolean;
+  anreise: string;
+  abholung: boolean;
+  zugzeit: string;
+  andate: Date;
+  abdate: Date;
+  naechte: number;
+  unterkuenfte: string;
+}
+
 @Component({
   selector: 'app-admin-zusagen',
   templateUrl: './zusagen.component.html',
   styleUrls: ['./zusagen.component.scss'],
   providers: [JoinClass]
 })
+
 export class AdminZusagenComponent implements OnInit, OnDestroy {
   rsvp: Observable<any>;
   rsvpData: AngularFireList<any>;
@@ -36,7 +53,15 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
     public joinclass: JoinClass
   ) {
     this.rsvpCollection = afs.collection('rsvp');
-    this.rsvps = this.rsvpCollection.valueChanges();
+    this.rsvps = this.rsvpCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Rsvp;
+        const id = a.payload.doc.id;
+        console.log(id);
+        console.log(data.andate);
+        return { id, ...data };
+      }))
+    );
   }
 
   ngOnInit() {

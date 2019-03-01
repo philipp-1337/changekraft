@@ -17,10 +17,14 @@
             <li>Anreise: {{ item.anreise }}</li>
             <li>Abholung: {{ item.abholung | questionableBoolean }}</li>
             <li>Bahnhof/Zeit: {{ item.zugzeit }}</li>
-            <li>Ankunft: {{ item.andate | date:'d. MMMM' }}</li>
-            <li>Abreise: {{ item.abdate | date:'d. MMMM' }}</li>
+            <li>Ankunft: {{ item.andate * 1000 | date:'d. MMMM' }}</li>
+            <li>Abreise: {{ item.abdate * 1000 }}</li>
             <li>Anzahl Nächte: {{ item.naechte }}</li>
-            <li>Übernachtung: {{ item.unterkuenfte }}</li>
+            <li class="mb-1">Unterkunft:
+              <ul *ngFor="let unterkunft of item.unterkuenfte">
+                <li>{{ unterkunft }}</li>
+              </ul>
+            </li>
           </ul>
         </mat-card-content>
       </mat-card>

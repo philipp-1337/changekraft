@@ -65,15 +65,15 @@ export class AnmeldungComponent implements OnInit {
   ];
 
   calcNights() {
-    this.anreise = this.anreiseFormGroup.controls['anDate'].value;
-    this.abreise = this.anreiseFormGroup.controls['abDate'].value;
+    this.anreise = this.anreiseFormGroup.controls['andate'].value;
+    this.abreise = this.anreiseFormGroup.controls['abdate'].value;
     this.nights = (this.abreise - this.anreise) / 86400000; // 86400000 = 1 day (in ms)
     this.unterkuenfte = this.unterkunftFormGroup.controls['unterkuenfte'].value;
   }
 
   checkRange() {
-    const anreise = this.anreiseFormGroup.controls['anDate'].value;
-    const abreise = this.anreiseFormGroup.controls['abDate'].value;
+    const anreise = this.anreiseFormGroup.controls['andate'].value;
+    const abreise = this.anreiseFormGroup.controls['abdate'].value;
     if (abreise < anreise) {
       return false;
     } else {
@@ -83,19 +83,19 @@ export class AnmeldungComponent implements OnInit {
 
   transformDate() {
     if (
-      this.anreiseFormGroup.controls['anDate'].touched &&
-      this.anreiseFormGroup.controls['anDate'].valid
+      this.anreiseFormGroup.controls['andate'].touched &&
+      this.anreiseFormGroup.controls['andate'].valid
     ) {
       this.newAnreiseDate = this.anreiseFormGroup.controls[
-        'anDate'
+        'andate'
       ].value.toDate();
     }
     if (
-      this.anreiseFormGroup.controls['abDate'].touched &&
-      this.anreiseFormGroup.controls['abDate'].valid
+      this.anreiseFormGroup.controls['abdate'].touched &&
+      this.anreiseFormGroup.controls['abdate'].valid
     ) {
       this.newAbreiseDate = this.anreiseFormGroup.controls[
-        'abDate'
+        'abdate'
       ].value.toDate();
     }
     const anReise = this.anreiseFormGroup.controls['anreise'].value;
@@ -105,8 +105,8 @@ export class AnmeldungComponent implements OnInit {
       anreise: new FormControl(anReise),
       abholung: new FormControl(abHolung),
       zugzeit: new FormControl(zugZeit),
-      anDate: new FormControl(this.newAnreiseDate, Validators.required),
-      abDate: new FormControl(this.newAbreiseDate, Validators.required)
+      andate: new FormControl(this.newAnreiseDate, Validators.required),
+      abdate: new FormControl(this.newAbreiseDate, Validators.required)
     });
     console.log(this.anreiseFormGroup);
   }
@@ -138,8 +138,8 @@ export class AnmeldungComponent implements OnInit {
       anreise: new FormControl(''),
       abholung: new FormControl(''),
       zugzeit: new FormControl(''),
-      anDate: new FormControl('', Validators.required),
-      abDate: new FormControl('', Validators.required)
+      andate: new FormControl('', Validators.required),
+      abdate: new FormControl('', Validators.required)
     });
     this.unterkunftFormGroup = new FormGroup({
       naechte: new FormControl(''),
