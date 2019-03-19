@@ -4,12 +4,12 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {
   AngularFirestoreModule,
   FirestoreSettingsToken
-} from 'angularfire2/firestore';
+} from '@angular/fire/firestore';
 
 import { CoreModule } from './components/core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -29,7 +29,7 @@ import { environment } from '../environments/environment';
     MaterialModule,
     BrowserModule,
     SharedModule,
-    AngularFireModule.initializeApp(AppComponent),
+    AngularFireModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
