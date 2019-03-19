@@ -29,7 +29,7 @@ import { environment } from '../environments/environment';
     MaterialModule,
     BrowserModule,
     SharedModule,
-    AngularFireModule,
+    AngularFireModule.initializeApp(AppComponent),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
