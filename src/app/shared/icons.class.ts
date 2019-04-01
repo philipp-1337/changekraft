@@ -78,6 +78,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'invitation',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/baseline-insert_invitation-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'local_dining',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-local_dining-24px.svg'
