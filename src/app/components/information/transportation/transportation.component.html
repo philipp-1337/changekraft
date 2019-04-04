@@ -28,20 +28,162 @@
       <mat-card>
         <mat-card-content>
           <p>
-            <i>AUTO </i><br>
-            Anfahrtsskizze
-            <p>
-            <i>ZUG </i><br>
-            -	Aus Berlin <br>
-            -	Aus Magdeburg <bR>
+            <strong>Adresse</strong><br>
+            Bekemühle<br>
+            Kolreper Damm 14<br>
+            16866 Gumtow<br>
           </p>
           <p>
-            An alle Zugreisenden: bitte teilt uns eure Ankunftszeit mit. Es gibt einen Shuttle (Bulli) vom Bahnhof zur Location.
+            <strong>Mit dem Auto</strong><br>
+            <a
+              mat-button
+              type="button"
+              href="https://goo.gl/maps/tqEtuEPG8pD2"
+              target="_blank"
+              title="Zu Google Maps">
+              <mat-icon svgIcon="commute"></mat-icon>
+              <span class="ml-1">Navigation</span>
+            </a>
+          </p>
+            <strong>Mit dem Zug</strong><br>
+            Freitag // 19.07.2019<br>
+            <ul>
+              <li>
+                Ab Magdeburg 15:08 via Wittenberge
+              </li>
+              <li>
+                An Pritzwalk 17:39
+              </li>
+              // verkehrt stündlich //
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 15:25
+              </li>
+              <li>
+              An Pritzwalk 17:39
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 17:06
+              </li>
+              <li>
+              An Pritzwalk 18:39
+              </li>
+              // verkehrt all 2 Stunden //
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 16:25
+              </li>
+              <li>
+              An Kyritz 17:46
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 18:25
+              </li>
+              <li>
+              An Kyritz 19:54
+              </li>
+              // Letzter Zug an dem Tag //
+            </ul>
+            Samstag // 20.07.2019<br>
+            <ul>
+              <li>
+                Ab Magdeburg 09:08 via Wittenberge
+              </li>
+              <li>
+                An Pritzwalk 11:39
+              </li>
+              // verkehrt alle 2 Stunden //
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 09:06
+              </li>
+              <li>
+              An Pritzwalk 10:39
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 13:06
+              </li>
+              <li>
+              An Pritzwalk 14:39
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 15:06
+              </li>
+              <li>
+              An Pritzwalk 16:39
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 17:06
+              </li>
+              <li>
+              An Pritzwalk 18:39
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 11:25
+              </li>
+              <li>
+              An Kyritz 12:56
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 15:25
+              </li>
+              <li>
+              An Kyritz 16:56
+              </li>
+            </ul>
+            <ul>
+              <li>
+              Ab Berlin HBF 19:25
+              </li>
+              <li>
+              An Kyritz 20:56
+              </li>
+              // letzter Zug an dem Tag //
+            </ul>
+          <p>
+            An alle Zugreisenden: bitte teilt uns eure Ankunftszeit mit. Es gibt einen Shuttle vom Bahnhof zur Location.
           </p>
           <p>
-            Ich freue mich, wenn ihr Fahrgemeinschaften bildet und die Reise auf´s Land schon das erste schöne Abenteuer an diesem Wochenende wird.
+            Ich freue mich, wenn ihr Fahrgemeinschaften bildet und die Reise auf's Land schon das erste schöne Abenteuer an diesem Wochenende wird.
           </p>
         </mat-card-content>
+        <mat-card-actions>
+            <button
+              mat-flat-button
+              type="button"
+              color="primary"
+              routerLink="/rsvp"
+              title="Zur Anmeldung">
+              <mat-icon svgIcon="loyalty"></mat-icon>
+              <span class="ml-1">Anmeldung</span>
+            </button>
+            <a
+              mat-button
+              type="button"
+              href="https://goo.gl/maps/tqEtuEPG8pD2"
+              target="_blank"
+              title="Zu Google Maps">
+              <mat-icon svgIcon="commute"></mat-icon>
+              <span class="ml-1">Route</span>
+            </a>
+          </mat-card-actions>
       </mat-card>
     </div>
   </div>

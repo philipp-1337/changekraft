@@ -100,11 +100,13 @@ export class AnmeldungComponent implements OnInit {
     }
     const anReise = this.anreiseFormGroup.controls['anreise'].value;
     const abHolung = this.anreiseFormGroup.controls['abholung'].value;
-    const zugZeit = this.anreiseFormGroup.controls['zugzeit'].value;
+    const zielBahnhof = this.anreiseFormGroup.controls['zielbahnhof'].value;
+    const ankunftsZeit = this.anreiseFormGroup.controls['ankunftszeit'].value;
     this.anreiseFormGroup = new FormGroup({
       anreise: new FormControl(anReise),
       abholung: new FormControl(abHolung),
-      zugzeit: new FormControl(zugZeit),
+      zielbahnhof: new FormControl(zielBahnhof),
+      ankunftszeit: new FormControl(ankunftsZeit),
       andate: new FormControl(this.newAnreiseDate, Validators.required),
       abdate: new FormControl(this.newAbreiseDate, Validators.required)
     });
@@ -137,7 +139,8 @@ export class AnmeldungComponent implements OnInit {
     this.anreiseFormGroup = new FormGroup({
       anreise: new FormControl(''),
       abholung: new FormControl(''),
-      zugzeit: new FormControl(''),
+      zielbahnhof: new FormControl(''),
+      ankunftszeit: new FormControl(''),
       andate: new FormControl('', Validators.required),
       abdate: new FormControl('', Validators.required)
     });
