@@ -48,6 +48,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'directions',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/baseline-directions-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'edit',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-edit-24px.svg'
