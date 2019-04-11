@@ -158,35 +158,39 @@
                     </mat-select>
                   </mat-form-field>
                 </p>
-                <p *ngIf="anreiseFormGroup.controls['anreise'].value == 'Zug'">
-                  Wird eine Abholung benötigt?<br />
-                  <mat-slide-toggle color="primary" formControlName="abholung"></mat-slide-toggle>
-                </p>
-                <p *ngIf="anreiseFormGroup.controls['abholung'].value == true">
-                  Zielbahnhof<br />
-                  <mat-form-field>
-                    <mat-select name="zielbahnhof" formControlName="zielbahnhof">
-                      <mat-option value="Kyritz">Kyritz</mat-option>
-                      <mat-option value="Pritzwalk">Pritzwalk</mat-option>
-                    </mat-select>
-                  </mat-form-field><br>
-                  <mat-form-field>
-                    <input
-                      matInput
-                      placeholder="Ankunftszeit lt. Fahrplan"
-                      type="text"
-                      id="ankunftszeit"
-                      formControlName="ankunftszeit">
-                      <mat-hint>Bsp. Uhrzeit-Format: 12:30</mat-hint>
-                  </mat-form-field>
-                </p>
+                <ng-template [ngIf]="anreiseFormGroup.controls['anreise'].value == 'Zug'">
+                  <p>
+                    Wird eine Abholung benötigt?<br />
+                    <mat-slide-toggle color="primary" formControlName="abholung"></mat-slide-toggle>
+                  </p>
+                  <ng-template [ngIf]="anreiseFormGroup.controls['abholung'].value == true">
+                    <p>
+                      Zielbahnhof<br />
+                      <mat-form-field>
+                        <mat-select required name="zielbahnhof" formControlName="zielbahnhof">
+                          <mat-option value="Kyritz">Kyritz</mat-option>
+                          <mat-option value="Pritzwalk">Pritzwalk</mat-option>
+                        </mat-select>
+                      </mat-form-field><br>
+                      <mat-form-field>
+                        <input
+                          matInput
+                          required
+                          placeholder="Ankunftszeit lt. Fahrplan"
+                          type="text"
+                          id="ankunftszeit"
+                          formControlName="ankunftszeit">
+                          <mat-hint>Bsp. Uhrzeit-Format: 12:30</mat-hint>
+                      </mat-form-field>
+                    </p>
+                  </ng-template>
+                </ng-template>
                 <div>
                     <button type="button" mat-button matStepperPrevious>Zurück</button>
                     <button type="button" mat-button matStepperNext [disabled]="!checkRange()">Weiter</button>
                 </div>
               </form>
             </mat-step>
-
             <mat-step [stepControl]="unterkunftFormGroup" *ngIf="nights > 0">
               <form [formGroup]="unterkunftFormGroup">
                 <ng-template matStepLabel>Übernachtung</ng-template>

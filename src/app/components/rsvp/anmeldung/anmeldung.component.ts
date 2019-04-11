@@ -65,7 +65,7 @@ export class AnmeldungComponent implements OnInit {
   ];
 
   unterkunftListe: string[] = [
-    'Draußen (Zelt, Auto, ohne Dach)',
+    'Draußen (Zelt, Auto, ...)',
     'Mehrbettzimmer',
     'Einzelzimmer',
     'Gästehaus'
