@@ -57,8 +57,15 @@ export class AnmeldungComponent implements OnInit {
   nights: number;
   unterkuenfte: Array<string>;
 
+  fahrzeugListe: string[] = [
+    'PKW',
+    'Zug',
+    'Mitfahrgelegenheit',
+    'Sonstige'
+  ];
+
   unterkunftListe: string[] = [
-    'Zelt/Bulli',
+    'Draußen (Zelt, Auto, ohne Dach)',
     'Mehrbettzimmer',
     'Einzelzimmer',
     'Gästehaus'

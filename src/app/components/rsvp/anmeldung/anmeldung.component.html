@@ -154,18 +154,7 @@
                   Ich reise an mit:<br />
                   <mat-form-field>
                     <mat-select required name="anreise" formControlName="anreise">
-                      <mat-option value="PKW">
-                        Eigener PKW
-                      </mat-option>
-                      <mat-option value="Mitfahrgelegenheit">
-                        Mitfahrgelegenheit
-                      </mat-option>
-                      <mat-option value="Zug">
-                        Zug
-                      </mat-option>
-                      <mat-option value="Sonstige">
-                        Sonstige
-                      </mat-option>
+                      <mat-option *ngFor="let fahrzeug of fahrzeugListe" [value]="fahrzeug">{{ fahrzeug }}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </p>
@@ -176,7 +165,7 @@
                 <p *ngIf="anreiseFormGroup.controls['abholung'].value == true">
                   Zielbahnhof<br />
                   <mat-form-field>
-                    <mat-select required name="zielbahnhof" formControlName="zielbahnhof">
+                    <mat-select name="zielbahnhof" formControlName="zielbahnhof">
                       <mat-option value="Kyritz">Kyritz</mat-option>
                       <mat-option value="Pritzwalk">Pritzwalk</mat-option>
                     </mat-select>
@@ -184,7 +173,6 @@
                   <mat-form-field>
                     <input
                       matInput
-                      required
                       placeholder="Ankunftszeit lt. Fahrplan"
                       type="text"
                       id="ankunftszeit"
