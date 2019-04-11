@@ -30,14 +30,20 @@
                 <mat-form-field>
                   <input
                     matInput
-                    placeholder="Name *"
+                    required
+                    placeholder="Name"
                     type="text"
                     id="name"
                     formControlName="name">
                 </mat-form-field>
                 <br />
                 <mat-form-field>
-                  <input matInput placeholder="E-Mail *" formControlName="email" email>
+                  <input 
+                    matInput
+                    required
+                    placeholder="E-Mail"
+                    formControlName="email"
+                    email>
                 </mat-form-field>
                 <div>
                   <button
@@ -61,12 +67,12 @@
                         </p>
                         <p *ngIf="teilnahmeFormGroup.controls['teilnahme'].value">
                           <button type="button" mat-button matStepperPrevious>Zurück</button>
-                          <button type="button" mat-button matStepperNext>Ok, cool. Weiter..</button>
+                          <button type="button" mat-button matStepperNext>Ok, cool. - Weiter</button>
                         </p>
                     </div>
                 </form>
             </mat-step>
-            <mat-step [stepControl]="anzahlFormGroup" optional>
+            <mat-step [stepControl]="anzahlFormGroup">
                 <form [formGroup]="anzahlFormGroup">
                 <ng-template matStepLabel>Anzahl</ng-template>
                 <p>
@@ -80,7 +86,7 @@
                 <p>
                   Ich bringe Kinder mit:<br />
                   <mat-form-field>
-                    <mat-select name="kinder" formControlName="kinder">
+                    <mat-select required name="kinder" formControlName="kinder">
                       <mat-option value="0">0</mat-option>
                       <mat-option value="1">1</mat-option>
                       <mat-option value="2">2</mat-option>
@@ -101,7 +107,9 @@
                 <p>
                   Ich reise an am:<br />
                   <mat-form-field class="datepicker">
-                    <input matInput
+                    <input 
+                      matInput
+                      required
                       [min]="minDate" [max]="maxDate"
                       [matDatepicker]="pickerAn"
                       formControlName="andate">
@@ -119,7 +127,9 @@
                 <p>
                   Ich reise ab am:<br />
                   <mat-form-field class="datepicker">
-                    <input matInput
+                    <input 
+                      matInput
+                      required
                       [min]="minDate" [max]="maxDate"
                       [matDatepicker]="pickerAb"
                       formControlName="abdate">
@@ -143,7 +153,7 @@
                 <p>
                   Ich reise an mit:<br />
                   <mat-form-field>
-                    <mat-select name="anreise" formControlName="anreise">
+                    <mat-select required name="anreise" formControlName="anreise">
                       <mat-option value="PKW">
                         Eigener PKW
                       </mat-option>
@@ -166,7 +176,7 @@
                 <p *ngIf="anreiseFormGroup.controls['abholung'].value == true">
                   Zielbahnhof<br />
                   <mat-form-field>
-                    <mat-select name="zielbahnhof" formControlName="zielbahnhof">
+                    <mat-select required name="zielbahnhof" formControlName="zielbahnhof">
                       <mat-option value="Kyritz">Kyritz</mat-option>
                       <mat-option value="Pritzwalk">Pritzwalk</mat-option>
                     </mat-select>
@@ -174,6 +184,7 @@
                   <mat-form-field>
                     <input
                       matInput
+                      required
                       placeholder="Ankunftszeit lt. Fahrplan"
                       type="text"
                       id="ankunftszeit"
@@ -205,7 +216,7 @@
                 </p>
                 <p>
                   <mat-form-field>
-                    <mat-select placeholder="Unterkunft" formControlName="unterkuenfte" multiple>
+                    <mat-select required placeholder="Unterkunft" formControlName="unterkuenfte" multiple>
                       <mat-option *ngFor="let unterkunft of unterkunftListe" [value]="unterkunft">{{ unterkunft }}</mat-option>
                     </mat-select>
                   </mat-form-field>
