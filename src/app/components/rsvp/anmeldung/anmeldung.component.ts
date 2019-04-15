@@ -61,7 +61,8 @@ export class AnmeldungComponent implements OnInit {
     'PKW',
     'Zug',
     'Mitfahrgelegenheit',
-    'Sonstige'
+    'Sonstige',
+    'in Planung'
   ];
 
   unterkunftListe: string[] = [
