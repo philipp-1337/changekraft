@@ -206,6 +206,7 @@
                   </mat-form-field>
                 </p>
                 <p>
+                  Bitte gib hier deine Präferenz für die Unterbringung an. Du kannst auch mehrere Dinge auswählen.<br>
                   <mat-form-field>
                     <mat-select required placeholder="Unterkunft" formControlName="unterkuenfte" multiple>
                       <mat-option *ngFor="let unterkunft of unterkunftListe" [value]="unterkunft">{{ unterkunft }}</mat-option>
