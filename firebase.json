@@ -17,6 +17,27 @@
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          },
+          {
+            "key": "Content-Encoding",
+            "value": "gzip"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
+          },
+          {
+            "key": "Content-Encoding",
+            "value": "gzip"
           }
         ]
       },
@@ -25,7 +46,11 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=7200"
+            "value": "max-age=86400"
+          },
+          {
+            "key": "Content-Encoding",
+            "value": "gzip"
           }
         ]
       },
@@ -35,6 +60,15 @@
           {
             "key": "Cache-Control",
             "value": "max-age=300"
+          }
+        ]
+      },
+      {
+        "source": "**/ngsw-worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
           }
         ]
       }

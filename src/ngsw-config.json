@@ -1,5 +1,6 @@
 {
   "index": "/index.html",
+  "version": "1.1.0",
   "assetGroups": [
     {
       "name": "app",
@@ -15,13 +16,30 @@
       }
     }, {
       "name": "assets",
-      "installMode": "prefetch",
-      "updateMode": "lazy",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/assets/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-freshness",
+      "version": 1,
+      "urls": [
+        "/admin",
+        "/admin/**",
+        "/login"
+      ],
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "1h",
+        "timeout": "10s",
+        "strategy": "freshness"
       }
     }
   ]
