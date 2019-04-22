@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material';
 
 import {
   AngularFirestore,
@@ -8,6 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { ExcelService } from '../../../services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
+import { DialogDeleteComponent } from './dialog-delete.component';
 
 export interface Rsvp {
   name: string;
@@ -45,7 +47,8 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   constructor(
     private excelService: ExcelService,
     private afs: AngularFirestore,
-    public joinclass: JoinClass
+    public joinclass: JoinClass,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -150,5 +153,22 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
         this.excelData[x].kinder = parseInt(this.excelData[x].kinder, 10);
       }
     }
+  }
+
+  openDialog(id: string, name: string) {
+    const dialogRef = this.dialog.open(DialogDeleteComponent, {
+      width: '250px',
+      data: { id: id, name: name }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      id = result;
+      if (id === undefined) {
+        console.log('Der User wurde nicht gelöscht.');
+      } else {
+        console.log('Der User mit der ID ' + id + ' wurde gelöscht.');
+        this.deleteItem(id);
+      }
+    });
   }
 }

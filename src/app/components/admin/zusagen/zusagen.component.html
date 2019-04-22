@@ -72,7 +72,7 @@
                   title="E-Mail schreiben">
                   <mat-icon svgIcon="email"></mat-icon>
                 </a>
-                <button mat-button color="warn" (click)="deleteItem(participant.id)" title="Teilnehmer entfernen">
+                <button mat-button color="warn" (click)="openDialog(participant.id, participant.name)" title="Teilnehmer entfernen">
                   <mat-icon svgIcon="delete"></mat-icon>
                 </button>
               </mat-action-row>
