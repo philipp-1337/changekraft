@@ -3,18 +3,18 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: angular/ngcontainer:latest
+image: node:latest
 
 pipelines:
   branches:
     master:
       - step:
+          caches:
+            - node
+            - docker
           name: "install dependcies, build & deploy to production"
           deployment: production
-          # caches:
-          #   - docker
-          #   - node
-          script:
+          script: # Modify the commands below to build your repository.
             - echo "only on master"
             - npm install --quiet
             - npm i -g @angular/cli
