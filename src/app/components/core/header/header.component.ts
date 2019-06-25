@@ -26,7 +26,7 @@ export class HeaderComponent {
     .observe(['(min-width: 961px)'])
     .pipe(map(result => result.matches));
 
-  @ViewChild('drawer') drawer: MatDrawer;
+  @ViewChild('drawer', { static: false }) drawer: MatDrawer;
 
   navigation = [
     {

@@ -25,7 +25,7 @@ export class AnmeldungComponent implements OnInit {
     .observe(['(min-width: 961px)'])
     .pipe(map(result => result.matches));
 
-  @ViewChild('stepper') stepper;
+  @ViewChild('stepper', { static: false }) stepper;
 
   checked = true;
 
