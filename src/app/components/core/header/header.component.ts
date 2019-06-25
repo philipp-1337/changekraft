@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatDrawer } from '@angular/material';
+import { MatDrawer } from '@angular/material/sidenav';
 import { AuthService } from '../../../services/auth.service';
 import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from 'src/app/app.animations';

@@ -16,11 +16,7 @@ import {
   MomentDateAdapter
 } from '@angular/material-moment-adapter';
 import { GERMAN_DATE_FORMAT } from '../../shared/germanDate.const';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE
-} from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   imports: [
