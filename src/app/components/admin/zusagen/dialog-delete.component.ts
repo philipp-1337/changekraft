@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
-  id: any;
+  id: string;
   name: string;
 }
 
@@ -13,8 +13,7 @@ export interface DialogData {
 export class DialogDeleteComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData[]) { }
 
   onCloseClick(): void {
     this.dialogRef.close();

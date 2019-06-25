@@ -49,7 +49,7 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
     private afs: AngularFirestore,
     public joinclass: JoinClass,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.rsvpCollection = this.afs.collection('rsvp');

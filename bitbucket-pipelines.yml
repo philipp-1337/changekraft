@@ -18,7 +18,6 @@ pipelines:
             - npm install --quiet
             - npm i -g @angular/cli
             - npm i -g firebase-tools
-            - ng update @angular/cli
             - npm update
             - ng build --prod
             - firebase deploy --token "$FIREBASE_TOKEN"

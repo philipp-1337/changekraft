@@ -17,4 +17,4 @@ import { DialogDeleteComponent } from './zusagen/dialog-delete.component';
   providers: [ExcelService],
   entryComponents: [DialogDeleteComponent]
 })
-export class AdminModule {}
+export class AdminModule { }
