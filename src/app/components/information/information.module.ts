@@ -6,8 +6,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 
 import { InformationComponent } from './information.component';
-import { EventComponent } from './event/event.component';
-
 import { LocationComponent } from './location/location.component';
 import { StayComponent } from './stay/stay.component';
 import { FoodComponent } from './food/food.component';
@@ -23,7 +21,6 @@ import { ProgramComponent } from './program/program.component';
   ],
   declarations: [
     InformationComponent,
-    EventComponent,
     LocationComponent,
     StayComponent,
     FoodComponent,
@@ -31,4 +28,4 @@ import { ProgramComponent } from './program/program.component';
     ProgramComponent
   ]
 })
-export class InformationModule {}
+export class InformationModule { }

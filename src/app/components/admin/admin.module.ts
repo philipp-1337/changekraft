@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
-import { SharedModule } from '../../shared/shared.module';
 import { MaterialModule } from 'src/app/shared/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
-import { ExcelService } from '../../services/excel.service';
-
+import { ExcelService } from 'src/app/services/excel.service';
 import { AdminComponent } from './admin.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { DialogDeleteComponent } from './zusagen/dialog-delete.component';

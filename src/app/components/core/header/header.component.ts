@@ -3,7 +3,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material/sidenav';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { RouterOutlet } from '@angular/router';
 import { slideInAnimation } from 'src/app/app.animations';
 import { IconsClass } from 'src/app/shared/icons.class';
@@ -20,7 +20,7 @@ export class HeaderComponent {
     private breakpointObserver: BreakpointObserver,
     public authService: AuthService,
     public icons: IconsClass
-  ) {}
+  ) { }
 
   isBigScreen$: Observable<boolean> = this.breakpointObserver
     .observe(['(min-width: 961px)'])

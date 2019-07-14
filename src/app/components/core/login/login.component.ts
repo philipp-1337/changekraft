@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     public snackbar: SnackbarClass,
     public userService: UserService
-  ) {}
+  ) { }
 
   loginError: string;
   userNotFound: boolean;

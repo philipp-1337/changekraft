@@ -22,4 +22,4 @@ const rsvpRoutes: Routes = [
   imports: [RouterModule.forChild(rsvpRoutes)],
   exports: [RouterModule]
 })
-export class RsvpRoutingModule {}
+export class RsvpRoutingModule { }

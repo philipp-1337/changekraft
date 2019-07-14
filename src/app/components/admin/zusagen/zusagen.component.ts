@@ -7,7 +7,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { ExcelService } from '../../../services/excel.service';
+import { ExcelService } from 'src/app/services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
 import { DialogDeleteComponent } from './dialog-delete.component';
 

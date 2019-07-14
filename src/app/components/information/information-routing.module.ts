@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InformationComponent } from './information.component';
-import { EventComponent } from './event/event.component';
 import { LocationComponent } from './location/location.component';
 import { StayComponent } from './stay/stay.component';
 import { FoodComponent } from './food/food.component';
@@ -18,11 +17,6 @@ const informationRoutes: Routes = [
         path: '',
         redirectTo: '/home',
         pathMatch: 'full'
-      },
-      {
-        path: 'onepage',
-        component: EventComponent,
-        data: { animation: 'EventPage' }
       },
       {
         path: 'location',
@@ -57,4 +51,4 @@ const informationRoutes: Routes = [
   imports: [RouterModule.forChild(informationRoutes)],
   exports: [RouterModule]
 })
-export class InformationRoutingModule {}
+export class InformationRoutingModule { }

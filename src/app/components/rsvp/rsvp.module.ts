@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// import { DateAdapter } from '@angular/material/core';
-import { GermanWeek } from '../../shared/germanWeek.class';
+import { GermanWeek } from 'src/app/shared/germanWeek.class';
 
 import { RsvpRoutingModule } from './rsvp-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -15,7 +13,8 @@ import {
   MatMomentDateModule,
   MomentDateAdapter
 } from '@angular/material-moment-adapter';
-import { GERMAN_DATE_FORMAT } from '../../shared/germanDate.const';
+
+import { GERMAN_DATE_FORMAT } from 'src/app/shared/germanDate.const';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
@@ -34,4 +33,4 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
   ]
 })
-export class RsvpModule {}
+export class RsvpModule { }
