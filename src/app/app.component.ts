@@ -4,22 +4,17 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { AuthService } from './services/auth.service';
-import { slideInAnimation } from './app.animations';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   template: '<app-header></app-header>',
   styleUrls: ['./app.component.scss'],
-  animations: [
-    slideInAnimation
-    // animation triggers go here
-  ]
 })
 export class AppComponent implements OnInit, OnDestroy {
   name = '';
   authUnsub: firebase.Unsubscribe;
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     console.log('firebase init');

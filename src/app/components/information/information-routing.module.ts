@@ -11,7 +11,6 @@ const informationRoutes: Routes = [
   {
     path: '',
     component: InformationComponent,
-    data: { animation: 'InfoPages' },
     children: [
       {
         path: '',
@@ -21,27 +20,22 @@ const informationRoutes: Routes = [
       {
         path: 'location',
         component: LocationComponent,
-        data: { animation: 'LocationPage' }
       },
       {
         path: 'stay',
         component: StayComponent,
-        data: { animation: 'StayPage' }
       },
       {
         path: 'food',
         component: FoodComponent,
-        data: { animation: 'FoodPage' }
       },
       {
         path: 'transportation',
         component: TransportationComponent,
-        data: { animation: 'TransportPage' }
       },
       {
         path: 'program',
         component: ProgramComponent,
-        data: { animation: 'ProgramPage' }
       }
     ]
   }

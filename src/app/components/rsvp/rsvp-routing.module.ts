@@ -7,12 +7,10 @@ const rsvpRoutes: Routes = [
   {
     path: '',
     component: RsvpComponent,
-    data: { animation: 'RsvpPage' },
     children: [
       {
         path: '',
         component: AnmeldungComponent,
-        data: { animation: 'AnmeldungPage' }
       }
     ]
   }

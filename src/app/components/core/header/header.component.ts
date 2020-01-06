@@ -5,15 +5,13 @@ import { map } from 'rxjs/operators';
 import { MatDrawer } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterOutlet } from '@angular/router';
-import { slideInAnimation } from 'src/app/app.animations';
 import { IconsClass } from 'src/app/shared/icons.class';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [IconsClass],
-  animations: [slideInAnimation]
+  providers: [IconsClass]
 })
 export class HeaderComponent {
   constructor(
@@ -103,8 +101,7 @@ export class HeaderComponent {
   prepareRoute(outlet: RouterOutlet) {
     return (
       outlet &&
-      outlet.activatedRouteData &&
-      outlet.activatedRouteData['animation']
+      outlet.activatedRouteData
     );
   }
 

@@ -3,22 +3,11 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-core',
-  template: `
-    <div [@routeAnimations]="prepareRoute(outlet)">
-      <router-outlet #outlet="outlet"></router-outlet>
-    </div>
-  `
+  template: `<router-outlet></router-outlet>`,
 })
 export class CoreComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  prepareRoute(outlet: RouterOutlet) {
-    return (
-      outlet &&
-      outlet.activatedRouteData &&
-      outlet.activatedRouteData['animation']
-    );
-  }
 }

@@ -9,7 +9,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    data: { animation: 'HomePage' }
   },
   {
     path: '',
@@ -20,17 +19,14 @@ const routes: Routes = [
     path: 'event',
     loadChildren:
       './components/information/information.module#InformationModule',
-    data: { animation: 'InfoPages' }
   },
   {
     path: 'rsvp',
     loadChildren: './components/rsvp/rsvp.module#RsvpModule',
-    data: { animation: 'RsvpPage' }
   },
   {
     path: 'login',
     component: LoginComponent,
-    data: { animation: 'LoginPage' }
   },
   {
     path: 'register',
@@ -41,7 +37,6 @@ const routes: Routes = [
     loadChildren: './components/admin/admin.module#AdminModule',
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
-    data: { animation: 'AdminPage' }
   },
   { path: '404', component: HomeComponent },
   { path: '**', redirectTo: '/404' }
