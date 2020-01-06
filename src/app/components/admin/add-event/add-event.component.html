@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 mt-3">
       <mat-card>
-        <form (ngSubmit)="onSubmit(eventform)" #eventform="ngForm">
+        <form [formGroup]="eventForm">
           <mat-card-header>
             <div class="justify-content-center align-self-center" mat-card-avatar>
               <mat-icon
@@ -19,15 +19,14 @@
                   matInput
                   type="text"
                   color="accent"
-                  id="eventname"
-                  name="eventname"
+                  id="name"
+                  formControlName="name"
                   placeholder="Name"
-                  ngModel
                   class="form-control"
                   required>
-                <mat-hint *ngIf="eventform.touched && !eventform.valid">
-                  Das darf nicht leer sein.
-                </mat-hint>
+                  <mat-hint *ngIf="eventForm.touched && !eventForm.valid">
+                    Das darf nicht leer sein.
+                  </mat-hint>
               </mat-form-field>
             </p>
             <p>
@@ -36,10 +35,9 @@
                   matInput
                   type="text"
                   color="accent"
-                  id="eventdescription"
-                  name="eventdescription"
+                  id="desc"
+                  formControlName="desc"
                   placeholder="Beschreibung"
-                  ngModel
                   class="form-control"
                   required>
                 </textarea>
@@ -49,8 +47,9 @@
           <mat-card-actions>
             <button
             mat-button
-            type="submit"
-            title="Speichern">
+            type="button"
+            title="Speichern"
+            (click)="onSave(eventForm)">
               <span>Speichern</span>
             </button>
           </mat-card-actions>

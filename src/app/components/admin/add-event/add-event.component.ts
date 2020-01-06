@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-add-event',
@@ -7,14 +9,25 @@ import { NgForm } from '@angular/forms';
 })
 export class AddEventComponent implements OnInit {
 
-  constructor() { }
+  eventForm = new FormGroup({
+    name: new FormControl(''),
+    desc: new FormControl('')
+  });
+
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
-    const eventname = form.value.eventname;
-    console.log(eventname);
-  }
+  onSave(eventForm: FormGroup) {
 
+    const eventData = {
+      ...this.eventForm.value
+    };
+
+    console.log(eventForm);
+    console.log(eventData);
+
+    this.afs.collection('event').add(eventData);
+  }
 }
