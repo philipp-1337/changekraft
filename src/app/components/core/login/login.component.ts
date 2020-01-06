@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   wrongPassword: boolean;
   randomError: boolean;
 
+  verfied = this.userService.verfied;
+
   hide = true;
 
   isLoading = false;

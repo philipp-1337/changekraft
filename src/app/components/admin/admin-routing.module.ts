@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
+import { AddEventComponent } from './add-event/add-event.component';
 
 const adminRoutes: Routes = [
   {
@@ -17,6 +18,11 @@ const adminRoutes: Routes = [
       {
         path: 'zusagen',
         component: AdminZusagenComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'add-event',
+        component: AddEventComponent,
         canActivate: [AuthGuard]
       }
     ]

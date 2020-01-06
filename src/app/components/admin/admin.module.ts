@@ -9,10 +9,11 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { AdminComponent } from './admin.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { DialogDeleteComponent } from './zusagen/dialog-delete.component';
+import { AddEventComponent } from './add-event/add-event.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule],
-  declarations: [AdminComponent, AdminZusagenComponent, DialogDeleteComponent],
+  declarations: [AdminComponent, AdminZusagenComponent, DialogDeleteComponent, AddEventComponent],
   providers: [ExcelService],
   entryComponents: [DialogDeleteComponent]
 })

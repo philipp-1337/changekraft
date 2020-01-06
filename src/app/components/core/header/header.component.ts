@@ -98,6 +98,24 @@ export class HeaderComponent {
     }
   ];
 
+  rsvp = [
+    {
+      name: 'Profil',
+      route: '/login',
+      icon: 'account_circle_outline'
+    },
+    {
+      name: 'Zusagen',
+      route: '/admin/zusagen',
+      icon: 'supervisor_account_outline'
+    },
+    {
+      name: 'Neues Event',
+      route: '/admin/add-event',
+      icon: 'event'
+    }
+  ];
+
   prepareRoute(outlet: RouterOutlet) {
     return (
       outlet &&

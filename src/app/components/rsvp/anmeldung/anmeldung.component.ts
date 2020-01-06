@@ -19,7 +19,7 @@ export class AnmeldungComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     public snackbar: SnackbarClass,
     private afs: AngularFirestore
-  ) {}
+  ) { }
 
   isBigScreen$: Observable<boolean> = this.breakpointObserver
     .observe(['(min-width: 961px)'])
@@ -197,17 +197,4 @@ export class AnmeldungComponent implements OnInit {
   onSaveData(newRsvpData: Array<any>) {
     this.afs.collection('rsvp').add(newRsvpData);
   }
-
-  // onSaveData(newRsvpData: Array<any>) {
-  //   this.storeRsvpData(newRsvpData).subscribe((response: HttpResponse<any>) => {
-  //     console.log(response);
-  //   });
-  // }
-
-  // storeRsvpData(data: Array<any>) {
-  //   return this.httpClient.post(
-  //     'https://wildwildwuerlich.firebaseio.com/rsvp.json',
-  //     data
-  //   );
-  // }
 }
