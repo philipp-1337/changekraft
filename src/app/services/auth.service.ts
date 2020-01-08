@@ -1,57 +1,109 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { switchMap} from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+
+interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  favoriteColor?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  public _token: string;
 
-  get token(): string {
-    return this._token;
-  }
+
+export class AuthService {
+  public token: string;
+
+  user: Observable<User>;
+
+  // get getToken(): string {
+  //   return this.token;
+  // }
 
   loggedIn = false;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private afAuth: AngularFireAuth, private afs: AngularFirestore,) {
+    //// Get auth data, then get firestore user document || null
+    this.user = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        } else {
+          return of(null)
+        }
+      })
+    )
+  }
 
-  public authChange_$(): firebase.Unsubscribe {
-    return firebase.auth().onAuthStateChanged((user: firebase.User) => {
-      if (user) {
-        this.getToken();
-      } else {
-        this._token = null;
-      }
-    });
+  // public authChange_$(): firebase.Unsubscribe {
+  //   return this.afAuth.auth.onAuthStateChanged((user: firebase.User) => {
+  //     if (user) {
+  //       this.getUserToken();
+  //     } else {
+  //       this.token = null;
+  //     }
+  //   });
+  // }
+
+  private updateUserData(user) {
+    // Sets user data to firestore on login
+
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    }
+
+    return userRef.set(data, { merge: true })
+
   }
 
   signupUser(email: string, password: string) {
-    firebase.auth().createUserWithEmailAndPassword(email, password);
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   signinUser(email: string, password: string) {
-    this.loggedIn = true;
-    const authObject = firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch()
-      .then(response => {
-        firebase
-          .auth()
-          .currentUser.getIdToken()
-          .then((token: string) => (this._token = token));
-      });
-    return authObject;
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((credential) => {
+        this.updateUserData(credential.user)
+        this.getUserToken();
+      })
   }
 
-  getToken() {
-    firebase
-      .auth()
-      .currentUser.getIdToken()
-      .then((token: string) => (this._token = token));
+  // signinUser(email: string, password: string) {
+  //   // this.loggedIn = true;
+  //   const authObject = firebase
+  //     .auth()
+  //     .signInWithEmailAndPassword(email, password)
+  //     .catch()
+  //     .then(response => {
+  //       this.updateUserData(response.user);
+  //       firebase
+  //         .auth()
+  //         .currentUser.getIdToken()
+  //         .then((token: string) => (this._token = token));
+  //     });
+  //   return authObject;
+  // }
+
+  getUserToken() {
+    this.afAuth.auth.currentUser.getIdToken()
+      .then((token: string) => (this.token = token));
     return this.token;
+  }
+
+  getCurrentUser() {
+    const currentUser = this.afAuth.auth.currentUser;
+    return currentUser;
   }
 
   isAuthenticated() {
@@ -59,9 +111,9 @@ export class AuthService {
   }
 
   logout() {
-    this.router.navigate(['/login']);
-    this._token = null;
-    this.loggedIn = false;
-    firebase.auth().signOut();
+    this.afAuth.auth.signOut().then(() => {
+      this.router.navigate(['/']);
+  });
+  this.token = null;
   }
 }

@@ -5,7 +5,8 @@ import localeDe from '@angular/common/locales/de';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {
   AngularFirestoreModule,
   FirestoreSettingsToken
@@ -30,8 +31,9 @@ import { environment } from 'src/environments/environment';
     MaterialModule,
     BrowserModule,
     SharedModule,
-    AngularFireModule.initializeApp(AppComponent),
-    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireDatabaseModule,
+    AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     LayoutModule,

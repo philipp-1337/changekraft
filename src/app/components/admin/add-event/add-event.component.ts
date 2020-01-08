@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
-
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -10,8 +9,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AddEventComponent implements OnInit {
 
   eventForm = new FormGroup({
-    name: new FormControl(''),
-    desc: new FormControl('')
+    name: new FormControl('', Validators.required),
+    desc: new FormControl('', Validators.required)
   });
 
   constructor(private afs: AngularFirestore) { }
