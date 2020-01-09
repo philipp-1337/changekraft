@@ -4,6 +4,8 @@ import { HomeComponent } from './components/core/home/home.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
+import { EventDetailComponent } from './components/core/event-detail/event-detail.component';
+
 
 const routes: Routes = [
   {
@@ -23,6 +25,10 @@ const routes: Routes = [
   {
     path: 'rsvp',
     loadChildren: './components/rsvp/rsvp.module#RsvpModule',
+  },
+  {
+    path: 'events/:userId/:eventId',
+    component: EventDetailComponent,
   },
   {
     path: 'login',
