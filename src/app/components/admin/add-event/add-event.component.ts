@@ -4,8 +4,8 @@ import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { Event } from '../../../shared/event.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,7 +18,8 @@ export class AddEventComponent implements OnInit {
 
   eventForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    desc: new FormControl('', Validators.required)
+    desc: new FormControl('', Validators.required),
+    url: new FormControl('', Validators.required),
   });
 
   constructor(private afs: AngularFirestore, private authservice: AuthService) { }
@@ -40,13 +41,22 @@ export class AddEventComponent implements OnInit {
         })
       )
     );
+    this.onChanges();
   }
+
+  onChanges(): void {
+    this.eventForm.controls['url'].valueChanges.subscribe(val => {
+      this.afs.collection('urls', ref => ref.where('url', '==', val))
+      return true;
+    });
+  };
+
 
   storeEvent() {
     this.afs.collection(`users/${this.userId}/event`).add(this.eventData)
       .then(docRef => {
         const eventId = docRef.id;
-        const urlData = { user: this.userId, event: eventId };
+        const urlData = { user: this.userId, event: eventId,  };
         console.log(urlData);
         this.afs.collection('urls/').add(urlData);
       })
