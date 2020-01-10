@@ -25,6 +25,7 @@ export class AddEventComponent implements OnInit {
   constructor(private afs: AngularFirestore, private authservice: AuthService) { }
 
   userId: string;
+  url: string;
   eventData: {};
   event$: Observable<any>;
   private eventCollection: AngularFirestoreCollection;
@@ -46,17 +47,16 @@ export class AddEventComponent implements OnInit {
 
   onChanges(): void {
     this.eventForm.controls['url'].valueChanges.subscribe(val => {
-      this.afs.collection('urls', ref => ref.where('url', '==', val))
+      this.afs.collection('urls', ref => ref.where('url', '==', val));
       return true;
     });
-  };
-
+  }
 
   storeEvent() {
     this.afs.collection(`users/${this.userId}/event`).add(this.eventData)
       .then(docRef => {
         const eventId = docRef.id;
-        const urlData = { user: this.userId, event: eventId,  };
+        const urlData = { user: this.userId, event: eventId, url: this.url };
         console.log(urlData);
         this.afs.collection('urls/').add(urlData);
       })
@@ -69,6 +69,8 @@ export class AddEventComponent implements OnInit {
     this.eventData = {
       ...this.eventForm.value
     };
+    this.url = this.eventForm.controls['url'].value;
     this.storeEvent();
+    console.log(this.onChanges());
   }
 }
