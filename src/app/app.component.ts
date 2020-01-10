@@ -19,12 +19,12 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // this.authUnsub = this.authService.authChange_$();
 
-    this.router.events.subscribe(evt => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-      window.scrollTo(0, 0);
-    });
+    // this.router.events.subscribe(evt => {
+    //   if (!(evt instanceof NavigationEnd)) {
+    //     return;
+    //   }
+    //   window.scrollTo(0, 0);
+    // });
   }
 
   ngOnDestroy() {

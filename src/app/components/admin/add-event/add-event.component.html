@@ -43,6 +43,9 @@
                   <mat-hint *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">
                     Das darf nicht leer sein.
                   </mat-hint>
+                  <mat-hint *ngIf="!urlAvailable">
+                    Diese URL ist leider nicht mehr verfügbar.
+                  </mat-hint>
               </mat-form-field>
             </p>
             <p>
@@ -54,7 +57,8 @@
                   id="desc"
                   formControlName="desc"
                   placeholder="Beschreibung"
-                  class="form-control">
+                  class="form-control"
+                  required>
                 </textarea>
               </mat-form-field>
             </p>
@@ -64,7 +68,8 @@
             mat-button
             type="button"
             title="Speichern"
-            (click)="onSave(eventForm)">
+            (click)="onSave(eventForm)"
+            [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable">
               <span>Speichern</span>
             </button>
           </mat-card-actions>
@@ -103,7 +108,7 @@
                 <li class="mb-1">Event: {{ event?.name }}</li>
                 <a
                   style="cursor: pointer"
-                  [routerLink]="['../../events/' + userId +'/'+ event?.id]"
+                  [routerLink]="['../../event/' + event?.url]"
                   routerLinkActive="active">Zum Event</a>
               </ul>
               <!-- <mat-action-row>

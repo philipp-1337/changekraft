@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: './components/rsvp/rsvp.module#RsvpModule',
   },
   {
-    path: 'events/:userId/:eventId',
+    path: 'event/:eventUrl',
     component: EventDetailComponent,
   },
   {
