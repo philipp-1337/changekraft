@@ -1,3 +1,3 @@
 export class Event {
-  constructor(public name: string, public description: string) { }
+  constructor(public name: string, public desc: string) { }
 }

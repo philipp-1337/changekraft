@@ -44,7 +44,7 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
-  { path: '404', component: HomeComponent },
+  { path: '404', component: LoginComponent },
   { path: '**', redirectTo: '/404' }
 ];
 

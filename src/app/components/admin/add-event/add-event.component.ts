@@ -6,11 +6,12 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, flatMap } from 'rxjs/operators';
+import { SnackbarClass } from 'src/app/shared/snackbar.class';
 
 import { Event } from '../../../shared/event.model';
 import { AuthService } from 'src/app/services/auth.service';
 
-interface eventUrl {
+interface EventUrl {
   eventId: string;
   userId: string;
   url: string;
@@ -18,7 +19,9 @@ interface eventUrl {
 
 @Component({
   selector: 'app-add-event',
-  templateUrl: './add-event.component.html'
+  templateUrl: './add-event.component.html',
+  providers: [SnackbarClass]
+
 })
 export class AddEventComponent implements OnInit {
 
@@ -28,12 +31,15 @@ export class AddEventComponent implements OnInit {
     desc: new FormControl('', Validators.required)
   });
 
-  constructor(private afs: AngularFirestore, private authservice: AuthService) { }
+  constructor(
+    private afs: AngularFirestore,
+    private authservice: AuthService,
+    public snackbar: SnackbarClass) { }
 
   urlAvailable = true;
   customUrl: string;
   userId: string;
-  eventUrl: eventUrl;
+  eventUrl: EventUrl;
   taken: boolean;
   eventData: {};
   event$: Observable<any>;
@@ -54,21 +60,21 @@ export class AddEventComponent implements OnInit {
 
     this.eventForm.controls['url'].valueChanges.subscribe(val => {
       this.urlAvailable = true;
-      const snapshotResult =  this.afs.collection('urls', ref =>
-          ref.where('url', '==', val)
-            .limit(1))
-            .snapshotChanges()
-            .pipe(flatMap(url => url)); 
+      const snapshotResult = this.afs.collection('urls', ref =>
+        ref.where('url', '==', val)
+          .limit(1))
+        .snapshotChanges()
+        .pipe(flatMap(url => url));
 
-          snapshotResult.subscribe(doc => {
-              this.eventUrl = <eventUrl>doc.payload.doc.data();
-              if (this.eventUrl.url = this.eventForm.controls['url'].value) {
-                this.urlAvailable = false;
-              } else {
-                this.urlAvailable = true;
-              }
-          });
-      })
+      snapshotResult.subscribe(doc => {
+        this.eventUrl = <EventUrl>doc.payload.doc.data();
+        if (this.eventUrl.url = this.eventForm.controls['url'].value) {
+          this.urlAvailable = false;
+        } else {
+          this.urlAvailable = true;
+        }
+      });
+    });
   }
 
 
@@ -85,11 +91,13 @@ export class AddEventComponent implements OnInit {
       });
   }
 
-  onSave(eventForm: FormGroup) {
+  onSave() {
     this.eventData = {
       ...this.eventForm.value
     };
     this.customUrl = this.eventForm.controls['url'].value;
     this.storeEvent(this.customUrl);
+    this.eventForm.reset();
+    this.snackbar.openSnackBar('Event hinzugefügt.', 'Check');
   }
 }
