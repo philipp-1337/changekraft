@@ -4,6 +4,7 @@ import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { AdminComponent } from './admin.component';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
 import { AddEventComponent } from './add-event/add-event.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 const adminRoutes: Routes = [
   {
@@ -23,6 +24,11 @@ const adminRoutes: Routes = [
       {
         path: 'add-event',
         component: AddEventComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit-event/:eventId',
+        component: EditEventComponent,
         canActivate: [AuthGuard]
       }
     ]

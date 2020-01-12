@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-
 
 import {
   AngularFirestore,
@@ -49,8 +48,6 @@ export class EventDetailComponent implements OnInit {
 
       snapshotResult.subscribe(doc => {
         this.urls = <EventUrl>doc.payload.doc.data();
-        console.log(this.urls);
-        console.log(this.urls);
         this.eventDoc = this.afs.doc(`users/${this.urls.user}/events/${this.urls.event}`);
         this.event = this.eventDoc.valueChanges();
       });

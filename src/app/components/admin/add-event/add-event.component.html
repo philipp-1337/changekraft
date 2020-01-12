@@ -106,13 +106,17 @@
               <ul>
                 <li class="mb-1">Beschreibung: {{ event?.desc }}</li>
                 <li class="mb-1">Event: {{ event?.name }}</li>
-                <a
-                  style="cursor: pointer"
-                  [routerLink]="['../../event/' + event?.url]"
-                  routerLinkActive="active">Zum Event</a>
               </ul>
-              <!-- <mat-action-row>
-                <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">
+              <mat-action-row>
+                <button
+                  mat-button
+                  color="primary"
+                  [routerLink]="['../../event/' + event?.url]">Event ansehen</button>
+                  <button
+                  mat-button
+                  color="primary"
+                  [routerLink]="['../edit-event/' + event?.id]">Event bearbeiten</button>
+                <!-- <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">
                   <mat-icon svgIcon="edit"></mat-icon>
                 </button>
                 <button
@@ -134,8 +138,8 @@
                 </a>
                 <button mat-button color="warn" (click)="openDialog(participant.id, participant.name)" title="Teilnehmer entfernen">
                   <mat-icon svgIcon="delete"></mat-icon>
-                </button>
-              </mat-action-row> -->
+                </button> -->
+              </mat-action-row>
           </mat-expansion-panel>
         </div>
       </mat-accordion>
