@@ -49,7 +49,7 @@ export class AuthService {
   //   });
   // }
 
-  private updateUserData(user) {
+  updateUserData(user: User) {
     // Sets user data to firestore on login
 
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
@@ -62,35 +62,17 @@ export class AuthService {
     };
 
     return userRef.set(data, { merge: true });
-
   }
 
   signupUser(email: string, password: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  signinUser(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((credential) => {
-        this.updateUserData(credential.user);
-        this.getUserToken();
-      });
+  async signinUser(email: string, password: string) {
+    const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    this.updateUserData(credential.user);
+    this.getUserToken();
   }
-
-  // signinUser(email: string, password: string) {
-  //   const authObject = firebase
-  //     .auth()
-  //     .signInWithEmailAndPassword(email, password)
-  //     .catch()
-  //     .then(response => {
-  //       this.updateUserData(response.user);
-  //       firebase
-  //         .auth()
-  //         .currentUser.getIdToken()
-  //         .then((token: string) => (this._token = token));
-  //     });
-  //   return authObject;
-  // }
 
   getUserToken() {
     this.afAuth.auth.currentUser.getIdToken()

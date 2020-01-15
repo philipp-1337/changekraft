@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   isLoading = false;
 
   ngOnInit() {
-    this.getInitialUser();
+    this.userService.getUserInfo();
   }
 
   updateUser(form: NgForm) {
@@ -37,10 +37,6 @@ export class LoginComponent implements OnInit {
 
   sendVerification() {
     this.userService.sendVerification();
-  }
-
-  getInitialUser() {
-    this.userService.getUserInfo();
   }
 
   onSignin(form: NgForm) {
