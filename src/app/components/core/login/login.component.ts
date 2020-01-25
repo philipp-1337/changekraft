@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { UserService } from 'src/app/services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,16 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public snackbar: SnackbarClass,
-    public userService: UserService
+    public userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   loginError: string;
   userNotFound: boolean;
   wrongPassword: boolean;
   randomError: boolean;
+  returnUrl: string;
 
   verfied = this.userService.verfied;
 
@@ -29,6 +33,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUserInfo();
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || './login';
   }
 
   updateUser(form: NgForm) {
@@ -55,6 +60,7 @@ export class LoginComponent implements OnInit {
         this.defineError();
       })
       .then(response => {
+        this.router.navigateByUrl(this.returnUrl);
         this.isLoading = false;
       });
   }

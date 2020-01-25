@@ -65,14 +65,23 @@ export class AuthService {
   }
 
   signupUser(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('email-already-in-use');
+          this.router.navigate(['/register']);
+          return error;
+        }
+      })
+      .then(a => {
+        this.router.navigate(['/login']);
+      });
   }
 
   async signinUser(email: string, password: string) {
     const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
     this.updateUserData(credential.user);
     this.getUserToken();
-    this.afAuth.auth.setPersistence(this.token);
   }
 
   getUserToken() {
@@ -92,7 +101,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     });
     this.token = null;
   }

@@ -23,12 +23,12 @@ const routes: Routes = [
       './components/information/information.module#InformationModule',
   },
   {
-    path: 'rsvp',
-    loadChildren: './components/rsvp/rsvp.module#RsvpModule',
-  },
-  {
     path: 'event/:eventUrl',
     component: EventDetailComponent,
+  },
+  {
+    path: 'event/:eventUrl/rsvp',
+    loadChildren: './components/rsvp/rsvp.module#RsvpModule',
   },
   {
     path: 'login',
