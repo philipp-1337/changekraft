@@ -5,10 +5,9 @@ import {
   AngularFirestoreCollection
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { flatMap } from 'rxjs/operators';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
-
-import { Event } from '../../../shared/event.model';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 interface EventUrl {
@@ -34,7 +33,8 @@ export class AddEventComponent implements OnInit {
   constructor(
     private afs: AngularFirestore,
     private authservice: AuthService,
-    public snackbar: SnackbarClass) { }
+    public snackbar: SnackbarClass,
+    private router: Router) { }
 
   urlAvailable = true;
   customUrl: string;
@@ -43,20 +43,9 @@ export class AddEventComponent implements OnInit {
   taken: boolean;
   eventData: {};
   event$: Observable<any>;
-  private eventCollection: AngularFirestoreCollection;
 
   ngOnInit() {
     this.userId = this.authservice.getCurrentUser().uid;
-    this.eventCollection = this.afs.collection(`users/${this.userId}/events`);
-    this.event$ = this.eventCollection.snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
-          const data = a.payload.doc.data() as Event;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        })
-      )
-    );
 
     this.eventForm.controls['url'].valueChanges.subscribe(val => {
       this.urlAvailable = true;
@@ -77,13 +66,11 @@ export class AddEventComponent implements OnInit {
     });
   }
 
-
   storeEvent(customUrl: string) {
     this.afs.collection(`users/${this.userId}/events`).add(this.eventData)
       .then(docRef => {
         const eventId = docRef.id;
         const urlData = { user: this.userId, event: eventId, url: customUrl };
-        console.log(urlData);
         this.afs.collection('urls/').add(urlData);
       })
       .catch(function (error) {
@@ -99,5 +86,6 @@ export class AddEventComponent implements OnInit {
     this.storeEvent(this.customUrl);
     this.eventForm.reset();
     this.snackbar.openSnackBar('Event hinzugefügt.', 'Check');
+    this.router.navigate(['/event-list']);
   }
 }

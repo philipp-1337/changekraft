@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
@@ -24,11 +25,18 @@ export class EventDetailComponent implements OnInit {
 
   eventDoc: AngularFirestoreDocument<Event>;
   event: Observable<Event>;
-  userId: string;
-  eventId: string;
   eventUrl: string;
+  eventId: string;
+  userId: string;
   urls: EventUrl;
   isLoading = false;
+  enrol = false;
+
+  rsvpForm = new FormGroup({
+    vorname: new FormControl('', Validators.required),
+    // url: new FormControl('', Validators.required),
+    // desc: new FormControl('', Validators.required)
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -49,11 +57,28 @@ export class EventDetailComponent implements OnInit {
       snapshotResult.subscribe(doc => {
         this.urls = <EventUrl>doc.payload.doc.data();
         this.eventDoc = this.afs.doc(`users/${this.urls.user}/events/${this.urls.event}`);
+        this.eventUrl = this.urls.url;
+        this.eventId = this.urls.event;
+        this.userId = this.urls.user;
         this.event = this.eventDoc.valueChanges();
       });
     });
+  }
 
-
+  onEnrol() {
+    const rsvpData = {
+      url: this.eventUrl,
+      ...this.rsvpForm.value
+    };
+    console.log(rsvpData);
+    this.afs.collection(`users/${this.userId}/events/${this.eventId}/rsvp`).add(rsvpData)
+      .then(docRef => {
+        console.warn('Document added: ', docRef);
+      })
+      .catch(function (error) {
+        console.error('Error adding document: ', error);
+      });
+    this.enrol = false;
   }
 
 }

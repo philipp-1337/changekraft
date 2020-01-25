@@ -26,7 +26,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-8 mt-3">
-        <mat-card>
+        <mat-card *ngIf="!enrol">
           <mat-card-content>
             <p>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
@@ -40,12 +40,43 @@
               mat-flat-button
               type="button"
               color="primary"
-              routerLink="./rsvp"
-              title="Zur Anmeldung">
-              <mat-icon svgIcon="loyalty"></mat-icon>
-              <span class="ml-1">Anmeldung</span>
+              title="Zur Anmeldung"
+              (click)="enrol = true">
+              <span class="ml-1">Zur Anmeldung</span>
             </button>
           </mat-card-actions>
+        </mat-card>
+        <mat-card *ngIf="enrol">
+          <form [formGroup]="rsvpForm">
+            <mat-card-content>
+              <p>
+                <strong>Anmeldung</strong>
+              </p>
+              <p>
+                <mat-form-field class="full-width">
+                  <input
+                    matInput
+                    type="text"
+                    color="accent"
+                    id="vorname"
+                    formControlName="vorname"
+                    placeholder="Vorname"
+                    class="form-control"
+                    required>
+                </mat-form-field>
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button
+                mat-flat-button
+                type="button"
+                color="primary"
+                title="Anmelden"
+                (click)="onEnrol()">
+                <span class="ml-1">Anmelden</span>
+              </button>
+            </mat-card-actions>
+          </form>
         </mat-card>
       </div>
       <div class="col-sm-12 col-md-6 col-lg-4 mt-3">

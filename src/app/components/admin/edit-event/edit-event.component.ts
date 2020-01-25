@@ -14,10 +14,11 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './edit-event.component.html'
 })
 export class EditEventComponent implements OnInit {
-  eventUrl: string;
+  eventId: string;
   userId: string;
   eventDoc: AngularFirestoreDocument<Event>;
   event: Observable<Event>;
+  eventUrl: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,9 +29,12 @@ export class EditEventComponent implements OnInit {
   ngOnInit() {
     this.userId = this.authservice.getCurrentUser().uid;
     this.route.params.subscribe((params: Params) => {
-      this.eventUrl = params['eventId'];
-      this.eventDoc = this.afs.doc(`users/${this.userId}/events/${this.eventUrl}`);
+      this.eventId = params['eventId'];
+      this.eventDoc = this.afs.doc(`users/${this.userId}/events/${this.eventId}`);
       this.event = this.eventDoc.valueChanges();
+      this.event.subscribe(data => {
+        console.log(data.url);
+      });
     });
   }
 }

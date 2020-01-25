@@ -26,77 +26,77 @@ export class HeaderComponent {
 
   @ViewChild('drawer', { static: false }) drawer: MatDrawer;
 
-  navigation = [
-    {
-      name: 'Location',
-      route: '/event',
-      fragment: 'location',
-      icon: 'location_on'
-    },
-    {
-      name: 'Übernachtung',
-      route: '/event',
-      fragment: 'stay',
-      icon: 'hotel'
-    },
-    {
-      name: 'Verpflegung',
-      route: '/event',
-      fragment: 'food',
-      icon: 'local_dining'
-    },
-    {
-      name: 'Anfahrt',
-      route: '/event',
-      fragment: 'transport',
-      icon: 'commute'
-    },
-    {
-      name: 'Programm',
-      route: '/event',
-      fragment: 'event',
-      icon: 'event'
-    },
-    {
-      name: 'Anmeldung',
-      route: '/rsvp',
-      fragment: 'anmeldung',
-      icon: 'loyalty'
-    }
-  ];
+  // navigation = [
+  //   {
+  //     name: 'Location',
+  //     route: '/event',
+  //     fragment: 'location',
+  //     icon: 'location_on'
+  //   },
+  //   {
+  //     name: 'Übernachtung',
+  //     route: '/event',
+  //     fragment: 'stay',
+  //     icon: 'hotel'
+  //   },
+  //   {
+  //     name: 'Verpflegung',
+  //     route: '/event',
+  //     fragment: 'food',
+  //     icon: 'local_dining'
+  //   },
+  //   {
+  //     name: 'Anfahrt',
+  //     route: '/event',
+  //     fragment: 'transport',
+  //     icon: 'commute'
+  //   },
+  //   {
+  //     name: 'Programm',
+  //     route: '/event',
+  //     fragment: 'event',
+  //     icon: 'event'
+  //   },
+  //   {
+  //     name: 'Anmeldung',
+  //     route: '/rsvp',
+  //     fragment: 'anmeldung',
+  //     icon: 'loyalty'
+  //   }
+  // ];
 
-  navigation2 = [
-    {
-      name: 'Location',
-      route: '/event/location',
-      icon: 'location_on'
-    },
-    {
-      name: 'Übernachtung',
-      route: '/event/stay',
-      icon: 'hotel'
-    },
-    {
-      name: 'Verpflegung',
-      route: '/event/food',
-      icon: 'local_dining'
-    },
-    {
-      name: 'Anfahrt',
-      route: '/event/transportation',
-      icon: 'commute'
-    },
-    {
-      name: 'Programm',
-      route: '/event/program',
-      icon: 'event'
-    },
-    {
-      name: 'Anmeldung',
-      route: '/rsvp',
-      icon: 'loyalty'
-    }
-  ];
+  // navigation2 = [
+  //   {
+  //     name: 'Location',
+  //     route: '/event/location',
+  //     icon: 'location_on'
+  //   },
+  //   {
+  //     name: 'Übernachtung',
+  //     route: '/event/stay',
+  //     icon: 'hotel'
+  //   },
+  //   {
+  //     name: 'Verpflegung',
+  //     route: '/event/food',
+  //     icon: 'local_dining'
+  //   },
+  //   {
+  //     name: 'Anfahrt',
+  //     route: '/event/transportation',
+  //     icon: 'commute'
+  //   },
+  //   {
+  //     name: 'Programm',
+  //     route: '/event/program',
+  //     icon: 'event'
+  //   },
+  //   {
+  //     name: 'Anmeldung',
+  //     route: '/rsvp',
+  //     icon: 'loyalty'
+  //   }
+  // ];
 
   rsvp = [
     {
@@ -105,8 +105,8 @@ export class HeaderComponent {
       icon: 'account_circle_outline'
     },
     {
-      name: 'Zusagen',
-      route: '/admin/zusagen',
+      name: 'Events',
+      route: '/admin/event-list',
       icon: 'supervisor_account_outline'
     },
     {

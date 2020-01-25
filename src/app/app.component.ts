@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
 
@@ -17,6 +17,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.authUnsub = this.authService.authChange_$();
+
+    const headers = new HttpHeaders({ 'Set-Cookie': 'HttpOnly;Secure;SameSite=Strict' });
 
     this.router.events.subscribe(evt => {
       if (!(evt instanceof NavigationEnd)) {

@@ -72,11 +72,12 @@ export class AuthService {
     const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
     this.updateUserData(credential.user);
     this.getUserToken();
+    this.afAuth.auth.setPersistence(this.token);
   }
 
   getUserToken() {
     this.afAuth.auth.currentUser.getIdToken()
-      .then((token: string) => (this.token = token));
+      .then(token => (this.token = token));
     return this.token;
   }
 
