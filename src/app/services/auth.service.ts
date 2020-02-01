@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -13,7 +13,7 @@ interface User {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 
@@ -64,18 +64,8 @@ export class AuthService {
     return userRef.set(data, { merge: true });
   }
 
-  signupUser(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('email-already-in-use');
-          this.router.navigate(['/register']);
-          return error;
-        }
-      })
-      .then(a => {
-        this.router.navigate(['/login']);
-      });
+  async signupUser(email: string, password: string) {
+    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   async signinUser(email: string, password: string) {

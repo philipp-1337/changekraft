@@ -25,14 +25,12 @@ const adminRoutes: Routes = [
       {
         path: 'edit-event/:eventId',
         component: EditEventComponent,
-        canActivate: [AuthGuard],
-        children: [
-          {
-            path: 'zusagen',
-            component: AdminZusagenComponent,
-            canActivate: [AuthGuard]
-          }
-        ]
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'zusagen',
+        component: AdminZusagenComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

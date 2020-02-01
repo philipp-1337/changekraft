@@ -113,6 +113,11 @@ export class HeaderComponent {
       name: 'Neues Event',
       route: '/admin/add-event',
       icon: 'event'
+    },
+    {
+      name: 'Zusagen (alt)',
+      route: '/admin/zusagen',
+      icon: 'event'
     }
   ];
 

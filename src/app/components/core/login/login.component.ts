@@ -54,14 +54,14 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     this.authService
       .signinUser(email, password)
+      .then(response => {
+        this.router.navigateByUrl(this.returnUrl);
+        this.isLoading = false;
+      })
       .catch(error => {
         console.log(error);
         this.loginError = error.code;
         this.defineError();
-      })
-      .then(response => {
-        this.router.navigateByUrl(this.returnUrl);
-        this.isLoading = false;
       });
   }
 

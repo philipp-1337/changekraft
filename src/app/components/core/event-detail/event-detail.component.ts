@@ -64,21 +64,4 @@ export class EventDetailComponent implements OnInit {
       });
     });
   }
-
-  onEnrol() {
-    const rsvpData = {
-      url: this.eventUrl,
-      ...this.rsvpForm.value
-    };
-    console.log(rsvpData);
-    this.afs.collection(`users/${this.userId}/events/${this.eventId}/rsvp`).add(rsvpData)
-      .then(docRef => {
-        console.warn('Document added: ', docRef);
-      })
-      .catch(function (error) {
-        console.error('Error adding document: ', error);
-      });
-    this.enrol = false;
-  }
-
 }

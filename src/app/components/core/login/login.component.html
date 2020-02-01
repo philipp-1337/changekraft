@@ -64,7 +64,10 @@
                 svgIcon="account_circle"
                 style="font-size: 40px; height: 40px; width: 40px;"></mat-icon>
             </div>
-            <mat-card-title>{{ userService.name }}</mat-card-title>
+            <mat-card-title>
+              Profil
+              <span *ngIf="userService.name"> von {{ userService.name }}</span>
+            </mat-card-title>
             <mat-card-subtitle class="mb-0">{{ userService.email }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="mt-3">
@@ -76,13 +79,12 @@
                   color="accent"
                   id="displayname"
                   name="displayname"
-                  ngModel
-                  [placeholder]="userService.name"
-                  [value]="userService.name"
+                  [(ngModel)]="userService.name"
+                  placeholder="Name"
                   class="form-control"
                   required>
                   <mat-hint *ngIf="profileform.touched && !profileform.valid">
-                    Der Benutzername darf nicht leer sein.
+                    Bitte einen Namen angeben.
                   </mat-hint>
               </mat-form-field>
             </form>
@@ -93,8 +95,7 @@
               [disabled]="!profileform.valid"
               type="button"
               (click)="updateUser(profileform)"
-              title="Aktualisieren">
-              <mat-icon svgIcon="autorenew"></mat-icon>
+              title="Speichern">Speichern
             </button>
             <!-- <button mat-button>SHARE</button> -->
           </mat-card-actions>

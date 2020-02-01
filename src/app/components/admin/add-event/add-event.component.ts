@@ -52,6 +52,10 @@ export class AddEventComponent implements OnInit {
     this.userId = this.authservice.getCurrentUser().uid;
     this.userService.getUserInfo();
 
+    if (this.verfied === false) {
+      this.snackbar.openSnackBar('Erst die E-Mail bestätigen.', 'Check');
+    }
+
     this.eventForm.controls['url'].valueChanges.subscribe(val => {
       this.urlAvailable = true;
       const snapshotResult = this.afs.collection('urls', ref =>
