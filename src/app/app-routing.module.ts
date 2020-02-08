@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: 'event',
     loadChildren:
-      './components/information/information.module#InformationModule',
+      () => import('./components/information/information.module').then(m => m.InformationModule),
   },
   {
     path: 'event/:eventUrl',
@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'event/:eventUrl/rsvp',
-    loadChildren: './components/rsvp/rsvp.module#RsvpModule',
+    loadChildren: () => import('./components/rsvp/rsvp.module').then(m => m.RsvpModule),
   },
   {
     path: 'login',
@@ -40,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './components/admin/admin.module#AdminModule',
+    loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
