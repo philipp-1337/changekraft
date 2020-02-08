@@ -39,7 +39,9 @@
               </mat-form-field>
             </p>
             <p>
-              <mat-form-field class="full-width" [ngClass]="{'mat-form-field-invalid': !urlAvailable}">
+              <mat-form-field 
+                class="full-width" 
+                [ngClass]="{'mat-form-field-invalid': !urlAvailable}">
                 <input
                   matInput
                   type="text"
@@ -50,7 +52,7 @@
                   class="form-control"
                   required>
                   <mat-hint *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">
-                    Das darf nicht leer sein.
+                    Die URL muss aus Buchstaben und Zahlen bestehen.
                   </mat-hint>
                   <mat-hint *ngIf="!urlAvailable">
                     Diese URL ist leider nicht mehr verfügbar.

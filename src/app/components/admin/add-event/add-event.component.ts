@@ -27,7 +27,10 @@ export class AddEventComponent implements OnInit {
 
   eventForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    url: new FormControl('', Validators.required),
+    url: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z0-9_.-]*$')
+    ]),
     desc: new FormControl('', Validators.required)
   });
 
@@ -45,6 +48,7 @@ export class AddEventComponent implements OnInit {
   taken: boolean;
   eventData: {};
   event$: Observable<any>;
+  prefilledUrl: string;
 
   verfied = this.userService.verfied;
 
@@ -73,7 +77,20 @@ export class AddEventComponent implements OnInit {
         }
       });
     });
+
+    this.prefilledUrl = this.makeid(5)
+
   }
+
+  makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
 
   sendVerification() {
     this.userService.sendVerification();
@@ -91,7 +108,7 @@ export class AddEventComponent implements OnInit {
       });
   }
 
-  onSave() {
+  onSave(eventForm: any) {
     this.eventData = {
       ...this.eventForm.value
     };
