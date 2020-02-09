@@ -1,0 +1,92 @@
+<div class="container pb-3">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <mat-card *ngIf="isLoading">
+        <mat-card-content>
+          <mat-progress-bar mode="query"></mat-progress-bar>
+        </mat-card-content>
+      </mat-card>
+      <ng-template [ngIf]="authService.isAuthenticated() && !isLoading">
+        <mat-card>
+          <mat-card-header>
+            <div class="justify-content-center align-self-center" mat-card-avatar>
+              <mat-icon
+                svgIcon="account_circle"
+                class="header-icon"></mat-icon>
+            </div>
+            <mat-card-title>
+              Profil
+              <span *ngIf="userService.name"> von {{ userService.name }}</span>
+            </mat-card-title>
+            <mat-card-subtitle class="mb-0">{{ userService.email }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="mt-3">
+            <form #profileform="ngForm">
+              <mat-form-field class="w-100" hideRequiredMarker>
+                <input
+                  matInput
+                  type="text"
+                  color="accent"
+                  id="displayname"
+                  name="displayname"
+                  [(ngModel)]="userService.name"
+                  placeholder="Name"
+                  class="form-control"
+                  required>
+                  <button
+                    mat-button
+                    mat-icon-button
+                    matSuffix
+                    *ngIf="userService.name"
+                    aria-label="Speichern"
+                    (click)="updateUser(profileform)"
+                    title="Speichern">
+                    <mat-icon svgIcon="autorenew"></mat-icon>
+                  </button>
+                  <mat-hint *ngIf="!userService.name">
+                    Bitte einen Namen angeben.
+                  </mat-hint>
+              </mat-form-field>
+              <!-- <mat-form-field class="w-100" hideRequiredMarker>
+                <input
+                  matInput
+                  type="email"
+                  color="accent"
+                  id="email"
+                  name="email"
+                  [(ngModel)]="userService.email"
+                  placeholder="E-Mail"
+                  class="form-control"
+                  required email>
+                  <mat-hint *ngIf="profileform.controls['email'].touched && !profileform.controls['email'].valid">
+                    Bitte eine E-Mail angeben.
+                  </mat-hint>
+              </mat-form-field> -->
+            </form>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-stroked-button
+              type="button"
+              title="Speichern">E-Mail ändern
+            </button>
+            <button *ngIf="!userService.verfied"
+              mat-stroked-button
+              color="primary"
+              type="button"
+              title="E-Mail bestätigen"
+              (click)="sendVerification()">E-Mail bestätigen
+            </button>
+          <!-- <button
+            mat-stroked-button
+            color="warn"
+            type="button"
+            title="Abmelden"
+            (click)="onSignout()">Abmelden
+          </button> -->
+          </mat-card-actions>
+        </mat-card>
+      </ng-template>
+    </div>
+  </div>
+</div>

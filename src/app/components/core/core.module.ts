@@ -7,10 +7,11 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { AuthGuard } from 'src/app/services/auth-guard.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CoreComponent } from './core.component';
 import { UserService } from 'src/app/services/user.service';
+import { EventDetailComponent } from './event-detail/event-detail.component';
+
 
 @NgModule({
   imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],
@@ -19,9 +20,10 @@ import { UserService } from 'src/app/services/user.service';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EventDetailComponent
   ],
   exports: [HeaderComponent, AppRoutingModule],
-  providers: [AuthGuard, AuthService, UserService]
+  providers: [AuthService, UserService]
 })
 export class CoreModule { }

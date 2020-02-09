@@ -1,0 +1,95 @@
+<div class="container pb-3">
+  <div class="row" id="home">
+    <div class="col-12 mt-3">
+      <mat-card *ngIf="!eventDoc">
+        <mat-card-content>
+          <mat-progress-bar mode="query"></mat-progress-bar>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <ng-template [ngIf]="eventDoc">
+  <div class="row" id="home">
+      <div class="col-12 mt-3">
+        <mat-card>
+          <mat-card-header>
+            <div class="justify-content-center align-self-center" mat-card-avatar>
+              <mat-icon
+                svgIcon="invitation"
+                class="header-icon"></mat-icon>
+            </div>
+            <mat-card-title>{{ (event | async)?.name }}</mat-card-title>
+            <mat-card-subtitle class="mb-0">{{ (event | async)?.desc }}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-8 mt-3">
+        <mat-card *ngIf="!enrol">
+          <mat-card-content>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </p>
+            <p>
+              <strong>Ich würde mich freuen, wenn ihr euch über die folgende Anmeldung zurückmelden könntet, damit ich dann alles perfekt Planen kann.</strong>
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-flat-button
+              type="button"
+              color="primary"
+              title="Zur Anmeldung"
+              routerLink="rsvp/">
+              <span class="ml-1">Zur Anmeldung</span>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        <!-- <mat-card *ngIf="enrol">
+          <form [formGroup]="rsvpForm">
+            <mat-card-content>
+              <p>
+                <strong>Anmeldung</strong>
+              </p>
+              <p>
+                <mat-form-field class="w-100">
+                  <input
+                    matInput
+                    type="text"
+                    color="accent"
+                    id="vorname"
+                    formControlName="vorname"
+                    placeholder="Vorname"
+                    class="form-control"
+                    required>
+                </mat-form-field>
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button
+                mat-flat-button
+                type="button"
+                color="primary"
+                title="Anmelden"
+                (click)="onEnrol()">
+                <span class="ml-1">Anmelden</span>
+              </button>
+            </mat-card-actions>
+          </form>
+        </mat-card> -->
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
+        <div class="img-wrapper">
+          <img srcset="../../../assets/img/event/food-xs_2x.jpg 580w,
+            ../../../assets/img/event/food-sm_2x.jpg 800w,
+            ../../../assets/img/event/food-md_2x.jpg 970w,
+            ../../../assets/img/event/food-lg_2x.jpg 1200w"
+            sizes="(max-width: 959px) 95vw, (max-width: 1024px) 47vw, (max-width: 1279px) 37vw, 32vw"
+            src="../../../assets/img/event/food-xs_1x.jpg"
+            alt="Photo of food"/>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

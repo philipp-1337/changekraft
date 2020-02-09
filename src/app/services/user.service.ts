@@ -3,18 +3,20 @@ import { NgForm } from '@angular/forms';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private authservice: AuthService) { }
 
   user: firebase.User;
   email: string;
   name: string;
   verfied: boolean;
+  isLoading: boolean;
 
   updateUser(form: NgForm) {
     this.name = form.value.displayname;
@@ -24,11 +26,12 @@ export class UserService {
         displayName: this.name,
         photoURL: ''
       })
-      .then(function () {
+      .then(user => {
         console.log('User updated');
-        console.log(this.user);
+        this.getUserInfo();
+        this.authservice.updateUserData(this.user);
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -46,12 +49,13 @@ export class UserService {
   }
 
   getUserInfo() {
+    this.isLoading = true;
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.email = user.email;
         this.name = user.displayName;
         this.verfied = user.emailVerified;
-        console.log(user);
+        this.isLoading = false;
       }
     });
   }

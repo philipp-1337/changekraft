@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/core/home/home.component';
-import { AuthGuard } from './services/auth-guard.service';
 import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
+import { EventDetailComponent } from './components/core/event-detail/event-detail.component';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+
 
 const routes: Routes = [
   {
@@ -18,11 +20,15 @@ const routes: Routes = [
   {
     path: 'event',
     loadChildren:
-      './components/information/information.module#InformationModule',
+      () => import('./components/information/information.module').then(m => m.InformationModule),
   },
   {
-    path: 'rsvp',
-    loadChildren: './components/rsvp/rsvp.module#RsvpModule',
+    path: 'event/:eventUrl',
+    component: EventDetailComponent,
+  },
+  {
+    path: 'event/:eventUrl/rsvp',
+    loadChildren: () => import('./components/rsvp/rsvp.module').then(m => m.RsvpModule),
   },
   {
     path: 'login',
@@ -34,11 +40,10 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './components/admin/admin.module#AdminModule',
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
+    loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AngularFireAuthGuard],
   },
-  { path: '404', component: HomeComponent },
+  { path: '404', component: LoginComponent },
   { path: '**', redirectTo: '/404' }
 ];
 

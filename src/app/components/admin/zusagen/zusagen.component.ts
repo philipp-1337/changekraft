@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-
+import { ActivatedRoute, Params } from '@angular/router';
 import {
   AngularFirestore,
   AngularFirestoreCollection
@@ -10,6 +10,7 @@ import {
 import { ExcelService } from 'src/app/services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
 import { DialogDeleteComponent } from './dialog-delete.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 export interface Rsvp {
   name: string;
@@ -43,26 +44,36 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
 
   private rsvpCollection: AngularFirestoreCollection;
   rsvp$: Observable<any>;
+  eventId: string;
+  userId: string;
+  event: Observable<Event>;
 
   constructor(
     private excelService: ExcelService,
+    private authservice: AuthService,
     private afs: AngularFirestore,
     public joinclass: JoinClass,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+
   ) { }
 
   ngOnInit() {
-    this.rsvpCollection = this.afs.collection('rsvp');
-    this.rsvp$ = this.rsvpCollection.snapshotChanges().pipe(
-      map(actions =>
-        actions.map(a => {
-          const data = a.payload.doc.data() as Rsvp;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        })
-      )
-    );
-    this.fetchDataforExcel();
+    this.userId = (this.authservice.getCurrentUser()).uid;
+    this.route.params.subscribe((params: Params) => {
+      this.eventId = params['eventId'];
+      this.rsvpCollection = this.afs.collection(`users/${this.userId}/events/${this.eventId}/rsvp`);
+      this.rsvp$ = this.rsvpCollection.snapshotChanges().pipe(
+        map(actions =>
+          actions.map(a => {
+            const data = a.payload.doc.data() as Rsvp;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          })
+        )
+      );
+      this.fetchDataforExcel();
+    });
   }
 
   ngOnDestroy() {

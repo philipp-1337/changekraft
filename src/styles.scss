@@ -1,9 +1,9 @@
 @import './assets/fonts/raleway/raleway';
 @import '~@angular/material/theming';
 
-$rsvp-primary: mat-palette($mat-light-green, 900);
-$rsvp-accent: mat-palette($mat-orange, 100);
-$rsvp-warn: mat-palette($mat-deep-orange, A400);
+$rsvp-primary: mat-palette($mat-deep-purple, 600);
+$rsvp-accent: mat-palette($mat-teal, 200);
+$rsvp-warn: mat-palette($mat-red, A700);
 $rsvp-theme: mat-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
 $custom-typography: mat-typography-config(
@@ -65,6 +65,11 @@ app-root {
         mat-form-field {
           font-size: 16px;
         }
+        .header-icon {
+          font-size: 40px;
+          height: 40px;
+          width: 40px;
+        }
         .mat-card-header-text {
           overflow-x: hidden;
           mat-card-subtitle {
@@ -77,6 +82,14 @@ app-root {
       mat-card,
       .mat-expansion-panel {
         background-color: rgba(255,255,255,0.8);
+      }
+      .mat-expansion-panel-header-title,
+      .mat-expansion-panel-header-description {
+        flex-basis: 0;
+      }
+      .mat-expansion-panel-header-description {
+        justify-content: space-between;
+        align-items: center;
       }
       .img-wrapper {
         @include _mat-theme-overridable-elevation(1, $rsvp-theme);

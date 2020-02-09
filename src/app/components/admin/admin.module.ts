@@ -9,11 +9,38 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { AdminComponent } from './admin.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { DialogDeleteComponent } from './zusagen/dialog-delete.component';
+import { AddEventComponent } from './add-event/add-event.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
+import { EventListComponent } from './event-list/event-list.component';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { UserProfilComponent } from './user-profil/user-profil.component';
+import { GermanWeek } from 'src/app/shared/germanWeek.class';
+import { GERMAN_DATE_FORMAT } from 'src/app/shared/germanDate.const';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  MatMomentDateModule,
+  MomentDateAdapter
+} from '@angular/material-moment-adapter';
 
 @NgModule({
-  imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule],
-  declarations: [AdminComponent, AdminZusagenComponent, DialogDeleteComponent],
-  providers: [ExcelService],
+  imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MatMomentDateModule],
+  declarations: [
+    AdminComponent,
+    AdminZusagenComponent,
+    DialogDeleteComponent,
+    AddEventComponent,
+    EditEventComponent,
+    EventListComponent,
+    UserProfilComponent
+  ],
+  providers: [
+    ExcelService,
+    AngularFireAuthGuard,
+    { provide: DateAdapter, useClass: GermanWeek },
+    { provide: DateAdapter, useClass: MomentDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: GERMAN_DATE_FORMAT },
+    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
+  ],
   entryComponents: [DialogDeleteComponent]
 })
 export class AdminModule { }

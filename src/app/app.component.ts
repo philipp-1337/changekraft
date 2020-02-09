@@ -1,32 +1,27 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
+import 'firebase/firestore';
 
 @Component({
   selector: 'app-root',
-  template: '<app-header></app-header>',
-  styleUrls: ['./app.component.scss'],
+  template: '<app-header></app-header>'
 })
 export class AppComponent implements OnInit, OnDestroy {
   name = '';
   authUnsub: firebase.Unsubscribe;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    firestore: AngularFirestore
+  ) { }
 
   ngOnInit() {
-    console.log('firebase init');
-    firebase.initializeApp({
-      apiKey: 'AIzaSyBq3dEPKL4y2rp2QwvWst1LZysjBzhsIWY',
-      authDomain: 'wildwildwuerlich.firebaseapp.com',
-      databaseURL: 'https://wildwildwuerlich.firebaseio.com',
-      projectId: 'wildwildwuerlich',
-      storageBucket: 'wildwildwuerlich.appspot.com',
-      messagingSenderId: '807799538199'
-    });
     this.authUnsub = this.authService.authChange_$();
+
+    const headers = new HttpHeaders({ 'Set-Cookie': 'HttpOnly;Secure;SameSite=Strict' });
 
     this.router.events.subscribe(evt => {
       if (!(evt instanceof NavigationEnd)) {

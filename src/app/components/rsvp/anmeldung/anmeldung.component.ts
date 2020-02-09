@@ -2,11 +2,20 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, flatMap } from 'rxjs/operators';
+import { ActivatedRoute, Params } from '@angular/router';
+
+import { Event } from '../../../shared/event.model';
+
+interface EventUrl {
+  event: string;
+  user: string;
+  url: string;
+}
 
 @Component({
   selector: 'app-anmeldung',
@@ -18,8 +27,9 @@ export class AnmeldungComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     public snackbar: SnackbarClass,
-    private afs: AngularFirestore
-  ) {}
+    private afs: AngularFirestore,
+    private route: ActivatedRoute
+  ) { }
 
   isBigScreen$: Observable<boolean> = this.breakpointObserver
     .observe(['(min-width: 961px)'])
@@ -71,6 +81,13 @@ export class AnmeldungComponent implements OnInit {
     'Einzelzimmer',
     'Gästehaus'
   ];
+
+  eventDoc: AngularFirestoreDocument<Event>;
+  event: Observable<Event>;
+  eventUrl: string;
+  eventId: string;
+  userId: string;
+  urls: EventUrl;
 
   calcNights() {
     this.anreise = this.anreiseFormGroup.controls['andate'].value;
@@ -132,6 +149,27 @@ export class AnmeldungComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.route.params.subscribe((params: Params) => {
+
+      this.eventUrl = params['eventUrl'];
+
+      const snapshotResult = this.afs.collection('urls', ref =>
+        ref.where('url', '==', this.eventUrl)
+          .limit(1))
+        .snapshotChanges()
+        .pipe(flatMap(url => url));
+
+      snapshotResult.subscribe(doc => {
+        this.urls = <EventUrl>doc.payload.doc.data();
+        this.eventDoc = this.afs.doc(`users/${this.urls.user}/events/${this.urls.event}`);
+        this.eventUrl = this.urls.url;
+        this.eventId = this.urls.event;
+        this.userId = this.urls.user;
+        this.event = this.eventDoc.valueChanges();
+      });
+    });
+
     this.firstFormGroup = new FormGroup({
       name: new FormControl(''),
       email: new FormControl('')
@@ -195,19 +233,12 @@ export class AnmeldungComponent implements OnInit {
   }
 
   onSaveData(newRsvpData: Array<any>) {
-    this.afs.collection('rsvp').add(newRsvpData);
+    this.afs.collection(`users/${this.userId}/events/${this.eventId}/rsvp`).add(newRsvpData)
+      .then(docRef => {
+        console.log('Document added: ', docRef);
+      })
+      .catch(function (error) {
+        console.error('Error adding document: ', error);
+      });
   }
-
-  // onSaveData(newRsvpData: Array<any>) {
-  //   this.storeRsvpData(newRsvpData).subscribe((response: HttpResponse<any>) => {
-  //     console.log(response);
-  //   });
-  // }
-
-  // storeRsvpData(data: Array<any>) {
-  //   return this.httpClient.post(
-  //     'https://wildwildwuerlich.firebaseio.com/rsvp.json',
-  //     data
-  //   );
-  // }
 }

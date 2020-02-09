@@ -5,10 +5,10 @@ import localeDe from '@angular/common/locales/de';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {
-  AngularFirestoreModule,
-  FirestoreSettingsToken
+  AngularFirestoreModule
 } from '@angular/fire/firestore';
 
 import { CoreModule } from './components/core/core.module';
@@ -21,7 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
-
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,8 +30,9 @@ import { environment } from 'src/environments/environment';
     MaterialModule,
     BrowserModule,
     SharedModule,
-    AngularFireModule.initializeApp(AppComponent),
-    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireDatabaseModule,
+    AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     LayoutModule,
@@ -43,7 +44,7 @@ import { environment } from 'src/environments/environment';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
-    { provide: FirestoreSettingsToken, useValue: {} }
+    AngularFireAuthGuard
   ],
   bootstrap: [AppComponent]
 })
