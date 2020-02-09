@@ -129,7 +129,7 @@
             mat-button
             type="button"
             title="Speichern"
-            (click)="onSave(eventForm)"
+            (click)="onSave()"
             [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable">
               <span>Speichern</span>
             </button>

@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/ww-rsvp",
+    "public": "dist/changekraft",
     "ignore": [
       "firebase.json",
       "**/.*",

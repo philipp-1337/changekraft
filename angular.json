@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ww-rsvp": {
+    "changekraft": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "aot": true,
-            "outputPath": "dist/ww-rsvp",
+            "outputPath": "dist/changekraft",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -64,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ww-rsvp:build"
+            "browserTarget": "changekraft:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ww-rsvp:build:production"
+              "browserTarget": "changekraft:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ww-rsvp:build"
+            "browserTarget": "changekraft:build"
           }
         },
         "test": {
@@ -110,7 +110,7 @@
         }
       }
     },
-    "ww-rsvp-e2e": {
+    "changekraft-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -118,11 +118,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ww-rsvp:serve"
+            "devServerTarget": "changekraft:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ww-rsvp:serve:production"
+              "devServerTarget": "changekraft:serve:production"
             }
           }
         },
@@ -138,5 +138,5 @@
       }
     }
   },
-  "defaultProject": "ww-rsvp"
+  "defaultProject": "changekraft"
 }

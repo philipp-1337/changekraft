@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: 'AIzaSyBq3dEPKL4y2rp2QwvWst1LZysjBzhsIWY',
-    authDomain: 'wildwildwuerlich.firebaseapp.com',
-    databaseURL: 'https://wildwildwuerlich.firebaseio.com',
-    projectId: 'wildwildwuerlich',
-    storageBucket: 'wildwildwuerlich.appspot.com',
-    messagingSenderId: '807799538199'
+    apiKey: 'AIzaSyD_5eSOHFbFRhbERiA1GJrXYrH-20yUUBE',
+    authDomain: 'changekraft.firebaseapp.com',
+    databaseURL: 'https://changekraft.firebaseio.com',
+    projectId: 'changekraft',
+    storageBucket: 'changekraft.appspot.com',
+    messagingSenderId: '560320254060'
   }
 };

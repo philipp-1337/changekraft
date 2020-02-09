@@ -49,6 +49,10 @@ export class AddEventComponent implements OnInit {
   mutlipleDays: boolean;
   minDate = new Date();
   maxDate = new Date(2099, 12, 31);
+  newStartDate: Date;
+  newEndDate: Date;
+  oldStartDate: any;
+  oldEndDate: any;
 
   buildForm() {
     this.eventForm = this.fb.group({
@@ -87,6 +91,32 @@ export class AddEventComponent implements OnInit {
         startControl.updateValueAndValidity();
         endControl.updateValueAndValidity();
       });
+  }
+
+  transformDate() {
+    if (
+      this.dates.controls['startDate'].touched &&
+      this.dates.controls['startDate'].valid &&
+      this.dates.controls['startDate'].value
+    ) {
+      this.oldStartDate = this.dates.controls['startDate'].value;
+      this.newStartDate = this.dates.controls['startDate'].value.toDate();
+    }
+    if (
+      this.dates.controls['endDate'].touched &&
+      this.dates.controls['endDate'].valid &&
+      this.dates.controls['endDate'].value
+    ) {
+      this.oldEndDate = this.dates.controls['startDate'].value;
+      this.newEndDate = this.dates.controls['endDate'].value.toDate();
+    }
+
+    this.eventForm.patchValue({
+      dates: {
+        startDate: this.newStartDate,
+        endDate: this.newEndDate,
+      },
+    });
   }
 
   ngOnInit() {
@@ -150,14 +180,22 @@ export class AddEventComponent implements OnInit {
       });
   }
 
-  onSave(eventForm: any) {
+  onSave() {
+    this.transformDate();
     this.eventData = {
       ...this.eventForm.value
     };
+    console.log(this.eventData);
     this.customUrl = this.eventForm.controls['url'].value;
     this.storeEvent(this.customUrl);
     this.eventForm.reset();
     this.snackbar.openSnackBar('Event hinzugefügt.', 'Check');
     this.router.navigate(['./admin/event-list']);
+    this.eventForm.patchValue({
+      dates: {
+        startDate: this.oldStartDate,
+        endDate: this.oldEndDate,
+      },
+    });
   }
 }
