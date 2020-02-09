@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/core/home/home.component';
-import { AuthGuard } from './services/auth-guard.service';
 import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
 import { EventDetailComponent } from './components/core/event-detail/event-detail.component';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 
 
 const routes: Routes = [
@@ -41,8 +41,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
-    canLoad: [AuthGuard],
-    canActivate: [AuthGuard],
+    canActivate: [AngularFireAuthGuard],
   },
   { path: '404', component: LoginComponent },
   { path: '**', redirectTo: '/404' }

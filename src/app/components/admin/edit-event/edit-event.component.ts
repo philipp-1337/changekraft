@@ -27,7 +27,7 @@ export class EditEventComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userId = this.authservice.getCurrentUser().uid;
+    this.userId = (this.authservice.getCurrentUser()).uid;
     this.route.params.subscribe((params: Params) => {
       this.eventId = params['eventId'];
       this.eventDoc = this.afs.doc(`users/${this.userId}/events/${this.eventId}`);

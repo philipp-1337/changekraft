@@ -6,13 +6,13 @@
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
       </mat-card>
-      <ng-template [ngIf]="!authService.isAuthenticated() && !isLoading">
+      <ng-template [ngIf]="!isLoading">
         <mat-card>
           <mat-card-header>
             <div class="justify-content-center align-self-center" mat-card-avatar>
               <mat-icon
                 svgIcon="account_circle"
-                style="font-size: 40px; height: 40px; width: 40px;"></mat-icon>
+                class="header-icon"></mat-icon>
             </div>
             <mat-card-title>Anmeldung</mat-card-title>
             <mat-card-subtitle class="mb-0">Login für Admin</mat-card-subtitle>
@@ -55,69 +55,6 @@
           </form>
         </mat-card-content>
       </mat-card>
-      </ng-template>
-      <ng-template [ngIf]="authService.isAuthenticated()">
-        <mat-card>
-          <mat-card-header>
-            <div class="justify-content-center align-self-center" mat-card-avatar>
-              <mat-icon
-                svgIcon="account_circle"
-                style="font-size: 40px; height: 40px; width: 40px;"></mat-icon>
-            </div>
-            <mat-card-title>
-              Profil
-              <span *ngIf="userService.name"> von {{ userService.name }}</span>
-            </mat-card-title>
-            <mat-card-subtitle class="mb-0">{{ userService.email }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="mt-3">
-            <form #profileform="ngForm">
-              <mat-form-field class="full-width" hideRequiredMarker>
-                <input
-                  matInput
-                  type="text"
-                  color="accent"
-                  id="displayname"
-                  name="displayname"
-                  [(ngModel)]="userService.name"
-                  placeholder="Name"
-                  class="form-control"
-                  required>
-                  <mat-hint *ngIf="profileform.touched && !profileform.valid">
-                    Bitte einen Namen angeben.
-                  </mat-hint>
-              </mat-form-field>
-            </form>
-          </mat-card-content>
-          <mat-card-actions>
-            <button
-              mat-button
-              [disabled]="!profileform.valid"
-              type="button"
-              (click)="updateUser(profileform)"
-              title="Speichern">Speichern
-            </button>
-            <!-- <button mat-button>SHARE</button> -->
-          </mat-card-actions>
-        </mat-card>
-        <mat-card class="my-3" *ngIf="!verfied">
-          <button
-            mat-raised-button
-            color="primary"
-            type="button"
-            title="E-Mail bestätigen"
-            (click)="sendVerification()">E-Mail bestätigen
-          </button>
-        </mat-card>
-        <mat-card class="my-3">
-          <button
-            mat-stroked-button
-            color="warn"
-            type="button"
-            title="Abmelden"
-            (click)="onSignout()">Abmelden
-          </button>
-        </mat-card>
       </ng-template>
     </div>
   </div>

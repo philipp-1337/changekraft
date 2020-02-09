@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import {
   AngularFirestore,
   AngularFirestoreCollection
@@ -10,6 +10,8 @@ import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { now } from 'moment';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 interface EventUrl {
   eventId: string;
@@ -25,22 +27,17 @@ interface EventUrl {
 })
 export class AddEventComponent implements OnInit {
 
-  eventForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    url: new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[a-zA-Z0-9_.-]*$')
-    ]),
-    desc: new FormControl('', Validators.required)
-  });
-
   constructor(
     private afs: AngularFirestore,
     private authservice: AuthService,
     public snackbar: SnackbarClass,
     private router: Router,
-    private userService: UserService) { }
+    private userService: UserService,
+    private breakpointObserver: BreakpointObserver,
+    private fb: FormBuilder
+  ) { }
 
+  eventForm: FormGroup;
   urlAvailable = true;
   customUrl: string;
   userId: string;
@@ -49,16 +46,57 @@ export class AddEventComponent implements OnInit {
   eventData: {};
   event$: Observable<any>;
   prefilledUrl: string;
+  mutlipleDays: boolean;
+  minDate = new Date();
+  maxDate = new Date(2099, 12, 31);
 
-  verfied = this.userService.verfied;
+  buildForm() {
+    this.eventForm = this.fb.group({
+      name: ['', [Validators.required]],
+      url: ['', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.-]*$')
+      ]],
+      desc: ['', [Validators.required]],
+      dates: this.fb.group({
+        mutlipleDays: [false],
+        startDate: [''],
+        endDate: [''],
+      })
+    });
+  }
+
+  get dates() {
+    return this.eventForm.get('dates') as FormArray;
+  }
+
+  setDatesValidators() {
+    const startControl = this.dates.get('startDate');
+    const endControl = this.dates.get('endDate');
+    this.dates.get('mutlipleDays').valueChanges
+      .subscribe(mutlipleDays => {
+        if (mutlipleDays === false) {
+          startControl.setValidators([Validators.required]);
+          endControl.setValidators(null);
+          endControl.setValue(null);
+        }
+        if (mutlipleDays === true) {
+          startControl.setValidators([Validators.required]);
+          endControl.setValidators([Validators.required]);
+        }
+        startControl.updateValueAndValidity();
+        endControl.updateValueAndValidity();
+      });
+  }
 
   ngOnInit() {
-    this.userId = this.authservice.getCurrentUser().uid;
-    this.userService.getUserInfo();
-
-    if (this.verfied === false) {
-      this.snackbar.openSnackBar('Erst die E-Mail bestätigen.', 'Check');
+    this.buildForm();
+    this.setDatesValidators();
+    if (!this.userService.verfied) {
+      this.router.navigate(['./admin/profile']);
     }
+    this.userId = (this.authservice.getCurrentUser()).uid;
+    this.userService.getUserInfo();
 
     this.eventForm.controls['url'].valueChanges.subscribe(val => {
       this.urlAvailable = true;
@@ -77,23 +115,27 @@ export class AddEventComponent implements OnInit {
         }
       });
     });
-
-    this.prefilledUrl = this.makeid(5)
-
   }
 
-  makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
- }
+  calcDays() {
+    const start = this.dates.controls['startDate'].value;
+    const end = this.dates.controls['endDate'].value;
+    const days = (end - start) / 86400000; // 86400000 = 1 day (in ms)
+    return days;
+  }
 
-  sendVerification() {
-    this.userService.sendVerification();
+  checkRange() {
+    const start = this.dates.controls['startDate'].value;
+    const end = this.dates.controls['endDate'].value;
+    if (end <= start) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  isMobile() {
+    return this.breakpointObserver.isMatched('(max-width: 599px)');
   }
 
   storeEvent(customUrl: string) {

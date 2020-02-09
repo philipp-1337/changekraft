@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
-import { UserService } from 'src/app/services/user.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +13,6 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public snackbar: SnackbarClass,
-    public userService: UserService,
-    private route: ActivatedRoute,
     private router: Router
   ) { }
 
@@ -23,25 +20,16 @@ export class LoginComponent implements OnInit {
   userNotFound: boolean;
   wrongPassword: boolean;
   randomError: boolean;
-  returnUrl: string;
-
-  verfied = this.userService.verfied;
-
+  isLoading = true;
   hide = true;
 
-  isLoading = false;
-
   ngOnInit() {
-    this.userService.getUserInfo();
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || './login';
-  }
-
-  updateUser(form: NgForm) {
-    this.userService.updateUser(form);
-  }
-
-  sendVerification() {
-    this.userService.sendVerification();
+    if (this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('/admin/profile');
+    }
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 300);
   }
 
   onSignin(form: NgForm) {
@@ -49,13 +37,12 @@ export class LoginComponent implements OnInit {
     this.wrongPassword = false;
     this.randomError = false;
     this.isLoading = true;
-    console.log('all errors reset.');
     const email = form.value.email;
     const password = form.value.password;
     this.authService
       .signinUser(email, password)
       .then(response => {
-        this.router.navigateByUrl(this.returnUrl);
+        this.router.navigateByUrl('/admin/profile');
         this.isLoading = false;
       })
       .catch(error => {
@@ -63,10 +50,6 @@ export class LoginComponent implements OnInit {
         this.loginError = error.code;
         this.defineError();
       });
-  }
-
-  onSignout() {
-    this.authService.logout();
   }
 
   defineError() {

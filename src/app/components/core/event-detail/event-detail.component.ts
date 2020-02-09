@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
@@ -31,12 +30,6 @@ export class EventDetailComponent implements OnInit {
   urls: EventUrl;
   isLoading = false;
   enrol = false;
-
-  rsvpForm = new FormGroup({
-    vorname: new FormControl('', Validators.required),
-    // url: new FormControl('', Validators.required),
-    // desc: new FormControl('', Validators.required)
-  });
 
   constructor(
     private route: ActivatedRoute,

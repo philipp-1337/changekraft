@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
     const password = form.value.password;
     this.authService.signupUser(email, password)
       .then(response => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/admin/profile']);
         this.snackbar.openSnackBar('Registrierung erfolgreich.', 'Check');
       })
       .catch(error => {

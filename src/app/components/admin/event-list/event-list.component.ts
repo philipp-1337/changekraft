@@ -22,7 +22,7 @@ export class EventListComponent implements OnInit {
   constructor(private authservice: AuthService, private afs: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit() {
-    const userId = this.authservice.getCurrentUser().uid;
+    const userId = (this.authservice.getCurrentUser()).uid;
     this.eventCollection = this.afs.collection(`users/${userId}/events`);
     this.event$ = this.eventCollection.snapshotChanges().pipe(
       map(actions =>

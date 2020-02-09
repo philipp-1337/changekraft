@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { AdminComponent } from './admin.component';
-import { AuthGuard } from 'src/app/services/auth-guard.service';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { UserProfilComponent } from './user-profil/user-profil.component';
 
 const adminRoutes: Routes = [
   {
@@ -13,24 +14,29 @@ const adminRoutes: Routes = [
     component: AdminComponent,
     children: [
       {
+        path: 'profile',
+        component: UserProfilComponent,
+        canActivate: [AngularFireAuthGuard]
+      },
+      {
         path: 'add-event',
         component: AddEventComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AngularFireAuthGuard]
       },
       {
         path: 'event-list',
         component: EventListComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AngularFireAuthGuard]
       },
       {
         path: 'edit-event/:eventId',
         component: EditEventComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AngularFireAuthGuard]
       },
       {
-        path: 'zusagen',
+        path: 'zusagen/:eventId',
         component: AdminZusagenComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AngularFireAuthGuard]
       }
     ]
   }

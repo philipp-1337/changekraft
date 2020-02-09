@@ -1,29 +1,20 @@
 <div class="container pb-3">
   <div class="row">
     <div class="col-12 mt-3">
-      <mat-card class="my-3" *ngIf="!verfied">
-        <button
-          mat-raised-button
-          color="primary"
-          type="button"
-          title="E-Mail bestätigen"
-          (click)="sendVerification()">E-Mail bestätigen
-        </button>
-      </mat-card>
       <mat-card>
         <form [formGroup]="eventForm">
           <mat-card-header>
             <div class="justify-content-center align-self-center" mat-card-avatar>
               <mat-icon
                 svgIcon="event"
-                style="font-size: 40px; height: 40px; width: 40px;"></mat-icon>
+                class="header-icon"></mat-icon>
             </div>
             <mat-card-title>Event hinzufügen</mat-card-title>
             <mat-card-subtitle class="mb-0">Hier kannst du dein Event erstellen</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="mt-3">
             <p>
-              <mat-form-field class="full-width">
+              <mat-form-field class="w-100">
                 <input
                   matInput
                   type="text"
@@ -39,8 +30,8 @@
               </mat-form-field>
             </p>
             <p>
-              <mat-form-field 
-                class="full-width" 
+              <mat-form-field
+                class="w-100"
                 [ngClass]="{'mat-form-field-invalid': !urlAvailable}">
                 <input
                   matInput
@@ -60,7 +51,7 @@
               </mat-form-field>
             </p>
             <p>
-              <mat-form-field class="full-width">
+              <mat-form-field class="w-100">
                 <textarea
                   matInput
                   type="text"
@@ -70,9 +61,68 @@
                   placeholder="Beschreibung"
                   class="form-control"
                   required>
+                <mat-hint *ngIf="eventForm.controls['desc'].touched && !eventForm.controls['desc'].valid">
+                  Das darf nicht leer sein.
+                </mat-hint>
                 </textarea>
               </mat-form-field>
             </p>
+            <div formGroupName="dates">
+              <span>Datum</span>
+              <mat-checkbox
+                id="mutlipleDays"
+                name="mutlipleDays"
+                labelPosition="before"
+                formControlName="mutlipleDays">
+                <span style="color:grey"> | mehrtägig</span>
+              </mat-checkbox><br />
+              <mat-form-field class="w-100 datepicker">
+                <input
+                  matInput
+                  required
+                  placeholder="Beginn"
+                  [min]="minDate" [max]="maxDate"
+                  [matDatepicker]="pickerAn"
+                  formControlName="startDate">
+                  <mat-hint
+                    *ngIf="!dates.controls['startDate'].valid && !dates.controls['startDate'].touched">
+                    Datum-Format: TT.DD.JJJJ</mat-hint>
+                  <mat-error
+                    *ngIf="dates.controls['startDate'].invalid && dates.controls['startDate'].touched">
+                    Bitte ein korrektes Datum angeben.
+                  </mat-error>
+                <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
+                <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
+              </mat-form-field>
+            <div *ngIf="dates.controls['mutlipleDays'].value === true">
+              <mat-form-field class="w-100 datepicker">
+                <input
+                  matInput
+                  placeholder="Ende"
+                  [min]="minDate" [max]="maxDate"
+                  [matDatepicker]="pickerAb"
+                  formControlName="endDate"
+                  required>
+                  <mat-hint
+                    *ngIf="!dates.controls['endDate'].touched">
+                    Datum-Format: TT.DD.JJJJ</mat-hint>
+                  <mat-error
+                    *ngIf="dates.controls['endDate'].touched">
+                    Bitte ein korrektes Datum angeben.
+                  </mat-error>
+                <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
+                <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
+              </mat-form-field>
+              <span
+                style="color:grey"
+                *ngIf="dates.controls['startDate'].valid && dates.controls['endDate'].valid">
+                <span *ngIf="checkRange()">Dauer des Events: {{ calcDays() }} Tage</span>
+                <span *ngIf="!checkRange()" class="rsvp-error">
+                  Das Zeitraumkontinuum ist in Gefahr.
+                </span>
+              </span>
+            </div>
+          </div>
           </mat-card-content>
           <mat-card-actions>
             <button
@@ -80,7 +130,7 @@
             type="button"
             title="Speichern"
             (click)="onSave(eventForm)"
-            [disabled]="!verfied || eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable">
+            [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable">
               <span>Speichern</span>
             </button>
           </mat-card-actions>

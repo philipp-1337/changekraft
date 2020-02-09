@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -22,11 +22,11 @@ export class AuthService {
 
   user: Observable<User>;
 
-  // get getToken(): string {
-  //   return this.token;
-  // }
+  get getToken(): string {
+    return this.token;
+  }
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private afs: AngularFirestore, ) {
+  constructor(private router: Router, public afAuth: AngularFireAuth, private afs: AngularFirestore, ) {
     //// Get auth data, then get firestore user document || null
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -39,15 +39,15 @@ export class AuthService {
     );
   }
 
-  // public authChange_$(): firebase.Unsubscribe {
-  //   return this.afAuth.auth.onAuthStateChanged((user: firebase.User) => {
-  //     if (user) {
-  //       this.getUserToken();
-  //     } else {
-  //       this.token = null;
-  //     }
-  //   });
-  // }
+  public authChange_$(): firebase.Unsubscribe {
+    return this.afAuth.auth.onAuthStateChanged((user: firebase.User) => {
+      if (user) {
+        this.getUserToken();
+      } else {
+        this.token = null;
+      }
+    });
+  }
 
   updateUserData(user: User) {
     // Sets user data to firestore on login
@@ -94,5 +94,6 @@ export class AuthService {
       this.router.navigate(['/']);
     });
     this.token = null;
+    localStorage.removeItem('token');
   }
 }

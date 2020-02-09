@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
+import 'firebase/firestore';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +11,15 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
   name = '';
-  // authUnsub: firebase.Unsubscribe;
+  authUnsub: firebase.Unsubscribe;
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    firestore: AngularFirestore
   ) { }
 
   ngOnInit() {
-    // this.authUnsub = this.authService.authChange_$();
+    this.authUnsub = this.authService.authChange_$();
 
     const headers = new HttpHeaders({ 'Set-Cookie': 'HttpOnly;Secure;SameSite=Strict' });
 
@@ -29,6 +32,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.authUnsub();
+    this.authUnsub();
   }
 }

@@ -26,82 +26,10 @@ export class HeaderComponent {
 
   @ViewChild('drawer', { static: false }) drawer: MatDrawer;
 
-  // navigation = [
-  //   {
-  //     name: 'Location',
-  //     route: '/event',
-  //     fragment: 'location',
-  //     icon: 'location_on'
-  //   },
-  //   {
-  //     name: 'Übernachtung',
-  //     route: '/event',
-  //     fragment: 'stay',
-  //     icon: 'hotel'
-  //   },
-  //   {
-  //     name: 'Verpflegung',
-  //     route: '/event',
-  //     fragment: 'food',
-  //     icon: 'local_dining'
-  //   },
-  //   {
-  //     name: 'Anfahrt',
-  //     route: '/event',
-  //     fragment: 'transport',
-  //     icon: 'commute'
-  //   },
-  //   {
-  //     name: 'Programm',
-  //     route: '/event',
-  //     fragment: 'event',
-  //     icon: 'event'
-  //   },
-  //   {
-  //     name: 'Anmeldung',
-  //     route: '/rsvp',
-  //     fragment: 'anmeldung',
-  //     icon: 'loyalty'
-  //   }
-  // ];
-
-  // navigation2 = [
-  //   {
-  //     name: 'Location',
-  //     route: '/event/location',
-  //     icon: 'location_on'
-  //   },
-  //   {
-  //     name: 'Übernachtung',
-  //     route: '/event/stay',
-  //     icon: 'hotel'
-  //   },
-  //   {
-  //     name: 'Verpflegung',
-  //     route: '/event/food',
-  //     icon: 'local_dining'
-  //   },
-  //   {
-  //     name: 'Anfahrt',
-  //     route: '/event/transportation',
-  //     icon: 'commute'
-  //   },
-  //   {
-  //     name: 'Programm',
-  //     route: '/event/program',
-  //     icon: 'event'
-  //   },
-  //   {
-  //     name: 'Anmeldung',
-  //     route: '/rsvp',
-  //     icon: 'loyalty'
-  //   }
-  // ];
-
   rsvp = [
     {
       name: 'Profil',
-      route: '/login',
+      route: '/admin/profile',
       icon: 'account_circle_outline'
     },
     {
@@ -112,11 +40,6 @@ export class HeaderComponent {
     {
       name: 'Neues Event',
       route: '/admin/add-event',
-      icon: 'event'
-    },
-    {
-      name: 'Zusagen (alt)',
-      route: '/admin/zusagen',
       icon: 'event'
     }
   ];
