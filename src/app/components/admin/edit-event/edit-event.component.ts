@@ -5,7 +5,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
-
+import { map } from 'rxjs/operators';
 import { Event } from '../../../shared/event.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -17,8 +17,9 @@ export class EditEventComponent implements OnInit {
   eventId: string;
   userId: string;
   eventDoc: AngularFirestoreDocument<Event>;
-  event: Observable<Event>;
+  event$: Observable<Event>;
   eventUrl: string;
+  eventDetails: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,13 +29,16 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit() {
     this.userId = (this.authservice.getCurrentUser()).uid;
+    // tslint:disable-next-line: deprecation
     this.route.params.subscribe((params: Params) => {
       this.eventId = params['eventId'];
       this.eventDoc = this.afs.doc(`users/${this.userId}/events/${this.eventId}`);
-      this.event = this.eventDoc.valueChanges();
-      this.event.subscribe(data => {
-        console.log(data.url);
-      });
+      this.event$ = this.eventDoc.valueChanges().pipe(
+        map(a => {
+          const data = a as Event;
+          return data;
+        })
+      );
     });
   }
 }

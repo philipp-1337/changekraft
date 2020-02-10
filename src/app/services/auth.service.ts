@@ -19,7 +19,7 @@ interface User {
 
 export class AuthService {
   public token: string;
-
+  lorem = false;
   user: Observable<User>;
 
   get getToken(): string {

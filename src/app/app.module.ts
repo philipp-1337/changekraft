@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-// import { AngularFireDatabaseModule } from '@angular/fire/database';
 import {
   AngularFirestoreModule
 } from '@angular/fire/firestore';
@@ -31,7 +30,6 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
     BrowserModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,

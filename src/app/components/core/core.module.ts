@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CoreComponent } from './core.component';
 import { UserService } from 'src/app/services/user.service';
 import { EventDetailComponent } from './event-detail/event-detail.component';
-
+import { RouterOutlet } from '@angular/router';
 
 @NgModule({
   imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],

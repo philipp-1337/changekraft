@@ -20,30 +20,20 @@ export class LoginComponent implements OnInit {
   userNotFound: boolean;
   wrongPassword: boolean;
   randomError: boolean;
-  isLoading = true;
   hide = true;
 
-  ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigateByUrl('/admin/profile');
-    }
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 300);
-  }
+  ngOnInit() { }
 
   onSignin(form: NgForm) {
     this.userNotFound = false;
     this.wrongPassword = false;
     this.randomError = false;
-    this.isLoading = true;
     const email = form.value.email;
     const password = form.value.password;
     this.authService
       .signinUser(email, password)
       .then(response => {
         this.router.navigateByUrl('/admin/profile');
-        this.isLoading = false;
       })
       .catch(error => {
         console.log(error);

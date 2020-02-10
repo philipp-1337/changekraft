@@ -25,46 +25,42 @@
                 {{ event?.name }}
               </mat-panel-title>
               <mat-panel-description>
-                {{ event?.desc }}
+                <span *ngIf="!event?.dates.multipleDays">
+                  {{ event?.dates.startDate.seconds * 1000 | date:'d.MM.yy' }}
+                </span>
+                <span *ngIf="event?.dates.multipleDays">
+                  {{ event?.dates.startDate.seconds * 1000 | date:'d.MM' }} –
+                  {{ event?.dates.endDate.seconds * 1000 | date:'d.MM.yy' }}
+                </span>
               </mat-panel-description>
             </mat-expansion-panel-header>
               <ul>
-                <li class="mb-1">Beschreibung: {{ event?.desc }}</li>
                 <li class="mb-1">Event: {{ event?.name }}</li>
+                <li class="mb-1">Beschreibung: {{ event?.desc }}</li>
+                <li class="mb-1">
+                  Datum: {{ event?.dates.startDate.seconds * 1000 | date:'d. MMMM' }}
+                  <span *ngIf="event?.dates.multipleDays">
+                    bis {{ event?.dates.endDate.seconds * 1000 | date:'d. MMMM' }}
+                  </span>
+                </li>
               </ul>
               <mat-action-row>
                 <button
                   mat-button
                   color="primary"
-                  [routerLink]="['../../event/' + event?.url]">Ansehen</button>
-                  <button
-                  mat-button
-                  color="primary"
-                  [routerLink]="['../edit-event/' + event?.id]">Bearbeiten</button>
-                  <button
-                  mat-button
-                  color="primary"
-                  [routerLink]="['../zusagen/' + event?.id]">Zusagen</button>
-                <!-- <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">
-                  <mat-icon svgIcon="edit"></mat-icon>
+                  [routerLink]="['../../event/' + event?.url]">Vorschau
                 </button>
                 <button
                   mat-button
-                  *ngIf="editMode"
                   color="primary"
-                  (click)="editMode = !editMode; updateItem(participant.id, begleitung.checked)"
-                  title="Teilnehmer bearbeiten">
-                  <mat-icon svgIcon="save"></mat-icon>
+                  [routerLink]="['../zusagen/' + event?.id]">Zusagen
                 </button>
-                <a
-                  *ngIf="participant?.email"
+                <button
                   mat-button
                   color="primary"
-                  href="mailto:{{participant?.email}}"
-                  target="_blank"
-                  title="E-Mail schreiben">
-                  <mat-icon svgIcon="email"></mat-icon>
-                </a> -->
+                  [routerLink]="['../edit-event/' + event?.id]">
+                  <mat-icon svgIcon="edit"></mat-icon>
+                </button>
                 <button mat-button color="warn" (click)="openDialog(event?.id, event?.name)" title="Event löschen">
                   <mat-icon svgIcon="delete"></mat-icon>
                 </button>
@@ -72,18 +68,6 @@
           </mat-expansion-panel>
         </div>
       </mat-accordion>
-
-      <!-- <mat-card class="mt-3" *ngIf="(event$ | async)">
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="exportAsXLSX()"
-          matBadge="{{ counter }}"
-          matBadgePosition="above after"
-          matBadgeColor="accent">
-          Excel Download
-        </button>
-      </mat-card> -->
     </div>
   </div>
 </div>

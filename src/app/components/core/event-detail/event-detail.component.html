@@ -1,14 +1,14 @@
 <div class="container pb-3">
   <div class="row" id="home">
     <div class="col-12 mt-3">
-      <mat-card *ngIf="!eventDoc">
+      <mat-card *ngIf="!(event$ | async)">
         <mat-card-content>
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
-  <ng-template [ngIf]="eventDoc">
+  <ng-template [ngIf]="(event$ | async)">
   <div class="row" id="home">
       <div class="col-12 mt-3">
         <mat-card>
@@ -18,8 +18,16 @@
                 svgIcon="invitation"
                 class="header-icon"></mat-icon>
             </div>
-            <mat-card-title>{{ (event | async)?.name }}</mat-card-title>
-            <mat-card-subtitle class="mb-0">{{ (event | async)?.desc }}</mat-card-subtitle>
+            <mat-card-title>{{(event$ | async)?.name}}</mat-card-title>
+            <mat-card-subtitle class="mb-0">
+              <span *ngIf="!(event$ | async)?.dates.multipleDays">
+                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM.yy' }}
+              </span>
+              <span *ngIf="(event$ | async)?.dates.multipleDays">
+                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM' }} –
+                {{ (event$ | async)?.dates.endDate.seconds * 1000 | date:'d.MM.yy' }}
+              </span>
+            </mat-card-subtitle>
           </mat-card-header>
         </mat-card>
       </div>
@@ -29,10 +37,7 @@
         <mat-card *ngIf="!enrol">
           <mat-card-content>
             <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
-            <p>
-              <strong>Ich würde mich freuen, wenn ihr euch über die folgende Anmeldung zurückmelden könntet, damit ich dann alles perfekt Planen kann.</strong>
+              {{ (event$ | async)?.desc }}
             </p>
           </mat-card-content>
           <mat-card-actions>
@@ -42,6 +47,7 @@
               color="primary"
               title="Zur Anmeldung"
               routerLink="rsvp/">
+              <mat-icon svgIcon="loyalty"></mat-icon>
               <span class="ml-1">Zur Anmeldung</span>
             </button>
           </mat-card-actions>

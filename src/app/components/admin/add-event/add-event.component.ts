@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
-  AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestore
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
@@ -10,7 +9,6 @@ import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { now } from 'moment';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 interface EventUrl {
@@ -46,7 +44,7 @@ export class AddEventComponent implements OnInit {
   eventData: {};
   event$: Observable<any>;
   prefilledUrl: string;
-  mutlipleDays: boolean;
+  multipleDays: boolean;
   minDate = new Date();
   maxDate = new Date(2099, 12, 31);
   newStartDate: Date;
@@ -63,7 +61,7 @@ export class AddEventComponent implements OnInit {
       ]],
       desc: ['', [Validators.required]],
       dates: this.fb.group({
-        mutlipleDays: [false],
+        multipleDays: [false],
         startDate: [''],
         endDate: [''],
       })
@@ -77,14 +75,14 @@ export class AddEventComponent implements OnInit {
   setDatesValidators() {
     const startControl = this.dates.get('startDate');
     const endControl = this.dates.get('endDate');
-    this.dates.get('mutlipleDays').valueChanges
-      .subscribe(mutlipleDays => {
-        if (mutlipleDays === false) {
+    this.dates.get('multipleDays').valueChanges
+      .subscribe(multipleDays => {
+        if (multipleDays === false) {
           startControl.setValidators([Validators.required]);
           endControl.setValidators(null);
           endControl.setValue(null);
         }
-        if (mutlipleDays === true) {
+        if (multipleDays === true) {
           startControl.setValidators([Validators.required]);
           endControl.setValidators([Validators.required]);
         }
@@ -122,9 +120,11 @@ export class AddEventComponent implements OnInit {
   ngOnInit() {
     this.buildForm();
     this.setDatesValidators();
-    if (!this.userService.verfied) {
-      this.router.navigate(['./admin/profile']);
-    }
+    setTimeout(() => {
+      if (!this.userService.verfied) {
+        this.router.navigate(['./admin/profile']);
+      }
+    }, 100);
     this.userId = (this.authservice.getCurrentUser()).uid;
     this.userService.getUserInfo();
 

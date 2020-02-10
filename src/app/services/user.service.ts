@@ -16,7 +16,6 @@ export class UserService {
   email: string;
   name: string;
   verfied: boolean;
-  isLoading: boolean;
 
   updateUser(form: NgForm) {
     this.name = form.value.displayname;
@@ -49,13 +48,11 @@ export class UserService {
   }
 
   getUserInfo() {
-    this.isLoading = true;
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.email = user.email;
         this.name = user.displayName;
         this.verfied = user.emailVerified;
-        this.isLoading = false;
       }
     });
   }

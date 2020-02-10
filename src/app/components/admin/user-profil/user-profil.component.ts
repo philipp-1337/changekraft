@@ -11,8 +11,6 @@ import { SnackbarClass } from 'src/app/shared/snackbar.class';
 })
 export class UserProfilComponent implements OnInit {
 
-  isLoading = true;
-
   constructor(
     public userService: UserService,
     public authService: AuthService,
@@ -25,9 +23,6 @@ export class UserProfilComponent implements OnInit {
         this.snackbar.openSnackBar('Bitte E-Mail bestätigen!', 'Check');
       }
     }, 100);
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 300);
   }
 
   updateUser(form: NgForm) {

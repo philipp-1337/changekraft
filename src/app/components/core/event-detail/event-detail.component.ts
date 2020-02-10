@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
-
+import { flatMap, map } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument
@@ -23,13 +22,12 @@ interface EventUrl {
 export class EventDetailComponent implements OnInit {
 
   eventDoc: AngularFirestoreDocument<Event>;
-  event: Observable<Event>;
+  event$: Observable<Event>;
   eventUrl: string;
   eventId: string;
   userId: string;
   urls: EventUrl;
   isLoading = false;
-  enrol = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +51,12 @@ export class EventDetailComponent implements OnInit {
         this.eventUrl = this.urls.url;
         this.eventId = this.urls.event;
         this.userId = this.urls.user;
-        this.event = this.eventDoc.valueChanges();
+        this.event$ = this.eventDoc.valueChanges().pipe(
+          map(a => {
+            const data = a as Event;
+            return data;
+          })
+        );
       });
     });
   }

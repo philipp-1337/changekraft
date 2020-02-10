@@ -68,13 +68,13 @@
               </mat-form-field>
             </p>
             <div formGroupName="dates">
-              <span>Datum</span>
+              <span>Datum </span>
               <mat-checkbox
-                id="mutlipleDays"
-                name="mutlipleDays"
+                id="multipleDays"
+                name="multipleDays"
                 labelPosition="before"
-                formControlName="mutlipleDays">
-                <span style="color:grey"> | mehrtägig</span>
+                formControlName="multipleDays">
+                <span style="color:grey">| mehrtägig</span>
               </mat-checkbox><br />
               <mat-form-field class="w-100 datepicker">
                 <input
@@ -94,7 +94,7 @@
                 <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
                 <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
               </mat-form-field>
-            <div *ngIf="dates.controls['mutlipleDays'].value === true">
+            <div *ngIf="dates.controls['multipleDays'].value === true">
               <mat-form-field class="w-100 datepicker">
                 <input
                   matInput
