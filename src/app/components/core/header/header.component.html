@@ -44,51 +44,53 @@
 
 <router-outlet></router-outlet>
 
-<div class="sticky-height bottom">
+<div class="bottom">
   <mat-toolbar>
-    <button
-      mat-button
-      class="nav-item"
-      routerLink="/admin/event-list"
-      routerLinkActive="active">
-      <mat-icon svgIcon="event" class="nav-item-icon"></mat-icon>
-      <span class="nav-item-title">Übersicht</span>
-    </button>
-    <span class="bar-spacer"></span>
-    <button
-      mat-button
-      class="nav-item"
-      routerLink="/admin/tbc"
-      routerLinkActive="active">
-      <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
-      <span class="nav-item-title">tbc</span>
-    </button>
-    <span class="bar-spacer"></span>
-    <button
-      mat-button
-      class="nav-item"
-      routerLink="/admin/add-event"
-      routerLinkActive="active">
-      <mat-icon svgIcon="add" class="nav-item-icon"></mat-icon>
-      <span class="nav-item-title">Hinzufügen</span>
-    </button>
-    <span class="bar-spacer"></span>
-    <button
-      mat-button
-      class="nav-item"
-      routerLink="/admin/tbc"
-      routerLinkActive="active">
-      <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
-      <span class="nav-item-title">tbc</span>
-    </button>
-    <span class="bar-spacer"></span>
-    <button
-      mat-button
-      class="nav-item"
-      routerLink="/admin/settings"
-      routerLinkActive="active">
-      <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
-      <span class="nav-item-title">Optionen</span>
-    </button>
+    <mat-toolbar-row class="container">
+      <button
+        mat-button
+        class="nav-item"
+        routerLink="/admin/event-list"
+        routerLinkActive="active">
+        <mat-icon svgIcon="event" class="nav-item-icon"></mat-icon>
+        <span class="nav-item-title">Übersicht</span>
+      </button>
+      <span class="bar-spacer"></span>
+      <button
+        mat-button
+        class="nav-item"
+        routerLink="/admin/tbc"
+        routerLinkActive="active">
+        <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
+        <span class="nav-item-title">tbc</span>
+      </button>
+      <span class="bar-spacer"></span>
+      <button
+        mat-button
+        class="nav-item"
+        routerLink="/admin/add-event"
+        routerLinkActive="active">
+        <mat-icon svgIcon="add" class="nav-item-icon"></mat-icon>
+        <span class="nav-item-title">Hinzufügen</span>
+      </button>
+      <span class="bar-spacer"></span>
+      <button
+        mat-button
+        class="nav-item"
+        routerLink="/admin/tbc"
+        routerLinkActive="active">
+        <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
+        <span class="nav-item-title">tbc</span>
+      </button>
+      <span class="bar-spacer"></span>
+      <button
+        mat-button
+        class="nav-item"
+        routerLink="/admin/settings"
+        routerLinkActive="active">
+        <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
+        <span class="nav-item-title">Optionen</span>
+      </button>
+    </mat-toolbar-row>
   </mat-toolbar>
 </div>

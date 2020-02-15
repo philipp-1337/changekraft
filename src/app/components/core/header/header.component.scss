@@ -5,6 +5,12 @@
     top: 0;
     z-index: 2;
   }
+  .mat-toolbar-row {
+    --safe-area-inset-right: env(safe-area-inset-right);
+    --safe-area-inset-left: env(safe-area-inset-left);
+    padding-right: calc(16px + var(--safe-area-inset-right));
+    padding-left: calc(16px + var(--safe-area-inset-left));
+  }
 }
 
 .bar-spacer {
@@ -27,6 +33,7 @@
   width: unset;
   min-width: 40px;
   padding: 0 8px;
+  margin-bottom: env(safe-area-inset-bottom);
   .nav-item-title {
     display: block;
     font-size: 0.7em;
