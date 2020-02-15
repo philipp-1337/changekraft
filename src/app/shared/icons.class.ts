@@ -12,6 +12,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'add',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/add_circle_outline-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'autorenew',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-autorenew-24px.svg'
@@ -135,6 +141,12 @@ export class IconsClass {
       'save',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-save-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'settings',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/settings-24px.svg'
       )
     );
     iconRegistry.addSvgIcon(

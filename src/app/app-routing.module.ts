@@ -5,6 +5,7 @@ import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
 import { EventDetailComponent } from './components/core/event-detail/event-detail.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { NotFoundComponent } from './components/core/not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -43,7 +44,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
     canActivate: [AngularFireAuthGuard],
   },
-  { path: '404', component: LoginComponent },
+  { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
 ];
 

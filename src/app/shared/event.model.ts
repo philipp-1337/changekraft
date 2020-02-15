@@ -1,3 +1,8 @@
+interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
 export class Event {
   constructor(
     public name: string,
@@ -5,8 +10,8 @@ export class Event {
     public url: string,
     public dates: {
       multipleDays: boolean,
-      startDate: Date,
-      endDate: Date
+      startDate: Timestamp,
+      endDate: Timestamp
     }
   ) { }
 }

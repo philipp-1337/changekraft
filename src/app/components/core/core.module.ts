@@ -12,6 +12,7 @@ import { CoreComponent } from './core.component';
 import { UserService } from 'src/app/services/user.service';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { RouterOutlet } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],
@@ -21,7 +22,8 @@ import { RouterOutlet } from '@angular/router';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    NotFoundComponent
   ],
   exports: [HeaderComponent, AppRoutingModule],
   providers: [AuthService, UserService]

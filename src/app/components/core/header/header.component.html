@@ -1,49 +1,94 @@
 <div class="sticky-height">
   <mat-toolbar color="primary">
     <mat-toolbar-row class="container">
-      <button mat-icon-button
-        [matMenuTriggerFor]="menu"
-        *ngIf="!(isBigScreen$ | async)"
-        id="drawerButton" type="button"
-        aria-label="Toggle Menu">
-        <mat-icon aria-label="Menu icon" svgIcon="menu"></mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item
-          *ngFor="let link of rsvp"
-          [routerLink]="link.route">
-          <mat-icon [svgIcon]="link.icon"></mat-icon>
-          <span>{{link.name}}</span>
-        </button>
-      </mat-menu>
       <nav>
         <a mat-button
-          class="logo"
+          class="logo pl-0"
           routerLink="/home">
           <!-- <img src="./assets/img/icon_s.svg"> -->
+          <mat-icon svgIcon="event" class="mr-2"></mat-icon>
           <span>changeKraft</span>
         </a>
-        <ng-template [ngIf]="(isBigScreen$ | async)">
-          <a mat-button
-            *ngFor="let link of rsvp"
-            [routerLink]="link.route">
-            <span>{{link.name}}</span>
-          </a>
-        </ng-template>
       </nav>
-      <span class="example-spacer"></span>
-      <ng-template [ngIf]="!authService.isAuthenticated()">
-        <button mat-icon-button routerLink="/admin/">
-          <mat-icon aria-label="Login" svgIcon="lock_open"></mat-icon>
+      <span class="bar-spacer"></span>
+      <button mat-icon-button
+        [matMenuTriggerFor]="profileMenu"
+        id="drawerButton" type="button"
+        aria-label="Toggle Menu">
+        <mat-icon
+          aria-label="Profil"
+          [svgIcon]="authService.isAuthenticated() ? 'account_circle' : 'account_circle_outline'">
+        </mat-icon>
+      </button>
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item routerLink="/admin/profile" [disabled]="!authService.isAuthenticated()">
+          <mat-icon svgIcon="account_circle"></mat-icon>
+          <span>Profil anzeigen</span>
         </button>
-      </ng-template>
-      <ng-template [ngIf]="authService.isAuthenticated()">
-        <button mat-icon-button (click)="onLogout()" routerLink="/">
-          <mat-icon aria-label="Logout" svgIcon="lock"></mat-icon>
-        </button>
-      </ng-template>
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <button mat-menu-item routerLink="/login">
+            <mat-icon aria-label="Login" svgIcon="lock_open"></mat-icon>
+            <span>Anmelden</span>
+          </button>
+        </ng-template>
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <button mat-menu-item (click)="onLogout()" routerLink="/">
+            <mat-icon aria-label="Logout" svgIcon="lock"></mat-icon>
+            <span>Abmelden</span>
+          </button>
+        </ng-template>
+      </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
 
 <router-outlet></router-outlet>
+
+<div class="sticky-height bottom">
+  <mat-toolbar>
+    <button
+      mat-button
+      class="nav-item"
+      routerLink="/admin/event-list"
+      routerLinkActive="active">
+      <mat-icon svgIcon="event" class="nav-item-icon"></mat-icon>
+      <span class="nav-item-title">Übersicht</span>
+    </button>
+    <span class="bar-spacer"></span>
+    <button
+      mat-button
+      class="nav-item"
+      routerLink="/admin/tbc"
+      routerLinkActive="active">
+      <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
+      <span class="nav-item-title">tbc</span>
+    </button>
+    <span class="bar-spacer"></span>
+    <button
+      mat-button
+      class="nav-item"
+      routerLink="/admin/add-event"
+      routerLinkActive="active">
+      <mat-icon svgIcon="add" class="nav-item-icon"></mat-icon>
+      <span class="nav-item-title">Hinzufügen</span>
+    </button>
+    <span class="bar-spacer"></span>
+    <button
+      mat-button
+      class="nav-item"
+      routerLink="/admin/tbc"
+      routerLinkActive="active">
+      <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
+      <span class="nav-item-title">tbc</span>
+    </button>
+    <span class="bar-spacer"></span>
+    <button
+      mat-button
+      class="nav-item"
+      routerLink="/admin/settings"
+      routerLinkActive="active">
+      <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
+      <span class="nav-item-title">Optionen</span>
+    </button>
+  </mat-toolbar>
+</div>

@@ -34,7 +34,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-8 mt-3">
-        <mat-card *ngIf="!enrol">
+        <mat-card>
           <mat-card-content>
             <p>
               {{ (event$ | async)?.desc }}
@@ -85,7 +85,7 @@
           </form>
         </mat-card> -->
       </div>
-      <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
+      <!-- <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
         <div class="img-wrapper">
           <img srcset="../../../assets/img/event/food-xs_2x.jpg 580w,
             ../../../assets/img/event/food-sm_2x.jpg 800w,
@@ -95,7 +95,7 @@
             src="../../../assets/img/event/food-xs_1x.jpg"
             alt="Photo of food"/>
         </div>
-      </div>
+      </div> -->
     </div>
   </ng-template>
 </div>

@@ -7,7 +7,7 @@
   }
 }
 
-.example-spacer {
+.bar-spacer {
   flex: 1 1 auto;
 }
 
@@ -21,3 +21,19 @@
     text-transform: uppercase;
   }
 }
+
+.nav-item {
+  line-height: 2em;
+  width: unset;
+  min-width: 40px;
+  padding: 0 8px;
+  .nav-item-title {
+    display: block;
+    font-size: 0.7em;
+    line-height: 1.5em;
+      &::before {
+        content: attr(data-text);
+      }
+  }
+}
+

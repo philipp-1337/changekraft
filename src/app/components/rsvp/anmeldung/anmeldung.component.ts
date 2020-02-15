@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Observable } from 'rxjs';
-import { map, flatMap } from 'rxjs/operators';
+import { flatMap } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Event } from '../../../shared/event.model';
@@ -30,10 +30,6 @@ export class AnmeldungComponent implements OnInit {
     private afs: AngularFirestore,
     private route: ActivatedRoute
   ) { }
-
-  isBigScreen$: Observable<boolean> = this.breakpointObserver
-    .observe(['(min-width: 961px)'])
-    .pipe(map(result => result.matches));
 
   @ViewChild('stepper', { static: false }) stepper;
 
