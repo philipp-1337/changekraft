@@ -20,11 +20,17 @@ export class LoginComponent implements OnInit {
   userNotFound: boolean;
   wrongPassword: boolean;
   randomError: boolean;
+  disabled = false;
   hide = true;
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('/admin/profile');
+    }
+  }
 
   onSignin(form: NgForm) {
+    this.disabled = true;
     this.userNotFound = false;
     this.wrongPassword = false;
     this.randomError = false;

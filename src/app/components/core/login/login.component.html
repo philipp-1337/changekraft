@@ -25,7 +25,8 @@
                     id="email"
                     name="email"
                     ngModel
-                    class="form-control">
+                    class="form-control"
+                    required>
               </mat-form-field>
               <br />
               <mat-form-field
@@ -39,7 +40,8 @@
                     id="password"
                     name="password"
                     ngModel
-                    class="form-control">
+                    class="form-control"
+                    required>
                  <mat-icon
                   matSuffix
                   (click)="hide = !hide"
@@ -51,7 +53,7 @@
                  mat-raised-button
                  color="primary"
                  type="submit"
-                 [disabled]="!loginform.valid">Anmelden
+                 [disabled]="loginform.touched && !loginform.valid || disabled">Anmelden
               </button>
               </form>
            </mat-card-content>
