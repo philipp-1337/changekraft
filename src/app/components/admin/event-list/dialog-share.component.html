@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+  <h1>{{ data.title }}</h1>
+  <h2>{{ data.text }}</h2>
+  <p>
+    Teile die URL mit allen, die eingeladen werden sollen:<br />
+    <span style="font-size: 0.5em;">{{ data.url }}</span><br />
+    <button mat-button>Copy</button>
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseClick()" cdkFocusInitial>Schließen</button>
+</div>

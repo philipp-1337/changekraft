@@ -53,7 +53,8 @@
                 <button
                   mat-button
                   color="primary"
-                  [routerLink]="['../zusagen/' + event?.id]">Zusagen
+                  (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)">
+                  <mat-icon svgIcon="share"></mat-icon>
                 </button>
                 <button
                   mat-button

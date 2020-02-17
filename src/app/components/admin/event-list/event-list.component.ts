@@ -9,6 +9,8 @@ import { Event } from '../../../shared/event.model';
 import { Observable } from 'rxjs';
 import { DialogDeleteComponent } from '../zusagen/dialog-delete.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NgNavigatorShareService } from 'ng-navigator-share';
+import { DialogShareComponent } from './dialog-share.component';
 
 @Component({
   selector: 'app-event-list',
@@ -19,7 +21,11 @@ export class EventListComponent implements OnInit {
   event$: Observable<any>;
   private eventCollection: AngularFirestoreCollection;
 
-  constructor(private authservice: AuthService, private afs: AngularFirestore, public dialog: MatDialog) { }
+  constructor(
+    private authservice: AuthService,
+    private afs: AngularFirestore,
+    public dialog: MatDialog,
+    private ngNavigatorShareService: NgNavigatorShareService) { }
 
   ngOnInit() {
     const userId = (this.authservice.getCurrentUser()).uid;
@@ -33,6 +39,21 @@ export class EventListComponent implements OnInit {
         })
       )
     );
+  }
+
+  share(title: string, text: string, url: string) {
+    this.ngNavigatorShareService.share({
+      title: title,
+      text: text,
+      url: url
+    }).then((response) => {
+      console.log(response);
+    })
+      .catch((error) => {
+        console.log(error);
+        console.log(title, text, url);
+        this.shareDialog(title, text, url);
+      });
   }
 
   deleteItem(id: string) {
@@ -57,6 +78,22 @@ export class EventListComponent implements OnInit {
         this.deleteItem(id);
       }
     });
+  }
+  shareDialog(title: string, text: string, url: string) {
+    const dialogRef = this.dialog.open(DialogShareComponent, {
+      width: '250px',
+      data: { title: title, text: text, url: url }
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   id = result;
+    //   if (id === undefined) {
+    //     console.log('Das Event wurde nicht gelöscht.');
+    //   } else {
+    //     console.log('Das Event mit der ID ' + id + ' wurde gelöscht.');
+    //     this.deleteItem(id);
+    //   }
+    // });
   }
 
 }

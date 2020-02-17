@@ -150,6 +150,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'share',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/share-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'supervisor_account',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-supervisor_account-24px.svg'
