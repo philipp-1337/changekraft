@@ -9,7 +9,6 @@ import { Event } from '../../../shared/event.model';
 import { Observable } from 'rxjs';
 import { DialogDeleteComponent } from '../zusagen/dialog-delete.component';
 import { MatDialog } from '@angular/material/dialog';
-import { NgNavigatorShareService } from 'ng-navigator-share';
 import { DialogShareComponent } from './dialog-share.component';
 
 @Component({
@@ -19,41 +18,62 @@ import { DialogShareComponent } from './dialog-share.component';
 export class EventListComponent implements OnInit {
 
   event$: Observable<any>;
+  shareVar: any;
+  counter: number;
+  userId: string;
+  eventIds: string;
+  // eventData: any;
   private eventCollection: AngularFirestoreCollection;
+  private rsvpCollection: AngularFirestoreCollection;
 
   constructor(
     private authservice: AuthService,
     private afs: AngularFirestore,
-    public dialog: MatDialog,
-    private ngNavigatorShareService: NgNavigatorShareService) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
-    const userId = (this.authservice.getCurrentUser()).uid;
-    this.eventCollection = this.afs.collection(`users/${userId}/events`);
+    this.userId = (this.authservice.getCurrentUser()).uid;
+    this.eventCollection = this.afs.collection(`users/${this.userId}/events`);
     this.event$ = this.eventCollection.snapshotChanges().pipe(
       map(actions =>
         actions.map(a => {
           const data = a.payload.doc.data() as Event;
+          // this.eventData = data;
+          // console.log(this.eventData);
           const id = a.payload.doc.id;
+          this.eventIds = id;
+          console.log(this.eventIds);
           return { id, ...data };
         })
       )
     );
+    // this.countRSVP();
   }
 
+  // countRSVP() {
+  //   for (let x = 0; x < this.eventIds.length; x++) {
+  //     this.rsvpCollection = this.afs.collection(`users/${this.userId}/events/${x}/rsvp`);
+  //     console.log(this.rsvpCollection);
+  //   }
+  //   // for (let x = 0; x < this.eventData.length; x++) {
+  //   //   this.counter = 1 + x;
+  //   // }
+  // }
+
   share(title: string, text: string, url: string) {
-    this.ngNavigatorShareService.share({
-      title: title,
-      text: text,
-      url: url
-    }).then((response) => {
-      console.log(response);
-    })
-      .catch((error) => {
-        console.log(error);
-        console.log(title, text, url);
-        this.shareDialog(title, text, url);
-      });
+    this.shareVar = window.navigator;
+    if (this.shareVar && this.shareVar.share) {
+      this.shareVar.share({
+        title: title,
+        text: title + ' – ' + text,
+        url: url,
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error: any) => console.log('Error sharing', error));
+    } else {
+      console.log('No browser support');
+      this.shareDialog(title, text, url);
+    }
   }
 
   deleteItem(id: string) {
