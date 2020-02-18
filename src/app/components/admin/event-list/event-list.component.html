@@ -47,12 +47,16 @@
               <mat-action-row>
                 <button
                   mat-icon-button
-                  [routerLink]="['../../event/' + event?.url]">
+                  [routerLink]="['../../event/' + event?.url]"
+                  aria-label="Event Vorschau"
+                  title="Event Vorschau">
                   <mat-icon svgIcon="invitation"></mat-icon>
                 </button>
                 <button
                   mat-icon-button
-                  (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)">
+                  (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)"
+                  aria-label="Event teilen"
+                  title="Event teilen">
                   <mat-icon svgIcon="share"></mat-icon>
                 </button>
                 <button
@@ -60,15 +64,24 @@
                   [routerLink]="['../zusagen/' + event?.id]"
                   matBadge="{{ counter }}"
                   matBadgePosition="above after"
-                  matBadgeColor="accent">
+                  matBadgeColor="accent"
+                  aria-label="Event Zusagen"
+                  title="Event Zusagen">
                   <mat-icon svgIcon="supervisor_account"></mat-icon>
                 </button>
                 <button
                   mat-icon-button
-                  [routerLink]="['../edit-event/' + event?.id]">
+                  [routerLink]="['../edit-event/' + event?.id]"
+                  aria-label="Event bearbeiten"
+                  title="Event bearbeiten">
                   <mat-icon svgIcon="edit"></mat-icon>
                 </button>
-                <button mat-button color="warn" (click)="openDialog(event?.id, event?.name)" title="Event löschen">
+                <button 
+                  mat-icon-button 
+                  color="warn" 
+                  (click)="deleteDialog(event?.id, event?.name)"
+                  aria-label="Event löschen"
+                  title="Event löschen">
                   <mat-icon svgIcon="delete"></mat-icon>
                 </button>
               </mat-action-row>

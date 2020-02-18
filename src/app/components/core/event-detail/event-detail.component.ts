@@ -24,8 +24,6 @@ export class EventDetailComponent implements OnInit {
   eventDoc: AngularFirestoreDocument<Event>;
   event$: Observable<Event>;
   eventUrl: string;
-  eventId: string;
-  userId: string;
   urls: EventUrl;
   isLoading = false;
 
@@ -48,9 +46,6 @@ export class EventDetailComponent implements OnInit {
       snapshotResult.subscribe(doc => {
         this.urls = <EventUrl>doc.payload.doc.data();
         this.eventDoc = this.afs.doc(`users/${this.urls.user}/events/${this.urls.event}`);
-        this.eventUrl = this.urls.url;
-        this.eventId = this.urls.event;
-        this.userId = this.urls.user;
         this.event$ = this.eventDoc.valueChanges().pipe(
           map(a => {
             const data = a as Event;

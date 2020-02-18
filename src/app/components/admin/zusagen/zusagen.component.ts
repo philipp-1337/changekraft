@@ -12,21 +12,7 @@ import { JoinClass } from 'src/app/shared/join.class';
 import { DialogDeleteComponent } from './dialog-delete.component';
 import { AuthService } from 'src/app/services/auth.service';
 
-export interface Rsvp {
-  name: string;
-  email: string;
-  teilnahme: boolean;
-  begleitung: boolean;
-  kinder: number;
-  hund: boolean;
-  anreise: string;
-  abholung: boolean;
-  zugzeit: string;
-  andate: Date;
-  abdate: Date;
-  naechte: number;
-  unterkuenfte: string;
-}
+export interface Rsvp { }
 
 @Component({
   selector: 'app-admin-zusagen',
