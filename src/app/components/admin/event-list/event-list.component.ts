@@ -7,13 +7,14 @@ import {
 import { map } from 'rxjs/operators';
 import { Event } from '../../../shared/event.model';
 import { Observable } from 'rxjs';
-import { DialogDeleteComponent } from '../zusagen/dialog-delete.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogDeleteComponent } from '../zusagen/dialog-delete.component';
 import { DialogShareComponent } from './dialog-share.component';
 
 @Component({
   selector: 'app-event-list',
-  templateUrl: './event-list.component.html'
+  templateUrl: './event-list.component.html',
+  styleUrls: ['./event-list.component.scss']
 })
 
 export class EventListComponent implements OnInit {
@@ -48,7 +49,7 @@ export class EventListComponent implements OnInit {
     this.shareVar = window.navigator;
     if (this.shareVar && this.shareVar.share) {
       this.shareVar.share({
-        title: title,
+        title: url,
         text: title + ' – ' + text,
         url: url,
       })

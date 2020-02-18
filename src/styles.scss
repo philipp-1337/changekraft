@@ -106,14 +106,6 @@ app-root {
       .mat-expansion-panel {
         background-color: rgba(255,255,255,0.8);
       }
-      .mat-expansion-panel-header-title,
-      .mat-expansion-panel-header-description {
-        flex-basis: 0;
-      }
-      .mat-expansion-panel-header-description {
-        justify-content: space-between;
-        align-items: center;
-      }
       .img-wrapper {
         @include _mat-theme-overridable-elevation(1, $rsvp-theme);
         border-radius: 4px;

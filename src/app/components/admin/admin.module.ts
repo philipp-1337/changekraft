@@ -8,6 +8,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { AdminComponent } from './admin.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { DialogDeleteComponent } from './zusagen/dialog-delete.component';
+import { DialogShareComponent } from './event-list/dialog-share.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
@@ -27,6 +28,7 @@ import {
     AdminComponent,
     AdminZusagenComponent,
     DialogDeleteComponent,
+    DialogShareComponent,
     AddEventComponent,
     EditEventComponent,
     EventListComponent,
@@ -40,6 +42,6 @@ import {
     { provide: MAT_DATE_FORMATS, useValue: GERMAN_DATE_FORMAT },
     { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
   ],
-  entryComponents: [DialogDeleteComponent]
+  entryComponents: [DialogDeleteComponent, DialogShareComponent]
 })
 export class AdminModule { }

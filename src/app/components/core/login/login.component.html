@@ -50,10 +50,10 @@
               </mat-form-field>
               <br />
               <button
-                 mat-raised-button
-                 color="primary"
-                 type="submit"
-                 [disabled]="loginform.touched && !loginform.valid || disabled">Anmelden
+                mat-raised-button
+                [color]="disabled ? 'accent' : 'primary'"
+                type="submit"
+                [disabled]="loginform.touched && !loginform.valid">Anmelden
               </button>
               </form>
            </mat-card-content>

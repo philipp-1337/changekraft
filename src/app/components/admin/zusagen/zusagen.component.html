@@ -54,27 +54,33 @@
                 </li>
               </ul>
               <mat-action-row>
-                <button mat-button *ngIf="!editMode" color="primary" (click)="editMode = !editMode" title="Teilnehmer bearbeiten">
+                <button
+                  mat-icon-button
+                  *ngIf="!editMode"
+                  (click)="editMode = !editMode"
+                  title="Teilnehmer bearbeiten">
                   <mat-icon svgIcon="edit"></mat-icon>
                 </button>
                 <button
-                  mat-button
+                  mat-icon-button
                   *ngIf="editMode"
-                  color="primary"
                   (click)="editMode = !editMode; updateItem(participant.id, begleitung.checked)"
-                  title="Teilnehmer bearbeiten">
+                  title="Teilnehmer speichern">
                   <mat-icon svgIcon="save"></mat-icon>
                 </button>
                 <a
                   *ngIf="participant?.email"
-                  mat-button
-                  color="primary"
+                  mat-icon-button
                   href="mailto:{{participant?.email}}"
                   target="_blank"
                   title="E-Mail schreiben">
                   <mat-icon svgIcon="email"></mat-icon>
                 </a>
-                <button mat-button color="warn" (click)="openDialog(participant.id, participant.name)" title="Teilnehmer entfernen">
+                <button
+                  mat-icon-button
+                  color="warn"
+                  (click)="openDialog(participant.id, participant.name)"
+                  title="Teilnehmer entfernen">
                   <mat-icon svgIcon="delete"></mat-icon>
                 </button>
               </mat-action-row>

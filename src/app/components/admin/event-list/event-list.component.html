@@ -26,11 +26,11 @@
               </mat-panel-title>
               <mat-panel-description>
                 <span *ngIf="!event?.dates.multipleDays">
-                  {{ event?.dates.startDate.seconds * 1000 | date:'d.MM.yy' }}
+                  {{ event?.dates.startDate.seconds * 1000 | date:'dd.MM.yy' }}
                 </span>
                 <span *ngIf="event?.dates.multipleDays">
-                  {{ event?.dates.startDate.seconds * 1000 | date:'d.MM' }} –
-                  {{ event?.dates.endDate.seconds * 1000 | date:'d.MM.yy' }}
+                  {{ event?.dates.startDate.seconds * 1000 | date:'dd.MM' }} –
+                  {{ event?.dates.endDate.seconds * 1000 | date:'dd.MM.yy' }}
                 </span>
               </mat-panel-description>
             </mat-expansion-panel-header>
@@ -76,9 +76,9 @@
                   title="Event bearbeiten">
                   <mat-icon svgIcon="edit"></mat-icon>
                 </button>
-                <button 
-                  mat-icon-button 
-                  color="warn" 
+                <button
+                  mat-icon-button
+                  color="warn"
                   (click)="deleteDialog(event?.id, event?.name)"
                   aria-label="Event löschen"
                   title="Event löschen">
