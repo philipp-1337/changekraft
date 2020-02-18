@@ -36,8 +36,8 @@
   // margin-bottom: env(safe-area-inset-bottom);
   .nav-item-title {
     display: block;
-    font-size: 0.7em;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 500;
     line-height: 1.5em;
       &::before {
         content: attr(data-text);
