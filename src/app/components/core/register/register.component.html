@@ -38,10 +38,16 @@
               <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
             </mat-form-field><br />
             <button
-              mat-raised-button
+              mat-button
               color="primary"
               type="submit"
-              [disabled]="!loginform.valid">Registrieren
+              [disabled]="!loginform.valid || disabled">
+              Registrieren
+              <mat-icon
+                *ngIf="disabled"
+                class="loading-spinner">
+                <mat-spinner color="accent" diameter="20"></mat-spinner>
+              </mat-icon>
             </button>
           </form>
         </mat-card-content>

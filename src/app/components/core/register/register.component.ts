@@ -12,12 +12,14 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   hide = true;
+  disabled = false;
 
   constructor(private authService: AuthService, private snackbar: SnackbarClass, private router: Router) { }
 
   ngOnInit() { }
 
   onSignup(form: NgForm) {
+    this.disabled = true;
     const email = form.value.email;
     const password = form.value.password;
     this.authService.signupUser(email, password)
@@ -27,6 +29,7 @@ export class RegisterComponent implements OnInit {
       })
       .catch(error => {
         this.snackbar.openSnackBar('E-Mail bereits in Benutzung.', 'Check');
+        this.disabled = false;
       });
   }
 }

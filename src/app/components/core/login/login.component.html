@@ -50,10 +50,16 @@
               </mat-form-field>
               <br />
               <button
-                mat-raised-button
-                [color]="disabled ? 'accent' : 'primary'"
+                mat-button
+                color="primary"
                 type="submit"
-                [disabled]="loginform.touched && !loginform.valid">Anmelden
+                [disabled]="loginform.touched && !loginform.valid || disabled">
+                Anmelden
+                <mat-icon
+                  *ngIf="disabled"
+                  class="loading-spinner">
+                  <mat-spinner color="accent" diameter="20"></mat-spinner>
+                </mat-icon>
               </button>
               </form>
            </mat-card-content>
