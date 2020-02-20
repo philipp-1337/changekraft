@@ -7,7 +7,7 @@ import { SwUpdate } from '@angular/service-worker';
 export class UpdateService {
   constructor(private swUpdate: SwUpdate, private snackbar: SnackbarClass) {
     this.swUpdate.available.subscribe(evt => {
-      const snack = this.snackbar.reloadSnackBar('Update Available', 'Reload', 0);
+      const snack = this.snackbar.reloadSnackBar('Update Available', 'Reload');
     })
   }
 }

@@ -10,7 +10,7 @@ export class SnackbarClass {
     });
   }
 
-  public reloadSnackBar(message: string, action: string, duration: number) {
+  public reloadSnackBar(message: string, action: string) {
     let snackBarRef = this.snackBar.open(message, action);
     snackBarRef.onAction().subscribe(() => {
       window.location.reload();
