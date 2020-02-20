@@ -4,6 +4,7 @@ import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
+import { UpdateService } from './services/update.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private update: UpdateService,
     firestore: AngularFirestore
   ) { }
 
