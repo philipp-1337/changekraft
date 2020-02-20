@@ -20,7 +20,7 @@ export class UserProfilComponent implements OnInit {
     this.userService.getUserInfo();
     setTimeout(() => {
       if (!this.userService.verfied) {
-        this.snackbar.openSnackBar('Bitte E-Mail bestätigen!', 'Check');
+        this.snackbar.openSnackBar('Bitte E-Mail bestätigen!', 'Check', 2500);
       }
     }, 100);
   }
@@ -31,7 +31,7 @@ export class UserProfilComponent implements OnInit {
 
   sendVerification() {
     this.userService.sendVerification();
-    this.snackbar.openSnackBar('Eine Bestätigungsemail wurde versandt.', 'Check');
+    this.snackbar.openSnackBar('Eine Bestätigungsemail wurde versandt.', 'Check', 2500);
   }
 
   onSignout() {

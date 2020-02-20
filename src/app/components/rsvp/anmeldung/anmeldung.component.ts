@@ -213,7 +213,7 @@ export class AnmeldungComponent implements OnInit {
     console.log(this.newRsvpData);
     this.onSaveData(this.newRsvpData);
     this.zusage = true;
-    this.snackbar.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen');
+    this.snackbar.openSnackBar('Juhu, toll dass du dabei bist.', 'Schließen', 2500);
     this.stepper.reset();
   }
   onEarlyExit() {
@@ -223,7 +223,8 @@ export class AnmeldungComponent implements OnInit {
     this.absage = true;
     this.snackbar.openSnackBar(
       'Schade, du wirst nicht eingeplant.',
-      'Schließen'
+      'Schließen',
+      2500
     );
     this.stepper.reset();
   }
