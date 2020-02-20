@@ -21,6 +21,8 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { UpdateService } from './services/update.service';
+import { SnackbarClass } from './shared/snackbar.class';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +44,9 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
-    AngularFireAuthGuard
+    AngularFireAuthGuard,
+    UpdateService,
+    SnackbarClass
   ],
   bootstrap: [AppComponent]
 })
