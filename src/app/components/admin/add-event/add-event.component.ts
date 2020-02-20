@@ -189,7 +189,7 @@ export class AddEventComponent implements OnInit {
     this.customUrl = this.eventForm.controls['url'].value;
     this.storeEvent(this.customUrl);
     this.eventForm.reset();
-    this.snackbar.openSnackBar('Event hinzugefügt.', 'Check', 2500);
+    this.snackbar.openSnackBar('Event hinzugefügt.', 'Ok', 2500);
     this.router.navigate(['./admin/event-list']);
     this.eventForm.patchValue({
       dates: {

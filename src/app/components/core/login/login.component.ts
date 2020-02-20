@@ -54,19 +54,19 @@ export class LoginComponent implements OnInit {
       this.userNotFound = true;
       this.snackbar.openSnackBar(
         'Bitte überprüfe die E-Mail-Adresse.',
-        'Schließen',
+        'Ok',
         2500
       );
       console.log('User not found.');
     } else if (this.loginError === 'auth/wrong-password') {
       this.wrongPassword = true;
-      this.snackbar.openSnackBar('Bitte überprüfe das Passwort.', 'Schließen', 2500);
+      this.snackbar.openSnackBar('Bitte überprüfe das Passwort.', 'Ok', 2500);
       console.log('Wrong password.');
     } else {
       this.randomError = true;
       this.snackbar.openSnackBar(
         'Bitte überprüfe deine Eingaben.',
-        'Schließen',
+        'Ok',
         2500
       );
       console.log('Random error occured.');

@@ -35,32 +35,17 @@
                   aria-label="Speichern"
                   (click)="updateUser(profileform)"
                   title="Speichern">
-                  <mat-icon svgIcon="autorenew"></mat-icon>
+                  <mat-icon svgIcon="autorenew" [@rotate]="animate"></mat-icon>
                 </button>
                 <mat-hint *ngIf="!userService.name">
                   Bitte einen Namen angeben.
                 </mat-hint>
             </mat-form-field>
-            <!-- <mat-form-field class="w-100" hideRequiredMarker>
-              <input
-                matInput
-                type="email"
-                color="accent"
-                id="email"
-                name="email"
-                [(ngModel)]="userService.email"
-                placeholder="E-Mail"
-                class="form-control"
-                required email>
-                <mat-hint *ngIf="profileform.controls['email'].touched && !profileform.controls['email'].valid">
-                  Bitte eine E-Mail angeben.
-                </mat-hint>
-            </mat-form-field> -->
           </form>
         </mat-card-content>
         <mat-card-actions>
           <button
-            mat-stroked-button
+            mat-button
             type="button"
             title="Speichern">E-Mail ändern
           </button>
@@ -71,13 +56,6 @@
             title="E-Mail bestätigen"
             (click)="sendVerification()">E-Mail bestätigen
           </button>
-        <!-- <button
-          mat-stroked-button
-          color="warn"
-          type="button"
-          title="Abmelden"
-          (click)="onSignout()">Abmelden
-        </button> -->
         </mat-card-actions>
       </mat-card>
     </div>

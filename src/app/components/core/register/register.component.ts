@@ -25,10 +25,10 @@ export class RegisterComponent implements OnInit {
     this.authService.signupUser(email, password)
       .then(response => {
         this.router.navigate(['/admin/profile']);
-        this.snackbar.openSnackBar('Registrierung erfolgreich.', 'Check', 2500);
+        this.snackbar.openSnackBar('Registrierung erfolgreich.', 'Ok', 2500);
       })
       .catch(error => {
-        this.snackbar.openSnackBar('E-Mail bereits in Benutzung.', 'Check', 2500);
+        this.snackbar.openSnackBar('E-Mail bereits in Benutzung.', 'Ok', 2500);
         this.disabled = false;
       });
   }
