@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class SnackbarClass {
-  constructor(public snackBar: MatSnackBar) {}
+  constructor(public snackBar: MatSnackBar) { }
   public openSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {
       duration: duration
@@ -11,7 +11,7 @@ export class SnackbarClass {
   }
 
   public reloadSnackBar(message: string, action: string) {
-    let snackBarRef = this.snackBar.open(message, action);
+    const snackBarRef = this.snackBar.open(message, action);
     snackBarRef.onAction().subscribe(() => {
       window.location.reload();
     });
