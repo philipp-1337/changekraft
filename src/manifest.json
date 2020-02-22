@@ -1,7 +1,7 @@
 {
   "name": "changeKraft",
   "short_name": "chngkrft",
-  "theme_color": "#5e35b1",
+  "theme_color": "#00897b",
   "background_color": "#fff",
   "display": "standalone",
   "scope": "/",

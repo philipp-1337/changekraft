@@ -47,6 +47,7 @@ export class EventDetailComponent implements OnInit {
           if (url.length === 0) {
             console.log('nichts gefunden');
             this.router.navigate(['404']);
+            return url;
           } else {
             return url;
           }

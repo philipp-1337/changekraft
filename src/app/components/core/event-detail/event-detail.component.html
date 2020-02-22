@@ -42,60 +42,25 @@
           </mat-card-content>
           <mat-card-actions>
             <button
-              mat-flat-button
+              mat-icon-button
               type="button"
               color="primary"
-              title="Zur Anmeldung"
+              title="Zurück"
+              routerLink=".."
+              disabled>
+              <mat-icon svgIcon="arrow_back"></mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              type="button"
+              color="primary"
+              title="Anmeldung"
               routerLink="rsvp/">
-              <mat-icon svgIcon="loyalty"></mat-icon>
-              <span class="ml-1">Zur Anmeldung</span>
+              <mat-icon svgIcon="arrow_forward"></mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>
-        <!-- <mat-card *ngIf="enrol">
-          <form [formGroup]="rsvpForm">
-            <mat-card-content>
-              <p>
-                <strong>Anmeldung</strong>
-              </p>
-              <p>
-                <mat-form-field class="w-100">
-                  <input
-                    matInput
-                    type="text"
-                    color="accent"
-                    id="vorname"
-                    formControlName="vorname"
-                    placeholder="Vorname"
-                    class="form-control"
-                    required>
-                </mat-form-field>
-              </p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button
-                mat-flat-button
-                type="button"
-                color="primary"
-                title="Anmelden"
-                (click)="onEnrol()">
-                <span class="ml-1">Anmelden</span>
-              </button>
-            </mat-card-actions>
-          </form>
-        </mat-card> -->
       </div>
-      <!-- <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
-        <div class="img-wrapper">
-          <img srcset="../../../assets/img/event/food-xs_2x.jpg 580w,
-            ../../../assets/img/event/food-sm_2x.jpg 800w,
-            ../../../assets/img/event/food-md_2x.jpg 970w,
-            ../../../assets/img/event/food-lg_2x.jpg 1200w"
-            sizes="(max-width: 959px) 95vw, (max-width: 1024px) 47vw, (max-width: 1279px) 37vw, 32vw"
-            src="../../../assets/img/event/food-xs_1x.jpg"
-            alt="Photo of food"/>
-        </div>
-      </div> -->
     </div>
   </ng-template>
 </div>

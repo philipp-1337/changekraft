@@ -28,7 +28,14 @@ export class RegisterComponent implements OnInit {
         this.snackbar.openSnackBar('Registrierung erfolgreich.', 'Ok', 2500);
       })
       .catch(error => {
-        this.snackbar.openSnackBar('E-Mail bereits in Benutzung.', 'Ok', 2500);
+        console.log(error.message);
+        if (error.code === 'auth/weak-password') {
+          this.snackbar.openSnackBar('Das Passwort sollte mindestens 6 Zeichen lang sein.', 'Ok', 2500);
+        } else if (error.code === 'auth/email-already-in-use') {
+          this.snackbar.openSnackBar('Die E-Mail-Adresse wird bereits von einem anderen Konto verwendet.', 'Ok', 2500);
+        } else {
+          this.snackbar.openSnackBar('Ein Fehler ist aufgetreten.', 'Ok', 2500);
+        }
         this.disabled = false;
       });
   }

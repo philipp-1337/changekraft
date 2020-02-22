@@ -1,15 +1,15 @@
 @import './assets/fonts/raleway/raleway';
 @import '~@angular/material/theming';
 
-$rsvp-primary: mat-palette($mat-deep-purple, 600);
-$rsvp-accent: mat-palette($mat-teal, 200);
-$rsvp-warn: mat-palette($mat-red, A700);
+$rsvp-primary: mat-palette($mat-teal, 600);
+$rsvp-accent: mat-palette($mat-deep-purple, 300);
+$rsvp-warn: mat-palette($mat-red, 900);
 $rsvp-theme: mat-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
 $custom-typography: mat-typography-config(
   $font-family: 'Raleway, sans-serif',
   $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(16px, 24px, 500)
+  $body-1: mat-typography-level(16px, 24px, 400)
 );
 
 // Override the typography in the core CSS.
@@ -20,6 +20,10 @@ $custom-typography: mat-typography-config(
 
 .rsvp-error {
   color: mat-color($rsvp-warn);
+}
+
+.text-grey {
+  color: rgba(0, 0, 0, 0.54)
 }
 
 .loading-spinner {
@@ -43,6 +47,10 @@ input { font-size: 16px;}
   color: mat-color($rsvp-primary);
 }
 
+.mat-badge-medium .mat-badge-content {
+  line-height: 20px;
+}
+
 .header-padding {
   @media (min-width: 600px){
     padding-top: 64px;
@@ -60,13 +68,9 @@ input { font-size: 16px;}
   --safe-area-inset-bottom: env(safe-area-inset-bottom);
   height: calc(56px + var(--safe-area-inset-bottom));
   .mat-toolbar {
-    // align-items: center;
     bottom: 0;
-    // flex-direction: row;
-    // justify-content: center;
     position: fixed;
     top: unset !important;
-    // z-index: 2;
     --safe-area-inset-bottom: env(safe-area-inset-bottom);
     height: calc(56px + var(--safe-area-inset-bottom));
   }
@@ -80,23 +84,7 @@ app-root {
         --safe-area-inset-left: env(safe-area-inset-left);
         padding-right: calc(16px + var(--safe-area-inset-right));
         padding-left: calc(16px + var(--safe-area-inset-left));
-      &::after {
-        background-attachment: scroll;
-        background-color: white;
-        background-image: url('./assets/img/background.jpg');
-        background-position: right bottom;
-        background-repeat: no-repeat;
-        background-size: contain;
-        content: '';
-        left: 0;
-        height: 100%;
-        opacity: 0.6;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: -1;
-      }
-      flex-grow: 1;
+        flex-grow: 1;
       mat-card {
         mat-form-field {
           font-size: 16px;
@@ -113,11 +101,6 @@ app-root {
             text-overflow: ellipsis;
           }
         }
-      }
-      .wrapper,
-      mat-card,
-      .mat-expansion-panel {
-        background-color: rgba(255,255,255,0.8);
       }
       .img-wrapper {
         @include _mat-theme-overridable-elevation(1, $rsvp-theme);

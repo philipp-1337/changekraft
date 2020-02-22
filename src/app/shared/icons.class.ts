@@ -18,6 +18,18 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'arrow_back',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/arrow_back-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'arrow_forward',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/arrow_forward-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'autorenew',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-autorenew-24px.svg'
