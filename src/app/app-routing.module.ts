@@ -40,6 +40,10 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
+    path: 'email/action',
+    loadChildren: () => import('./components/email-action/email-action.module').then(m => m.EmailActionModule),
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
     canActivate: [AngularFireAuthGuard],
