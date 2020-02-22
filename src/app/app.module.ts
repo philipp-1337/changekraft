@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { UpdateService } from './services/update.service';
 import { SnackbarClass } from './shared/snackbar.class';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { SnackbarClass } from './shared/snackbar.class';
     CoreModule,
     MaterialModule,
     BrowserModule,
+    RouterModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
