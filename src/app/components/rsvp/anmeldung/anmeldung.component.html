@@ -148,7 +148,7 @@
                 </p>
                 <p *ngIf="anreiseFormGroup.controls['andate'].valid && anreiseFormGroup.controls['abdate'].valid">
                   <span *ngIf="checkRange()">Anzahl Nächte: {{ nights }}</span>
-                  <span *ngIf="!checkRange()" class="rsvp-error">
+                  <span *ngIf="!checkRange()" class="text-error">
                   Das Datum der Abreise darf nicht vor dem Datum der Anreise liegen.
                   </span>
                 </p>

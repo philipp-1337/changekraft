@@ -117,7 +117,7 @@
                 style="color:grey"
                 *ngIf="dates.controls['startDate'].valid && dates.controls['endDate'].valid">
                 <span *ngIf="checkRange()">Dauer des Events: {{ calcDays() }} Tage</span>
-                <span *ngIf="!checkRange()" class="rsvp-error">
+                <span *ngIf="!checkRange()" class="text-error">
                   Das Zeitraumkontinuum ist in Gefahr.
                 </span>
               </span>

@@ -18,7 +18,7 @@ $custom-typography: mat-typography-config(
 
 @import './assets/scss/bootstrap';
 
-.rsvp-error {
+.text-error {
   color: mat-color($rsvp-warn);
 }
 
@@ -26,7 +26,7 @@ $custom-typography: mat-typography-config(
   color: rgba(0, 0, 0, 0.54)
 }
 
-.loading-spinner {
+.button-spinner {
   position: absolute;
   margin-left: auto;
   margin-right: auto;

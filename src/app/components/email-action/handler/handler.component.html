@@ -9,42 +9,77 @@
               class="header-icon"></mat-icon>
           </div>
           <mat-card-title>
-            Profil
+            {{ title }}
           </mat-card-title>
-          <mat-card-subtitle class="mb-0">Folge den Anweisungen</mat-card-subtitle>
+          <mat-card-subtitle class="mb-0">
+            Fragen? Kontaktiere
+            <a href="mailto:hello@changekraft.de" target="_blank">hello@changekraft.de</a>
+          </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="mt-3">
+          <!-- <mat-icon *ngIf="loading">
+            <mat-spinner color="accent" diameter="20"></mat-spinner>
+          </mat-icon> -->
           <ng-container [ngSwitch]="mode">
-            <!-- password reset -->
-            <ng-container *ngSwitchCase="'resetPassword'">
-              resetPassword
-            </ng-container>
-
             <!-- verify email address -->
             <ng-container *ngSwitchCase="'verifyEmail'">
-              verifyEmail
+              <p>{{ text }}</p>
+              <p class="text-error">{{ error }}</p>
             </ng-container>
-
+            <!-- password reset -->
+            <ng-container *ngSwitchCase="'resetPassword'">
+              <p>{{ text }}</p>
+              <form [formGroup]="frmSetNewPassword">
+                <mat-form-field
+                  class="w-100">
+                  <input
+                    matInput
+                    placeholder="Passwort"
+                    formControlName="password"
+                    color="accent"
+                    id="password"
+                    name="password"
+                    type="password"
+                    class="form-control">
+                  </mat-form-field><br />
+                  <mat-form-field
+                  class="w-100">
+                  <input
+                    matInput
+                    placeholder="Passwort bestätigen"
+                    type="password"
+                    color="accent"
+                    formControlName="confirmPassword"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    class="form-control">
+                  </mat-form-field><br />
+              </form>
+            </ng-container>
             <!-- default action -->
             <ng-container *ngSwitchDefault>
-              Nope
+              <p>{{ text }}</p>
             </ng-container>
           </ng-container>
         </mat-card-content>
-        <!-- <mat-card-actions>
+        <mat-card-actions>
           <button
+            *ngIf="mode === 'verifyEmail'"
             mat-button
-            type="button"
-            title="Speichern">E-Mail ändern
-          </button>
-          <button *ngIf="!userService.verfied"
-            mat-stroked-button
             color="primary"
-            type="button"
-            title="E-Mail bestätigen"
-            (click)="sendVerification()">E-Mail bestätigen
+            routerLink="/login">Zum Profil
+            <!-- <mat-icon
+              class="button-spinner">
+              <mat-spinner color="accent" diameter="20"></mat-spinner>
+            </mat-icon> -->
           </button>
-        </mat-card-actions> -->
+          <button
+            *ngIf="mode === 'resetPassword'"
+            mat-button
+            color="primary"
+            (click)="setPassword()">Passwort zurücksetzen
+          </button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>
