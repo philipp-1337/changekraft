@@ -44,7 +44,7 @@
                   minlength="5"
                   required>
                   <mat-error *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">
-                    Die URL muss aus mindestens 5 Zeichen (Buchstaben / Zahlen) bestehen.
+                    {{ getErrorMessage() }}
                   </mat-error>
                   <mat-hint *ngIf="!urlAvailable">
                     Diese URL ist leider nicht mehr verfügbar.

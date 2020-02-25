@@ -43,33 +43,38 @@ export class AddEventComponent implements OnInit {
   taken: boolean;
   eventData: {};
   event$: Observable<any>;
-  prefilledUrl: string;
-  multipleDays: boolean;
   minDate = new Date();
   maxDate = new Date(2099, 12, 31);
-  newStartDate: Date;
-  newEndDate: Date;
-  oldStartDate: any;
-  oldEndDate: any;
 
   buildForm() {
     this.eventForm = this.fb.group({
       name: ['', [Validators.required]],
       url: ['', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.-]*$')
+        Validators.pattern('^[a-zA-Z0-9_.-]*$'),
+        Validators.minLength(5)
       ]],
       desc: ['', [Validators.required]],
       dates: this.fb.group({
         multipleDays: [false],
         startDate: [''],
-        endDate: [''],
+        endDate: [''], 
       })
     });
   }
 
   get dates() {
     return this.eventForm.get('dates') as FormArray;
+  }
+
+  getErrorMessage() {
+    if (this.eventForm.controls['url'].hasError('required')) {
+      return 'Bitte eine URL festlegen.';
+    }
+    if (this.eventForm.controls['url'].hasError('pattern')) {
+      return 'Die URL darf keine Leer- & Sonderzeichen enthalten.';
+    }
+    return this.eventForm.controls['url'].hasError('minlength') ? 'Die URL muss mindestens 5 Zeichen lang sein.' : '';
   }
 
   setDatesValidators() {
@@ -92,29 +97,36 @@ export class AddEventComponent implements OnInit {
   }
 
   transformDate() {
+    let newStartDate: Date;
+    let newEndDate: Date;
     if (
       this.dates.controls['startDate'].touched &&
       this.dates.controls['startDate'].valid &&
       this.dates.controls['startDate'].value
     ) {
-      this.oldStartDate = this.dates.controls['startDate'].value;
-      this.newStartDate = this.dates.controls['startDate'].value.toDate();
+      newStartDate = this.dates.controls['startDate'].value.toDate();
+      if (this.dates.controls['multipleDays'].value == false) {
+        this.eventForm.patchValue({
+          dates: {
+            startDate: newStartDate,
+          },
+        });
+      }
     }
     if (
       this.dates.controls['endDate'].touched &&
       this.dates.controls['endDate'].valid &&
-      this.dates.controls['endDate'].value
+      this.dates.controls['endDate'].value &&
+      this.dates.controls['multipleDays'].value == true
     ) {
-      this.oldEndDate = this.dates.controls['startDate'].value;
-      this.newEndDate = this.dates.controls['endDate'].value.toDate();
+      newEndDate = this.dates.controls['endDate'].value.toDate();
+      this.eventForm.patchValue({
+        dates: {
+          startDate: newStartDate,
+          endDate: newEndDate,
+        },
+      });
     }
-
-    this.eventForm.patchValue({
-      dates: {
-        startDate: this.newStartDate,
-        endDate: this.newEndDate,
-      },
-    });
   }
 
   ngOnInit() {
@@ -150,7 +162,7 @@ export class AddEventComponent implements OnInit {
   calcDays() {
     const start = this.dates.controls['startDate'].value;
     const end = this.dates.controls['endDate'].value;
-    const days = (end - start) / 86400000; // 86400000 = 1 day (in ms)
+    const days = Math.round((end - start) / 86400000); // 86400000 = 1 day (in ms)
     return days;
   }
 
@@ -185,17 +197,10 @@ export class AddEventComponent implements OnInit {
     this.eventData = {
       ...this.eventForm.value
     };
-    console.log(this.eventData);
     this.customUrl = this.eventForm.controls['url'].value;
     this.storeEvent(this.customUrl);
     this.eventForm.reset();
     this.snackbar.openSnackBar('Event hinzugefügt.', 'Ok', 2500);
     this.router.navigate(['./admin/event-list']);
-    this.eventForm.patchValue({
-      dates: {
-        startDate: this.oldStartDate,
-        endDate: this.oldEndDate,
-      },
-    });
   }
 }
