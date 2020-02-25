@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   constructor(
-    public authService: AuthService,
+    public authservice: AuthService,
     public snackbar: SnackbarClass,
     private router: Router
   ) { }
@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigateByUrl('/admin/profile');
-    }
+    // if (this.authservice.isAuthenticated()) {
+    //   this.router.navigateByUrl('/admin/profile');
+    // }
   }
 
   onSignin(form: NgForm) {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.randomError = false;
     const email = form.value.email;
     const password = form.value.password;
-    this.authService
+    this.authservice
       .signinUser(email, password)
       .then(response => {
         this.router.navigateByUrl('/admin/profile');
@@ -60,12 +60,12 @@ export class LoginComponent implements OnInit {
       console.log('User not found.');
     } else if (this.loginError === 'auth/wrong-password') {
       this.wrongPassword = true;
-      this.snackbar.openSnackBar('Bitte überprüfe das Passwort.', 'Ok', 2500);
+      this.snackbar.openSnackBar('Bitte Passwort überprüfen.', 'Ok', 2500);
       console.log('Wrong password.');
     } else {
       this.randomError = true;
       this.snackbar.openSnackBar(
-        'Bitte überprüfe deine Eingaben.',
+        'Bitte Eingaben überprüfen.',
         'Ok',
         2500
       );

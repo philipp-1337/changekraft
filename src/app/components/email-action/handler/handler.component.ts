@@ -39,7 +39,7 @@ export class HandlerComponent implements OnInit {
           .applyActionCode(this.code)
           .then(() => {
             this.snackbar.openSnackBar('E-Mail erfolgreich verifiziert.', 'Ok', 2500);
-            this.text = 'Die E-Mail-Adresse wurde erfolgreich verifiziert.';
+            this.router.navigate(['/admin/profile']);
           })
           .catch(err => {
             this.text = this.errormessage;
@@ -49,7 +49,7 @@ export class HandlerComponent implements OnInit {
         // check if mode is resetPassword
       } else if (this.mode === 'resetPassword') {
         this.title = 'Passwort zurücksetzen';
-        this.text = 'Bitte gib dein neues Passwort ein.';
+        this.text = 'Bitte neues Passwort eingeben.';
       }
     } else {
       // oobCode is missing
@@ -69,7 +69,10 @@ export class HandlerComponent implements OnInit {
     }
     this.afAuth.auth
       .confirmPasswordReset(this.code, password)
-      .then(() => this.router.navigate(['./login']))
+      .then(() => {
+        this.snackbar.openSnackBar('Das Passwörter wurde geändert', 'Ok', 2500);
+        this.router.navigate(['./login']);
+      })
       .catch(err => {
         this.snackbar.openSnackBar(err.code, 'Ok', 2500);
       });

@@ -12,7 +12,7 @@ import { IconsClass } from 'src/app/shared/icons.class';
 })
 export class HeaderComponent {
   constructor(
-    public authService: AuthService,
+    public authservice: AuthService,
     public icons: IconsClass
   ) { }
 
@@ -66,6 +66,6 @@ export class HeaderComponent {
   }
 
   onLogout() {
-    this.authService.logout();
+    this.authservice.logout();
   }
 }

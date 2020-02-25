@@ -1,0 +1,35 @@
+<div mat-dialog-content>
+  <h2>Das Konto wirklich löschen?</h2>
+  <p>Alle Daten werden unwiderrufbar gelöscht.</p>
+  <p>Bitte Passwort eingeben zum Bestätigen!</p>
+  <form #credential="ngForm">
+  <mat-form-field class="w-100">
+    <input
+      matInput
+      placeholder="E-Mail"
+      type="email"
+      color="accent"
+      id="email"
+      name="email"
+      ngModel
+      class="form-control"
+      required>
+    </mat-form-field><br />
+  <mat-form-field class="w-100">
+    <input
+      matInput
+      placeholder="Passwort"
+      type="password"
+      color="accent"
+      id="password"
+      name="password"
+      ngModel
+      class="form-control"
+      required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseClick()" cdkFocusInitial>Noooo</button>
+  <button mat-button [disabled]="credential.invalid" [mat-dialog-close]="credential">Definitiv</button>
+</div>

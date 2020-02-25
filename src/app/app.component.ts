@@ -14,14 +14,14 @@ export class AppComponent implements OnInit, OnDestroy {
   name = '';
   authUnsub: firebase.Unsubscribe;
   constructor(
-    private authService: AuthService,
+    private authservice: AuthService,
     private router: Router,
     private update: UpdateService,
     firestore: AngularFirestore
   ) { }
 
   ngOnInit() {
-    this.authUnsub = this.authService.authChange_$();
+    this.authUnsub = this.authservice.authChange_$();
 
     const headers = new HttpHeaders({ 'Set-Cookie': 'HttpOnly;Secure;SameSite=Strict' });
 

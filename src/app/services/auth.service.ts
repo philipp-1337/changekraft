@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 interface User {
   uid: string;
@@ -83,6 +85,14 @@ export class AuthService {
   getCurrentUser() {
     const currentUser = this.afAuth.auth.currentUser;
     return currentUser;
+  }
+
+  getCredential(email: string, password: string) {
+    const credentials = firebase.auth.EmailAuthProvider.credential(
+      email,
+      password
+    );
+    return credentials;
   }
 
   isAuthenticated() {

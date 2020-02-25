@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -13,19 +14,28 @@ export class RegisterComponent implements OnInit {
 
   hide = true;
   disabled = false;
+  signinForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
+  });
 
-  constructor(private authService: AuthService, private snackbar: SnackbarClass, private router: Router) { }
+  constructor(private authservice: AuthService,
+    private fb: FormBuilder,
+    private snackbar: SnackbarClass,
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() { }
 
-  onSignup(form: NgForm) {
+  onSignup() {
+    const email = this.signinForm.controls['email'].value;
+    const password = this.signinForm.controls['password'].value;
     this.disabled = true;
-    const email = form.value.email;
-    const password = form.value.password;
-    this.authService.signupUser(email, password)
+    this.authservice.signupUser(email, password)
       .then(response => {
+        // this.userService.sendVerification();
+        // this.snackbar.openSnackBar('Registrierung erfolgreich & Bestätigungsemail versandt.', 'Ok', 2500);
         this.router.navigate(['/admin/profile']);
-        this.snackbar.openSnackBar('Registrierung erfolgreich.', 'Ok', 2500);
       })
       .catch(error => {
         console.log(error.message);

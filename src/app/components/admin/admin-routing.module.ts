@@ -5,8 +5,10 @@ import { AdminComponent } from './admin.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard, redirectUnauthorizedTo, emailVerified } from '@angular/fire/auth-guard';
 import { UserProfilComponent } from './user-profil/user-profil.component';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const adminRoutes: Routes = [
   {
@@ -16,27 +18,27 @@ const adminRoutes: Routes = [
       {
         path: 'profile',
         component: UserProfilComponent,
-        canActivate: [AngularFireAuthGuard]
+        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
       },
       {
         path: 'add-event',
         component: AddEventComponent,
-        canActivate: [AngularFireAuthGuard]
+        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, emailVerified }
       },
       {
         path: 'event-list',
         component: EventListComponent,
-        canActivate: [AngularFireAuthGuard]
+        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, emailVerified }
       },
       {
         path: 'edit-event/:eventId',
         component: EditEventComponent,
-        canActivate: [AngularFireAuthGuard]
+        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
       },
       {
         path: 'zusagen/:eventId',
         component: AdminZusagenComponent,
-        canActivate: [AngularFireAuthGuard]
+        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
       }
     ]
   }

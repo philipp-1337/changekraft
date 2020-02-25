@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-12 mt-3">
       <mat-card>
+        <form [formGroup]="signinForm">
         <mat-card-header>
           <div class="justify-content-center align-self-center" mat-card-avatar>
             <mat-icon
@@ -9,23 +10,26 @@
               class="header-icon"></mat-icon>
           </div>
           <mat-card-title>Registrierung</mat-card-title>
-          <mat-card-subtitle class="mb-0">Bitte E-Mail und Passwort festlegen</mat-card-subtitle>
+          <mat-card-subtitle class="mb-0">E-Mail und Passwort angeben</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="mt-3">
-          <form (ngSubmit)="onSignup(loginform)" #loginform="ngForm">
-            <mat-form-field class="w-100">
-              <input
+          <mat-form-field class="w-100">
+            <input
               matInput
               placeholder="E-Mail"
               type="email"
               color="accent"
               id="email"
               name="email"
-              ngModel
-              class="form-control">
-            </mat-form-field><br />
-            <mat-form-field
-            class="w-100">
+              formControlName="email"
+              class="form-control"
+              required>
+              <mat-error *ngIf="signinForm.controls['email'].touched && !signinForm.controls['email'].valid">
+                Bitte eine korrekte E-Mail eingeben.
+              </mat-error>
+          </mat-form-field>
+          <br />
+          <mat-form-field class="w-100">
             <input
               matInput
               placeholder="Passwort"
@@ -33,24 +37,36 @@
               color="accent"
               id="password"
               name="password"
-              ngModel
-              class="form-control">
-              <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
-            </mat-form-field><br />
-            <button
-              mat-button
-              color="primary"
-              type="submit"
-              [disabled]="!loginform.valid || disabled">
-              Registrieren
-              <mat-icon
-                *ngIf="disabled"
-                class="button-spinner">
-                <mat-spinner color="accent" diameter="20"></mat-spinner>
-              </mat-icon>
-            </button>
-          </form>
+              formControlName="password"
+              class="form-control"
+              required>
+              <mat-error *ngIf="signinForm.controls['password'].touched && !signinForm.controls['password'].valid">
+                Bitte ein Passwort vergeben.
+              </mat-error>
+            <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
+          </mat-form-field>
+          <br />
         </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-button
+            color="primary"
+            (click)="onSignup()"
+            [disabled]="signinForm.touched && !signinForm.valid || disabled">
+            Registrieren
+            <mat-icon
+              *ngIf="disabled"
+              class="button-spinner">
+              <mat-spinner color="accent" diameter="20"></mat-spinner>
+            </mat-icon>
+          </button>
+          <button
+            mat-button
+            routerLink="/login">
+          Zum Login
+          </button>
+        </mat-card-actions>
+        </form>
       </mat-card>
     </div>
   </div>

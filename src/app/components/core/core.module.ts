@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { RouterOutlet } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 @NgModule({
   imports: [CommonModule, AppRoutingModule, SharedModule, MaterialModule],
@@ -23,7 +24,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     LoginComponent,
     RegisterComponent,
     EventDetailComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PasswordResetComponent
   ],
   exports: [HeaderComponent, AppRoutingModule],
   providers: [AuthService, UserService]

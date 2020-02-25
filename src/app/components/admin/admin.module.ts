@@ -21,6 +21,7 @@ import {
   MatMomentDateModule,
   MomentDateAdapter
 } from '@angular/material-moment-adapter';
+import { DialogUserDeleteComponent } from './user-profil/dialog-user-delete.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MatMomentDateModule],
@@ -32,7 +33,8 @@ import {
     AddEventComponent,
     EditEventComponent,
     EventListComponent,
-    UserProfilComponent
+    UserProfilComponent,
+    DialogUserDeleteComponent
   ],
   providers: [
     ExcelService,

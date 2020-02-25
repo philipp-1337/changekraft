@@ -23,8 +23,13 @@
           <ng-container [ngSwitch]="mode">
             <!-- verify email address -->
             <ng-container *ngSwitchCase="'verifyEmail'">
-              <p>{{ text }}</p>
-              <p class="text-error">{{ error }}</p>
+              <div style="text-align: center;">
+                <mat-spinner *ngIf="!error" color="primary" diameter="40"></mat-spinner>
+              </div>
+              <div *ngIf="error">
+                <p>{{ text }}</p>
+                <p class="text-error">{{ error }}</p>
+              </div>
             </ng-container>
             <!-- password reset -->
             <ng-container *ngSwitchCase="'resetPassword'">
@@ -62,19 +67,18 @@
             </ng-container>
           </ng-container>
         </mat-card-content>
-        <mat-card-actions>
-          <button
+        <mat-card-actions *ngIf="mode === 'resetPassword'">
+          <!-- <button
             *ngIf="mode === 'verifyEmail'"
             mat-button
             color="primary"
             routerLink="/login">Zum Profil
-            <!-- <mat-icon
+            <mat-icon
               class="button-spinner">
               <mat-spinner color="accent" diameter="20"></mat-spinner>
-            </mat-icon> -->
-          </button>
+            </mat-icon>
+          </button> -->
           <button
-            *ngIf="mode === 'resetPassword'"
             mat-button
             color="primary"
             (click)="setPassword()">Passwort zurücksetzen

@@ -10,7 +10,7 @@
                 class="header-icon"></mat-icon>
             </div>
             <mat-card-title>Event hinzufügen</mat-card-title>
-            <mat-card-subtitle class="mb-0">Hier kannst du dein Event erstellen</mat-card-subtitle>
+            <mat-card-subtitle class="mb-0">Hier wird das Event erstellt</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="mt-3">
             <p>
@@ -24,9 +24,9 @@
                   placeholder="Name"
                   class="form-control"
                   required>
-                  <mat-hint *ngIf="eventForm.controls['name'].touched && !eventForm.controls['name'].valid">
-                    Das darf nicht leer sein.
-                  </mat-hint>
+                  <mat-error *ngIf="eventForm.controls['name'].touched && !eventForm.controls['name'].valid">
+                    Bitte dem Event einen Namen geben.
+                  </mat-error>
               </mat-form-field>
             </p>
             <p>
@@ -41,10 +41,11 @@
                   formControlName="url"
                   placeholder="URL"
                   class="form-control"
+                  minlength="5"
                   required>
-                  <mat-hint *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">
-                    Die URL muss aus Buchstaben und Zahlen bestehen.
-                  </mat-hint>
+                  <mat-error *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">
+                    Die URL muss aus mindestens 5 Zeichen (Buchstaben / Zahlen) bestehen.
+                  </mat-error>
                   <mat-hint *ngIf="!urlAvailable">
                     Diese URL ist leider nicht mehr verfügbar.
                   </mat-hint>
@@ -61,9 +62,9 @@
                   placeholder="Beschreibung"
                   class="form-control"
                   required>
-                <mat-hint *ngIf="eventForm.controls['desc'].touched && !eventForm.controls['desc'].valid">
-                  Das darf nicht leer sein.
-                </mat-hint>
+                  <mat-error *ngIf="eventForm.controls['desc'].touched && !eventForm.controls['desc'].valid">
+                    Bitte eine Beschreibung verfassen.
+                  </mat-error>
                 </textarea>
               </mat-form-field>
             </p>
