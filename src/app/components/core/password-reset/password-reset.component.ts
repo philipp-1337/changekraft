@@ -26,16 +26,17 @@ export class PasswordResetComponent implements OnInit {
 
   sendPasswordResetRequest() {
     const email = this.frmPasswordReset.controls['email'].value;
-
+    this.disabled = true;
     this.afAuth.auth.sendPasswordResetEmail(email).then(
       () => {
         // success, show some message
         this.snackbar.openSnackBar('Eine Bestätigungsnachricht wurde versandt.', 'Ok', 2500);
-        this.disabled = true;
+        this.disabled = false;
       },
       err => {
         // handle errors
         this.snackbar.openSnackBar(err.code, 'Ok', 2500);
+        this.disabled = false;
       }
     );
   }
