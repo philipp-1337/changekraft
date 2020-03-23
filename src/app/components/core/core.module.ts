@@ -11,7 +11,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CoreComponent } from './core.component';
 import { UserService } from 'src/app/services/user.service';
 import { EventDetailComponent } from './event-detail/event-detail.component';
-import { RouterOutlet } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 
