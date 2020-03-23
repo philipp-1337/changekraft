@@ -23,7 +23,7 @@
       <mat-menu #profileMenu="matMenu">
         <button mat-menu-item routerLink="/admin/profile" [disabled]="!authservice.isAuthenticated()">
           <mat-icon svgIcon="account_circle"></mat-icon>
-          <span>Profil anzeigen</span>
+          <span>Profil</span>
         </button>
         <ng-template [ngIf]="!authservice.isAuthenticated()">
           <button mat-menu-item routerLink="/login">
