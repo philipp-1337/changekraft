@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
@@ -28,6 +28,8 @@ export class AuthService {
     return this.token;
   }
 
+  userId: string;
+
   constructor(private router: Router, public afAuth: AngularFireAuth, private afs: AngularFirestore, ) {
     //// Get auth data, then get firestore user document || null
     this.user = this.afAuth.authState.pipe(
@@ -41,8 +43,12 @@ export class AuthService {
     );
   }
 
-  public authChange_$(): firebase.Unsubscribe {
-    return this.afAuth.auth.onAuthStateChanged((user: firebase.User) => {
+  isLoggedIn() {
+    return this.afAuth.authState.pipe(first()).toPromise();
+ }
+
+  public authChange_$() {
+    return this.afAuth.onAuthStateChanged((user: firebase.User) => {
       if (user) {
         this.getUserToken();
       } else {
@@ -67,24 +73,31 @@ export class AuthService {
   }
 
   async signupUser(email: string, password: string) {
-    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    await this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
   async signinUser(email: string, password: string) {
-    const credential = await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
     this.updateUserData(credential.user);
     this.getUserToken();
   }
 
-  getUserToken() {
-    this.afAuth.auth.currentUser.getIdToken()
+  async getUserToken() {
+    (await this.afAuth.currentUser).getIdToken()
       .then(token => (this.token = token));
     return this.token;
   }
 
   getCurrentUser() {
-    const currentUser = this.afAuth.auth.currentUser;
+    const currentUser = this.afAuth.currentUser;
     return currentUser;
+  }
+
+  getCurrentUserID() {
+    firebase.auth().onAuthStateChanged( user => {
+      if (user) { this.userId = user.uid }
+      return this.userId;
+    });
   }
 
   getCredential(email: string, password: string) {
@@ -100,7 +113,7 @@ export class AuthService {
   }
 
   logout() {
-    this.afAuth.auth.signOut().then(() => {
+    this.afAuth.signOut().then(() => {
       this.router.navigate(['/']);
     });
     this.token = null;

@@ -46,7 +46,11 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.userId = (this.authservice.getCurrentUser()).uid;
+    this.getSingleRsvpData();    
+  }
+
+  async getSingleRsvpData() {
+    this.userId = (await (this.authservice.getCurrentUser())).uid;
     this.route.params.subscribe((params: Params) => {
       this.eventId = params['eventId'];
       this.rsvpCollection = this.afs.collection(`users/${this.userId}/events/${this.eventId}/rsvp`);

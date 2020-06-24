@@ -52,8 +52,8 @@ export class UserProfilComponent implements OnInit {
     }, 1000);
   }
 
-  deleteDialog() {
-    const id = this.authservice.getCurrentUser().uid;
+  async deleteDialog() {
+    const id = (await this.authservice.getCurrentUser()).uid;
     const name = this.userService.name;
     const user = this.authservice.getCurrentUser();
     const dialogRef = this.dialog.open(DialogUserDeleteComponent, {
@@ -77,12 +77,12 @@ export class UserProfilComponent implements OnInit {
     this.snackbar.openSnackBar('Fehler: ' + errorcode, 'Ok', 2500);
   }
 
-  onReauthenticate(email, password) {
+  async onReauthenticate(email, password) {
     const user = this.authservice.getCurrentUser();
     const credential = this.authservice.getCredential(email, password);
-    user.reauthenticateWithCredential(credential).then(response => {
+    (await user).reauthenticateWithCredential(credential).then(async response => {
       // User re-authenticated.
-      user.delete().then(promise => {
+      (await user).delete().then(promise => {
         // User deleted.
         console.log('Benutzer gelöscht');
         this.router.navigate(['/home']);
