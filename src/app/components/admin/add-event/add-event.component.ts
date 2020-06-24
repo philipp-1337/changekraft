@@ -137,7 +137,11 @@ export class AddEventComponent implements OnInit {
         this.router.navigate(['./admin/profile']);
       }
     }, 100);
-    this.userId = (this.authservice.getCurrentUser()).uid;
+    this.getSingleEventData();
+  }
+
+  async getSingleEventData() {
+    this.userId = (await (this.authservice.getCurrentUser())).uid;
     this.userService.getUserInfo();
 
     this.eventForm.controls['url'].valueChanges.subscribe(val => {

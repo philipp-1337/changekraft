@@ -35,7 +35,7 @@ export class HandlerComponent implements OnInit {
       // check if mode is verifyEmail
       if (this.mode === 'verifyEmail') {
         this.title = 'E-Mail bestätigen';
-        this.afAuth.auth
+        this.afAuth
           .applyActionCode(this.code)
           .then(() => {
             this.snackbar.openSnackBar('E-Mail erfolgreich verifiziert.', 'Ok', 2500);
@@ -67,7 +67,7 @@ export class HandlerComponent implements OnInit {
       this.snackbar.openSnackBar('Die Passwörter stimmen nicht überein.', 'Ok', 2500);
       return;
     }
-    this.afAuth.auth
+    this.afAuth
       .confirmPasswordReset(this.code, password)
       .then(() => {
         this.snackbar.openSnackBar('Das Passwörter wurde geändert', 'Ok', 2500);

@@ -32,7 +32,11 @@ export class EventListComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.userId = (this.authservice.getCurrentUser()).uid;
+    this.getEventData();
+  }
+
+  async getEventData(){
+    this.userId = (await (this.authservice.getCurrentUser())).uid;
     this.eventCollection = this.afs.collection(`users/${this.userId}/events`);
     this.event$ = this.eventCollection.snapshotChanges().pipe(
       map(actions =>
