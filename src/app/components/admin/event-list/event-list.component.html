@@ -44,23 +44,30 @@
                   </span>
                 </li>
               </ul>
-              <mat-action-row>
+              <mat-action-row class="py-3 pr-3 pl-2">
                 <button
-                  mat-icon-button
+                  mat-button
+                  class="nav-item"
                   [routerLink]="['../../event/' + event?.url]"
                   aria-label="Event Vorschau"
                   title="Event Vorschau">
                   <mat-icon svgIcon="invitation"></mat-icon>
+                  <span class="nav-item-title">Vorschau</span>
                 </button>
+                <span class="bar-spacer"></span>
                 <button
-                  mat-icon-button
+                  mat-button
+                  class="nav-item"
                   (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)"
                   aria-label="Event teilen"
                   title="Event teilen">
                   <mat-icon svgIcon="share"></mat-icon>
+                  <span class="nav-item-title">Teilen</span>
                 </button>
+                <span class="bar-spacer"></span>
                 <button
-                  mat-icon-button
+                  mat-button
+                  class="nav-item"
                   [routerLink]="['../zusagen/' + event?.id]"
                   matBadge="{{ counter }}"
                   matBadgePosition="above after"
@@ -68,21 +75,28 @@
                   aria-label="Event Zusagen"
                   title="Event Zusagen">
                   <mat-icon svgIcon="supervisor_account"></mat-icon>
+                  <span class="nav-item-title">Zusagen</span>
                 </button>
+                <span class="bar-spacer"></span>
                 <button
-                  mat-icon-button
+                  mat-button
+                  class="nav-item"
                   [routerLink]="['../edit-event/' + event?.id]"
                   aria-label="Event bearbeiten"
                   title="Event bearbeiten">
                   <mat-icon svgIcon="edit"></mat-icon>
+                  <span class="nav-item-title">Bearbeiten</span>
                 </button>
+                <span class="bar-spacer"></span>
                 <button
-                  mat-icon-button
+                  mat-button
+                  class="nav-item"
                   color="warn"
                   (click)="deleteDialog(event?.id, event?.name)"
                   aria-label="Event löschen"
                   title="Event löschen">
                   <mat-icon svgIcon="delete"></mat-icon>
+                  <span class="nav-item-title">Löschen</span>
                 </button>
               </mat-action-row>
           </mat-expansion-panel>
