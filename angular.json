@@ -17,6 +17,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "firebase/app",
+              "file-saver",
+              "xlsx"
+            ],
             "aot": true,
             "outputPath": "dist/changekraft",
             "index": "src/index.html",

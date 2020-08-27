@@ -58,7 +58,7 @@ export class AddEventComponent implements OnInit {
       dates: this.fb.group({
         multipleDays: [false],
         startDate: [''],
-        endDate: [''], 
+        endDate: [''],
       })
     });
   }
@@ -170,13 +170,25 @@ export class AddEventComponent implements OnInit {
     return days;
   }
 
-  checkRange() {
-    const start = this.dates.controls['startDate'].value;
-    const end = this.dates.controls['endDate'].value;
-    if (end <= start) {
-      return false;
+  checkPlural() {
+    if (this.calcDays() > 1) {
+      return 'Tage'
     } else {
-      return true;
+      return 'Tag'
+    }
+  }
+
+  checkRange() {
+    if (this.dates.get('multipleDays').value === true) {
+      const start = this.dates.controls['startDate'].value;
+      const end = this.dates.controls['endDate'].value;
+      if (end <= start) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true
     }
   }
 
