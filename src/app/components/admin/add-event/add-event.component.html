@@ -117,7 +117,7 @@
               <span
                 style="color:grey"
                 *ngIf="dates.controls['startDate'].valid && dates.controls['endDate'].valid">
-                <span *ngIf="checkRange()">Dauer des Events: {{ calcDays() }} Tage</span>
+                <span *ngIf="checkRange()">Dauer des Events: {{ calcDays() }} {{ checkPlural() }}</span>
                 <span *ngIf="!checkRange()" class="text-error">
                   Das Zeitraumkontinuum ist in Gefahr.
                 </span>
@@ -131,7 +131,7 @@
             type="button"
             title="Speichern"
             (click)="onSave()"
-            [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable">
+            [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable || !checkRange()">
               <span>Speichern</span>
             </button>
           </mat-card-actions>

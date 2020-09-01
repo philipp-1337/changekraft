@@ -1,4 +1,5 @@
-@import './assets/fonts/raleway/raleway';
+// @import './assets/fonts/raleway/raleway';
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
 @import '~@angular/material/theming';
 
 $rsvp-primary: mat-palette($mat-teal, 600);
