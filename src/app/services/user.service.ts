@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import firebase from 'firebase';
 import { AuthService } from './auth.service';
 
 @Injectable({

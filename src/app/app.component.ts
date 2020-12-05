@@ -3,8 +3,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-import 'firebase/firestore';
 import { UpdateService } from './services/update.service';
+import firebase from 'firebase';
 
 @Component({
   selector: 'app-root',

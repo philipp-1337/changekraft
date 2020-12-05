@@ -4,8 +4,7 @@ import { Observable, of } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
+import firebase from 'firebase';
 
 interface User {
   uid: string;
@@ -30,7 +29,7 @@ export class AuthService {
 
   userId: string;
 
-  constructor(private router: Router, public afAuth: AngularFireAuth, private afs: AngularFirestore, ) {
+  constructor(private router: Router, public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     //// Get auth data, then get firestore user document || null
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -45,7 +44,7 @@ export class AuthService {
 
   isLoggedIn() {
     return this.afAuth.authState.pipe(first()).toPromise();
- }
+  }
 
   public authChange_$() {
     return this.afAuth.onAuthStateChanged((user: firebase.User) => {
@@ -94,7 +93,7 @@ export class AuthService {
   }
 
   getCurrentUserID() {
-    firebase.auth().onAuthStateChanged( user => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) { this.userId = user.uid }
       return this.userId;
     });
