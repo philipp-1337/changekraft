@@ -115,7 +115,7 @@ app-root {
         }
       }
       .img-wrapper {
-        @include _mat-theme-overridable-elevation(1, $rsvp-theme);
+        @include mat-elevation(1);
         border-radius: 4px;
         // height: 100%;
         img {
@@ -127,7 +127,7 @@ app-root {
         }
       }
       .wrapper {
-        @include _mat-theme-overridable-elevation(1, $rsvp-theme);
+        @include mat-elevation(1);
         border-radius: 4px;
         display: flex;
         flex-direction: column;
