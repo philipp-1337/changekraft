@@ -4,7 +4,10 @@ import { Observable, of } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore'; 
+import 'firebase/auth';
+
 
 interface User {
   uid: string;
