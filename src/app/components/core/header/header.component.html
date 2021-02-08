@@ -2,8 +2,8 @@
   <mat-toolbar color="primary">
     <mat-toolbar-row class="container">
       <nav>
-        <a mat-button
-          class="logo pl-0"
+        <a mat-button 
+          class="logo pl-0" 
           [routerLink]="authservice.isAuthenticated() ? '/admin/event-list' : '/home'">
           <!-- <img src="./assets/img/filename.svg"> -->
           <!-- <mat-icon svgIcon="event" class="mr-2"></mat-icon> -->
@@ -11,17 +11,20 @@
         </a>
       </nav>
       <span class="bar-spacer"></span>
-      <button mat-icon-button
-        [matMenuTriggerFor]="profileMenu"
+      <button mat-icon-button 
+        [matMenuTriggerFor]="profileMenu" 
         id="drawerButton" type="button"
         aria-label="Toggle Menu">
-        <mat-icon
+        <mat-icon 
           aria-label="Profil"
           [svgIcon]="authservice.isAuthenticated() ? 'account_circle' : 'account_circle_outline'">
         </mat-icon>
       </button>
       <mat-menu #profileMenu="matMenu">
-        <button mat-menu-item routerLink="/admin/profile" [disabled]="!authservice.isAuthenticated()">
+        <button 
+          mat-menu-item 
+          routerLink="/admin/profile" 
+          [disabled]="!authservice.isAuthenticated()">
           <mat-icon svgIcon="account_circle"></mat-icon>
           <span>Profil</span>
         </button>
@@ -47,16 +50,16 @@
 <ng-template [ngIf]="authservice.isAuthenticated()">
   <div class="bottom">
     <mat-toolbar>
-      <mat-toolbar-row class="container">
-        <button
-          mat-button
-          class="nav-item"
-          routerLink="/admin/event-list"
+      <mat-toolbar-row>
+        <button 
+          mat-button 
+          class="nav-item" 
+          routerLink="/admin/event-list" 
           routerLinkActive="active">
           <mat-icon svgIcon="event" class="nav-item-icon"></mat-icon>
           <span class="nav-item-title">Übersicht</span>
         </button>
-        <!-- <span class="bar-spacer"></span>
+        <span class="bar-spacer"></span>
         <button
           mat-button
           class="nav-item"
@@ -65,32 +68,32 @@
           disabled>
           <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
           <span class="nav-item-title">tbc</span>
-        </button> -->
+        </button>
         <span class="bar-spacer"></span>
-        <button
+        <button 
           mat-button
           class="nav-item"
-          routerLink="/admin/add-event"
+          routerLink="/admin/add-event" 
           routerLinkActive="active">
           <mat-icon svgIcon="add" class="nav-item-icon"></mat-icon>
           <span class="nav-item-title">Hinzufügen</span>
         </button>
         <span class="bar-spacer"></span>
-        <button
-          mat-button
-          class="nav-item"
-          routerLink="/admin/tbc"
-          routerLinkActive="active"
+        <button 
+          mat-button 
+          class="nav-item" 
+          routerLink="/admin/tbc" 
+          routerLinkActive="active" 
           disabled>
           <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
           <span class="nav-item-title">tbc</span>
         </button>
         <span class="bar-spacer"></span>
-        <button
-          mat-button
-          class="nav-item"
-          routerLink="/admin/settings"
-          routerLinkActive="active"
+        <button 
+          mat-button 
+          class="nav-item" 
+          routerLink="/admin/settings" 
+          routerLinkActive="active" 
           disabled>
           <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
           <span class="nav-item-title">Optionen</span>

@@ -68,7 +68,7 @@ export class UserProfilComponent implements OnInit {
         const email = cred.value.email;
         const password = cred.value.password;
         console.log('Der Benutzer mit der E-Mail ' + email + ' wird gelöscht.');
-        this.onReauthenticate(email, password);
+        this.deleteUser(email, password);
       }
     });
   }
@@ -77,7 +77,7 @@ export class UserProfilComponent implements OnInit {
     this.snackbar.openSnackBar('Fehler: ' + errorcode, 'Ok', 2500);
   }
 
-  async onReauthenticate(email, password) {
+  async deleteUser(email, password) {
     const user = this.authservice.getCurrentUser();
     const credential = this.authservice.getCredential(email, password);
     (await user).reauthenticateWithCredential(credential).then(async response => {
