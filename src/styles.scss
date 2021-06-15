@@ -1,5 +1,5 @@
-// @use '~@angular/material' as mat;
-@import './assets/fonts/raleway/raleway';
+@use '~@angular/material' as mat;
+// @import './assets/fonts/raleway/raleway';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
 
 $rsvp-primary: mat.define-palette(mat.$teal-palette, 600);
