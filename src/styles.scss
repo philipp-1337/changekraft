@@ -1,26 +1,26 @@
-// @import './assets/fonts/raleway/raleway';
+// @use '~@angular/material' as mat;
+@import './assets/fonts/raleway/raleway';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
-@import '~@angular/material/theming';
 
-$rsvp-primary: mat-palette($mat-teal, 600);
-$rsvp-accent: mat-palette($mat-deep-purple, 300);
-$rsvp-warn: mat-palette($mat-red, 900);
-$rsvp-theme: mat-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
+$rsvp-primary: mat.define-palette(mat.$teal-palette, 600);
+$rsvp-accent: mat.define-palette(mat.$deep-purple-palette, 300);
+$rsvp-warn: mat.define-palette(mat.$red-palette, 900);
+$rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
-$custom-typography: mat-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family: 'Raleway, sans-serif',
-  $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(16px, 24px, 400)
+  $headline: mat.define-typography-level(32px, 48px, 700),
+  $body-1: mat.define-typography-level(16px, 24px, 400)
 );
 
 // Override the typography in the core CSS.
-@include mat-core($custom-typography);
-@include angular-material-theme($rsvp-theme);
+@include mat.core($custom-typography);
+@include mat.all-component-themes($rsvp-theme);
 
 @import './assets/scss/bootstrap';
 
 .text-error {
-  color: mat-color($rsvp-warn);
+  color: mat.get-color-from-palette($rsvp-warn);
 }
 
 .text-grey {
@@ -45,7 +45,7 @@ body { margin: 0; font-family: 'Raleway', sans-serif; overflow-x: hidden; }
 input { font-size: 16px;}
 
 .active {
-  color: mat-color($rsvp-primary);
+  color: mat.get-color-from-palette($rsvp-primary);
 }
 
 .mat-badge-medium .mat-badge-content {
@@ -73,7 +73,7 @@ input { font-size: 16px;}
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
     }
-    @include mat-elevation(1);
+    @include mat.elevation(1);
     bottom: 0;
     position: fixed;
     top: unset !important;
@@ -120,7 +120,7 @@ app-root {
         }
       }
       .img-wrapper {
-        @include mat-elevation(1);
+        @include mat.elevation(1);
         border-radius: 4px;
         // height: 100%;
         img {
@@ -132,7 +132,7 @@ app-root {
         }
       }
       .wrapper {
-        @include mat-elevation(1);
+        @include mat.elevation(1);
         border-radius: 4px;
         display: flex;
         flex-direction: column;
