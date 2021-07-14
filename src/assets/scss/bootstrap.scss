@@ -21,12 +21,10 @@ $container-max-widths: (
 
 $grid-gutter-width: (32px);
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/grid";
-@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/bootstrap-utilities";
+
 * {
   &:active,
   :focus {
