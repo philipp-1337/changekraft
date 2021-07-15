@@ -11,7 +11,7 @@ pipelines:
             - npm install --quiet
           artifacts:
             - node_modules/** # Save modules for next steps
-        - step:
+      - step:
             name: "Build"
             script:
               - npm i -g @angular/cli
@@ -19,7 +19,7 @@ pipelines:
               - ng build --configuration production
             artifacts:
               - dist/**
-        - step:
+      - step:
             name: "Linting"
             script:
               - npm i -g @angular/cli
