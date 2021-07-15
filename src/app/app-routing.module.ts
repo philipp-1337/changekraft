@@ -24,11 +24,6 @@ const routes: Routes = [
     redirectTo: 'home'
   },
   {
-    path: 'event',
-    loadChildren:
-      () => import('./components/information/information.module').then(m => m.InformationModule),
-  },
-  {
     path: 'event/:eventUrl',
     component: EventDetailComponent,
   },
@@ -67,9 +62,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules,
-    relativeLinkResolution: 'legacy'
-})
+      preloadingStrategy: PreloadAllModules,
+      relativeLinkResolution: 'legacy'
+    })
   ],
   exports: [RouterModule]
 })

@@ -4,7 +4,7 @@ import {
   AngularFirestore
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -105,7 +105,7 @@ export class AddEventComponent implements OnInit {
       this.dates.controls['startDate'].value
     ) {
       newStartDate = this.dates.controls['startDate'].value.toDate();
-      if (this.dates.controls['multipleDays'].value == false) {
+      if (this.dates.controls['multipleDays'].value === false) {
         this.eventForm.patchValue({
           dates: {
             startDate: newStartDate,
@@ -117,7 +117,7 @@ export class AddEventComponent implements OnInit {
       this.dates.controls['endDate'].touched &&
       this.dates.controls['endDate'].valid &&
       this.dates.controls['endDate'].value &&
-      this.dates.controls['multipleDays'].value == true
+      this.dates.controls['multipleDays'].value === true
     ) {
       newEndDate = this.dates.controls['endDate'].value.toDate();
       this.eventForm.patchValue({
@@ -150,7 +150,7 @@ export class AddEventComponent implements OnInit {
         ref.where('url', '==', val)
           .limit(1))
         .snapshotChanges()
-        .pipe(flatMap(url => url));
+        .pipe(mergeMap(url => url));
 
       snapshotResult.subscribe(doc => {
         this.eventUrl = <EventUrl>doc.payload.doc.data();
@@ -172,9 +172,9 @@ export class AddEventComponent implements OnInit {
 
   checkPlural() {
     if (this.calcDays() > 1) {
-      return 'Tage'
+      return 'Tage';
     } else {
-      return 'Tag'
+      return 'Tag';
     }
   }
 
@@ -188,7 +188,7 @@ export class AddEventComponent implements OnInit {
         return true;
       }
     } else {
-      return true
+      return true;
     }
   }
 

@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './register.component.html',
   providers: [SnackbarClass]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   hide = true;
   disabled = false;
@@ -24,8 +24,6 @@ export class RegisterComponent implements OnInit {
     private snackbar: SnackbarClass,
     private router: Router,
     private userService: UserService) { }
-
-  ngOnInit() { }
 
   onSignup() {
     const email = this.signinForm.controls['email'].value;

@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Observable } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Event } from '../../../shared/event.model';
@@ -154,7 +154,7 @@ export class AnmeldungComponent implements OnInit {
         ref.where('url', '==', this.eventUrl)
           .limit(1))
         .snapshotChanges()
-        .pipe(flatMap(url => url));
+        .pipe(mergeMap(url => url));
 
       snapshotResult.subscribe(doc => {
         this.urls = <EventUrl>doc.payload.doc.data();

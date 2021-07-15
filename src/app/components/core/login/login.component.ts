@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   providers: [SnackbarClass]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   constructor(
     public authservice: AuthService,
     public snackbar: SnackbarClass,
@@ -22,12 +22,6 @@ export class LoginComponent implements OnInit {
   randomError: boolean;
   disabled = false;
   hide = true;
-
-  ngOnInit() {
-    // if (this.authservice.isAuthenticated()) {
-    //   this.router.navigateByUrl('/admin/profile');
-    // }
-  }
 
   onSignin(form: NgForm) {
     this.disabled = true;

@@ -5,7 +5,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UpdateService } from './services/update.service';
 import firebase from 'firebase/app';
-import 'firebase/firestore'; 
+import 'firebase/firestore';
 import 'firebase/auth';
 
 @Component({

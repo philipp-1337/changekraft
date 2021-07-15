@@ -5,7 +5,7 @@ import { first, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
-import 'firebase/firestore'; 
+import 'firebase/firestore';
 import 'firebase/auth';
 
 
@@ -97,7 +97,7 @@ export class AuthService {
 
   getCurrentUserID() {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) { this.userId = user.uid }
+      if (user) { this.userId = user.uid; }
       return this.userId;
     });
   }

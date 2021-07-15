@@ -4,9 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-admin',
   template: `<router-outlet></router-outlet>`,
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   constructor() { }
-
-  ngOnInit() { }
-
 }

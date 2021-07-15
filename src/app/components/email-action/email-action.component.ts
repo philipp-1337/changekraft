@@ -4,11 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-email-action',
   template: `<router-outlet></router-outlet>`,
 })
-export class EmailActionComponent implements OnInit {
+export class EmailActionComponent {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

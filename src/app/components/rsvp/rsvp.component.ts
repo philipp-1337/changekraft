@@ -4,9 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-rsvp',
   template: `<router-outlet></router-outlet>`,
 })
-export class RsvpComponent implements OnInit {
+export class RsvpComponent {
   constructor() { }
-
-  ngOnInit() { }
-
 }

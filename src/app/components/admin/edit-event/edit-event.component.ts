@@ -29,10 +29,9 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit() {
     this.getSingleEventData();
-}
-  async getSingleEventData() {
+  }
+  async getSingleEventData() {
     this.userId = (await (this.authservice.getCurrentUser())).uid;
-    // tslint:disable-next-line: deprecation
     this.route.params.subscribe((params: Params) => {
       this.eventId = params['eventId'];
       this.eventDoc = this.afs.doc(`users/${this.userId}/events/${this.eventId}`);
@@ -43,5 +42,5 @@ export class EditEventComponent implements OnInit {
         })
       );
     });
-    }
   }
+}

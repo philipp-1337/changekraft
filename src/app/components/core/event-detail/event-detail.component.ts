@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { flatMap, map } from 'rxjs/operators';
+import { mergeMap, map } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument
@@ -42,7 +42,7 @@ export class EventDetailComponent implements OnInit {
         ref.where('url', '==', this.eventUrl)
           .limit(1))
         .snapshotChanges()
-        .pipe(flatMap(url => {
+        .pipe(mergeMap(url => {
           console.log(url);
           if (url.length === 0) {
             console.log('nichts gefunden');

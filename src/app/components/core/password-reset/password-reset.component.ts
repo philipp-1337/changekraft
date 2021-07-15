@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-password-reset',
   templateUrl: './password-reset.component.html'
 })
-export class PasswordResetComponent implements OnInit {
+export class PasswordResetComponent {
 
   frmPasswordReset: FormGroup = this.fb.group({
     email: [null, [Validators.required, Validators.email]]
@@ -21,8 +21,6 @@ export class PasswordResetComponent implements OnInit {
     public snackbar: SnackbarClass,
     private fb: FormBuilder,
     private router: Router) { }
-
-  ngOnInit(): void { }
 
   sendPasswordResetRequest() {
     const email = this.frmPasswordReset.controls['email'].value;

@@ -12,7 +12,6 @@ import { JoinClass } from 'src/app/shared/join.class';
 import { DialogDeleteComponent } from './dialog-delete.component';
 import { AuthService } from 'src/app/services/auth.service';
 
-// tslint:disable-next-line: no-empty-interface
 export interface Rsvp { }
 
 @Component({
@@ -46,7 +45,7 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.getSingleRsvpData();    
+    this.getSingleRsvpData();
   }
 
   async getSingleRsvpData() {

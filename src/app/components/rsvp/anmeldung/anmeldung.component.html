@@ -160,12 +160,12 @@
                     </mat-select>
                   </mat-form-field>
                 </p>
-                <ng-template [ngIf]="anreiseFormGroup.controls['anreise'].value == 'Zug'">
+                <ng-template [ngIf]="anreiseFormGroup.controls['anreise'].value === 'Zug'">
                   <p>
                     Wird eine Abholung benötigt?<br />
                     <mat-slide-toggle color="primary" formControlName="abholung"></mat-slide-toggle>
                   </p>
-                  <ng-template [ngIf]="anreiseFormGroup.controls['abholung'].value == true">
+                  <ng-template [ngIf]="anreiseFormGroup.controls['abholung'].value === true">
                     <p>
                       Zielbahnhof<br />
                       <mat-form-field>
