@@ -11,23 +11,25 @@ pipelines:
             - npm install --quiet
           artifacts:
             - node_modules/** # Save modules for next steps
-      - step:
-            name: "Build"
-            script:
-              - npm i -g @angular/cli
-              - ng config -g cli.warnings.versionMismatch false
-              - ng build --configuration production
-            artifacts:
-              - dist/**
-      - step:
-            name: "Linting"
-            script:
-              - npm i -g @angular/cli
-              - ng config -g cli.warnings.versionMismatch false
-              - ng lint
+      - parallel:
+        - step:
+              name: "Linting"
+              script:
+                - npm i -g @angular/cli
+                - ng config -g cli.warnings.versionMismatch false
+                - ng lint
+        - step:
+              name: "Build"
+              script:
+                - npm i -g @angular/cli
+                - ng config -g cli.warnings.versionMismatch false
+                - ng build --configuration production
+              artifacts:
+                - dist/**
       - step:
           name: "Deploy to Production"
           deployment: Production
           script:
-            - npm i -g firebase-tools
-            - firebase deploy --token "$FIREBASE_TOKEN"
+            - pipe: atlassian/firebase-deploy:1.2.0
+              variables:
+                KEY_FILE: '$KEY_FILE'
