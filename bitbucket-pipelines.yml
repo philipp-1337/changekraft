@@ -16,8 +16,6 @@ pipelines:
       - parallel:
         - step:
             name: "Build"
-            caches:
-              - node
             script:
               - ng config -g cli.warnings.versionMismatch false
               - ng build --configuration production
@@ -25,14 +23,10 @@ pipelines:
               - dist/**
         - step:
             name: "Linting"
-            caches:
-              - node
             script:
               - ng lint
       - step:
           name: "Deploy to Production"
-          caches:
-            - node
           deployment: Production
           script:
             - firebase deploy --token "$FIREBASE_TOKEN"
