@@ -5,7 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params } from '@angular/router';
 import {
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
 } from '@angular/fire/firestore';
 import { ExcelService } from 'src/app/services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
@@ -33,6 +34,8 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   eventId: string;
   userId: string;
   event: Observable<Event>;
+  eventDoc: AngularFirestoreDocument<Event>;
+  event$: Observable<Event>;
 
   constructor(
     private excelService: ExcelService,
@@ -62,6 +65,15 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
           })
         )
       );
+
+      this.eventDoc = this.afs.doc(`users/${this.userId}/events/${this.eventId}`);
+      this.event$ = this.eventDoc.valueChanges().pipe(
+        map(a => {
+          const data = a as Event;
+          return data;
+        })
+      );
+
       this.fetchDataforExcel();
     });
   }
