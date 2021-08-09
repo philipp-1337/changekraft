@@ -52,7 +52,7 @@
             mat-button
             color="primary"
             (click)="onSignup()"
-            [disabled]="signinForm.touched && !signinForm.valid || disabled">
+            [disabled]="!signinForm.touched && !signinForm.valid || disabled">
             Registrieren
             <mat-icon
               *ngIf="disabled"

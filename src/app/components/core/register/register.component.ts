@@ -31,8 +31,8 @@ export class RegisterComponent {
     this.disabled = true;
     this.authservice.signupUser(email, password)
       .then(response => {
-        // this.userService.sendVerification();
-        // this.snackbar.openSnackBar('Registrierung erfolgreich & Bestätigungsemail versandt.', 'Ok', 2500);
+        this.userService.sendVerification();
+        //this.snackbar.openSnackBar('Registrierung erfolgreich & Bestätigungsemail versandt.', 'Ok', 2500);
         this.router.navigate(['/admin/profile']);
       })
       .catch(error => {

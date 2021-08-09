@@ -35,7 +35,7 @@ export class UserProfilComponent implements OnInit {
     this.userService.getUserInfo();
     setTimeout(() => {
       if (!this.userService.verfied) {
-        this.snackbar.verificationSnackBar('Bitte E-Mail bestätigen.', 'Link senden');
+        this.snackbar.verificationSnackBar('Bitte E-Mail bestätigen.', 'Link erneut senden?');
       }
     }, 300);
   }
