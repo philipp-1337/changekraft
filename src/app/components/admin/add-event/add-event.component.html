@@ -131,6 +131,7 @@
             type="button"
             title="Speichern"
             (click)="onSave()"
+            color="primary"
             [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable || !checkRange()">
               <span>Speichern</span>
             </button>

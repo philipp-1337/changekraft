@@ -64,6 +64,7 @@
                 <button
                   mat-icon-button
                   *ngIf="editMode"
+                  color="primary"
                   (click)="editMode = !editMode; updateItem(participant.id, begleitung.checked)"
                   title="Teilnehmer speichern">
                   <mat-icon svgIcon="save"></mat-icon>
