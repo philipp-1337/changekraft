@@ -10,7 +10,7 @@ import {
 } from '@angular/fire/firestore';
 import { ExcelService } from 'src/app/services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
-import { DialogDeleteComponent } from './dialog-delete.component';
+import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 export interface Rsvp { }
