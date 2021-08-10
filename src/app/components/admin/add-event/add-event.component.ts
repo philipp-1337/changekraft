@@ -133,7 +133,7 @@ export class AddEventComponent implements OnInit {
     this.buildForm();
     this.setDatesValidators();
     setTimeout(() => {
-      if (!this.userService.verfied) {
+      if (!this.userService.verfied || !this.userService.name) {
         this.router.navigate(['./admin/profile']);
       }
     }, 100);

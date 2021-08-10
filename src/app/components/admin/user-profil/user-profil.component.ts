@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DialogUserDeleteComponent } from './dialog-user-delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-user-profil',
@@ -23,11 +24,13 @@ import { Router } from '@angular/router';
 })
 export class UserProfilComponent implements OnInit {
   animate = 'state1';
+  private userCollection: AngularFirestoreCollection;
 
   constructor(
     public userService: UserService,
     private snackbar: SnackbarClass,
     private authservice: AuthService,
+    private afs: AngularFirestore,
     public dialog: MatDialog,
     public router: Router) { }
 
@@ -36,6 +39,8 @@ export class UserProfilComponent implements OnInit {
     setTimeout(() => {
       if (!this.userService.verfied) {
         this.snackbar.verificationSnackBar('Bitte E-Mail bestätigen.', 'Link erneut senden?');
+      } if (!this.userService.name && this.userService.verfied) {
+        this.snackbar.openSnackBar('Bitte zuerst einen Namen vergeben.', 'Ok', 0);
       }
     }, 300);
   }
@@ -50,6 +55,7 @@ export class UserProfilComponent implements OnInit {
     setTimeout(() => {
       this.animate = 'state1';
     }, 1000);
+    this.snackbar.closeSnackBar();
   }
 
   async deleteDialog() {
@@ -63,28 +69,39 @@ export class UserProfilComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(cred => {
       if (cred === undefined) {
-        console.log('Der Benutzer wurde nicht gelöscht.');
+        console.log('Löschen wurde abgegebrochen.');
       } else {
         const email = cred.value.email;
         const password = cred.value.password;
-        console.log('Der Benutzer mit der E-Mail ' + email + ' wird gelöscht.');
+        console.log('Lösch-Dialog wurde bestätigt.');
         this.deleteUser(email, password);
       }
     });
   }
 
-  errorSnackbar(errorcode) {
+  errorSnackbar(errorcode: string) {
     this.snackbar.openSnackBar('Fehler: ' + errorcode, 'Ok', 2500);
   }
 
-  async deleteUser(email, password) {
+  deleteUserData(userId: string) {
+    this.userCollection = this.afs.collection(`users/`);
+    const promise = this.userCollection.doc(userId).delete();
+    promise
+      .then(_ => console.log('UserData gelöscht.'))
+      .catch(err => console.log(err, 'Löschen nicht erlaubt.'));
+  }
+
+  async deleteUser(email: string, password: string) {
     const user = this.authservice.getCurrentUser();
     const credential = this.authservice.getCredential(email, password);
     (await user).reauthenticateWithCredential(credential).then(async response => {
       // User re-authenticated.
+      const userId = (await this.authservice.getCurrentUser()).uid;
+      this.deleteUserData(userId);
       (await user).delete().then(promise => {
         // User deleted.
         console.log('Benutzer gelöscht');
+        console.log('Der Benutzer mit der E-Mail ' + email + ' wurde gelöscht.');
         this.router.navigate(['/home']);
       }).catch(error => {
         // An error happened.
@@ -95,6 +112,6 @@ export class UserProfilComponent implements OnInit {
       // An error happened.
       console.log(error);
       this.errorSnackbar(error.code);
-    });
+    }); 
   }
 }

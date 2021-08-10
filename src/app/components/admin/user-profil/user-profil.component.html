@@ -47,22 +47,43 @@
           <button
             mat-button
             type="button"
-            title="Speichern">E-Mail ändern
+            (click)="updateUser(profileform)"
+            color="primary"
+            title="Speichern">Speichern
           </button>
+          <span style="flex: 1 1 auto;"></span> 
           <button
-            mat-button
-            type="button"
-            title="Speichern">Passwort ändern
+            mat-icon-button 
+            [matMenuTriggerFor]="more">
+            <mat-icon aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
           </button>
-          <span style="flex: 1 1 auto;"></span>
-          <button
-            mat-icon-button
-            (click)="deleteDialog()"
-            color="warn"
-            type="button"
-            title="Benutzer löschen">
-            <mat-icon aria-label="Benutzer löschen" svgIcon="delete"></mat-icon>
-          </button>
+          <mat-menu #more="matMenu">
+            <button
+              mat-menu-item
+              disabled
+              type="button"
+              title="E-Mail ändern">
+              <mat-icon aria-label="E-Mail ändern" svgIcon="email"></mat-icon>
+              <span>E-Mail ändern</span>
+            </button>
+            <button
+              mat-menu-item
+              disabled
+              type="button"
+              title="Passwort ändern">
+              <mat-icon aria-label="Passwort ändern" svgIcon="password"></mat-icon>
+              <span>Passwort ändern</span>
+            </button>
+            <button
+              mat-menu-item
+              (click)="deleteDialog()"
+              color="warn"
+              type="button"
+              title="Benutzer löschen">
+              <mat-icon aria-label="Benutzer löschen" svgIcon="delete" color="warn"></mat-icon>
+              <span>Account löschen</span>
+            </button>
+          </mat-menu>
         </mat-card-actions>
       </mat-card>
     </div>

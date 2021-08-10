@@ -150,6 +150,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'password',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/password_black_24dp.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'save',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-save-24px.svg'

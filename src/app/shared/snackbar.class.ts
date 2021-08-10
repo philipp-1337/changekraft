@@ -24,4 +24,9 @@ export class SnackbarClass {
       this.userService.sendVerification();
     });
   }
+
+  public closeSnackBar() {
+    this.snackBar.dismiss();
+  }
+
 }
