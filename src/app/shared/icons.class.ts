@@ -12,9 +12,15 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
-      'add',
+      'add_circle',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/add_circle_outline-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'add',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/add_black_24dp.svg'
       )
     );
     iconRegistry.addSvgIcon(
