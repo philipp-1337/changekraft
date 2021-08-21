@@ -1,14 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
 import { HttpClientModule } from '@angular/common/http';
+import localeDe from '@angular/common/locales/de';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import {
-  AngularFirestoreModule
-} from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { CoreModule } from './components/core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';

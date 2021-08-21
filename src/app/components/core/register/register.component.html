@@ -24,7 +24,10 @@
               formControlName="email"
               class="form-control"
               required>
-              <mat-error *ngIf="signinForm.controls['email'].touched && !signinForm.controls['email'].valid">
+              <mat-error *ngIf="signinForm.controls['email'].touched && signinForm.controls['email'].hasError('required')">
+                Bitte eine E-Mail eingeben.
+              </mat-error>
+              <mat-error *ngIf="signinForm.controls['email'].touched && signinForm.controls['email'].hasError('email')">
                 Bitte eine korrekte E-Mail eingeben.
               </mat-error>
           </mat-form-field>
@@ -34,15 +37,40 @@
               matInput
               placeholder="Passwort"
               [type]="hide ? 'password' : 'text'"
+              spellcheck="false"
+              autocapitalize="off"
               color="accent"
               id="password"
               name="password"
               formControlName="password"
               class="form-control"
               required>
-              <mat-error *ngIf="signinForm.controls['password'].touched && !signinForm.controls['password'].valid">
+              <mat-error *ngIf="signinForm.controls['password'].touched && signinForm.controls['password'].hasError('required')">
                 Bitte ein Passwort vergeben.
               </mat-error>
+              <mat-error *ngIf="signinForm.controls['password'].touched && signinForm.controls['password'].hasError('minlength')">
+                Das Passwort muss mindestens 6 Zeichen haben.
+              </mat-error>
+            <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
+          </mat-form-field>
+          <br />
+          <mat-form-field class="w-100">
+            <input
+              matInput
+              placeholder="Passwort bestätigen"
+              [type]="hide ? 'password' : 'text'"
+              color="accent"
+              id="confirm_password"
+              name="confirm_password"
+              formControlName="confirm_password"
+              class="form-control"
+              required>
+              <mat-error *ngIf="signinForm.controls['confirm_password'].touched && signinForm.controls['confirm_password'].hasError('required')">
+                Bitte das Passwort wiederholen.
+              </mat-error>
+              <!-- <mat-error *ngIf="signinForm.controls['confirm_password'].touched && signinForm.controls['password'].errors?.matchOtherValidator()">
+                Die Passwörter stimmen nicht überein.
+              </mat-error> -->
             <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
           </mat-form-field>
           <br />
@@ -52,7 +80,7 @@
             mat-button
             color="primary"
             (click)="onSignup()"
-            [disabled]="!signinForm.touched && !signinForm.valid || disabled">
+            [disabled]="!signinForm.touched || !signinForm.valid">
             Registrieren
             <mat-icon
               *ngIf="disabled"
