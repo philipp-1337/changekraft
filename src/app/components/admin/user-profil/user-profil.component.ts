@@ -83,21 +83,11 @@ export class UserProfilComponent implements OnInit {
     this.snackbar.openSnackBar('Fehler: ' + errorcode, 'Ok', 2500);
   }
 
-  deleteUserData(userId: string) {
-    this.userCollection = this.afs.collection(`users/`);
-    const promise = this.userCollection.doc(userId).delete();
-    promise
-      .then(_ => console.log('UserData gelöscht.'))
-      .catch(err => console.log(err, 'Löschen nicht erlaubt.'));
-  }
-
   async deleteUser(email: string, password: string) {
     const user = this.authservice.getCurrentUser();
     const credential = this.authservice.getCredential(email, password);
     (await user).reauthenticateWithCredential(credential).then(async response => {
       // User re-authenticated.
-      const userId = (await this.authservice.getCurrentUser()).uid;
-      this.deleteUserData(userId);
       (await user).delete().then(promise => {
         // User deleted.
         console.log('Benutzer gelöscht');
@@ -112,6 +102,6 @@ export class UserProfilComponent implements OnInit {
       // An error happened.
       console.log(error);
       this.errorSnackbar(error.code);
-    }); 
+    });
   }
 }

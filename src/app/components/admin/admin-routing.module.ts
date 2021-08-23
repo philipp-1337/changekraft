@@ -7,6 +7,7 @@ import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, emailVerified } from '@angular/fire/auth-guard';
 import { UserProfilComponent } from './user-profil/user-profil.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -16,9 +17,14 @@ const adminRoutes: Routes = [
     component: AdminComponent,
     children: [
       {
-        path: 'profile',
-        component: UserProfilComponent,
+        path: 'dashboard',
+        component: DashboardComponent,
         canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+      },
+      {
+        path: 'profile',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
       },
       {
         path: 'add-event',

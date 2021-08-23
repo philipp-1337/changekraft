@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -22,6 +23,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -29,6 +31,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    MatChipsModule,
     MatNativeDateModule,
     MatIconModule,
     MatInputModule,
@@ -47,12 +50,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
   exports: [
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    MatChipsModule,
     MatNativeDateModule,
     MatIconModule,
     MatInputModule,
@@ -71,7 +76,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

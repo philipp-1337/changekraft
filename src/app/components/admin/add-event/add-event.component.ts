@@ -200,7 +200,9 @@ export class AddEventComponent implements OnInit {
     this.afs.collection(`users/${this.userId}/events`).add(this.eventData)
       .then(docRef => {
         const eventId = docRef.id;
-        const urlData = { user: this.userId, event: eventId, url: customUrl };
+        const urlData = {
+          user: this.userId, event: eventId, url: customUrl, completeUrl: 'https://changekraft.de/event/' + customUrl
+        };
         this.afs.collection('urls/').add(urlData);
       })
       .catch(function (error) {

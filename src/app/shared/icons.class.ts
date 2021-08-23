@@ -180,6 +180,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'space_dashboard',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/space_dashboard_black_24dp.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'supervisor_account',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-supervisor_account-24px.svg'

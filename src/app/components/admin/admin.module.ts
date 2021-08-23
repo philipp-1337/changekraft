@@ -11,6 +11,7 @@ import { DialogShareComponent } from './event-list/dialog-share.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { EventsComponent } from './events/events.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { GermanWeek } from 'src/app/shared/germanWeek.class';
@@ -21,6 +22,7 @@ import {
   MomentDateAdapter
 } from '@angular/material-moment-adapter';
 import { DialogUserDeleteComponent } from './user-profil/dialog-user-delete.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MatMomentDateModule],
@@ -32,8 +34,10 @@ import { DialogUserDeleteComponent } from './user-profil/dialog-user-delete.comp
     AddEventComponent,
     EditEventComponent,
     EventListComponent,
+    EventsComponent,
     UserProfilComponent,
-    DialogUserDeleteComponent
+    DialogUserDeleteComponent,
+    DashboardComponent
   ],
   providers: [
     ExcelService,

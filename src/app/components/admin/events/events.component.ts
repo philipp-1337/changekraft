@@ -9,15 +9,14 @@ import { Event } from '../../../shared/event.model';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
-import { DialogShareComponent } from './dialog-share.component';
 
 @Component({
-  selector: 'app-event-list',
-  templateUrl: './event-list.component.html',
-  styleUrls: ['./event-list.component.scss']
+  selector: 'app-events',
+  templateUrl: './events.component.html',
+  styleUrls: ['./events.component.scss']
 })
 
-export class EventListComponent implements OnInit, OnDestroy {
+export class EventsComponent implements OnInit, OnDestroy {
   eventData: Array<any>;
   subscription: Subscription;
   event$: Observable<any>;
@@ -62,22 +61,6 @@ export class EventListComponent implements OnInit, OnDestroy {
     });
   }
 
-  share(title: string, text: string, url: string) {
-    this.shareVar = window.navigator;
-    if (this.shareVar && this.shareVar.share) {
-      this.shareVar.share({
-        title: url,
-        text: title + ' – ' + text,
-        url: url,
-      })
-        .then(() => console.log('Successful share'))
-        .catch((error: any) => console.log('Error sharing', error));
-    } else {
-      console.log('No browser support');
-      this.shareDialog(title, text, url);
-    }
-  }
-
   deleteItem(id: string) {
     const promise = this.eventCollection.doc(id).delete();
     promise
@@ -99,12 +82,6 @@ export class EventListComponent implements OnInit, OnDestroy {
         console.log('Das Event mit der ID ' + id + ' wurde gelöscht.');
         this.deleteItem(id);
       }
-    });
-  }
-  shareDialog(title: string, text: string, url: string) {
-    this.dialog.open(DialogShareComponent, {
-      width: '250px',
-      data: { title: title, text: text, url: url }
     });
   }
 

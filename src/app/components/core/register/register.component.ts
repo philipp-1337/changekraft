@@ -13,7 +13,8 @@ import { matchOtherValidator } from 'src/app/shared/matchOtherValidator.function
 })
 export class RegisterComponent {
 
-  hide = true;
+  hide1 = true;
+  hide2 = true;
   disabled = false;
   signinForm = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.minLength(6)]],

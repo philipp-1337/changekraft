@@ -36,7 +36,7 @@
             <input
               matInput
               placeholder="Passwort"
-              [type]="hide ? 'password' : 'text'"
+              [type]="hide2 ? 'password' : 'text'"
               spellcheck="false"
               autocapitalize="off"
               color="accent"
@@ -51,14 +51,14 @@
               <mat-error *ngIf="signinForm.controls['password'].touched && signinForm.controls['password'].hasError('minlength')">
                 Das Passwort muss mindestens 6 Zeichen haben.
               </mat-error>
-            <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
+            <mat-icon matSuffix (click)="hide2 = !hide2" [svgIcon]="hide2 ? 'visibility_off' : 'visibility'"></mat-icon>
           </mat-form-field>
           <br />
           <mat-form-field class="w-100">
             <input
               matInput
               placeholder="Passwort bestätigen"
-              [type]="hide ? 'password' : 'text'"
+              [type]="hide1 ? 'password' : 'text'"
               color="accent"
               id="confirm_password"
               name="confirm_password"
@@ -71,7 +71,7 @@
               <!-- <mat-error *ngIf="signinForm.controls['confirm_password'].touched && signinForm.controls['password'].errors?.matchOtherValidator()">
                 Die Passwörter stimmen nicht überein.
               </mat-error> -->
-            <mat-icon matSuffix (click)="hide = !hide" [svgIcon]="hide ? 'visibility_off' : 'visibility'"></mat-icon>
+            <mat-icon matSuffix (click)="hide1 = !hide1" [svgIcon]="hide1 ? 'visibility_off' : 'visibility'"></mat-icon>
           </mat-form-field>
           <br />
         </mat-card-content>
