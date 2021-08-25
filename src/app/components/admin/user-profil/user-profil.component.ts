@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { UserService } from 'src/app/services/user.service';
 import { NgForm } from '@angular/forms';
@@ -22,7 +22,7 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
     ])
   ],
 })
-export class UserProfilComponent implements OnInit {
+export class UserProfilComponent implements OnInit, OnDestroy {
   animate = 'state1';
   private userCollection: AngularFirestoreCollection;
 
@@ -43,6 +43,10 @@ export class UserProfilComponent implements OnInit {
         this.snackbar.openSnackBar('Bitte zuerst einen Namen vergeben.', 'Ok', 0);
       }
     }, 300);
+  }
+
+  ngOnDestroy() {
+    this.snackbar.closeSnackBar();
   }
 
   onLogout() {

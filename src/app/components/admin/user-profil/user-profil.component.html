@@ -30,6 +30,7 @@
                 mat-button
                 mat-icon-button
                 matSuffix
+                [disabled]="!profileform.dirty"
                 *ngIf="userService.name"
                 aria-label="Speichern"
                 (click)="updateUser(profileform)"
@@ -47,6 +48,7 @@
           mat-button
           type="button"
           (click)="updateUser(profileform)"
+          [disabled]="!profileform.dirty"
           color="primary"
           title="Speichern">Speichern
         </button>

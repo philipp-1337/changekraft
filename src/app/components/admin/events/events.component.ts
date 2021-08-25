@@ -57,8 +57,17 @@ export class EventsComponent implements OnInit, OnDestroy {
       this.eventData = rsvp;
       for (let x = 0; x < this.eventData.length; x++) {
         this.counter = 1 + x;
+        console.log(this.counter);
       }
     });
+  }
+
+  checkPlural() {
+    if (this.counter > 1) {
+      return 'Events';
+    } else {
+      return 'Event';
+    }
   }
 
   deleteItem(id: string) {
