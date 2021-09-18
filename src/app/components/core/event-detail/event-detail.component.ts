@@ -5,7 +5,7 @@ import { mergeMap, map } from 'rxjs/operators';
 import {
   AngularFirestore,
   AngularFirestoreDocument
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 
 import { Event } from '../../../shared/event.model';
 

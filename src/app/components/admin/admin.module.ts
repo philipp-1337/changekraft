@@ -12,7 +12,7 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EventsComponent } from './events/events.component';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { UserProfilComponent } from './user-profil/user-profil.component';
 import { GermanWeek } from 'src/app/shared/germanWeek.class';
 import { GERMAN_DATE_FORMAT } from 'src/app/shared/germanDate.const';

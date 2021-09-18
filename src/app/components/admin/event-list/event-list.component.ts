@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
   AngularFirestore,
   AngularFirestoreCollection
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import { Event } from '../../../shared/event.model';
 import { Observable, Subscription } from 'rxjs';

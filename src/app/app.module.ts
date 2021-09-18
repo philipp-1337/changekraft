@@ -4,9 +4,9 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { CoreModule } from './components/core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
-import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { UpdateService } from './services/update.service';
 import { SnackbarClass } from './shared/snackbar.class';
 import { RouterModule } from '@angular/router';

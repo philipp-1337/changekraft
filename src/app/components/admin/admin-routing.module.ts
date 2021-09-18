@@ -5,8 +5,7 @@ import { AdminComponent } from './admin.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
-import { AngularFireAuthGuard, redirectUnauthorizedTo, emailVerified } from '@angular/fire/auth-guard';
-import { UserProfilComponent } from './user-profil/user-profil.component';
+import { AngularFireAuthGuard, redirectUnauthorizedTo, emailVerified } from '@angular/fire/compat/auth-guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);

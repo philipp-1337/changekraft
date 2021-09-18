@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   AngularFirestore
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
@@ -219,6 +219,6 @@ export class AddEventComponent implements OnInit {
     this.storeEvent(this.customUrl);
     this.eventForm.reset();
     this.snackbar.openSnackBar('Event hinzugefügt.', 'Ok', 2500);
-    this.router.navigate(['./admin/event-list']);
+    this.router.navigate(['./admin/dashboard']);
   }
 }

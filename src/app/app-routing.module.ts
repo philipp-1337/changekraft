@@ -4,7 +4,7 @@ import { HomeComponent } from './components/core/home/home.component';
 import { LoginComponent } from './components/core/login/login.component';
 import { RegisterComponent } from './components/core/register/register.component';
 import { EventDetailComponent } from './components/core/event-detail/event-detail.component';
-import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
 import { NotFoundComponent } from './components/core/not-found/not-found.component';
 import { PasswordResetComponent } from './components/core/password-reset/password-reset.component';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';

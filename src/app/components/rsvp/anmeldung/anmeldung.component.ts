@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Observable } from 'rxjs';

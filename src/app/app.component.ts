@@ -2,11 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UpdateService } from './services/update.service';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-root',

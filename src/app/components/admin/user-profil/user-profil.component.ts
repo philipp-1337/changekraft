@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { DialogUserDeleteComponent } from './dialog-user-delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-user-profil',
@@ -40,7 +40,7 @@ export class UserProfilComponent implements OnInit, OnDestroy {
       if (!this.userService.verfied) {
         this.snackbar.verificationSnackBar('Bitte E-Mail bestätigen.', 'Link erneut senden?');
       } if (!this.userService.name && this.userService.verfied) {
-        this.snackbar.openSnackBar('Bitte zuerst einen Namen vergeben.', 'Ok', 0);
+        this.snackbar.openSnackBar('Bitte einen Namen vergeben.', 'Ok', 0);
       }
     }, 300);
   }

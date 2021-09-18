@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import {
   AngularFirestore,
   AngularFirestoreDocument
-} from '@angular/fire/firestore';
+} from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import { Event } from '../../../shared/event.model';
 import { AuthService } from 'src/app/services/auth.service';
