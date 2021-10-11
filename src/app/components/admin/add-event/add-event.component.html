@@ -135,6 +135,15 @@
             [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable || !checkRange()">
               <span>Speichern</span>
             </button>
+
+            <button
+              mat-button
+              type="button"
+              title="Abbrechen"
+              routerLink="/admin/dashboard" 
+              color="accent">
+              <span>Abbrechen</span>
+            </button>
           </mat-card-actions>
         </form>
       </mat-card>

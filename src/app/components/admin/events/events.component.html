@@ -6,7 +6,7 @@
         <mat-progress-bar mode="query"></mat-progress-bar>
       </mat-card-content>
     </mat-card>
-    <mat-card *ngIf="(event$ | async) && counter || null">
+    <mat-card *ngIf="(event$ | async) || null">
       <mat-card-header>
         <div class="justify-content-center align-self-center" mat-card-avatar>
           <mat-icon
@@ -23,11 +23,21 @@
           <mat-chip 
             [color]="event?.dates.multipleDays ? 'primary' : 'accent'"
             *ngFor="let event of event$ | async; let ievent = index"
-            matTooltip="{{ event?.desc }}">
+            matTooltip="{{ event?.dates }}">
             {{ event?.name }}
           </mat-chip>
         </mat-chip-list>
       </mat-card-content>
+      <mat-card-actions class="flex-card-actions">
+        <button
+          mat-button
+          type="button"
+          routerLink="/admin/add-event"
+          color="primary"
+          title="Speichern">Event erstellen
+        </button>
+        <span style="flex: 1 1 auto;"></span> 
+      </mat-card-actions>
       <!-- <mat-card-actions class="flex-card-actions">
         <button
           mat-button
