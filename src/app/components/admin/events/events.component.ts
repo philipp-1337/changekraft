@@ -7,7 +7,7 @@ import {
 import { map } from 'rxjs/operators';
 import { Event } from '../../../shared/event.model';
 import { Observable, Subscription } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
 
 @Component({
