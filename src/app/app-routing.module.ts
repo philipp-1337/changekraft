@@ -7,6 +7,9 @@ import { EventDetailComponent } from './components/core/event-detail/event-detai
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
 import { NotFoundComponent } from './components/core/not-found/not-found.component';
 import { PasswordResetComponent } from './components/core/password-reset/password-reset.component';
+import { RsvpModule } from './components/rsvp/rsvp.module';
+import { EmailActionModule } from './components/email-action/email-action.module';
+import { AdminModule } from './components/admin/admin.module';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToProfile = () => redirectLoggedInTo(['admin/profile']);
@@ -29,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'event/:eventUrl/rsvp',
-    loadChildren: () => import('./components/rsvp/rsvp.module').then(m => m.RsvpModule),
+    component: RsvpModule,
   },
   {
     path: 'login',
@@ -48,11 +51,11 @@ const routes: Routes = [
   },
   {
     path: 'email/action',
-    loadChildren: () => import('./components/email-action/email-action.module').then(m => m.EmailActionModule),
+    component: EmailActionModule,
   },
   {
     path: 'admin',
-    loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
+    component: AdminModule,
     canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   { path: '404', component: NotFoundComponent },
