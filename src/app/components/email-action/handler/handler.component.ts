@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-handler',
@@ -26,7 +26,7 @@ export class HandlerComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private router: Router,
     public snackbar: SnackbarClass,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) { }
 
   ngOnInit(): void {

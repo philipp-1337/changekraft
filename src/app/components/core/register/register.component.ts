@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ export class RegisterComponent {
   });
 
   constructor(private authservice: AuthService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private snackbar: SnackbarClass,
     private router: Router,
     private userService: UserService) { }

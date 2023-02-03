@@ -1,12 +1,12 @@
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 
 export function matchOtherValidator(otherControlName: string) {
 
-    let thisControl: FormControl;
-    let otherControl: FormControl;
+    let thisControl: UntypedFormControl;
+    let otherControl: UntypedFormControl;
 
-    return function matchOtherValidator(control: FormControl) {
+    return function matchOtherValidator(control: UntypedFormControl) {
 
         if (!control.parent) {
             return null;
@@ -15,7 +15,7 @@ export function matchOtherValidator(otherControlName: string) {
         // Initializing the validator.
         if (!thisControl) {
             thisControl = control;
-            otherControl = control.parent.get(otherControlName) as FormControl;
+            otherControl = control.parent.get(otherControlName) as UntypedFormControl;
             if (!otherControl) {
                 throw new Error('matchOtherValidator(): other control is not found in parent group');
             }

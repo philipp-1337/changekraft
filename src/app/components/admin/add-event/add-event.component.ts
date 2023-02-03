@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import {
   AngularFirestore
 } from '@angular/fire/compat/firestore';
@@ -32,10 +32,10 @@ export class AddEventComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private breakpointObserver: BreakpointObserver,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) { }
 
-  eventForm: FormGroup;
+  eventForm: UntypedFormGroup;
   urlAvailable = true;
   customUrl: string;
   userId: string;
@@ -64,7 +64,7 @@ export class AddEventComponent implements OnInit {
   }
 
   get dates() {
-    return this.eventForm.get('dates') as FormArray;
+    return this.eventForm.get('dates') as UntypedFormArray;
   }
 
   getErrorMessage() {

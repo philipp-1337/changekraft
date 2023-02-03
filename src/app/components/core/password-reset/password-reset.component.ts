@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class PasswordResetComponent {
 
-  frmPasswordReset: FormGroup = this.fb.group({
+  frmPasswordReset: UntypedFormGroup = this.fb.group({
     email: [null, [Validators.required, Validators.email]]
   });
 
@@ -19,7 +19,7 @@ export class PasswordResetComponent {
   constructor(
     private afAuth: AngularFireAuth,
     public snackbar: SnackbarClass,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router) { }
 
   sendPasswordResetRequest() {

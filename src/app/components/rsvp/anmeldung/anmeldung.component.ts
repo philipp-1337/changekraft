@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
@@ -43,11 +43,11 @@ export class AnmeldungComponent implements OnInit {
   minDate = new Date(2019, 6, 19);
   maxDate = new Date(2019, 6, 21);
 
-  firstFormGroup: FormGroup;
-  anzahlFormGroup: FormGroup;
-  teilnahmeFormGroup: FormGroup;
-  anreiseFormGroup: FormGroup;
-  unterkunftFormGroup: FormGroup;
+  firstFormGroup: UntypedFormGroup;
+  anzahlFormGroup: UntypedFormGroup;
+  teilnahmeFormGroup: UntypedFormGroup;
+  anreiseFormGroup: UntypedFormGroup;
+  unterkunftFormGroup: UntypedFormGroup;
 
   newRsvpData: Array<any>;
 
@@ -123,13 +123,13 @@ export class AnmeldungComponent implements OnInit {
     const abHolung = this.anreiseFormGroup.controls['abholung'].value;
     const zielBahnhof = this.anreiseFormGroup.controls['zielbahnhof'].value;
     const ankunftsZeit = this.anreiseFormGroup.controls['ankunftszeit'].value;
-    this.anreiseFormGroup = new FormGroup({
-      anreise: new FormControl(anReise),
-      abholung: new FormControl(abHolung),
-      zielbahnhof: new FormControl(zielBahnhof),
-      ankunftszeit: new FormControl(ankunftsZeit),
-      andate: new FormControl(this.newAnreiseDate, Validators.required),
-      abdate: new FormControl(this.newAbreiseDate, Validators.required)
+    this.anreiseFormGroup = new UntypedFormGroup({
+      anreise: new UntypedFormControl(anReise),
+      abholung: new UntypedFormControl(abHolung),
+      zielbahnhof: new UntypedFormControl(zielBahnhof),
+      ankunftszeit: new UntypedFormControl(ankunftsZeit),
+      andate: new UntypedFormControl(this.newAnreiseDate, Validators.required),
+      abdate: new UntypedFormControl(this.newAbreiseDate, Validators.required)
     });
     console.log(this.anreiseFormGroup);
   }
@@ -137,9 +137,9 @@ export class AnmeldungComponent implements OnInit {
   onChanges(): void {
     this.anreiseFormGroup.valueChanges.subscribe(val => {
       this.calcNights();
-      this.unterkunftFormGroup = new FormGroup({
-        naechte: new FormControl(this.nights),
-        unterkuenfte: new FormControl(this.unterkuenfte)
+      this.unterkunftFormGroup = new UntypedFormGroup({
+        naechte: new UntypedFormControl(this.nights),
+        unterkuenfte: new UntypedFormControl(this.unterkuenfte)
       });
     });
   }
@@ -166,29 +166,29 @@ export class AnmeldungComponent implements OnInit {
       });
     });
 
-    this.firstFormGroup = new FormGroup({
-      name: new FormControl(''),
-      email: new FormControl('')
+    this.firstFormGroup = new UntypedFormGroup({
+      name: new UntypedFormControl(''),
+      email: new UntypedFormControl('')
     });
-    this.teilnahmeFormGroup = new FormGroup({
-      teilnahme: new FormControl('')
+    this.teilnahmeFormGroup = new UntypedFormGroup({
+      teilnahme: new UntypedFormControl('')
     });
-    this.anzahlFormGroup = new FormGroup({
-      begleitung: new FormControl(this.begleitung),
-      hund: new FormControl(''),
-      kinder: new FormControl('')
+    this.anzahlFormGroup = new UntypedFormGroup({
+      begleitung: new UntypedFormControl(this.begleitung),
+      hund: new UntypedFormControl(''),
+      kinder: new UntypedFormControl('')
     });
-    this.anreiseFormGroup = new FormGroup({
-      anreise: new FormControl(''),
-      abholung: new FormControl(''),
-      zielbahnhof: new FormControl(''),
-      ankunftszeit: new FormControl(''),
-      andate: new FormControl('', Validators.required),
-      abdate: new FormControl('', Validators.required)
+    this.anreiseFormGroup = new UntypedFormGroup({
+      anreise: new UntypedFormControl(''),
+      abholung: new UntypedFormControl(''),
+      zielbahnhof: new UntypedFormControl(''),
+      ankunftszeit: new UntypedFormControl(''),
+      andate: new UntypedFormControl('', Validators.required),
+      abdate: new UntypedFormControl('', Validators.required)
     });
-    this.unterkunftFormGroup = new FormGroup({
-      naechte: new FormControl(''),
-      unterkuenfte: new FormControl('')
+    this.unterkunftFormGroup = new UntypedFormGroup({
+      naechte: new UntypedFormControl(''),
+      unterkuenfte: new UntypedFormControl('')
     });
     this.onChanges();
   }
