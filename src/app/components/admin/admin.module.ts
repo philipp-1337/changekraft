@@ -25,28 +25,27 @@ import { DialogUserDeleteComponent } from './user-profil/dialog-user-delete.comp
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MatMomentDateModule],
-  declarations: [
-    AdminComponent,
-    AdminZusagenComponent,
-    DialogDeleteComponent,
-    DialogShareComponent,
-    AddEventComponent,
-    EditEventComponent,
-    EventListComponent,
-    EventsComponent,
-    UserProfilComponent,
-    DialogUserDeleteComponent,
-    DashboardComponent
-  ],
-  providers: [
-    ExcelService,
-    AngularFireAuthGuard,
-    { provide: DateAdapter, useClass: GermanWeek },
-    { provide: DateAdapter, useClass: MomentDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: GERMAN_DATE_FORMAT },
-    { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
-  ],
-  entryComponents: [DialogDeleteComponent, DialogShareComponent]
+    imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MatMomentDateModule],
+    declarations: [
+        AdminComponent,
+        AdminZusagenComponent,
+        DialogDeleteComponent,
+        DialogShareComponent,
+        AddEventComponent,
+        EditEventComponent,
+        EventListComponent,
+        EventsComponent,
+        UserProfilComponent,
+        DialogUserDeleteComponent,
+        DashboardComponent
+    ],
+    providers: [
+        ExcelService,
+        AngularFireAuthGuard,
+        { provide: DateAdapter, useClass: GermanWeek },
+        { provide: DateAdapter, useClass: MomentDateAdapter },
+        { provide: MAT_DATE_FORMATS, useValue: GERMAN_DATE_FORMAT },
+        { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }
+    ]
 })
 export class AdminModule { }
