@@ -24,7 +24,7 @@
             [routerLink]="['../edit-event/' + event?.id]"
             [color]="event?.dates.multipleDays ? 'primary' : 'accent'"
             *ngFor="let event of event$ | async; let ievent = index"
-            matTooltip="{{ event?.dates }}">
+            matTooltip="{{ event?.desc }}">
             {{ event?.name }}
           </mat-chip>
         </mat-chip-list>
