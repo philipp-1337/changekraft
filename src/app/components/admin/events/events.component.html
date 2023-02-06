@@ -21,6 +21,7 @@
       <mat-card-content class="mt-3">
         <mat-chip-list aria-label="Events">
           <mat-chip 
+            [routerLink]="['../edit-event/' + event?.id]"
             [color]="event?.dates.multipleDays ? 'primary' : 'accent'"
             *ngFor="let event of event$ | async; let ievent = index"
             matTooltip="{{ event?.dates }}">
