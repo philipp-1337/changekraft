@@ -49,6 +49,10 @@ $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
   top: 25%;
 }
 
+.mdc-menu-surface {
+  background-color: rgb(245 245 245);
+}
+
 .mat-mdc-snack-bar-handset {
   margin-bottom: env(safe-area-inset-bottom) !important;
 }
