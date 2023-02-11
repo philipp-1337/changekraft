@@ -49,6 +49,7 @@ $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
   top: 25%;
 }
 
+// poor solution to fix mat-select overlay background
 .mdc-menu-surface {
   background-color: rgb(245 245 245);
 }
