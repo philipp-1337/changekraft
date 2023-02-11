@@ -1,7 +1,7 @@
 <div class="container pb-3">
   <div class="row" id="home">
     <div class="col-12 mt-3">
-      <mat-card *ngIf="(event$ | async) === null">
+      <mat-card appearance="outlined" *ngIf="(event$ | async) === null">
         <mat-card-content>
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
@@ -11,7 +11,7 @@
   <ng-template [ngIf]="(event$ | async)">
   <div class="row" id="home">
       <div class="col-12">
-        <mat-card>
+        <mat-card appearance="outlined">
           <mat-card-header>
             <div class="justify-content-center align-self-center" mat-card-avatar>
               <mat-icon
@@ -34,7 +34,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-8 mt-3">
-        <mat-card>
+        <mat-card appearance="outlined">
           <mat-card-content>
             <p>
               {{ (event$ | async)?.desc }}
