@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 mt-3">
-    <mat-card>
+    <mat-card appearance="outlined">
       <mat-card-header>
         <div class="justify-content-center align-self-center" mat-card-avatar>
           <mat-icon
@@ -28,7 +28,6 @@
               required>
               <button
                 mat-button
-                mat-icon-button
                 matSuffix
                 [disabled]="!profileform.dirty"
                 *ngIf="userService.name"
@@ -43,21 +42,28 @@
           </mat-form-field>
         </form>
       </mat-card-content>
-      <mat-card-actions class="flex-card-actions">
+      <mat-card-actions>
         <button
-          mat-button
+          mat-flat-button
+          color="primary"
           type="button"
           (click)="updateUser(profileform)"
           [disabled]="!profileform.dirty"
-          color="primary"
           title="Speichern">Speichern
         </button>
         <span style="flex: 1 1 auto;"></span> 
         <button
+          mat-stroked-button
+          color="accent"
+          type="button"
+          [matMenuTriggerFor]="more"
+          title="Mehr Optionen">Mehr
+        </button>
+        <!-- <button
           mat-icon-button 
           [matMenuTriggerFor]="more">
           <mat-icon aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
-        </button>
+        </button> -->
         <mat-menu #more="matMenu">
           <button
             mat-menu-item

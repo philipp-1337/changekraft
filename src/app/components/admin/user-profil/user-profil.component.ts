@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogUserDeleteComponent } from './dialog-user-delete.component';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/compat/firestore';
 

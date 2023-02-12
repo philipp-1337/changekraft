@@ -1,12 +1,12 @@
 
 <div class="row">
   <div class="col-12 mt-3">
-    <mat-card *ngIf="(event$ | async) === null">
+    <mat-card appearance="outlined" *ngIf="(event$ | async) === null">
       <mat-card-content>
         <mat-progress-bar mode="query"></mat-progress-bar>
       </mat-card-content>
     </mat-card>
-    <mat-card *ngIf="(event$ | async) || null">
+    <mat-card appearance="outlined" *ngIf="(event$ | async) || null">
       <mat-card-header>
         <div class="justify-content-center align-self-center" mat-card-avatar>
           <mat-icon
@@ -18,20 +18,20 @@
         <mat-card-title>Events</mat-card-title>
         <mat-card-subtitle class="mb-0">Du hast derzeit {{ counter }} {{ checkPlural() }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content class="mt-3">
-        <mat-chip-list aria-label="Events">
-          <mat-chip 
+      <mat-card-content class="mt-2 mb-2">
+        <mat-chip-listbox aria-label="Events">
+          <mat-chip-option 
             [routerLink]="['../edit-event/' + event?.id]"
             [color]="event?.dates.multipleDays ? 'primary' : 'accent'"
             *ngFor="let event of event$ | async; let ievent = index"
             matTooltip="{{ event?.desc }}">
             {{ event?.name }}
-          </mat-chip>
-        </mat-chip-list>
+          </mat-chip-option>
+        </mat-chip-listbox>
       </mat-card-content>
-      <mat-card-actions class="flex-card-actions">
+      <mat-card-actions>
         <button
-          mat-button
+          mat-flat-button
           type="button"
           routerLink="/admin/add-event"
           color="primary"
@@ -39,48 +39,6 @@
         </button>
         <span style="flex: 1 1 auto;"></span> 
       </mat-card-actions>
-      <!-- <mat-card-actions class="flex-card-actions">
-        <button
-          mat-button
-          type="button"
-          (click)="updateUser(profileform)"
-          color="primary"
-          title="Speichern">Speichern
-        </button>
-        <span style="flex: 1 1 auto;"></span> 
-        <button
-          mat-icon-button 
-          [matMenuTriggerFor]="more">
-          <mat-icon aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
-        </button>
-        <mat-menu #more="matMenu">
-          <button
-            mat-menu-item
-            disabled
-            type="button"
-            title="E-Mail ändern">
-            <mat-icon aria-label="E-Mail ändern" svgIcon="email"></mat-icon>
-            <span>E-Mail ändern</span>
-          </button>
-          <button
-            mat-menu-item
-            disabled
-            type="button"
-            title="Passwort ändern">
-            <mat-icon aria-label="Passwort ändern" svgIcon="password"></mat-icon>
-            <span>Passwort ändern</span>
-          </button>
-          <button
-            mat-menu-item
-            (click)="deleteDialog()"
-            color="warn"
-            type="button"
-            title="Benutzer löschen">
-            <mat-icon aria-label="Benutzer löschen" svgIcon="delete" color="warn"></mat-icon>
-            <span>Account löschen</span>
-          </button>
-        </mat-menu>
-      </mat-card-actions> -->
     </mat-card>
   </div>
 </div>
