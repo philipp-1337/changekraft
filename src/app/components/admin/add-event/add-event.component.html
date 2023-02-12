@@ -12,7 +12,7 @@
             <mat-card-title>Event hinzufügen</mat-card-title>
             <mat-card-subtitle class="mb-0">Hier wird das Event erstellt</mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content class="mt-3">
+          <mat-card-content class="mt-2 mb-2">
             <p>
               <mat-form-field class="w-100">
                 <input
@@ -127,7 +127,7 @@
           </mat-card-content>
           <mat-card-actions>
             <button
-            mat-button
+            mat-flat-button
             type="button"
             title="Speichern"
             (click)="onSave()"
@@ -135,9 +135,9 @@
             [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable || !checkRange()">
               <span>Speichern</span>
             </button>
-
+            <span style="flex: 1 1 auto;"></span>
             <button
-              mat-button
+              mat-stroked-button
               type="button"
               title="Abbrechen"
               routerLink="/admin/dashboard" 

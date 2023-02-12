@@ -51,7 +51,7 @@
         </mat-card-content>
         <mat-card-actions>
           <button
-            mat-button
+            mat-flat-button
             color="primary"
             type="submit"
             [disabled]="loginform.touched && !loginform.valid || disabled">
@@ -62,8 +62,10 @@
               <mat-spinner color="accent" diameter="20"></mat-spinner>
             </mat-icon>
           </button>
+          <span style="flex: 1 1 auto;"></span> 
           <button
-            mat-button
+            mat-stroked-button
+            color="accent"
             routerLink="/password-reset">
           Passwort vergessen
           </button>

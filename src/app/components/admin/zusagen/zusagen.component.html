@@ -90,14 +90,16 @@
       </mat-accordion>
 
       <mat-card appearance="outlined" class="mt-3" *ngIf="(rsvp$ | async)">
-        <button
-          mat-flat-button
-          color="primary"
-          (click)="exportAsXLSX()"
-          matBadge="{{ counter }}"
-          matBadgeColor="accent">
-          Excel Download
-        </button>
+        <mat-card-actions>
+          <button
+            mat-button
+            color="primary"
+            (click)="exportAsXLSX()"
+            matBadge="{{ counter }}"
+            matBadgeColor="accent">
+            Excel Download
+          </button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>

@@ -30,6 +30,7 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCloseClick()" cdkFocusInitial>Noooo</button>
-  <button mat-button [disabled]="credential.invalid" [mat-dialog-close]="credential" color="warn">Definitiv</button>
+  <button mat-flat-button color="primary" (click)="onCloseClick()" cdkFocusInitial>Noooo</button>
+  <span style="flex: 1 1 auto;"></span> 
+  <button mat-stroked-button color="warn" [disabled]="credential.invalid" [mat-dialog-close]="credential">Definitiv</button>
 </div>

@@ -77,7 +77,7 @@
         </mat-card-content>
         <mat-card-actions>
           <button
-            mat-button
+            mat-flat-button
             color="primary"
             (click)="onSignup()"
             [disabled]="!signinForm.touched || !signinForm.valid">
@@ -88,10 +88,12 @@
               <mat-spinner color="accent" diameter="20"></mat-spinner>
             </mat-icon>
           </button>
+          <span style="flex: 1 1 auto;"></span> 
           <button
-            mat-button
+            mat-stroked-button
+            color="accent"
             routerLink="/login">
-          Zum Login
+          Zurück
           </button>
         </mat-card-actions>
         </form>

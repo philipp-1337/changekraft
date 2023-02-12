@@ -3,6 +3,7 @@
   <p>Möchtest du {{ data.name }} wirklich löschen?</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onCloseClick()" cdkFocusInitial>Noooo</button>
-  <button mat-button [mat-dialog-close]="data.id" color="warn">Definitiv</button>
+  <button mat-flat-button color="primary" (click)="onCloseClick()" cdkFocusInitial>Noooo</button>
+  <span style="flex: 1 1 auto;"></span> 
+  <button mat-stroked-button color="warn" [mat-dialog-close]="data.id">Definitiv</button>
 </div>
