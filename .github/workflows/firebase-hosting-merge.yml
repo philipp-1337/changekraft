@@ -11,12 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: 
-        - npm install --quiet --legacy-peer-deps
-        - npm i -g @angular/cli
-        - ng config -g cli.warnings.versionMismatch false
-        - ng lint
-        - ng build --configuration production
+      - run: npm install --quiet --legacy-peer-deps
+      - run: npm i -g @angular/cli
+      - run: ng config -g cli.warnings.versionMismatch false
+      - run: ng lint
+      - run: ng build --configuration production
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
