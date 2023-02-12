@@ -32,10 +32,10 @@ jobs:
         run: npm install --quiet --legacy-peer-deps
 
       - name: Install Angular CLI & run linting
-        run: npm i -g @angular/cli
-        run: ng config -g cli.warnings.versionMismatch false
-        continue-on-error: false
-        run: ng lint
+        - run: npm i -g @angular/cli
+        - run: ng config -g cli.warnings.versionMismatch false
+        - continue-on-error: false
+        - run: ng lint
 
       - name: Build
         run: ng build --configuration production
