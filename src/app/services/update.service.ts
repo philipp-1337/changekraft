@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { interval } from 'rxjs';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 
 
 @Injectable()
 export class UpdateService {
-  constructor(swUpdate: SwUpdate, private snackbar: SnackbarClass) {
-    swUpdate.versionUpdates.subscribe(event => {
-      this.snackbar.reloadSnackBar('Es ist ein Update verfügbar.', 'Aktualisieren');
-    });
-    // SwUpdate has changed. Check !!!
-    // swUpdate.activateUpdate.??call??(event => { 
-    //   this.snackbar.openSnackBar('Die App wurde aktualisiert.', 'Ok', 2500);
-    // });
+  constructor(public swUpdate: SwUpdate, private snackbar: SnackbarClass) {
+
+    if (swUpdate.isEnabled) {
+      interval(6 * 60 * 60).subscribe(() => swUpdate.checkForUpdate()
+        .then(() => console.log('checking for updates')));
+    }
+  }
+
+  public checkForUpdates(): void {
+    this.swUpdate.versionUpdates.subscribe(event => this.promptUser());
+  }
+
+  private promptUser() {
+    this.swUpdate.activateUpdate().then(() => this.snackbar.reloadSnackBar('Es ist ein Update verfügbar.', 'Aktualisieren')); 
   }
 }
+
