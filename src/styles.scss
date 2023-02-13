@@ -97,6 +97,7 @@ input { font-size: 16px;}
     top: unset !important;
     --safe-area-inset-bottom: env(safe-area-inset-bottom);
     height: calc(56px + var(--safe-area-inset-bottom));
+    z-index: 3;
   }
 }
 
