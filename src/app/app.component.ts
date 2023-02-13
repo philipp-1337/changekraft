@@ -19,7 +19,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private update: UpdateService,
     firestore: AngularFirestore
-  ) { }
+  ) {
+    // check the service worker for updates
+    this.update.checkForUpdates();
+  }
 
   ngOnInit() {
     // console.log(this.authUnsub);

@@ -14,7 +14,7 @@ export class SnackbarClass {
   public reloadSnackBar(message: string, action: string) {
     const snackBarRef = this.snackBar.open(message, action);
     snackBarRef.onAction().subscribe(() => {
-      window.location.reload();
+      window.location.reload()
     });
   }
 
