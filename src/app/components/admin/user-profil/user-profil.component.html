@@ -1,6 +1,12 @@
 <div class="row">
   <div class="col-12 mt-3">
     <mat-card appearance="outlined">
+      <button
+        class="position-absolute top-0 end-0"
+        mat-icon-button 
+        [matMenuTriggerFor]="more">
+        <mat-icon class="position-absolute top-50 translate-middle start-50" aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
+        </button>
       <mat-card-header>
         <div class="justify-content-center align-self-center" mat-card-avatar>
           <mat-icon
@@ -59,11 +65,6 @@
           [matMenuTriggerFor]="more"
           title="Mehr Optionen">Mehr
         </button>
-        <!-- <button
-          mat-icon-button 
-          [matMenuTriggerFor]="more">
-          <mat-icon aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
-        </button> -->
         <mat-menu #more="matMenu">
           <button
             mat-menu-item
