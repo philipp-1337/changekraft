@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
     firestore: AngularFirestore
   ) {
     // check the service worker for updates
-    this.update.checkForUpdates();
+    this.update.updatesAvailable;
   }
 
   ngOnInit() {
