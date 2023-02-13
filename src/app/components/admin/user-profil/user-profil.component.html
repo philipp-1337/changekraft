@@ -1,97 +1,93 @@
-<div class="row">
-  <div class="col-12 mt-3">
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <div class="justify-content-center align-self-center" mat-card-avatar>
-          <mat-icon
-            svgIcon="account_circle"
-            class="header-icon"></mat-icon>
-        </div>
-        <mat-card-title>
-          Profil
-          <span *ngIf="userService.name"> von {{ userService.name }}</span>
-        </mat-card-title>
-        <mat-card-subtitle class="mb-0">{{ userService.email }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="mt-3">
-        <form #profileform="ngForm">
-          <mat-form-field class="w-100" hideRequiredMarker>
-            <input
-              matInput
-              type="text"
-              color="accent"
-              id="displayname"
-              name="displayname"
-              [(ngModel)]="userService.name"
-              placeholder="Name"
-              class="form-control"
-              required>
-              <button
-                mat-button
-                matSuffix
-                [disabled]="!profileform.dirty"
-                *ngIf="userService.name"
-                aria-label="Speichern"
-                (click)="updateUser(profileform)"
-                title="Speichern">
-                <mat-icon svgIcon="autorenew" [@rotate]="animate"></mat-icon>
-              </button>
-              <mat-hint *ngIf="!userService.name">
-                Bitte einen Namen angeben.
-              </mat-hint>
-          </mat-form-field>
-        </form>
-      </mat-card-content>
-      <mat-card-actions>
-        <button
-          mat-flat-button
-          color="primary"
-          type="button"
-          (click)="updateUser(profileform)"
-          [disabled]="!profileform.dirty"
-          title="Speichern">Speichern
-        </button>
-        <span style="flex: 1 1 auto;"></span> 
-        <button
-          mat-stroked-button
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <div class="justify-content-center align-self-center" mat-card-avatar>
+      <mat-icon
+        svgIcon="account_circle"
+        class="header-icon"></mat-icon>
+    </div>
+    <mat-card-title>
+      Profil
+      <span *ngIf="userService.name"> von {{ userService.name }}</span>
+    </mat-card-title>
+    <mat-card-subtitle class="mb-0">{{ userService.email }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="mt-3">
+    <form #profileform="ngForm">
+      <mat-form-field class="w-100" hideRequiredMarker>
+        <input
+          matInput
+          type="text"
           color="accent"
-          type="button"
-          [matMenuTriggerFor]="more"
-          title="Mehr Optionen">Mehr
-        </button>
-        <!-- <button
-          mat-icon-button 
-          [matMenuTriggerFor]="more">
-          <mat-icon aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
-        </button> -->
-        <mat-menu #more="matMenu">
+          id="displayname"
+          name="displayname"
+          [(ngModel)]="userService.name"
+          placeholder="Name"
+          class="form-control"
+          required>
           <button
-            mat-menu-item
-            disabled
-            type="button"
-            title="E-Mail ändern">
-            <mat-icon aria-label="E-Mail ändern" svgIcon="email"></mat-icon>
-            <span>E-Mail ändern</span>
+            mat-button
+            matSuffix
+            [disabled]="!profileform.dirty"
+            *ngIf="userService.name"
+            aria-label="Speichern"
+            (click)="updateUser(profileform)"
+            title="Speichern">
+            <mat-icon svgIcon="autorenew" [@rotate]="animate"></mat-icon>
           </button>
-          <button
-            mat-menu-item
-            disabled
-            type="button"
-            title="Passwort ändern">
-            <mat-icon aria-label="Passwort ändern" svgIcon="password"></mat-icon>
-            <span>Passwort ändern</span>
-          </button>
-          <button
-            mat-menu-item
-            (click)="deleteDialog()"
-            color="warn"
-            type="button"
-            title="Benutzer löschen">
-            <mat-icon aria-label="Benutzer löschen" svgIcon="delete" color="warn"></mat-icon>
-            <span>Account löschen</span>
-          </button>
-        </mat-menu>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-</div>
+          <mat-hint *ngIf="!userService.name">
+            Bitte einen Namen angeben.
+          </mat-hint>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      (click)="updateUser(profileform)"
+      [disabled]="!profileform.dirty"
+      title="Speichern">Speichern
+    </button>
+    <span style="flex: 1 1 auto;"></span> 
+    <button
+      mat-stroked-button
+      color="accent"
+      type="button"
+      [matMenuTriggerFor]="more"
+      title="Mehr Optionen">Mehr
+    </button>
+    <!-- <button
+      mat-icon-button 
+      [matMenuTriggerFor]="more">
+      <mat-icon aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
+    </button> -->
+    <mat-menu #more="matMenu">
+      <button
+        mat-menu-item
+        disabled
+        type="button"
+        title="E-Mail ändern">
+        <mat-icon aria-label="E-Mail ändern" svgIcon="email"></mat-icon>
+        <span>E-Mail ändern</span>
+      </button>
+      <button
+        mat-menu-item
+        disabled
+        type="button"
+        title="Passwort ändern">
+        <mat-icon aria-label="Passwort ändern" svgIcon="password"></mat-icon>
+        <span>Passwort ändern</span>
+      </button>
+      <button
+        mat-menu-item
+        (click)="deleteDialog()"
+        color="warn"
+        type="button"
+        title="Benutzer löschen">
+        <mat-icon aria-label="Benutzer löschen" svgIcon="delete" color="warn"></mat-icon>
+        <span>Account löschen</span>
+      </button>
+    </mat-menu>
+  </mat-card-actions>
+</mat-card>
