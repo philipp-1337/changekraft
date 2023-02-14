@@ -67,7 +67,7 @@ export class EventListComponent implements OnInit, OnDestroy {
     if (this.shareVar && this.shareVar.share) {
       this.shareVar.share({
         title: url,
-        text: title + ' – ' + text,
+        text: title + ' — ' + text,
         url: url,
       })
         .then(() => console.log('Successful share'))

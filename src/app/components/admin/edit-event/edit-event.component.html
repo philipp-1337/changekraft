@@ -12,6 +12,12 @@
   <div class="row" id="home">
       <div class="col-12 mt-3">
         <mat-card appearance="outlined">
+          <button
+            class="position-absolute top-0 end-0"
+            mat-icon-button 
+            [matMenuTriggerFor]="more">
+            <mat-icon class="position-absolute top-50 translate-middle start-50" aria-label="Weitere Optionen" svgIcon="more_vert"></mat-icon>
+          </button>
           <mat-card-header>
             <div class="justify-content-center align-self-center" mat-card-avatar>
               <mat-icon
@@ -29,67 +35,63 @@
               </span>
             </mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content>
+          <mat-card-content class="mb-2">
             <p>
               {{ (event$ | async)?.desc }}
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <!-- <button
-              mat-button
-              color="primary"
-              [routerLink]="['/event/' + (event$ | async)?.url]">Vorschau
-            </button>
+            <mat-menu #more="matMenu">
+              <button
+                mat-menu-item
+                type="button"
+                [routerLink]="['/admin/zusagen/' + eventId]"
+                title="Event Zusagen">
+                <mat-icon aria-label="Event Zusagen" svgIcon="supervisor_account"></mat-icon>
+                <span>Zusagen</span>
+              </button>
+              <button
+                mat-menu-item
+                type="button"
+                [routerLink]="['/event/' + (event$ | async)?.url]"
+                title="Event Vorschau">
+                <mat-icon aria-label="Event Vorschau" svgIcon="invitation"></mat-icon>
+                <span>Vorschau</span>
+              </button>
+              <button
+                mat-menu-item
+                disabled
+                type="button"
+                (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)"
+                title="Event teilen">
+                <mat-icon aria-label="Event teilen" svgIcon="share"></mat-icon>
+                <span>Teilen</span>
+              </button>
+              <button
+                mat-menu-item
+                disabled
+                type="button"
+                title="Event bearbeiten">
+                <mat-icon aria-label="Event bearbeiten" svgIcon="edit"></mat-icon>
+                <span>Bearbeiten</span>
+              </button>
+              <button
+                mat-menu-item
+                disabled
+                type="button"
+                (click)="deleteDialog(event?.id, event?.name)"
+                color="warn"
+                title="Event löschen">
+                <mat-icon aria-label="Event löschen" svgIcon="delete" color="warn"></mat-icon>
+                <span>Löschen</span>
+              </button>
+            </mat-menu>
             <button
-              mat-button
+              mat-flat-button
               color="primary"
-              [routerLink]="['/admin/zusagen/' + eventId]">Zusagen
-            </button> -->
-            <button
-              mat-icon-button
-              class="nav-item"
               [routerLink]="['/event/' + (event$ | async)?.url]"
-              aria-label="Event Vorschau"
-              title="Event Vorschau">
-              <mat-icon svgIcon="invitation"></mat-icon>
-            </button>
-            <span class="bar-spacer"></span>
-            <button
-              mat-icon-button
-              class="nav-item"
-              (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)"
-              aria-label="Event teilen"
-              title="Event teilen">
-              <mat-icon svgIcon="share"></mat-icon>
-            </button>
-            <span class="bar-spacer"></span>
-            <button
-              mat-icon-button
-              class="nav-item"
-              [routerLink]="['/admin/zusagen/' + eventId]"
-              matBadgePosition="above after"
-              matBadgeColor="accent"
-              aria-label="Event Zusagen"
-              title="Event Zusagen">
-              <mat-icon svgIcon="supervisor_account"></mat-icon>
-            </button>
-            <span class="bar-spacer"></span>
-            <button
-              mat-icon-button
-              class="nav-item"
-              aria-label="Event bearbeiten"
-              title="Event bearbeiten">
-              <mat-icon svgIcon="edit"></mat-icon>
-            </button>
-            <span class="bar-spacer"></span>
-            <button
-              mat-icon-button
-              class="nav-item"
-              color="warn"
-              (click)="deleteDialog(event?.id, event?.name)"
-              aria-label="Event löschen"
-              title="Event löschen">
-              <mat-icon svgIcon="delete"></mat-icon>
+              aria-label="Vorschau"
+              title="Vorschau">Vorschau
             </button>
           </mat-card-actions>
         </mat-card>

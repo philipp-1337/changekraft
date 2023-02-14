@@ -21,11 +21,11 @@
             <mat-card-title>{{(event$ | async)?.name}}</mat-card-title>
             <mat-card-subtitle class="mb-0">
               <span *ngIf="!(event$ | async)?.dates.multipleDays">
-                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM.yy' }}
+                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM.yy' }}
               </span>
               <span *ngIf="(event$ | async)?.dates.multipleDays">
-                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM' }} –
-                {{ (event$ | async)?.dates.endDate.seconds * 1000 | date:'d.MM.yy' }}
+                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM' }} —
+                {{ (event$ | async)?.dates.endDate.seconds * 1000 | date:'d.MM.yy' }}
               </span>
             </mat-card-subtitle>
           </mat-card-header>
