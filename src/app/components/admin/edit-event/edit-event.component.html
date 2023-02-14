@@ -1,7 +1,7 @@
 <div class="container pb-3">
-  <div class="row" id="home">
+  <div class="row" id="home" *ngIf="(event$ | async) === null">
     <div class="col-12 mt-3">
-      <mat-card appearance="outlined" *ngIf="(event$ | async) === null">
+      <mat-card appearance="outlined">
         <mat-card-content>
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
@@ -29,19 +29,13 @@
               </span>
             </mat-card-subtitle>
           </mat-card-header>
-        </mat-card>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-6 col-lg-8 mt-3">
-        <mat-card appearance="outlined">
           <mat-card-content>
             <p>
               {{ (event$ | async)?.desc }}
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button
+            <!-- <button
               mat-button
               color="primary"
               [routerLink]="['/event/' + (event$ | async)?.url]">Vorschau
@@ -50,21 +44,56 @@
               mat-button
               color="primary"
               [routerLink]="['/admin/zusagen/' + eventId]">Zusagen
+            </button> -->
+            <button
+              mat-icon-button
+              class="nav-item"
+              [routerLink]="['/event/' + (event$ | async)?.url]"
+              aria-label="Event Vorschau"
+              title="Event Vorschau">
+              <mat-icon svgIcon="invitation"></mat-icon>
+            </button>
+            <span class="bar-spacer"></span>
+            <button
+              mat-icon-button
+              class="nav-item"
+              (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)"
+              aria-label="Event teilen"
+              title="Event teilen">
+              <mat-icon svgIcon="share"></mat-icon>
+            </button>
+            <span class="bar-spacer"></span>
+            <button
+              mat-icon-button
+              class="nav-item"
+              [routerLink]="['/admin/zusagen/' + eventId]"
+              matBadgePosition="above after"
+              matBadgeColor="accent"
+              aria-label="Event Zusagen"
+              title="Event Zusagen">
+              <mat-icon svgIcon="supervisor_account"></mat-icon>
+            </button>
+            <span class="bar-spacer"></span>
+            <button
+              mat-icon-button
+              class="nav-item"
+              aria-label="Event bearbeiten"
+              title="Event bearbeiten">
+              <mat-icon svgIcon="edit"></mat-icon>
+            </button>
+            <span class="bar-spacer"></span>
+            <button
+              mat-icon-button
+              class="nav-item"
+              color="warn"
+              (click)="deleteDialog(event?.id, event?.name)"
+              aria-label="Event löschen"
+              title="Event löschen">
+              <mat-icon svgIcon="delete"></mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>
       </div>
-      <!-- <div class="col-sm-12 col-md-6 col-lg-4 mt-3">
-        <div class="img-wrapper">
-          <img srcset="../../../assets/img/event/food-xs_2x.jpg 580w,
-            ../../../assets/img/event/food-sm_2x.jpg 800w,
-            ../../../assets/img/event/food-md_2x.jpg 970w,
-            ../../../assets/img/event/food-lg_2x.jpg 1200w"
-            sizes="(max-width: 959px) 95vw, (max-width: 1024px) 47vw, (max-width: 1279px) 37vw, 32vw"
-            src="../../../assets/img/event/food-xs_1x.jpg"
-            alt="Photo of food"/>
-        </div>
-      </div> -->
     </div>
   </ng-template>
 </div>
