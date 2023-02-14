@@ -32,6 +32,10 @@ $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
 @import './assets/scss/bootstrap';
 
+.bar-spacer {
+  flex: 1 1 auto;
+}
+
 .text-error {
   color: mat.get-color-from-palette($rsvp-warn);
 }
