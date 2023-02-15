@@ -138,6 +138,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'rainbow',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/looks_FILL0_wght400_GRAD-25_opsz24.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'loyalty',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-loyalty-24px.svg'
@@ -183,6 +189,12 @@ export class IconsClass {
       'space_dashboard',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/space_dashboard_black_24dp.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'space_dashboard_outlined',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/space_dashboard_FILL0_wght400_GRAD-25_opsz24.svg'
       )
     );
     iconRegistry.addSvgIcon(

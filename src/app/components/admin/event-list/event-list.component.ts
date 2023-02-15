@@ -1,3 +1,9 @@
+// THIS COMPONENT IS DEPRECATED
+// THIS COMPONENT IS DEPRECATED
+// THIS COMPONENT IS DEPRECATED
+// THIS COMPONENT IS DEPRECATED
+// THIS COMPONENT IS DEPRECATED
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import {
@@ -9,7 +15,7 @@ import { Event } from '../../../shared/event.model';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
-import { DialogShareComponent } from './dialog-share.component';
+import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
 
 @Component({
   selector: 'app-event-list',
@@ -67,7 +73,7 @@ export class EventListComponent implements OnInit, OnDestroy {
     if (this.shareVar && this.shareVar.share) {
       this.shareVar.share({
         title: url,
-        text: title + ' – ' + text,
+        text: title + ' — ' + text,
         url: url,
       })
         .then(() => console.log('Successful share'))
