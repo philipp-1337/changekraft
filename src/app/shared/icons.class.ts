@@ -138,6 +138,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'rainbow',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/looks_FILL0_wght400_GRAD-25_opsz24.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'loyalty',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-loyalty-24px.svg'
