@@ -17,26 +17,9 @@
 <nav class="bottom">
   <mat-toolbar>
     <mat-toolbar-row>
-      <button mat-icon-button [matMenuTriggerFor]="profileMenu" id="drawerButton" type="button"
-        aria-label="Toggle Menu">
-        <mat-icon aria-label="Profil"
-          [svgIcon]="authservice.isAuthenticated() ? 'account_circle' : 'account_circle_outline'">
-        </mat-icon>
+      <button mat-icon-button class="nav-item" routerLink="/admin/settings" routerLinkActive="active" disabled>
+        <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
       </button>
-      <mat-menu #profileMenu="matMenu">
-        <ng-template [ngIf]="!authservice.isAuthenticated()">
-          <button mat-menu-item routerLink="/login">
-            <mat-icon aria-label="Login" svgIcon="lock_open"></mat-icon>
-            <span>Anmelden</span>
-          </button>
-        </ng-template>
-        <ng-template [ngIf]="authservice.isAuthenticated()">
-          <button mat-menu-item (click)="onLogout()">
-            <mat-icon aria-label="Logout" svgIcon="lock" color="warn"></mat-icon>
-            <span>Abmelden</span>
-          </button>
-        </ng-template>
-      </mat-menu>
       <span class="bar-spacer"></span>
       <button mat-icon-button class="nav-item" routerLink="/admin/tbc" routerLinkActive="active" disabled>
         <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
@@ -51,9 +34,23 @@
         <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
       </button>
       <span class="bar-spacer"></span>
-      <button mat-icon-button class="nav-item" routerLink="/admin/settings" routerLinkActive="active" disabled>
-        <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
-      </button>
+      <ng-template [ngIf]="!authservice.isAuthenticated()">
+        <button mat-icon-button routerLink="/login">
+          <mat-icon aria-label="Login" svgIcon="login"></mat-icon>
+        </button>
+      </ng-template>
+      <ng-template [ngIf]="authservice.isAuthenticated()">
+        <button mat-icon-button [matMenuTriggerFor]="profileMenu" id="drawerButton" type="button"
+          aria-label="Toggle Logout Menu">
+          <mat-icon aria-label="Logout" svgIcon="logout"></mat-icon>
+        </button>
+        <mat-menu #profileMenu="matMenu" class="profile-menu">
+          <button mat-menu-item (click)="onLogout()">
+            <!-- <mat-icon aria-label="Logout" svgIcon="lock" color="warn"></mat-icon> -->
+            <span class="text-error">Abmelden?</span>
+          </button>
+        </mat-menu>
+      </ng-template>
     </mat-toolbar-row>
   </mat-toolbar>
 </nav>

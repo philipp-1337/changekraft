@@ -18,42 +18,6 @@ export class HeaderComponent {
 
   @ViewChild('drawer', { static: false }) drawer: MatDrawer;
 
-  rsvp = [
-    {
-      name: 'Profil',
-      route: '/admin/profile',
-      icon: 'account_circle_outline'
-    },
-    {
-      name: 'Events',
-      route: '/admin/event-list',
-      icon: 'supervisor_account_outline'
-    },
-    {
-      name: 'Neues Event',
-      route: '/admin/add-event',
-      icon: 'event'
-    }
-  ];
-
-  bottomBar = [
-    {
-      name: 'Events',
-      route: '/admin/event-list',
-      icon: 'supervisor_account_outline'
-    },
-    {
-      name: 'Neues Event',
-      route: '/admin/add-event',
-      icon: 'event'
-    },
-    {
-      name: 'Neues Event',
-      route: '/admin/add-event',
-      icon: 'event'
-    }
-  ];
-
   prepareRoute(outlet: RouterOutlet) {
     return (
       outlet &&
