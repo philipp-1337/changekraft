@@ -9,7 +9,7 @@ import { Event } from '../../../shared/event.model';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
-import { DialogShareComponent } from './dialog-share.component';
+import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
 
 @Component({
   selector: 'app-event-list',

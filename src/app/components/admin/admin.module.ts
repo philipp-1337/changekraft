@@ -7,7 +7,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { AdminComponent } from './admin.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
-import { DialogShareComponent } from './event-list/dialog-share.component';
+import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventListComponent } from './event-list/event-list.component';
