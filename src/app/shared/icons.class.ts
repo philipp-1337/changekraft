@@ -192,6 +192,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'space_dashboard_outlined',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/space_dashboard_FILL0_wght400_GRAD-25_opsz24.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'supervisor_account',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-supervisor_account-24px.svg'
