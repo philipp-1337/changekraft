@@ -65,6 +65,10 @@ input { font-size: 16px;}
   line-height: 20px;
 }
 
+.mat-mdc-card-content {
+  margin: 0.5rem 0;
+}
+
 .fab {
   @include media-breakpoint-up(sm) {
     bottom: 80px;
