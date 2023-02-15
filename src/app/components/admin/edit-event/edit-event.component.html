@@ -27,11 +27,11 @@
             <mat-card-title>{{(event$ | async)?.name}}</mat-card-title>
             <mat-card-subtitle class="mb-0">
               <span *ngIf="!(event$ | async)?.dates.multipleDays">
-                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM.yy' }}
+                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM.yy' }}
               </span>
               <span *ngIf="(event$ | async)?.dates.multipleDays">
-                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM' }} –
-                {{ (event$ | async)?.dates.endDate.seconds * 1000 | date:'d.MM.yy' }}
+                {{ (event$ | async)?.dates.startDate.seconds * 1000 | date:'d.MM' }} —
+                {{ (event$ | async)?.dates.endDate.seconds * 1000 | date:'d.MM.yy' }}
               </span>
             </mat-card-subtitle>
           </mat-card-header>
@@ -59,8 +59,8 @@
                 <span>Vorschau</span>
               </button>
               <button
+                *ngIf="(event$ | async) as event"
                 mat-menu-item
-                disabled
                 type="button"
                 (click)="share(event?.name,event?.desc,'https://changekraft.de/event/' + event?.url)"
                 title="Event teilen">
@@ -77,9 +77,9 @@
               </button>
               <button
                 mat-menu-item
-                disabled
+                *ngIf="(event$ | async) as event"
                 type="button"
-                (click)="deleteDialog(event?.id, event?.name)"
+                (click)="deleteDialog(event?.name)"
                 color="warn"
                 title="Event löschen">
                 <mat-icon aria-label="Event löschen" svgIcon="delete" color="warn"></mat-icon>

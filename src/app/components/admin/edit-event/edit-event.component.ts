@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import {
   AngularFirestore,
-  AngularFirestoreDocument
+  AngularFirestoreDocument,
+  AngularFirestoreCollection
 } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
+import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Event } from '../../../shared/event.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
-// import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
+import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
 
 @Component({
   selector: 'app-edit-event',
-  templateUrl: './edit-event.component.html'
+  templateUrl: './edit-event.component.html',
+  providers: [SnackbarClass]
 })
 export class EditEventComponent implements OnInit {
   eventId: string;
@@ -24,12 +27,15 @@ export class EditEventComponent implements OnInit {
   eventUrl: string;
   eventDetails: any;
   shareVar: any;
-
+  private eventCollection: AngularFirestoreCollection;
+  
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private afs: AngularFirestore,
     private authservice: AuthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackbar: SnackbarClass,
   ) { }
 
   ngOnInit() {
@@ -38,6 +44,7 @@ export class EditEventComponent implements OnInit {
 
   async getSingleEventData() {
     this.userId = (await (this.authservice.getCurrentUser())).uid;
+    this.eventCollection = this.afs.collection(`users/${this.userId}/events`);
     this.route.params.subscribe((params: Params) => {
       this.eventId = params['eventId'];
       this.eventDoc = this.afs.doc(`users/${this.userId}/events/${this.eventId}`);
@@ -62,40 +69,42 @@ export class EditEventComponent implements OnInit {
         .catch((error: any) => console.log('Error sharing', error));
     } else {
       console.log('No browser support');
-      // this.shareDialog(title, text, url);
+      this.shareDialog(title, text, url);
     }
   }
 
   deleteItem(id: string) {
-    const promise = this.afs.doc(id).delete();
+    console.log(id)
+    const promise = this.eventCollection.doc(id).delete();
     promise
       .then(_ => console.log('Erfolgreich gelöscht.'))
       .catch(err => console.log(err, 'Löschen nicht erlaubt.'));
+    this.router.navigate(['./admin/dashboard']);
+    this.snackbar.openSnackBar('Event gelöscht.', 'Ok', 2500);
   }
 
-  deleteDialog(id: string, name: string) {
+  deleteDialog(name: string) {
+    const id = this.eventId;
+    console.log(id)
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
       width: '250px',
       data: { id: id, name: name }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      id = result;
+      const id = result;
       if (id === undefined) {
         console.log('Das Event wurde nicht gelöscht.');
       } else {
-        console.log('Das Event mit der ID ' + id + ' wurde gelöscht.');
+        console.log('Das Event mit der ID ' + id + ' wird gelöscht...');
         this.deleteItem(id);
       }
     });
   }
-  // shareDialog(title: string, text: string, url: string) {
-  //   this.dialog.open(DialogShareComponent, {
-  //     width: '250px',
-  //     data: { title: title, text: text, url: url }
-  //   });
-  // }
-
-
-
+  shareDialog(title: string, text: string, url: string) {
+    this.dialog.open(DialogShareComponent, {
+      width: '250px',
+      data: { title: title, text: text, url: url }
+    });
+  }
 }
