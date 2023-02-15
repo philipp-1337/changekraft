@@ -12,8 +12,7 @@ import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delet
 
 @Component({
   selector: 'app-events',
-  templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  templateUrl: './events.component.html'
 })
 
 export class EventsComponent implements OnInit, OnDestroy {
