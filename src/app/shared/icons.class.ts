@@ -138,6 +138,18 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'login',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/login_FILL0_wght400_GRAD-25_opsz24.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'logout',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/logout_FILL0_wght400_GRAD-25_opsz24.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'rainbow',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/looks_FILL0_wght400_GRAD-25_opsz24.svg'
