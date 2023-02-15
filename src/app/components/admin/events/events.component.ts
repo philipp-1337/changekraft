@@ -21,7 +21,7 @@ export class EventsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   event$: Observable<any>;
   shareVar: any;
-  counter: number;
+  counter: number = 0;
   userId: string;
 
 
@@ -65,8 +65,10 @@ export class EventsComponent implements OnInit, OnDestroy {
   checkPlural() {
     if (this.counter > 1) {
       return 'Events';
-    } else {
+    } else if (this.counter === 1) {
       return 'Event';
+    } else if (this.counter === 0) {
+    return 'Events';
     }
   }
 
