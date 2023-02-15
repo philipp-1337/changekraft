@@ -10,7 +10,6 @@ import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delet
 import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
-import { EventListComponent } from './event-list/event-list.component';
 import { EventsComponent } from './events/events.component';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { UserProfilComponent } from './user-profil/user-profil.component';
@@ -33,7 +32,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         DialogShareComponent,
         AddEventComponent,
         EditEventComponent,
-        EventListComponent,
         EventsComponent,
         UserProfilComponent,
         DialogUserDeleteComponent,

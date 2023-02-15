@@ -4,7 +4,6 @@ import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { AdminComponent } from './admin.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
-import { EventListComponent } from './event-list/event-list.component';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, emailVerified } from '@angular/fire/compat/auth-guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -28,11 +27,6 @@ const adminRoutes: Routes = [
       {
         path: 'add-event',
         component: AddEventComponent,
-        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, emailVerified }
-      },
-      {
-        path: 'event-list',
-        component: EventListComponent,
         canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, emailVerified }
       },
       {
