@@ -6,6 +6,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument
 } from '@angular/fire/compat/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { Event } from '../../../shared/event.model';
 
@@ -24,26 +25,29 @@ export class EventDetailComponent implements OnInit {
   eventDoc: AngularFirestoreDocument<Event>;
   event$: Observable<Event>;
   eventUrl: string;
+  eventId: string;
   urls: EventUrl;
   isLoading = false;
 
   constructor(
     private route: ActivatedRoute,
     private afs: AngularFirestore,
+    public authservice: AuthService,
     private router: Router
   ) { }
 
   ngOnInit() {
+    //Get custom event url from browser url 
     this.route.params.subscribe((params: Params) => {
-
+      //Assign received url to varible (string)
       this.eventUrl = params['eventUrl'];
 
+      //Use url variable to find matching url in database
       const snapshotResult = this.afs.collection('urls', ref =>
         ref.where('url', '==', this.eventUrl)
           .limit(1))
         .snapshotChanges()
         .pipe(mergeMap(url => {
-          console.log(url);
           if (url.length === 0) {
             console.log('nichts gefunden');
             this.router.navigate(['404']);
@@ -52,11 +56,12 @@ export class EventDetailComponent implements OnInit {
             return url;
           }
         }));
-      console.log(snapshotResult);
 
+      // Use result from url search and retrieve event data
       snapshotResult.subscribe(doc => {
         this.urls = <EventUrl>doc.payload.doc.data();
         this.eventDoc = this.afs.doc(`users/${this.urls.user}/events/${this.urls.event}`);
+        this.eventId = this.urls.event
         this.event$ = this.eventDoc.valueChanges().pipe(
           map(a => {
             const data = a as Event;

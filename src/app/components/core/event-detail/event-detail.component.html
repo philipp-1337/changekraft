@@ -29,12 +29,6 @@
               </span>
             </mat-card-subtitle>
           </mat-card-header>
-        </mat-card>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-6 col-lg-8 mt-3">
-        <mat-card appearance="outlined">
           <mat-card-content>
             <p>
               {{ (event$ | async)?.desc }}
@@ -42,21 +36,21 @@
           </mat-card-content>
           <mat-card-actions>
             <button
-              mat-icon-button
+              *ngIf="authservice.isAuthenticated()"
+              mat-stroked-button
               type="button"
-              color="primary"
+              color="accent"
               title="Zurück"
-              routerLink=".."
-              disabled>
-              <mat-icon svgIcon="arrow_back"></mat-icon>
+              [routerLink]="['../../admin/edit-event/' + eventId]"
+              [disabled]="!authservice.isAuthenticated()"> Zurück
             </button>
+            <span class="bar-spacer"></span>
             <button
-              mat-icon-button
+              mat-flat-button
               type="button"
               color="primary"
               title="Anmeldung"
-              routerLink="rsvp/">
-              <mat-icon svgIcon="arrow_forward"></mat-icon>
+              routerLink="rsvp/">RSPV
             </button>
           </mat-card-actions>
         </mat-card>
