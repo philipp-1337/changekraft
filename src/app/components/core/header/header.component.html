@@ -1,33 +1,25 @@
 <div class="sticky-height">
   <mat-toolbar color="primary">
     <mat-toolbar-row class="container">
-      <nav>
-        <a mat-button 
-          class="logo pl-0" 
-          [routerLink]="authservice.isAuthenticated() ? '/admin/dashboard' : '/home'">
-          <span>changekraft</span>
-        </a>
-      </nav>
+      <a mat-button class="logo pl-0" [routerLink]="authservice.isAuthenticated() ? '/admin/dashboard' : '/home'">
+        <span>changekraft</span>
+      </a>
       <span class="bar-spacer"></span>
-      <mat-icon 
-        aria-label="Logo"
-        svgIcon="rainbow">
-      </mat-icon>
+      <button mat-icon-button [routerLink]="authservice.isAuthenticated() ? '/admin/dashboard' : '/home'">
+        <mat-icon aria-label="Logo" svgIcon="rainbow"></mat-icon>
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
 
 <router-outlet></router-outlet>
 
-<div class="bottom">
+<nav class="bottom">
   <mat-toolbar>
     <mat-toolbar-row>
-      <button mat-icon-button 
-        [matMenuTriggerFor]="profileMenu" 
-        id="drawerButton" type="button"
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu" id="drawerButton" type="button"
         aria-label="Toggle Menu">
-        <mat-icon 
-          aria-label="Profil"
+        <mat-icon aria-label="Profil"
           [svgIcon]="authservice.isAuthenticated() ? 'account_circle' : 'account_circle_outline'">
         </mat-icon>
       </button>
@@ -46,42 +38,22 @@
         </ng-template>
       </mat-menu>
       <span class="bar-spacer"></span>
-      <button
-        mat-icon-button
-        class="nav-item"
-        routerLink="/admin/tbc"
-        routerLinkActive="active"
-        disabled>
+      <button mat-icon-button class="nav-item" routerLink="/admin/tbc" routerLinkActive="active" disabled>
         <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
       </button>
       <span class="bar-spacer"></span>
-      <button 
-        mat-icon-button
-        class="nav-item"
-        routerLink="/admin/dashboard" 
-        routerLinkActive="active">
-        <mat-icon 
-          [svgIcon]="authservice.isAuthenticated() ? 'space_dashboard' : 'space_dashboard_outlined'" 
+      <button mat-icon-button class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active">
+        <mat-icon [svgIcon]="authservice.isAuthenticated() ? 'space_dashboard' : 'space_dashboard_outlined'"
           class="nav-item-icon"></mat-icon>
       </button>
       <span class="bar-spacer"></span>
-      <button 
-        mat-icon-button 
-        class="nav-item" 
-        routerLink="/admin/tbc" 
-        routerLinkActive="active" 
-        disabled>
+      <button mat-icon-button class="nav-item" routerLink="/admin/tbc" routerLinkActive="active" disabled>
         <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
       </button>
       <span class="bar-spacer"></span>
-      <button 
-        mat-icon-button 
-        class="nav-item" 
-        routerLink="/admin/settings" 
-        routerLinkActive="active" 
-        disabled>
+      <button mat-icon-button class="nav-item" routerLink="/admin/settings" routerLinkActive="active" disabled>
         <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
       </button>
     </mat-toolbar-row>
   </mat-toolbar>
-</div>
+</nav>
