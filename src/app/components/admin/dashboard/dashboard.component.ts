@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
         <app-events class="col-md-6 col-12 mt-3"></app-events>
       </div>
     </div>
-    <div class="fab position-fixed">
+    <!-- <div class="fab position-fixed">
       <button
         mat-fab
         color="primary"
@@ -18,7 +18,7 @@ import { Component, OnInit } from '@angular/core';
         routerLinkActive="active">
         <mat-icon svgIcon="add"></mat-icon>
       </button>
-    </div>
+    </div> -->
   `,
   styles: [
   ]
