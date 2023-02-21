@@ -23,8 +23,8 @@ $custom-typography: mat.define-typography-config(
 @include mat.core();
 
 // Color Settings
-$rsvp-primary: mat.define-palette(mat.$teal-palette, 600);
-$rsvp-accent: mat.define-palette(mat.$deep-purple-palette, 300);
+$rsvp-primary: mat.define-palette(mat.$deep-purple-palette, 300);
+$rsvp-accent: mat.define-palette(mat.$teal-palette, 600);
 $rsvp-warn: mat.define-palette(mat.$red-palette, 900);
 $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
@@ -100,6 +100,7 @@ input { font-size: 16px;}
   --safe-area-inset-bottom: env(safe-area-inset-bottom);
   height: calc(56px + var(--safe-area-inset-bottom));
   .mat-toolbar {
+    // background-color: mat.get-color-from-palette($rsvp-accent);
     @include media-breakpoint-up(sm) {
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
