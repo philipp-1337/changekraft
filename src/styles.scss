@@ -43,6 +43,14 @@ $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 .text-grey {
   color: rgba(0, 0, 0, 0.54)
 }
+.mat-mdc-form-field-subscript-wrapper {
+  .mat-mdc-form-field-hint-wrapper, 
+  .mat-mdc-form-field-error-wrapper {
+    position: relative;
+    top: -20px;
+    margin: 0 0 -32px 0;
+  }
+}
 
 // poor solution to fix mat-select overlay background
 .mdc-menu-surface {
