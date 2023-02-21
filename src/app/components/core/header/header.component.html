@@ -17,22 +17,34 @@
 <nav class="bottom">
   <mat-toolbar>
     <mat-toolbar-row>
-      <button mat-icon-button class="nav-item" routerLink="/admin/settings" routerLinkActive="active" disabled>
+      <!-- <button mat-icon-button class="nav-item" routerLink="/admin/settings" routerLinkActive="active" disabled>
         <mat-icon svgIcon="settings" class="nav-item-icon"></mat-icon>
       </button>
       <span class="bar-spacer"></span>
       <button mat-icon-button class="nav-item" routerLink="/admin/tbc" routerLinkActive="active" disabled>
         <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
       </button>
-      <span class="bar-spacer"></span>
+      <span class="bar-spacer"></span> -->
       <button mat-icon-button class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active">
         <mat-icon [svgIcon]="authservice.isAuthenticated() ? 'space_dashboard' : 'space_dashboard_outlined'"
           class="nav-item-icon"></mat-icon>
       </button>
-      <span class="bar-spacer"></span>
+      <!-- <span class="bar-spacer"></span>
       <button mat-icon-button class="nav-item" routerLink="/admin/tbc" routerLinkActive="active" disabled>
         <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
-      </button>
+      </button> -->
+      <ng-template [ngIf]="authservice.isAuthenticated()">
+        <span class="bar-spacer"></span>
+        <button
+          *ngIf="hasRoute('dashboard') || hasRoute('edit-event')"
+          mat-fab
+          color="primary"
+          aria-label="Event hinzufügen"
+          routerLink="/admin/add-event"
+          routerLinkActive="active">
+          <mat-icon svgIcon="add"></mat-icon>
+        </button>
+      </ng-template>
       <span class="bar-spacer"></span>
       <ng-template [ngIf]="!authservice.isAuthenticated()">
         <button mat-icon-button routerLink="/login">

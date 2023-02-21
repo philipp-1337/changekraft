@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { IconsClass } from 'src/app/shared/icons.class';
 
 @Component({
@@ -12,8 +12,9 @@ import { IconsClass } from 'src/app/shared/icons.class';
 })
 export class HeaderComponent {
   constructor(
+    private router: Router,
     public authservice: AuthService,
-    public icons: IconsClass
+    public icons: IconsClass,
   ) { }
 
   @ViewChild('drawer', { static: false }) drawer: MatDrawer;
@@ -23,6 +24,10 @@ export class HeaderComponent {
       outlet &&
       outlet.activatedRouteData
     );
+  }
+
+  hasRoute(route: string) {
+    return this.router.url.includes(route);
   }
 
   toggleDrawer() {
