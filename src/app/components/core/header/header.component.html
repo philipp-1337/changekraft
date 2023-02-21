@@ -33,15 +33,18 @@
       <button mat-icon-button class="nav-item" routerLink="/admin/tbc" routerLinkActive="active" disabled>
         <mat-icon svgIcon="commute" class="nav-item-icon"></mat-icon>
       </button> -->
-      <span class="bar-spacer"></span>
-      <button
-        mat-fab
-        color="primary"
-        aria-label="Event hinzufügen"
-        routerLink="/admin/add-event"
-        routerLinkActive="active">
-        <mat-icon svgIcon="add"></mat-icon>
-      </button>
+      <ng-template [ngIf]="authservice.isAuthenticated()">
+        <span class="bar-spacer"></span>
+        <button
+          *ngIf="hasRoute('dashboard') || hasRoute('edit-event')"
+          mat-fab
+          color="primary"
+          aria-label="Event hinzufügen"
+          routerLink="/admin/add-event"
+          routerLinkActive="active">
+          <mat-icon svgIcon="add"></mat-icon>
+        </button>
+      </ng-template>
       <span class="bar-spacer"></span>
       <ng-template [ngIf]="!authservice.isAuthenticated()">
         <button mat-icon-button routerLink="/login">
