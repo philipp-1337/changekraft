@@ -1,7 +1,7 @@
 {
   "name": "changekraft",
   "short_name": "chngkrft",
-  "theme_color": "#00897b",
+  "theme_color": "#9575cd",
   "background_color": "#fff",
   "display": "standalone",
   "scope": "/",
