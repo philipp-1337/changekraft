@@ -17,13 +17,13 @@
   </mat-card-header>
   <mat-card-content class="mt-2 mb-2">
     <mat-chip-listbox aria-label="Events">
-      <mat-chip-option 
+      <mat-chip 
         [routerLink]="['../edit-event/' + event?.id]"
         [color]="event?.dates.multipleDays ? 'primary' : 'accent'"
         *ngFor="let event of event$ | async; let ievent = index"
         matTooltip="{{ event?.desc }}">
         {{ event?.name }}
-      </mat-chip-option>
+      </mat-chip>
     </mat-chip-listbox>
   </mat-card-content>
   <mat-card-actions>

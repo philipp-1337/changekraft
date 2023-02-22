@@ -54,6 +54,12 @@ $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
   }
 }
 
+.mdc-button {
+  .mat-mdc-progress-spinner {
+    position: initial;
+  }
+}
+
 .mat-mdc-snack-bar-handset {
   margin-bottom: env(safe-area-inset-bottom) !important;
 }
