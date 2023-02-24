@@ -51,7 +51,7 @@ export class AddEventComponent implements OnInit {
       name: ['', [Validators.required]],
       url: ['', [
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.-]*$'),
+        Validators.pattern('^[a-z0-9_.-]*$'),
         Validators.minLength(5)
       ]],
       desc: ['', [Validators.required]],
@@ -72,7 +72,7 @@ export class AddEventComponent implements OnInit {
       return 'Bitte eine URL festlegen.';
     }
     if (this.eventForm.controls['url'].hasError('pattern')) {
-      return 'Die URL darf keine Leer- & Sonderzeichen enthalten.';
+      return 'Hier sind nur Kleinbuchstaben, Zahlen, Punkt, Komma, Unter- und Bindestrich erlaubt.';
     }
     return this.eventForm.controls['url'].hasError('minlength') ? 'Die URL muss mindestens 5 Zeichen lang sein.' : '';
   }

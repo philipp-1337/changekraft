@@ -82,9 +82,7 @@
             (click)="onSignup()"
             [disabled]="!signinForm.touched || !signinForm.valid">
             Registrieren
-            <mat-icon
-              *ngIf="disabled"
-              class="button-spinner">
+            <mat-icon *ngIf="disabled">
               <mat-spinner color="accent" diameter="20"></mat-spinner>
             </mat-icon>
           </button>

@@ -43,9 +43,7 @@
                   class="form-control"
                   minlength="5"
                   required>
-                  <mat-error *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">
-                    {{ getErrorMessage() }}
-                  </mat-error>
+                  <mat-error *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">{{ getErrorMessage() }}</mat-error>
                   <mat-hint *ngIf="!urlAvailable">
                     Diese URL ist leider nicht mehr verfügbar.
                   </mat-hint>
