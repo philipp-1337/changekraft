@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 96 960 960" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="482.345" y1="-41.157" x2="482.345" y2="414.843" id="gradient-0-1" xlink:href="#gradient-0"/>
+    <linearGradient id="gradient-0" bx:pinned="true">
+      <stop offset="0.685" style="stop-color: rgb(122, 137, 206);"/>
+      <stop offset="0.695" style="stop-color: rgb(255, 255, 255);"/>
+      <stop offset="0.757" style="stop-color: rgb(0, 137, 123);"/>
+    </linearGradient>
+  </defs>
+  <path d="M24 782q0-94 36-177t98-145q62-62 145.225-98t177-36Q574 326 657 362t145.095 97.857q62.095 61.857 98.5 145.056Q937 688.112 937 782h-73q0-159.344-112.244-271.172Q639.513 399 479.756 399 320 399 208.5 510.879 97 622.758 97 782H24Zm146 0q0-130 89.692-220t220.5-90Q611 472 701 562t90 220h-73q0-99-69-168t-169.092-69q-100.092 0-168.5 69T243 782h-73Z" style="fill-rule: nonzero; fill-opacity: 1; paint-order: fill; fill: url(#gradient-0-1);"/>
+</svg>
