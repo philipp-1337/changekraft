@@ -144,15 +144,21 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
-      'logout',
+      'logo_turquoise',
       sanitizer.bypassSecurityTrustResourceUrl(
-        'assets/fonts/material-icons/svg/logout_FILL0_wght400_GRAD-25_opsz24.svg'
+        'assets/fonts/material-icons/svg/logo_turquoise.svg'
       )
     );
     iconRegistry.addSvgIcon(
-      'rainbow',
+      'logo_white',
       sanitizer.bypassSecurityTrustResourceUrl(
-        'assets/fonts/material-icons/svg/looks_FILL0_wght400_GRAD-25_opsz24.svg'
+        'assets/fonts/material-icons/svg/logo_white.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'logout',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/logout_FILL0_wght400_GRAD-25_opsz24.svg'
       )
     );
     iconRegistry.addSvgIcon(
