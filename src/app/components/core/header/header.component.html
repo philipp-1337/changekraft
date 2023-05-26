@@ -36,13 +36,30 @@
       <ng-template [ngIf]="authservice.isAuthenticated()">
         <span class="bar-spacer"></span>
         <button
-          *ngIf="hasRoute('dashboard') || hasRoute('edit-event')"
+          *ngIf="hasRoute('/admin/dashboard') || hasRoute('/admin/edit-event')"
           mat-fab
           color="primary"
           aria-label="Event hinzufügen"
-          routerLink="/admin/add-event"
+          routerLinkActive="active"
+          (click)="navigateToEventEditScreen()">
+          <div
+            class="mat-fab-overlay" 
+            [@primaryToAccent]="primaryState">
+            <mat-icon svgIcon="add" class="mat-icon-overlay"></mat-icon>
+          </div>
+        </button>
+        <button
+          *ngIf="hasRoute('/admin/add-event')"
+          mat-fab
+          color="accent"
+          aria-label="Event hinzufügen"
+          (click)="navigateToDashboardAndCancel()"
           routerLinkActive="active">
-          <mat-icon svgIcon="add"></mat-icon>
+          <div
+            class="mat-fab-overlay"
+            [@accentToPrimary]="accentState">
+            <mat-icon svgIcon="add" class="mat-icon-overlay"></mat-icon>
+          </div>
         </button>
       </ng-template>
       <span class="bar-spacer"></span>
