@@ -23,8 +23,8 @@ $custom-typography: mat.define-typography-config(
 @include mat.core();
 
 // Color Settings
-$rsvp-primary: mat.define-palette(mat.$deep-purple-palette, 300);
-$rsvp-accent: mat.define-palette(mat.$teal-palette, 600);
+$rsvp-primary: mat.define-palette(mat.$teal-palette, 600);
+$rsvp-accent: mat.define-palette(mat.$deep-purple-palette, 300);
 $rsvp-warn: mat.define-palette(mat.$red-palette, 900);
 $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 

@@ -13,6 +13,16 @@
   }
 }
 
+.mat-fab-overlay {
+  border-radius: 50%; 
+  height: 56px;
+  width: 56px; 
+  .mat-icon-overlay {
+    transform: translateY(10px);
+    vertical-align: middle
+  }
+}
+
 .logo {
   img {
     width: 25px;
