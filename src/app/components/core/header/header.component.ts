@@ -4,6 +4,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { IconsClass } from 'src/app/shared/icons.class';
+import { routerTransition } from 'src/app/route-animations';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,7 @@ import { IconsClass } from 'src/app/shared/icons.class';
   styleUrls: ['./header.component.scss'],
   providers: [IconsClass],
   animations: [
+    routerTransition,
     trigger('primaryToAccent', [
       state('true', style({ transform: 'rotate(0deg)', background: '#00897b' })),
       state('false', style({ transform: 'rotate(-225deg)', background: '#9575cd' })),
@@ -37,7 +39,8 @@ export class HeaderComponent {
   prepareRoute(outlet: RouterOutlet) {
     return (
       outlet &&
-      outlet.activatedRouteData
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
     );
   }
 

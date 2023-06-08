@@ -17,11 +17,13 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    data: {animation: true}
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home'
+    redirectTo: 'home',
+    data: {animation: true}
   },
   {
     path: 'event/:eventUrl',
@@ -44,7 +46,8 @@ const routes: Routes = [
   },
   {
     path: 'password-reset',
-    component: PasswordResetComponent
+    component: PasswordResetComponent,
+    data: {animation: true}
   },
   {
     path: 'email/action',
