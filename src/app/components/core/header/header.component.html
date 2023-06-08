@@ -12,7 +12,9 @@
   </mat-toolbar>
 </div>
 
-<router-outlet></router-outlet>
+<main [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</main>
 
 <nav class="bottom">
   <mat-toolbar>

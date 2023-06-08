@@ -17,11 +17,13 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    data: {animation: true}
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home'
+    redirectTo: 'home',
+    data: {animation: true}
   },
   {
     path: 'event/:eventUrl',
@@ -44,7 +46,8 @@ const routes: Routes = [
   },
   {
     path: 'password-reset',
-    component: PasswordResetComponent
+    component: PasswordResetComponent,
+    data: {animation: true}
   },
   {
     path: 'email/action',
@@ -53,7 +56,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
-    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, animation: true },
   },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }

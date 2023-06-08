@@ -32,6 +32,12 @@ $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 
 @import './assets/scss/bootstrap';
 
+.header-icon {
+  font-size: 40px;
+  height: 40px !important;
+  width: 40px !important;
+}
+
 .bar-spacer {
   flex: 1 1 auto;
 }
@@ -145,11 +151,6 @@ app-root {
         padding-left: calc(16px + var(--safe-area-inset-left));
         flex-grow: 1;
       mat-card {
-        .header-icon {
-          font-size: 40px;
-          height: 40px;
-          width: 40px;
-        }
         .mat-mdc-card-header-text {
           overflow-x: hidden;
           mat-mdc-card-subtitle {
