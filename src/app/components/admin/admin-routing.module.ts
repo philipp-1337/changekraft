@@ -29,7 +29,7 @@ const adminRoutes: Routes = [
       {
         path: 'add-event',
         component: AddEventComponent,
-        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, emailVerified }
+        canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, emailVerified, animation: true }
       },
       {
         path: 'edit-event/:eventId',

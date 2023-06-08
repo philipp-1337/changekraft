@@ -56,7 +56,7 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./components/admin/admin.module').then(m => m.AdminModule),
-    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }
+    canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, animation: true },
   },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }

@@ -18,14 +18,14 @@ export const routerTransition = trigger("routeAnimations", [
       query(":leave", [
         style({ opacity: 1 }),
         animate(
-          "400ms cubic-bezier(.75,-0.48,.26,1.52)",
+          "200ms cubic-bezier(.75,-0.48,.26,1.52)",
           style({ opacity: 0 })
         )
       ]),
       query(":enter", [
         style({ transform: "translateX(0)", opacity: 0 }),
         animate(
-          "400ms cubic-bezier(.75,-0.48,.26,1.52)",
+          "200ms cubic-bezier(.75,-0.48,.26,1.52)",
           style({ opacity: 1 })
         )
       ]),

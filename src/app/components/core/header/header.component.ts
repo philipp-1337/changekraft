@@ -15,13 +15,13 @@ import { routerTransition } from 'src/app/route-animations';
     routerTransition,
     trigger('primaryToAccent', [
       state('true', style({ transform: 'rotate(0deg)', background: '#00897b' })),
-      state('false', style({ transform: 'rotate(-225deg)', background: '#9575cd' })),
-      transition('0 <=> 1', animate('400ms ease'))
+      state('false', style({ transform: 'rotate(-225deg)', background: '#b71c1c' })),
+      transition('0 <=> 1', animate('200ms ease'))
     ]),
     trigger('accentToPrimary', [
-      state('true', style({ transform: 'rotate(-225deg)', background: '#9575cd' })),
+      state('true', style({ transform: 'rotate(-225deg)', background: '#b71c1c' })),
       state('false', style({ transform: 'rotate(0deg)', background: '#00897b' })),
-      transition('0 <=> 1', animate('400ms ease'))
+      transition('0 <=> 1', animate('200ms ease'))
     ])
   ]
 })
@@ -49,14 +49,14 @@ export class HeaderComponent {
     setTimeout(() => {
       this.router.navigate(['./admin/add-event']);
       this.primaryState = true;
-    }, 400);
+    }, 200);
   }
   navigateToDashboardAndCancel() {
     this.accentState = false;
     setTimeout(() => {
       this.router.navigate(['./admin/dashboard']);
       this.accentState = true;
-    }, 400);
+    }, 200);
   }
 
   hasRoute(route: string) {
