@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { trigger, transition, style, animate, state } from '@angular/animations';
 import { MatDrawer } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { IconsClass } from 'src/app/shared/icons.class';
-import { routerTransition } from 'src/app/route-animations';
+import { routerTransition } from 'src/app/shared/route-animations';
+import { accentToPrimary, primaryToAccent } from 'src/app/shared/color-animations';
 
 @Component({
   selector: 'app-header',
@@ -13,16 +13,8 @@ import { routerTransition } from 'src/app/route-animations';
   providers: [IconsClass],
   animations: [
     routerTransition,
-    trigger('primaryToAccent', [
-      state('true', style({ transform: 'rotate(0deg)', background: '#00897b' })),
-      state('false', style({ transform: 'rotate(-225deg)', background: '#b71c1c' })),
-      transition('0 <=> 1', animate('200ms ease'))
-    ]),
-    trigger('accentToPrimary', [
-      state('true', style({ transform: 'rotate(-225deg)', background: '#b71c1c' })),
-      state('false', style({ transform: 'rotate(0deg)', background: '#00897b' })),
-      transition('0 <=> 1', animate('200ms ease'))
-    ])
+    primaryToAccent,
+    accentToPrimary
   ]
 })
 export class HeaderComponent {

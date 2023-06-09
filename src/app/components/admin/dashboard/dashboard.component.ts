@@ -9,16 +9,6 @@ import { Component } from '@angular/core';
         <app-events class="col-md-6 col-12 mt-3"></app-events>
       </div>
     </div>
-    <!-- <div class="fab position-fixed">
-      <button
-        mat-fab
-        color="primary"
-        aria-label="Event hinzufügen"
-        routerLink="/admin/add-event"
-        routerLinkActive="active">
-        <mat-icon svgIcon="add"></mat-icon>
-      </button>
-    </div> -->
   `,
   styles: [
   ]
