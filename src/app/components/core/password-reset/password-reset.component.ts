@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
