@@ -3,7 +3,6 @@ import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UpdateService } from './services/update.service';
 import firebase from 'firebase/compat/app';
 
