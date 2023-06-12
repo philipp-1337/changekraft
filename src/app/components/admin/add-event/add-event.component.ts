@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogWarningComponent } from 'src/app/shared/dialog-warning/dialog-warning.component';
 
 interface EventUrl {
   eventId: string;
@@ -32,7 +34,8 @@ export class AddEventComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private breakpointObserver: BreakpointObserver,
-    private fb: UntypedFormBuilder
+    private fb: UntypedFormBuilder,
+    public dialog: MatDialog,
   ) { }
 
   eventForm: UntypedFormGroup;
@@ -221,4 +224,29 @@ export class AddEventComponent implements OnInit {
     this.snackbar.openSnackBar('Event hinzugefügt.', 'Ok', 2500);
     this.router.navigate(['./admin/dashboard']);
   }
+
+  canExit() : boolean {
+ 
+    if (this.eventForm.dirty) {
+      this.openWarnDialog('Achtung', 'Deine Eingaben gehen verloren. Was möchtest du tun?', 'Löschen', true);
+        return true
+      } else {
+        return false
+      }
+    }
+
+    openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
+      const dialogRef = this.dialog.open(DialogWarningComponent, {
+        width: '250px',
+        data: { title: title, text: text, actionLabel: actionLabel, action: true}
+      });
+      dialogRef.afterClosed().subscribe(action => {
+        if (action === undefined) {
+          console.log('Der Vorgang wurde abgebrochen')
+        } else {
+          this.eventForm.reset()
+        }
+      });
+    }
+
 }

@@ -29,6 +29,7 @@ const adminRoutes: Routes = [
       {
         path: 'add-event',
         component: AddEventComponent,
+        canDeactivate: [(component: AddEventComponent) => !component.canExit()],
         canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin, emailVerified, animation: true }
       },
       {
