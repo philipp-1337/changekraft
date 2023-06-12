@@ -8,6 +8,7 @@ import { AdminComponent } from './admin.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
 import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
+import { DialogWarningComponent } from 'src/app/shared/dialog-warning/dialog-warning.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { EventsComponent } from './events/events.component';
@@ -30,6 +31,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         AdminZusagenComponent,
         DialogDeleteComponent,
         DialogShareComponent,
+        DialogWarningComponent,
         AddEventComponent,
         EditEventComponent,
         EventsComponent,

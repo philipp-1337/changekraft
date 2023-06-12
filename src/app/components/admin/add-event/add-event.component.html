@@ -135,12 +135,13 @@
             </button>
             <!-- <span class="bar-spacer"></span>
             <button
-              mat-stroked-button
+              mat-flat-button
               type="button"
-              title="Abbrechen"
-              routerLink="/admin/dashboard" 
-              color="warn">
-              <span>Abbrechen</span>
+              title="Löschen"
+              (click)="reset()"
+              color="warn"
+              [disabled]="!eventForm.dirty">
+              <span>Löschen</span>
             </button> -->
           </mat-card-actions>
         </form>
