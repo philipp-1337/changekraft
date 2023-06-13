@@ -1,0 +1,50 @@
+<div mat-dialog-content>
+  <h2>E-Mail ändern</h2>
+  <form #credential="ngForm" autocomplete="off">
+    <p>Neue E-Mail</p>
+    <mat-form-field class="w-100">
+      <input
+        matInput
+        placeholder="Neue E-Mail"
+        type="email"
+        color="accent"
+        id="newemail"
+        name="newemail"
+        ngModel
+        class="form-control"
+        autocomplete="off"
+        required>
+    </mat-form-field><br />
+    <p>Bitte authentifizieren zum Bestätigen.</p>
+    <mat-form-field class="w-100">
+      <input
+        matInput
+        placeholder="Alte E-Mail"
+        type="email"
+        color="accent"
+        id="email"
+        name="email"
+        ngModel
+        class="form-control"
+        required>
+    </mat-form-field><br />
+  <mat-form-field class="w-100">
+    <input
+      matInput
+      placeholder="Passwort"
+      type="password"
+      color="accent"
+      id="password"
+      name="password"
+      ngModel
+      class="form-control"
+      autocomplete="new-password"
+      required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" [disabled]="credential.invalid" [mat-dialog-close]="credential">Speichern</button>
+  <span class="bar-spacer"></span> 
+  <button mat-stroked-button color="warn" (click)="onCloseClick()" cdkFocusInitial>Abbrechen</button>
+</div>

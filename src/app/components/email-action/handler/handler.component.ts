@@ -46,6 +46,20 @@ export class HandlerComponent implements OnInit {
             this.error = err;
           }
           );
+        // check if mode is recoverEmail
+      } else if (this.mode === 'recoverEmail') {
+        this.title = 'E-Mail zurücksetzen';
+        this.afAuth
+          .applyActionCode(this.code)
+          .then(() => {
+            this.snackbar.openSnackBar('Die E-Mail wurde zurückgesetzt.', 'Ok', 2500);
+            this.router.navigate(['/admin/profile']);
+          })
+          .catch(err => {
+            this.text = this.errormessage;
+            this.error = err;
+          }
+          );
         // check if mode is resetPassword
       } else if (this.mode === 'resetPassword') {
         this.title = 'Passwort zurücksetzen';

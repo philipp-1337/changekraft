@@ -8,6 +8,7 @@ import { DialogUserDeleteComponent } from './dialog-user-delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/compat/firestore';
+import { DialogEmailUpdateComponent } from './dialog-email-update.component';
 
 @Component({
   selector: 'app-user-profil',
@@ -61,13 +62,35 @@ export class UserProfilComponent implements OnInit, OnDestroy {
     }, 1000);
     this.snackbar.closeSnackBar();
   }
+  
+  async updateEmailDialog() {
+    const id = (await this.authservice.getCurrentUser()).uid;
+    const name = this.userService.name;
+    const user = this.authservice.getCurrentUser();
+    const dialogRef = this.dialog.open(DialogEmailUpdateComponent, {
+      width: '350px',
+      data: { id: id, name: name, user: user }
+    });
+
+    dialogRef.afterClosed().subscribe(cred => {
+      if (cred === undefined) {
+        console.log('E-Mail-Änderung wurde abgegebrochen.');
+      } else {
+        const newemail = cred.value.newemail;
+        const email = cred.value.email;
+        const password = cred.value.password;
+        console.log('E-Mail-Änderung wurde bestätigt.');
+        this.updateEmail(newemail, email, password);
+      }
+    });
+  }
 
   async deleteDialog() {
     const id = (await this.authservice.getCurrentUser()).uid;
     const name = this.userService.name;
     const user = this.authservice.getCurrentUser();
     const dialogRef = this.dialog.open(DialogUserDeleteComponent, {
-      width: '250px',
+      width: '350px',
       data: { id: id, name: name, user: user }
     });
 
@@ -87,6 +110,21 @@ export class UserProfilComponent implements OnInit, OnDestroy {
     this.snackbar.openSnackBar('Fehler: ' + errorcode, 'Ok', 2500);
   }
 
+  async updateEmail(newemail: string, email: string, password: string) {
+    const user = this.authservice.getCurrentUser();
+    const credential = this.authservice.getCredential(email, password);
+    (await user).reauthenticateWithCredential(credential).then(async response => {
+      // User re-authenticated.
+      this.userService.updateEmail(newemail);
+      console.log('E-Mail Adresse geändert. Alt: ' + email + ' - Neu: ' + newemail);
+      this.snackbar.verificationSnackBar('Bitte E-Mail bestätigen.', 'Link erneut senden?');
+    }).catch(error => {
+      // An error happened.
+      console.log(error);
+      this.errorSnackbar(error.code);
+    });
+  }
+
   async deleteUser(email: string, password: string) {
     const user = this.authservice.getCurrentUser();
     const credential = this.authservice.getCredential(email, password);
@@ -96,7 +134,7 @@ export class UserProfilComponent implements OnInit, OnDestroy {
         // User deleted.
         console.log('Benutzer gelöscht');
         console.log('Der Benutzer mit der E-Mail ' + email + ' wurde gelöscht.');
-        this.router.navigate(['/home']);
+        this.authservice.logout();
       }).catch(error => {
         // An error happened.
         console.log(error);

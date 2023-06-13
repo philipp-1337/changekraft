@@ -237,7 +237,7 @@ export class AddEventComponent implements OnInit {
 
     openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
       const dialogRef = this.dialog.open(DialogWarningComponent, {
-        width: '250px',
+        width: '350px',
         data: { title: title, text: text, actionLabel: actionLabel, action: true}
       });
       dialogRef.afterClosed().subscribe(action => {

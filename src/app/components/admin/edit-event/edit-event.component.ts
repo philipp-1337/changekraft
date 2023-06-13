@@ -86,7 +86,7 @@ export class EditEventComponent implements OnInit {
   deleteDialog(name: string) {
     const id = this.eventId;
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
-      width: '250px',
+      width: '350px',
       data: { id: id, name: name }
     });
 
@@ -102,7 +102,7 @@ export class EditEventComponent implements OnInit {
   }
   shareDialog(title: string, text: string, url: string) {
     this.dialog.open(DialogShareComponent, {
-      width: '250px',
+      width: '350px',
       data: { title: title, text: text, url: url }
     });
   }

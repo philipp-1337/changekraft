@@ -170,7 +170,7 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
 
   openDialog(id: string, name: string) {
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
-      width: '250px',
+      width: '350px',
       data: { id: id, name: name }
     });
 

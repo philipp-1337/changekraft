@@ -23,6 +23,7 @@ import {
 } from '@angular/material-moment-adapter';
 import { DialogUserDeleteComponent } from './user-profil/dialog-user-delete.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DialogEmailUpdateComponent } from './user-profil/dialog-email-update.component';
 
 @NgModule({
     imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MatMomentDateModule],
@@ -37,6 +38,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         EventsComponent,
         UserProfilComponent,
         DialogUserDeleteComponent,
+        DialogEmailUpdateComponent,
         DashboardComponent
     ],
     providers: [

@@ -33,6 +33,18 @@ export class UserService {
       });
   }
 
+  updateEmail(email: string) {
+    const user = firebase.auth().currentUser;
+  
+    user.updateEmail(email).then(() => {
+      console.log('Update successful: ' + email)
+      this.sendVerification();
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
+
+
   sendVerification() {
     this.user = firebase.auth().currentUser;
     this.user

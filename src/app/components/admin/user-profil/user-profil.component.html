@@ -58,7 +58,7 @@
     <mat-menu #more="matMenu">
       <button
         mat-menu-item
-        disabled
+        (click)="updateEmailDialog()"
         type="button"
         title="E-Mail ändern">
         <mat-icon aria-label="E-Mail ändern" svgIcon="email"></mat-icon>
@@ -66,7 +66,7 @@
       </button>
       <button
         mat-menu-item
-        disabled
+        routerLink="/password-reset"
         type="button"
         title="Passwort ändern">
         <mat-icon aria-label="Passwort ändern" svgIcon="password"></mat-icon>
