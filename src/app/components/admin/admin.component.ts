@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { routerTransition } from "src/app/shared/route-animations";
 
@@ -11,13 +11,19 @@ import { routerTransition } from "src/app/shared/route-animations";
   `,
   animations: [routerTransition],
 })
-export class AdminComponent {
-  constructor() {}
+export class AdminComponent implements AfterViewInit {
+  constructor(private changeRef: ChangeDetectorRef) {}
+
+  ngAfterViewInit(): void {
+    this.changeRef.detectChanges();
+ }
+
   prepareRoute(outlet: RouterOutlet) {
     return (
       outlet &&
       outlet.activatedRouteData &&
-      outlet.activatedRouteData["animation"]
+      outlet?.activatedRouteData["animation"]
     );
   }
+
 }
