@@ -1,11 +1,11 @@
 <div class="sticky-height">
   <mat-toolbar color="accent">
     <mat-toolbar-row class="container">
-      <a mat-button class="logo pl-0" [routerLink]="authservice.isAuthenticated() ? '/admin/dashboard' : '/home'">
+      <a mat-button class="logo pl-0" [routerLink]="authservice.isAuthenticated() ? '/admin/dashboard' : '/home'" title="Home">
         <span>changekraft</span>
       </a>
       <span class="bar-spacer"></span>
-      <button mat-icon-button [routerLink]="authservice.isAuthenticated() ? '/admin/dashboard' : '/home'">
+      <button mat-icon-button [routerLink]="authservice.isAuthenticated() ? '/admin/dashboard' : '/home'" title="Home">
         <mat-icon aria-label="Logo" svgIcon="logo_white"></mat-icon>
       </button>
     </mat-toolbar-row>
@@ -27,7 +27,7 @@
         <mat-icon svgIcon="hotel" class="nav-item-icon"></mat-icon>
       </button>
       <span class="bar-spacer"></span> -->
-      <button mat-icon-button class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active">
+      <button mat-icon-button class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active" title="Dashboard">
         <mat-icon [svgIcon]="authservice.isAuthenticated() ? 'space_dashboard' : 'space_dashboard_outlined'"
           class="nav-item-icon"></mat-icon>
       </button>
