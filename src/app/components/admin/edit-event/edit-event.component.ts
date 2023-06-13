@@ -85,7 +85,6 @@ export class EditEventComponent implements OnInit {
 
   deleteDialog(name: string) {
     const id = this.eventId;
-    console.log(id)
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
       width: '250px',
       data: { id: id, name: name }

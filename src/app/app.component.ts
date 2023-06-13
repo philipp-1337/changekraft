@@ -24,9 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // console.log(this.authUnsub);
     this.authservice.authChange_$();
-    // console.log(this.authUnsub);
 
     const headers = new HttpHeaders({ 'Set-Cookie': 'HttpOnly;Secure;SameSite=Strict' });
 

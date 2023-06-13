@@ -62,7 +62,6 @@ export class HandlerComponent implements OnInit {
   setPassword() {
     const password = this.frmSetNewPassword.controls['password'].value;
     const confirmPassword = this.frmSetNewPassword.controls['confirmPassword'].value;
-    console.log(password);
     if (password !== confirmPassword) {
       this.snackbar.openSnackBar('Die Passwörter stimmen nicht überein.', 'Ok', 2500);
       return;
