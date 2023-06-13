@@ -66,17 +66,17 @@
       </ng-template>
       <span class="bar-spacer"></span>
       <ng-template [ngIf]="!authservice.isAuthenticated()">
-        <button mat-icon-button routerLink="/login">
+        <button mat-icon-button routerLink="/login" title="Login">
           <mat-icon aria-label="Login" svgIcon="login"></mat-icon>
         </button>
       </ng-template>
       <ng-template [ngIf]="authservice.isAuthenticated()">
         <button mat-icon-button [matMenuTriggerFor]="profileMenu" id="drawerButton" type="button"
-          aria-label="Toggle Logout Menu">
+          aria-label="Toggle Logout Menu" titel="Menu">
           <mat-icon aria-label="Logout" svgIcon="logout"></mat-icon>
         </button>
         <mat-menu #profileMenu="matMenu" class="profile-menu">
-          <button mat-menu-item (click)="onLogout()">
+          <button mat-menu-item (click)="onLogout()" title="Logout">
             <!-- <mat-icon aria-label="Logout" svgIcon="lock" color="warn"></mat-icon> -->
             <span class="text-error">Abmelden?</span>
           </button>
