@@ -26,7 +26,11 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authservice.authChange_$();
 
-    const headers = new HttpHeaders({ 'Set-Cookie': 'HttpOnly;Secure;SameSite=Strict' });
+    const headers = new HttpHeaders({ 
+      'Set-Cookie': 'HttpOnly;Secure;SameSite=Strict',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
 
     this.router.events.subscribe(evt => {
       if (!(evt instanceof NavigationEnd)) {
