@@ -40,6 +40,9 @@ export class HandlerComponent implements OnInit {
           .then(() => {
             this.snackbar.openSnackBar('E-Mail erfolgreich verifiziert.', 'Ok', 2500);
             this.router.navigate(['/admin/profile']);
+            setTimeout(() => {
+              window.location.reload()
+            }, 300);
           })
           .catch(err => {
             this.text = this.errormessage;
@@ -54,6 +57,9 @@ export class HandlerComponent implements OnInit {
           .then(() => {
             this.snackbar.openSnackBar('Die E-Mail wurde zurückgesetzt.', 'Ok', 2500);
             this.router.navigate(['/admin/profile']);
+            setTimeout(() => {
+              window.location.reload()
+            }, 300);
           })
           .catch(err => {
             this.text = this.errormessage;
