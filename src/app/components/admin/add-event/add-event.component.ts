@@ -35,7 +35,7 @@ export class AddEventComponent implements OnInit {
     private userService: UserService,
     private breakpointObserver: BreakpointObserver,
     private fb: UntypedFormBuilder,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) { }
 
   eventForm: UntypedFormGroup;
@@ -46,8 +46,9 @@ export class AddEventComponent implements OnInit {
   taken: boolean;
   eventData: {};
   event$: Observable<any>;
-  minDate = new Date();
-  maxDate = new Date(2099, 12, 31);
+  minDateStart = new Date();
+  minDateEnd = new Date();
+  maxDate = new Date(2099, 11, 31);
 
   buildForm() {
     this.eventForm = this.fb.group({
@@ -141,6 +142,17 @@ export class AddEventComponent implements OnInit {
       }
     }, 100);
     this.getSingleEventData();
+    // Disable the endDate initially
+    this.dates.get('endDate').disable();
+    // Listen for changes in the startDate field and enable/disable the endDate field accordingly and adjust the minDateEnd
+    this.dates.get('startDate').valueChanges.subscribe(value => {
+      if (value) {
+        this.dates.get('endDate').enable();
+        this.minDateEnd = new Date(value + 86400000)
+      } else {
+        this.dates.get('endDate').disable();
+      }
+    });
   }
 
   async getSingleEventData() {
@@ -169,7 +181,7 @@ export class AddEventComponent implements OnInit {
   calcDays() {
     const start = this.dates.controls['startDate'].value;
     const end = this.dates.controls['endDate'].value;
-    const days = Math.round((end - start) / 86400000); // 86400000 = 1 day (in ms)
+    const days = 1 + Math.round((end - start) / 86400000); // 86400000 = 1 day (in ms)
     return days;
   }
 
@@ -238,13 +250,15 @@ export class AddEventComponent implements OnInit {
     openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
       const dialogRef = this.dialog.open(DialogWarningComponent, {
         width: '350px',
-        data: { title: title, text: text, actionLabel: actionLabel, action: true}
+        data: { title: title, text: text, actionLabel: actionLabel, action: action}
       });
       dialogRef.afterClosed().subscribe(action => {
         if (action === undefined) {
           console.log('Der Vorgang wurde abgebrochen')
         } else {
           this.eventForm.reset()
+          console.log('Die Eingaben wurden zurückgesetzt.')
+
         }
       });
     }

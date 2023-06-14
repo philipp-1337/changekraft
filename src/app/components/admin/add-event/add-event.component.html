@@ -73,14 +73,14 @@
                 name="multipleDays"
                 labelPosition="before"
                 formControlName="multipleDays">
-                <span class="text-grey">| mehrtägig</span>
+                <span class="text-grey">| mehrtägig</span>
               </mat-checkbox><br />
               <mat-form-field class="w-100 datepicker">
                 <input
                   matInput
                   required
                   placeholder="Beginn"
-                  [min]="minDate" [max]="maxDate"
+                  [min]="minDateStart" [max]="maxDate"
                   [matDatepicker]="pickerAn"
                   formControlName="startDate">
                   <mat-hint
@@ -98,7 +98,7 @@
                 <input
                   matInput
                   placeholder="Ende"
-                  [min]="minDate" [max]="maxDate"
+                  [min]="minDateEnd" [max]="maxDate"
                   [matDatepicker]="pickerAb"
                   formControlName="endDate"
                   required>
@@ -138,7 +138,7 @@
               mat-flat-button
               type="button"
               title="Löschen"
-              (click)="reset()"
+              (click)="canExit()"
               color="warn"
               [disabled]="!eventForm.dirty">
               <span>Löschen</span>
