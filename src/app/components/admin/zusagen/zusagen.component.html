@@ -92,13 +92,22 @@
       <mat-card appearance="outlined" class="mt-3" *ngIf="(rsvp$ | async)">
         <mat-card-actions>
           <button
-            mat-button
+            mat-flat-button
             color="primary"
             (click)="exportAsXLSX()"
             matBadge="{{ counter }}"
             matBadgeColor="accent">
             Excel Download
           </button>
+           <span class="bar-spacer"></span>
+           <button
+              mat-stroked-button
+              type="button"
+              color="accent"
+              title="Zurück"
+              [routerLink]="['/admin/edit-event/' + eventId]"> 
+              Zurück
+            </button>
         </mat-card-actions>
       </mat-card>
     </div>

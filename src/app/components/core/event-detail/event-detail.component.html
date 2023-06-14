@@ -36,6 +36,14 @@
           </mat-card-content>
           <mat-card-actions>
             <button
+              mat-flat-button
+              type="button"
+              color="primary"
+              title="Anmeldung"
+              routerLink="rsvp/">RSPV
+            </button>
+            <span class="bar-spacer"></span>
+            <button
               *ngIf="authservice.isAuthenticated()"
               mat-stroked-button
               type="button"
@@ -43,14 +51,6 @@
               title="Zurück"
               [routerLink]="['../../admin/edit-event/' + eventId]"
               [disabled]="!authservice.isAuthenticated()"> Zurück
-            </button>
-            <span class="bar-spacer"></span>
-            <button
-              mat-flat-button
-              type="button"
-              color="primary"
-              title="Anmeldung"
-              routerLink="rsvp/">RSPV
             </button>
           </mat-card-actions>
         </mat-card>
