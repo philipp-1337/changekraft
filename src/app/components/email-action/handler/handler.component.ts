@@ -17,7 +17,7 @@ export class HandlerComponent implements OnInit {
   errormessage = 'Leider ist ein Fehler aufgetreten. Bitte versuche es erneut.';
 
   frmSetNewPassword = this.fb.group({
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(12)]],
     confirmPassword: ['', [Validators.required]]
   });
 

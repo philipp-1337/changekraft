@@ -46,6 +46,12 @@
                     name="password"
                     type="password"
                     class="form-control">
+                    <mat-error *ngIf="frmSetNewPassword.controls['password'].touched && frmSetNewPassword.controls['password'].hasError('required')">
+                      Bitte ein Passwort vergeben.
+                    </mat-error>
+                    <mat-error *ngIf="frmSetNewPassword.controls['password'].touched && frmSetNewPassword.controls['password'].hasError('minlength')">
+                      Das Passwort muss mindestens 12 Zeichen haben.
+                    </mat-error>
                   </mat-form-field><br />
                   <mat-form-field
                   class="w-100">
@@ -58,6 +64,9 @@
                     id="confirmPassword"
                     name="confirmPassword"
                     class="form-control">
+                    <mat-error *ngIf="frmSetNewPassword.controls['confirmPassword'].touched && frmSetNewPassword.controls['confirmPassword'].hasError('required')">
+                      Bitte das Passwort wiederholen.
+                    </mat-error>
                   </mat-form-field><br />
               </form>
             </ng-container>
@@ -79,8 +88,9 @@
             </mat-icon>
           </button> -->
           <button
-            mat-button
+            mat-flat-button
             color="primary"
+            [disabled]="frmSetNewPassword.invalid"
             (click)="setPassword()">Passwort zurücksetzen
           </button>
         </mat-card-actions>

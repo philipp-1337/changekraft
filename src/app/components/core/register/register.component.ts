@@ -16,9 +16,9 @@ export class RegisterComponent {
   hide1 = true;
   hide2 = true;
   disabled = false;
-  signinForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email, Validators.minLength(6)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+  signUpForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email, Validators.minLength(5)]],
+    password: ['', [Validators.required, Validators.minLength(12)]],
     confirm_password: ['', [Validators.required, matchOtherValidator('password')]]
   });
 
@@ -29,8 +29,13 @@ export class RegisterComponent {
     private userService: UserService) { }
 
   onSignup() {
-    const email = this.signinForm.controls['email'].value;
-    const password = this.signinForm.controls['password'].value;
+    const email = this.signUpForm.controls['email'].value;
+    const password = this.signUpForm.controls['password'].value;
+    const confirmPassword = this.signUpForm.controls['confirm_password'].value;
+    if (password !== confirmPassword) {
+      this.snackbar.openSnackBar('Die Passwörter stimmen nicht überein.', 'Ok', 2500);
+      return;
+    }
     this.disabled = true;
     this.authservice.signupUser(email, password)
       .then(response => {
