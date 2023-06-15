@@ -12,6 +12,10 @@ export class Event {
       multipleDays: boolean,
       startDate: Timestamp,
       endDate: Timestamp
+    },
+    public images: {
+      iconUrl: string,
+      headerUrl: string
     }
   ) { }
 }

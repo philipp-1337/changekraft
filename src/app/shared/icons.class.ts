@@ -228,6 +228,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'upload',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/upload_FILL0_wght400_GRAD0_opsz48.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'visibility_off',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-visibility_off-24px.svg'

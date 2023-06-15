@@ -5,132 +5,127 @@
         <form [formGroup]="eventForm">
           <mat-card-header>
             <div class="justify-content-center align-self-center" mat-card-avatar>
-              <mat-icon
-                svgIcon="invitation"
-                class="header-icon"></mat-icon>
+              <mat-icon svgIcon="invitation" class="header-icon"></mat-icon>
             </div>
             <mat-card-title>Event hinzufügen</mat-card-title>
             <mat-card-subtitle class="mb-0">Hier wird das Event erstellt</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p>
-              <mat-form-field class="w-100">
-                <input
-                  matInput
-                  type="text"
-                  color="accent"
-                  id="name"
-                  formControlName="name"
-                  placeholder="Name"
-                  class="form-control"
-                  required>
-                  <mat-error *ngIf="eventForm.controls['name'].touched && !eventForm.controls['name'].valid">
-                    Bitte dem Event einen Namen geben.
-                  </mat-error>
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field
-                class="w-100"
-                [ngClass]="{'mat-form-field-invalid': !urlAvailable}">
-                <input
-                  matInput
-                  type="text"
-                  color="accent"
-                  id="url"
-                  formControlName="url"
-                  placeholder="URL"
-                  class="form-control"
-                  minlength="5"
-                  required>
-                  <mat-error *ngIf="eventForm.controls['url'].touched && !eventForm.controls['url'].valid">{{ getErrorMessage() }}</mat-error>
-                  <mat-hint *ngIf="!urlAvailable">
-                    Diese URL ist leider nicht mehr verfügbar.
-                  </mat-hint>
-              </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field class="w-100">
-                <textarea
-                  matInput
-                  type="text"
-                  color="accent"
-                  id="desc"
-                  formControlName="desc"
-                  placeholder="Beschreibung"
-                  class="form-control"
-                  required>
+            <h3>Details</h3>
+            <mat-form-field class="w-100">
+              <input matInput type="text" color="accent" id="name" formControlName="name" placeholder="Name"
+                class="form-control" required />
+              <mat-error *ngIf="
+                    eventForm.controls['name'].touched &&
+                    !eventForm.controls['name'].valid
+                  ">
+                Bitte dem Event einen Namen geben.
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100" [ngClass]="{ 'mat-form-field-invalid': !urlAvailable }">
+              <input matInput type="text" color="accent" id="url" formControlName="url" placeholder="URL"
+                class="form-control" minlength="5" required />
+              <mat-error *ngIf="
+                    eventForm.controls['url'].touched &&
+                    !eventForm.controls['url'].valid
+                  ">{{ getErrorMessage() }}</mat-error>
+              <mat-hint *ngIf="!urlAvailable">
+                Diese URL ist leider nicht mehr verfügbar.
+              </mat-hint>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <textarea matInput type="text" color="accent" id="desc" formControlName="desc" placeholder="Beschreibung"
+                class="form-control" required>
                   <mat-error *ngIf="eventForm.controls['desc'].touched && !eventForm.controls['desc'].valid">
                     Bitte eine Beschreibung verfassen.
                   </mat-error>
                 </textarea>
-              </mat-form-field>
-            </p>
+            </mat-form-field>
             <div formGroupName="dates">
-              <span>Datum </span>
-              <mat-checkbox
-                id="multipleDays"
-                name="multipleDays"
-                labelPosition="before"
-                formControlName="multipleDays">
-                <span class="text-grey">| mehrtägig</span>
-              </mat-checkbox><br />
+              <h3>Datum </h3>
+              <mat-checkbox id="multipleDays" name="multipleDays" labelPosition="before" formControlName="multipleDays">
+                <span class="text-grey">Mehrtägig</span></mat-checkbox><br />
               <mat-form-field class="w-100 datepicker">
-                <input
-                  matInput
-                  required
-                  placeholder="Beginn"
-                  [min]="minDateStart" [max]="maxDate"
-                  [matDatepicker]="pickerAn"
-                  formControlName="startDate">
-                  <mat-hint
-                    *ngIf="!dates.controls['startDate'].valid && !dates.controls['startDate'].touched">
-                    Datum-Format: TT.DD.JJJJ</mat-hint>
-                  <mat-error
-                    *ngIf="dates.controls['startDate'].invalid && dates.controls['startDate'].touched">
-                    Bitte ein korrektes Datum angeben.
-                  </mat-error>
+                <input matInput required placeholder="Beginn" [min]="minDateStart" [max]="maxDate"
+                  [matDatepicker]="pickerAn" formControlName="startDate" />
+                <mat-hint *ngIf="
+                      !dates.controls['startDate'].valid &&
+                      !dates.controls['startDate'].touched
+                    ">
+                  Datum-Format: TT.DD.JJJJ</mat-hint>
+                <mat-error *ngIf="
+                      dates.controls['startDate'].invalid &&
+                      dates.controls['startDate'].touched
+                    ">
+                  Bitte ein korrektes Datum angeben.
+                </mat-error>
                 <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
                 <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
               </mat-form-field>
-            <div *ngIf="dates.controls['multipleDays'].value === true">
-              <mat-form-field class="w-100 datepicker">
-                <input
-                  matInput
-                  placeholder="Ende"
-                  [min]="minDateEnd" [max]="maxDate"
-                  [matDatepicker]="pickerAb"
-                  formControlName="endDate"
-                  required>
-                  <mat-hint
-                    *ngIf="!dates.controls['endDate'].touched">
+              <div *ngIf="dates.controls['multipleDays'].value === true">
+                <mat-form-field class="w-100 datepicker">
+                  <input matInput placeholder="Ende" [min]="minDateEnd" [max]="maxDate" [matDatepicker]="pickerAb"
+                    formControlName="endDate" required />
+                  <mat-hint *ngIf="!dates.controls['endDate'].touched">
                     Datum-Format: TT.DD.JJJJ</mat-hint>
-                  <mat-error
-                    *ngIf="dates.controls['endDate'].touched">
+                  <mat-error *ngIf="dates.controls['endDate'].touched">
                     Bitte ein korrektes Datum angeben.
                   </mat-error>
-                <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
-                <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
-              </mat-form-field>
-              <span
-                style="color:grey"
-                *ngIf="dates.controls['startDate'].valid && dates.controls['endDate'].valid">
-                <span *ngIf="checkRange()">Dauer des Events: {{ calcDays() }} {{ checkPlural() }}</span>
-                <span *ngIf="!checkRange()" class="text-error">
-                  Das Zeitraumkontinuum ist in Gefahr.
+                  <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
+                  <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
+                </mat-form-field>
+                <span style="color: grey" *ngIf="
+                  dates.controls['startDate'].valid &&
+                  dates.controls['endDate'].valid
+                  ">
+                  <span *ngIf="checkRange()">Dauer des Events: {{ calcDays() }}
+                    {{ checkPlural() }}</span>
+                  <span *ngIf="!checkRange()" class="text-error">
+                    Das Zeitraumkontinuum ist in Gefahr.
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
-          </div>
+            <div formGroupName="images">
+              <h3>Bilder </h3>
+              <span class="text-grey">(max 3 MB; png & jpg)</span>
+              <mat-form-field class="w-100">
+                <mat-label>Icon</mat-label>
+                <ngx-mat-file-input type="file" accept=".png,.jpg" id="iconUrl" name="iconUrl" class="form-control"
+                  formControlName="iconUrl" (change)="onIconSelected($event)" valuePlaceholder="{{ placeholderIcon }}">
+                </ngx-mat-file-input>
+                <button mat-icon-button matSuffix aria-label="Upload" title="Upload">
+                  <mat-icon svgIcon="upload"></mat-icon>
+                </button>
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Header</mat-label>
+                <ngx-mat-file-input type="file" accept=".png,.jpg" id="headerUrl" name="headerUrl" class="form-control"
+                  formControlName="headerUrl" (change)="onHeaderSelected($event)"
+                  valuePlaceholder="{{ placeholderHeader }}">
+                </ngx-mat-file-input>
+                <button mat-icon-button matSuffix aria-label="Upload" title="Upload">
+                  <mat-icon svgIcon="upload"></mat-icon>
+                </button>
+              </mat-form-field>
+              <h3 *ngIf="iconPath || headerPath">Vorschau</h3>
+              <div class="row">
+                <div class="col-6">
+                  <img class="img-thumbnail img-fluid w-100" [src]="iconPath" *ngIf="iconPath">
+                </div>
+                <div class="col-6">
+                  <img class="img-thumbnail img-fluid w-100" [src]="headerPath" *ngIf="headerPath">
+                </div>
+              </div>
+            </div>
           </mat-card-content>
           <mat-card-actions>
-            <button
-            mat-flat-button
-            type="button"
-            title="Speichern"
-            (click)="onSave()"
-            color="primary"
-            [disabled]="eventForm.invalid || !eventForm.controls['url'].touched || !urlAvailable || !checkRange()">
+            <button mat-flat-button type="button" title="Speichern" (click)="onSave()" color="primary" [disabled]="
+                eventForm.invalid ||
+                !eventForm.controls['url'].touched ||
+                !urlAvailable ||
+                !checkRange()
+              ">
               <span>Speichern</span>
             </button>
             <!-- <span class="bar-spacer"></span>

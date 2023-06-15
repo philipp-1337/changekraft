@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UntypedFormArray, UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import {
   AngularFirestore
 } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import {
+  AngularFireStorage
+} from '@angular/fire/compat/storage';
+import { Observable, finalize } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
@@ -27,6 +30,8 @@ interface EventUrl {
 })
 export class AddEventComponent implements OnInit {
 
+  private readonly storage: AngularFireStorage = inject(AngularFireStorage);
+
   constructor(
     private afs: AngularFirestore,
     private authservice: AuthService,
@@ -49,6 +54,65 @@ export class AddEventComponent implements OnInit {
   minDateStart = new Date();
   minDateEnd = new Date();
   maxDate = new Date(2099, 11, 31);
+  selectedIcon: File;
+  selectedHeader: File;
+  iconPath: string;
+  headerPath: string;
+  placeholderIcon: string;
+  placeholderHeader: string;
+  maxSize = 104857600
+
+  onIconSelected(event: any) {
+    this.selectedIcon = event.target.files[0];
+    const file = this.selectedIcon;
+  
+    if (file) {
+      const filePath = `images/${Date.now()}_${file.name}`;
+      const fileRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, file);
+  
+      uploadTask.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            this.iconPath = url; // Assign the image URL to display in the frontend
+            const tempPlaceholderIcon = this.iconPath.split("_")[1];
+            this.placeholderIcon = tempPlaceholderIcon.split("?")[0];
+            this.eventForm.patchValue({
+              images: {
+                iconUrl: url,
+              },
+            });
+          });
+        })
+      ).subscribe();
+    }
+  }
+
+  onHeaderSelected(event: any) {
+    this.selectedHeader = event.target.files[0];
+    const file = this.selectedHeader;
+  
+    if (file) {
+      const filePath = `images/${Date.now()}_${file.name}`;
+      const fileRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, file);
+  
+      uploadTask.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            this.headerPath = url; // Assign the image URL to display in the frontend
+            const tempPlaceholderHeader = this.headerPath.split("_")[1];
+            this.placeholderHeader = tempPlaceholderHeader.split("?")[0];
+            this.eventForm.patchValue({
+              images: {
+                headerUrl: url,
+              },
+            });
+          });
+        })
+      ).subscribe();
+    }
+  }
 
   buildForm() {
     this.eventForm = this.fb.group({
@@ -62,9 +126,17 @@ export class AddEventComponent implements OnInit {
       dates: this.fb.group({
         multipleDays: [false],
         startDate: [''],
-        endDate: [''],
+        endDate: ['']
+      }),
+      images: this.fb.group({
+        iconUrl: [''],
+        headerUrl: ['']
       })
     });
+  }
+
+  get images() {
+    return this.eventForm.get('images') as UntypedFormArray;
   }
 
   get dates() {
@@ -226,7 +298,7 @@ export class AddEventComponent implements OnInit {
   }
 
   onSave() {
-    this.transformDate();
+    this.transformDate(); 
     this.eventData = {
       ...this.eventForm.value
     };

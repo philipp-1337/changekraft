@@ -33,6 +33,7 @@
     "firebase": "^9.22.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "ngx-material-file-input": "^4.0.1",
     "rxfire": "^6.0.3",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.2",

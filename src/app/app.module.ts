@@ -7,12 +7,14 @@ import localeDe from '@angular/common/locales/de';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { CoreModule } from './components/core/core.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
 import { SharedModule } from './shared/shared.module';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,15 +25,18 @@ import { UpdateService } from './services/update.service';
 import { SnackbarClass } from './shared/snackbar.class';
 import { RouterModule } from '@angular/router';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     CoreModule,
     MaterialModule,
+    MaterialFileInputModule,
     BrowserModule,
     RouterModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,

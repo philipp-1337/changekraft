@@ -24,9 +24,10 @@ import {
 import { DialogUserDeleteComponent } from './user-profil/dialog-user-delete.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DialogEmailUpdateComponent } from './user-profil/dialog-email-update.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
-    imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MatMomentDateModule],
+    imports: [CommonModule, AdminRoutingModule, SharedModule, MaterialModule, MaterialFileInputModule, MatMomentDateModule],
     declarations: [
         AdminComponent,
         AdminZusagenComponent,
