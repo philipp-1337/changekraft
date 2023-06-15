@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service firebase.storage {
+ match /b/{bucket}/o {
+   match /images {
+     // Cascade read to any image type at any path
+     match /{allImages=**} {
+       allow read;
+     }
+
+     // Allow write files to the path "images/*", subject to the constraints:
+     // 1. File is less than 5MB
+     // 2. Content type is an image
+     match /{imageId} {
+       allow write: if request.resource.size < 3 * 1024 * 1024
+                    && request.resource.contentType.matches('image/.*')
+     }
+   }
+ }
+}
