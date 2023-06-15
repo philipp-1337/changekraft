@@ -11,48 +11,50 @@
             <mat-card-subtitle class="mb-0">Hier wird das Event erstellt</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <h3>Details</h3>
-            <mat-form-field class="w-100">
-              <input matInput type="text" color="accent" id="name" formControlName="name" placeholder="Name"
-                class="form-control" required />
-              <mat-error *ngIf="
+            <div class="row mt-3">
+              <h3>Details</h3>
+              <mat-form-field class="w-100">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" color="accent" id="name" formControlName="name"
+                  class="form-control" required />
+                <mat-error *ngIf="
                     eventForm.controls['name'].touched &&
                     !eventForm.controls['name'].valid
                   ">
-                Bitte dem Event einen Namen geben.
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="w-100" [ngClass]="{ 'mat-form-field-invalid': !urlAvailable }">
-              <input matInput type="text" color="accent" id="url" formControlName="url" placeholder="URL"
-                class="form-control" minlength="5" required />
-              <mat-error *ngIf="
+                  Bitte dem Event einen Namen geben.
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-100" [ngClass]="{ 'mat-form-field-invalid': !urlAvailable }">
+                <mat-label>URL</mat-label>
+                <input matInput type="text" color="accent" id="url" formControlName="url" 
+                  placeholder="> 4 Zeichen, Buchstaben & Zahlen"
+                  class="form-control" minlength="5" required />
+                <mat-error *ngIf="
                     eventForm.controls['url'].touched &&
                     !eventForm.controls['url'].valid
                   ">{{ getErrorMessage() }}</mat-error>
-              <mat-hint *ngIf="!urlAvailable">
-                Diese URL ist leider nicht mehr verfügbar.
-              </mat-hint>
-            </mat-form-field>
-            <mat-form-field class="w-100">
-              <textarea matInput type="text" color="accent" id="desc" formControlName="desc" placeholder="Beschreibung"
-                class="form-control" required>
+                <mat-hint *ngIf="!urlAvailable">
+                  Diese URL ist leider nicht mehr verfügbar.
+                </mat-hint>
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Beschreibung</mat-label>
+                <textarea matInput type="text" color="accent" id="desc" formControlName="desc"
+                  class="form-control" required>
+                </textarea>
                   <mat-error *ngIf="eventForm.controls['desc'].touched && !eventForm.controls['desc'].valid">
                     Bitte eine Beschreibung verfassen.
                   </mat-error>
-                </textarea>
-            </mat-form-field>
-            <div formGroupName="dates">
+              </mat-form-field>
+            </div>
+            <div formGroupName="dates" class="row mt-3">
               <h3>Datum </h3>
               <mat-checkbox id="multipleDays" name="multipleDays" labelPosition="before" formControlName="multipleDays">
                 <span class="text-grey">Mehrtägig</span></mat-checkbox><br />
               <mat-form-field class="w-100 datepicker">
-                <input matInput required placeholder="Beginn" [min]="minDateStart" [max]="maxDate"
-                  [matDatepicker]="pickerAn" formControlName="startDate" />
-                <mat-hint *ngIf="
-                      !dates.controls['startDate'].valid &&
-                      !dates.controls['startDate'].touched
-                    ">
-                  Datum-Format: TT.DD.JJJJ</mat-hint>
+                <mat-label>Beginn</mat-label>
+                <input matInput required placeholder="TT.DD.JJJJ" [min]="minDateStart" [max]="maxDate"
+                  [matDatepicker]="pickerAn" formControlName="startDate"/>
                 <mat-error *ngIf="
                       dates.controls['startDate'].invalid &&
                       dates.controls['startDate'].touched
@@ -62,12 +64,11 @@
                 <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
                 <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
               </mat-form-field>
-              <div *ngIf="dates.controls['multipleDays'].value === true">
+              <div *ngIf="dates.controls['multipleDays'].value">
                 <mat-form-field class="w-100 datepicker">
-                  <input matInput placeholder="Ende" [min]="minDateEnd" [max]="maxDate" [matDatepicker]="pickerAb"
+                  <mat-label>Ende</mat-label>
+                  <input matInput placeholder="TT.DD.JJJJ" [min]="minDateEnd" [max]="maxDate" [matDatepicker]="pickerAb"
                     formControlName="endDate" required />
-                  <mat-hint *ngIf="!dates.controls['endDate'].touched">
-                    Datum-Format: TT.DD.JJJJ</mat-hint>
                   <mat-error *ngIf="dates.controls['endDate'].touched">
                     Bitte ein korrektes Datum angeben.
                   </mat-error>
@@ -86,36 +87,33 @@
                 </span>
               </div>
             </div>
-            <div formGroupName="images">
+            <div formGroupName="images" class="row mt-3">
               <h3>Bilder </h3>
               <span class="text-grey">(max 3 MB; png & jpg)</span>
               <mat-form-field class="w-100">
                 <mat-label>Icon</mat-label>
                 <ngx-mat-file-input type="file" accept=".png,.jpg" id="iconUrl" name="iconUrl" class="form-control"
-                  formControlName="iconUrl" (change)="onIconSelected($event)" valuePlaceholder="{{ placeholderIcon }}">
+                  formControlName="iconUrl" (change)="onImageSelected($event, 'icon')"
+                  placeholder="{{ placeholderIcon }}" [valuePlaceholder]="placeholderIcon">
                 </ngx-mat-file-input>
-                <button mat-icon-button matSuffix aria-label="Upload" title="Upload">
-                  <mat-icon svgIcon="upload"></mat-icon>
-                </button>
+                <mat-icon matSuffix svgIcon="upload"></mat-icon>
               </mat-form-field>
               <mat-form-field class="w-100">
                 <mat-label>Header</mat-label>
                 <ngx-mat-file-input type="file" accept=".png,.jpg" id="headerUrl" name="headerUrl" class="form-control"
-                  formControlName="headerUrl" (change)="onHeaderSelected($event)"
-                  valuePlaceholder="{{ placeholderHeader }}">
+                  formControlName="headerUrl" (change)="onImageSelected($event, 'header')"
+                  placeholder="{{ placeholderHeader }}" [valuePlaceholder]="placeholderHeader">
                 </ngx-mat-file-input>
-                <button mat-icon-button matSuffix aria-label="Upload" title="Upload">
-                  <mat-icon svgIcon="upload"></mat-icon>
-                </button>
+                <mat-icon matSuffix svgIcon="upload"></mat-icon>
               </mat-form-field>
+            </div>
+            <div class="row mt-3">
               <h3 *ngIf="iconPath || headerPath">Vorschau</h3>
-              <div class="row">
-                <div class="col-6">
-                  <img class="img-thumbnail img-fluid w-100" [src]="iconPath" *ngIf="iconPath">
-                </div>
-                <div class="col-6">
-                  <img class="img-thumbnail img-fluid w-100" [src]="headerPath" *ngIf="headerPath">
-                </div>
+              <div class="col-6">
+                <img class="img-thumbnail img-fluid w-100" [src]="iconPath" *ngIf="iconPath">
+              </div>
+              <div class="col-6">
+                <img class="img-thumbnail img-fluid w-100" [src]="headerPath" *ngIf="headerPath">
               </div>
             </div>
           </mat-card-content>

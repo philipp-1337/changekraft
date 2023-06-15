@@ -32,17 +32,6 @@ export class AddEventComponent implements OnInit {
 
   private readonly storage: AngularFireStorage = inject(AngularFireStorage);
 
-  constructor(
-    private afs: AngularFirestore,
-    private authservice: AuthService,
-    public snackbar: SnackbarClass,
-    private router: Router,
-    private userService: UserService,
-    private breakpointObserver: BreakpointObserver,
-    private fb: UntypedFormBuilder,
-    public dialog: MatDialog
-  ) { }
-
   eventForm: UntypedFormGroup;
   urlAvailable = true;
   customUrl: string;
@@ -62,148 +51,16 @@ export class AddEventComponent implements OnInit {
   placeholderHeader: string;
   maxSize = 104857600
 
-  onIconSelected(event: any) {
-    this.selectedIcon = event.target.files[0];
-    const file = this.selectedIcon;
-  
-    if (file) {
-      const filePath = `images/${Date.now()}_${file.name}`;
-      const fileRef = this.storage.ref(filePath);
-      const uploadTask = this.storage.upload(filePath, file);
-  
-      uploadTask.snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe(url => {
-            this.iconPath = url; // Assign the image URL to display in the frontend
-            const tempPlaceholderIcon = this.iconPath.split("_")[1];
-            this.placeholderIcon = tempPlaceholderIcon.split("?")[0];
-            this.eventForm.patchValue({
-              images: {
-                iconUrl: url,
-              },
-            });
-          });
-        })
-      ).subscribe();
-    }
-  }
-
-  onHeaderSelected(event: any) {
-    this.selectedHeader = event.target.files[0];
-    const file = this.selectedHeader;
-  
-    if (file) {
-      const filePath = `images/${Date.now()}_${file.name}`;
-      const fileRef = this.storage.ref(filePath);
-      const uploadTask = this.storage.upload(filePath, file);
-  
-      uploadTask.snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe(url => {
-            this.headerPath = url; // Assign the image URL to display in the frontend
-            const tempPlaceholderHeader = this.headerPath.split("_")[1];
-            this.placeholderHeader = tempPlaceholderHeader.split("?")[0];
-            this.eventForm.patchValue({
-              images: {
-                headerUrl: url,
-              },
-            });
-          });
-        })
-      ).subscribe();
-    }
-  }
-
-  buildForm() {
-    this.eventForm = this.fb.group({
-      name: ['', [Validators.required]],
-      url: ['', [
-        Validators.required,
-        Validators.pattern('^[a-z0-9_.-]*$'),
-        Validators.minLength(5)
-      ]],
-      desc: ['', [Validators.required]],
-      dates: this.fb.group({
-        multipleDays: [false],
-        startDate: [''],
-        endDate: ['']
-      }),
-      images: this.fb.group({
-        iconUrl: [''],
-        headerUrl: ['']
-      })
-    });
-  }
-
-  get images() {
-    return this.eventForm.get('images') as UntypedFormArray;
-  }
-
-  get dates() {
-    return this.eventForm.get('dates') as UntypedFormArray;
-  }
-
-  getErrorMessage() {
-    if (this.eventForm.controls['url'].hasError('required')) {
-      return 'Bitte eine URL festlegen.';
-    }
-    if (this.eventForm.controls['url'].hasError('pattern')) {
-      return 'Hier sind nur Kleinbuchstaben, Zahlen, Punkt, Komma, Unter- und Bindestrich erlaubt.';
-    }
-    return this.eventForm.controls['url'].hasError('minlength') ? 'Die URL muss mindestens 5 Zeichen lang sein.' : '';
-  }
-
-  setDatesValidators() {
-    const startControl = this.dates.get('startDate');
-    const endControl = this.dates.get('endDate');
-    this.dates.get('multipleDays').valueChanges
-      .subscribe(multipleDays => {
-        if (multipleDays === false) {
-          startControl.setValidators([Validators.required]);
-          endControl.setValidators(null);
-          endControl.setValue(null);
-        }
-        if (multipleDays === true) {
-          startControl.setValidators([Validators.required]);
-          endControl.setValidators([Validators.required]);
-        }
-        startControl.updateValueAndValidity();
-        endControl.updateValueAndValidity();
-      });
-  }
-
-  transformDate() {
-    let newStartDate: Date;
-    let newEndDate: Date;
-    if (
-      this.dates.controls['startDate'].touched &&
-      this.dates.controls['startDate'].valid &&
-      this.dates.controls['startDate'].value
-    ) {
-      newStartDate = this.dates.controls['startDate'].value.toDate();
-      if (this.dates.controls['multipleDays'].value === false) {
-        this.eventForm.patchValue({
-          dates: {
-            startDate: newStartDate,
-          },
-        });
-      }
-    }
-    if (
-      this.dates.controls['endDate'].touched &&
-      this.dates.controls['endDate'].valid &&
-      this.dates.controls['endDate'].value &&
-      this.dates.controls['multipleDays'].value === true
-    ) {
-      newEndDate = this.dates.controls['endDate'].value.toDate();
-      this.eventForm.patchValue({
-        dates: {
-          startDate: newStartDate,
-          endDate: newEndDate,
-        },
-      });
-    }
-  }
+  constructor(
+    private afs: AngularFirestore,
+    private authservice: AuthService,
+    public snackbar: SnackbarClass,
+    private router: Router,
+    private userService: UserService,
+    private breakpointObserver: BreakpointObserver,
+    private fb: UntypedFormBuilder,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.buildForm();
@@ -227,6 +84,130 @@ export class AddEventComponent implements OnInit {
     });
   }
 
+  buildForm() {
+    this.eventForm = this.fb.group({
+      name: ['', [Validators.required]],
+      url: ['', [
+        Validators.required,
+        Validators.pattern('^[a-z0-9_.-]*$'),
+        Validators.minLength(5)
+      ]],
+      desc: ['', [Validators.required]],
+      dates: this.fb.group({
+        multipleDays: [false],
+        startDate: [''],
+        endDate: ['']
+      }),
+      images: this.fb.group({
+        iconUrl: [''],
+        headerUrl: ['']
+      })
+    });
+  }
+
+  onImageSelected(event: any, imageType: string) {
+    const selectedImage = event.target.files[0];
+    const file = selectedImage;
+
+    if (file) {
+      const filePath = `images/${Date.now()}_${file.name}`;
+      const fileRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, file);
+
+      uploadTask
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              if (imageType === 'icon') {
+                this.iconPath = url;
+                const tempPlaceholderIcon = this.iconPath.split('_')[1];
+                this.placeholderIcon = tempPlaceholderIcon.split('?')[0];
+              } else if (imageType === 'header') {
+                this.headerPath = url;
+                const tempPlaceholderHeader = this.headerPath.split('_')[1];
+                this.placeholderHeader = tempPlaceholderHeader.split('?')[0];
+              }
+
+              this.eventForm.patchValue({
+                images: {
+                  [`${imageType}Url`]: url,
+                },
+              });
+            });
+          })
+        )
+        .subscribe();
+    }
+  }
+
+  get dates() {
+    return this.eventForm.get('dates') as UntypedFormArray;
+  }
+
+  getErrorMessage() {
+    const urlControl = this.eventForm.get('url');
+    if (urlControl.hasError('required')) {
+      return 'Bitte eine URL festlegen.';
+    }
+    if (urlControl.hasError('pattern')) {
+      return 'Keine Sonderzeichen & Großbuchstaben erlaubt.';
+    }
+    return urlControl.hasError('minlength') ? 'Die URL muss mindestens 5 Zeichen lang sein.' : '';
+  }
+
+  setDatesValidators() {
+    const datesGroup = this.dates;
+    const startControl = datesGroup.get('startDate');
+    const endControl = datesGroup.get('endDate');
+
+    datesGroup
+      .get('multipleDays')
+      .valueChanges.subscribe((multipleDays) => {
+        if (!multipleDays) {
+          startControl.setValidators([Validators.required]);
+          endControl.clearValidators();
+          endControl.reset();
+        } else {
+          startControl.setValidators([Validators.required]);
+          endControl.setValidators([Validators.required]);
+        }
+
+        startControl.updateValueAndValidity();
+        endControl.updateValueAndValidity();
+      });
+  }
+
+  transformDate() {
+    const datesGroup = this.dates;
+    const startDateControl = datesGroup.get('startDate');
+    const endDateControl = datesGroup.get('endDate');
+
+    if (startDateControl.touched && startDateControl.valid && startDateControl.value) {
+      if (!datesGroup.get('multipleDays').value) {
+        this.eventForm.patchValue({
+          dates: {
+            startDate: startDateControl.value,
+          },
+        });
+      }
+    }
+
+    if (
+      endDateControl.touched &&
+      endDateControl.valid &&
+      endDateControl.value &&
+      datesGroup.get('multipleDays').value
+    ) {
+      this.eventForm.patchValue({
+        dates: {
+          startDate: startDateControl.value,
+          endDate: endDateControl.value,
+        },
+      });
+    }
+  }
+
   async getSingleEventData() {
     this.userId = (await (this.authservice.getCurrentUser())).uid;
     this.userService.getUserInfo();
@@ -241,7 +222,7 @@ export class AddEventComponent implements OnInit {
 
       snapshotResult.subscribe(doc => {
         this.eventUrl = <EventUrl>doc.payload.doc.data();
-        if (this.eventUrl.url = this.eventForm.controls['url'].value) {
+        if (this.eventUrl.url === val) {
           this.urlAvailable = false;
         } else {
           this.urlAvailable = true;
@@ -258,25 +239,16 @@ export class AddEventComponent implements OnInit {
   }
 
   checkPlural() {
-    if (this.calcDays() > 1) {
-      return 'Tage';
-    } else {
-      return 'Tag';
-    }
+    return this.calcDays() > 1 ? 'Tage' : 'Tag';
   }
 
   checkRange() {
-    if (this.dates.get('multipleDays').value === true) {
-      const start = this.dates.controls['startDate'].value;
-      const end = this.dates.controls['endDate'].value;
-      if (end <= start) {
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return true;
+    if (this.dates.get('multipleDays').value) {
+      const startDate = this.dates.get('startDate').value;
+      const endDate = this.dates.get('endDate').value;
+      return endDate > startDate;
     }
+    return true;
   }
 
   isMobile() {
@@ -319,20 +291,20 @@ export class AddEventComponent implements OnInit {
       }
     }
 
-    openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
-      const dialogRef = this.dialog.open(DialogWarningComponent, {
-        width: '350px',
-        data: { title: title, text: text, actionLabel: actionLabel, action: action}
-      });
-      dialogRef.afterClosed().subscribe(action => {
-        if (action === undefined) {
-          console.log('Der Vorgang wurde abgebrochen')
-        } else {
-          this.eventForm.reset()
-          console.log('Die Eingaben wurden zurückgesetzt.')
+  openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
+    const dialogRef = this.dialog.open(DialogWarningComponent, {
+      width: '350px',
+      data: { title: title, text: text, actionLabel: actionLabel, action: action}
+    });
+    dialogRef.afterClosed().subscribe(action => {
+      if (action === undefined) {
+        console.log('Der Vorgang wurde abgebrochen')
+      } else {
+        this.eventForm.reset()
+        console.log('Die Eingaben wurden zurückgesetzt.')
 
-        }
-      });
-    }
+      }
+    });
+  }
 
 }
