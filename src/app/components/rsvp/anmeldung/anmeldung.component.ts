@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 import { SnackbarClass } from 'src/app/shared/snackbar.class';
@@ -25,7 +24,6 @@ interface EventUrl {
 })
 export class AnmeldungComponent implements OnInit {
   constructor(
-    private breakpointObserver: BreakpointObserver,
     public snackbar: SnackbarClass,
     private afs: AngularFirestore,
     private route: ActivatedRoute
@@ -191,10 +189,6 @@ export class AnmeldungComponent implements OnInit {
       unterkuenfte: new UntypedFormControl('')
     });
     this.onChanges();
-  }
-
-  isMobile() {
-    return this.breakpointObserver.isMatched('(max-width: 599px)');
   }
 
   mergeFG() {
