@@ -17,7 +17,7 @@
               svgIcon="more_vert"></mat-icon>
           </button>
           <mat-card-header>
-            <div *ngIf="(event$ | async)?.images" class="justify-content-center align-self-center" mat-card-avatar
+            <div *ngIf="(event$ | async)?.images.iconUrl" class="justify-content-center align-self-center" mat-card-avatar
               style="
                 background-image: url('{{ (event$ | async)?.images.iconUrl }}'); 
                 background-size: cover;">
@@ -38,7 +38,7 @@
             </mat-card-subtitle>
           </mat-card-header>
           <img 
-            *ngIf="(event$ | async)?.images"
+            *ngIf="(event$ | async)?.images.headerUrl"
             mat-card-image
             style="
               max-width: 100%;
