@@ -61,8 +61,8 @@
                     ">
                   Bitte ein korrektes Datum angeben.
                 </mat-error>
-                <mat-datepicker-toggle matSuffix [for]="pickerAn"></mat-datepicker-toggle>
-                <mat-datepicker [touchUi]="isMobile()" #pickerAn></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerAn"></mat-datepicker-toggle>
+                <mat-datepicker #pickerAn></mat-datepicker>
               </mat-form-field>
               <div *ngIf="dates.controls['multipleDays'].value">
                 <mat-form-field class="w-100 datepicker">
@@ -72,8 +72,8 @@
                   <mat-error *ngIf="dates.controls['endDate'].touched">
                     Bitte ein korrektes Datum angeben.
                   </mat-error>
-                  <mat-datepicker-toggle matSuffix [for]="pickerAb"></mat-datepicker-toggle>
-                  <mat-datepicker [touchUi]="isMobile()" #pickerAb></mat-datepicker>
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerAb"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerAb></mat-datepicker>
                 </mat-form-field>
                 <span style="color: grey" *ngIf="
                   dates.controls['startDate'].valid &&

@@ -12,7 +12,6 @@ import { SnackbarClass } from 'src/app/shared/snackbar.class';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWarningComponent } from 'src/app/shared/dialog-warning/dialog-warning.component';
 
@@ -30,8 +29,7 @@ interface EventUrl {
 })
 export class AddEventComponent implements OnInit {
 
-  private readonly storage: AngularFireStorage = inject(AngularFireStorage);
-
+  
   eventForm: UntypedFormGroup;
   urlAvailable = true;
   customUrl: string;
@@ -49,20 +47,19 @@ export class AddEventComponent implements OnInit {
   headerPath: string;
   placeholderIcon: string;
   placeholderHeader: string;
-  maxSize = 104857600
-
+  
   constructor(
     private afs: AngularFirestore,
     private authservice: AuthService,
     public snackbar: SnackbarClass,
     private router: Router,
     private userService: UserService,
-    private breakpointObserver: BreakpointObserver,
     private fb: UntypedFormBuilder,
+    private readonly storage: AngularFireStorage = inject(AngularFireStorage),
     public dialog: MatDialog
-  ) { }
-
-  ngOnInit() {
+    ) { }
+    
+    ngOnInit() {
     this.buildForm();
     this.setDatesValidators();
     setTimeout(() => {
@@ -249,10 +246,6 @@ export class AddEventComponent implements OnInit {
       return endDate > startDate;
     }
     return true;
-  }
-
-  isMobile() {
-    return this.breakpointObserver.isMatched('(max-width: 599px)');
   }
 
   storeEvent(customUrl: string) {
