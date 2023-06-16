@@ -1,32 +1,41 @@
 @use '@angular/material' as mat;
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-
-// Font Settings
-// @import './assets/fonts/raleway/raleway';
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
-$custom-typography: mat.define-typography-config(
-  $font-family: 'Raleway, sans-serif',
-  $headline-5: mat.define-typography-level(32px, 48px, 700),
-  $body-2: mat.define-typography-level(16px, 24px, 400)
-);
-// Override the typography in the core CSS.
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy($custom-typography);`
-@include mat.all-component-typographies($custom-typography);
 @include mat.core();
 
 // Color Settings
 $rsvp-primary: mat.define-palette(mat.$teal-palette, 600);
 $rsvp-accent: mat.define-palette(mat.$deep-purple-palette, 300);
 $rsvp-warn: mat.define-palette(mat.$red-palette, 900);
-$rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
+
+// Font Settings
+// @import './assets/fonts/raleway/raleway';
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
+$rsvp-typography-level: mat.define-typography-level(
+  $font-family: Raleway,
+  $font-weight: 400,
+  $font-size: 1rem,
+  $line-height: 1,
+  $letter-spacing: normal,
+);
+
+$rsvp-typography-config: mat.define-typography-config(
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $headline-4: mat.define-typography-level(34px, 40px, 400),
+  $headline-5: mat.define-typography-level(24px, 32px, 400),
+);
+
+$rsvp-theme: mat.define-light-theme((
+ color: (
+   primary: $rsvp-primary,
+   accent: $rsvp-accent,
+   warn: $rsvp-warn
+ ),
+ typography: $rsvp-typography-config,
+ density: 0,
+));
+
 
 @include mat.all-component-themes($rsvp-theme);
 
@@ -71,7 +80,7 @@ $rsvp-theme: mat.define-light-theme($rsvp-primary, $rsvp-accent, $rsvp-warn);
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Raleway', sans-serif; overflow-x: hidden; }
+body { margin: 0; font-family: 'Raleway'; overflow-x: hidden; }
 input { font-size: 16px;}
 
 .active {
