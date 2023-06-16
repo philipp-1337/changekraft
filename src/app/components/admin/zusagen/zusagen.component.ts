@@ -12,6 +12,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 export interface Rsvp { }
 
@@ -171,7 +172,8 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   openDialog(id: string, name: string) {
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
       width: '350px',
-      data: { id: id, name: name }
+      data: { id: id, name: name },
+      scrollStrategy: new NoopScrollStrategy()
     });
 
     dialogRef.afterClosed().subscribe(result => {

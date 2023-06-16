@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/compat/firestore';
 import { DialogEmailUpdateComponent } from './dialog-email-update.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-user-profil',
@@ -69,7 +70,8 @@ export class UserProfilComponent implements OnInit, OnDestroy {
     const user = this.authservice.getCurrentUser();
     const dialogRef = this.dialog.open(DialogEmailUpdateComponent, {
       width: '350px',
-      data: { id: id, name: name, user: user }
+      data: { id: id, name: name, user: user },
+      scrollStrategy: new NoopScrollStrategy()
     });
 
     dialogRef.afterClosed().subscribe(cred => {
@@ -91,7 +93,8 @@ export class UserProfilComponent implements OnInit, OnDestroy {
     const user = this.authservice.getCurrentUser();
     const dialogRef = this.dialog.open(DialogUserDeleteComponent, {
       width: '350px',
-      data: { id: id, name: name, user: user }
+      data: { id: id, name: name, user: user },
+      scrollStrategy: new NoopScrollStrategy()
     });
 
     dialogRef.afterClosed().subscribe(cred => {

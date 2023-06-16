@@ -9,6 +9,7 @@ import { Event } from '../../../shared/event.model';
 import { Observable, Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-events',
@@ -80,7 +81,8 @@ export class EventsComponent implements OnInit, OnDestroy {
   deleteDialog(id: string, name: string) {
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
       width: '350px',
-      data: { id: id, name: name }
+      data: { id: id, name: name },
+      scrollStrategy: new NoopScrollStrategy()
     });
 
     dialogRef.afterClosed().subscribe(result => {

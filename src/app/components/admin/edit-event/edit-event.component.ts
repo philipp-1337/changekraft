@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
 import { DialogShareComponent } from 'src/app/shared/dialog-share/dialog-share.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-edit-event',
@@ -87,7 +88,8 @@ export class EditEventComponent implements OnInit {
     const id = this.eventId;
     const dialogRef = this.dialog.open(DialogDeleteComponent, {
       width: '350px',
-      data: { id: id, name: name }
+      data: { id: id, name: name },
+      scrollStrategy: new NoopScrollStrategy()
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWarningComponent } from 'src/app/shared/dialog-warning/dialog-warning.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 interface EventUrl {
   eventId: string;
@@ -293,7 +294,8 @@ export class AddEventComponent implements OnInit {
     openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
       const dialogRef = this.dialog.open(DialogWarningComponent, {
         width: '350px',
-        data: { title: title, text: text, actionLabel: actionLabel, action: action}
+        data: { title: title, text: text, actionLabel: actionLabel, action: action},
+        scrollStrategy: new NoopScrollStrategy()
       });
       dialogRef.afterClosed().subscribe(action => {
         if (action === undefined) {
