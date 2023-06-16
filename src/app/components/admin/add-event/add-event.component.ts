@@ -29,7 +29,6 @@ interface EventUrl {
 })
 export class AddEventComponent implements OnInit {
 
-  
   eventForm: UntypedFormGroup;
   urlAvailable = true;
   customUrl: string;
@@ -47,7 +46,7 @@ export class AddEventComponent implements OnInit {
   headerPath: string;
   placeholderIcon: string;
   placeholderHeader: string;
-  
+
   constructor(
     private afs: AngularFirestore,
     private authservice: AuthService,
@@ -57,9 +56,9 @@ export class AddEventComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private readonly storage: AngularFireStorage = inject(AngularFireStorage),
     public dialog: MatDialog
-    ) { }
-    
-    ngOnInit() {
+  ) { }
+
+  ngOnInit() {
     this.buildForm();
     this.setDatesValidators();
     setTimeout(() => {
@@ -70,10 +69,11 @@ export class AddEventComponent implements OnInit {
     this.getSingleEventData();
     // Disable the endDate initially
     this.dates.get('endDate').disable();
-    // Listen for changes in the startDate field and enable/disable the endDate field accordingly and adjust the minDateEnd
+    // Listen for changes in the startDate field and enable/disable the endDate field accordingly 
     this.dates.get('startDate').valueChanges.subscribe(value => {
       if (value) {
         this.dates.get('endDate').enable();
+        // set the minDateEnd to be 1 day from the startDate
         this.minDateEnd = new Date(value + 86400000)
       } else {
         this.dates.get('endDate').disable();
@@ -103,11 +103,14 @@ export class AddEventComponent implements OnInit {
   }
 
   onImageSelected(event: any, imageType: string) {
-    const selectedImage = event.target.files[0];
-    const file = selectedImage;
+    const file = event.target.files[0];
+    const filename = file.name
+      .replace(/[^a-z0-9\._-]/gi, '-')
+      .toLowerCase()
+      .replace(/-{2,}/g, '-');
 
     if (file) {
-      const filePath = `images/${Date.now()}_${file.name}`;
+      const filePath = `images/${Date.now()}_${filename}`;
       const fileRef = this.storage.ref(filePath);
       const uploadTask = this.storage.upload(filePath, file);
 
@@ -154,52 +157,52 @@ export class AddEventComponent implements OnInit {
   }
 
   setDatesValidators() {
-    const datesGroup = this.dates;
-    const startControl = datesGroup.get('startDate');
-    const endControl = datesGroup.get('endDate');
-
-    datesGroup
-      .get('multipleDays')
-      .valueChanges.subscribe((multipleDays) => {
+    const startControl = this.dates.get('startDate');
+    const endControl = this.dates.get('endDate');
+    this.dates.get('multipleDays').valueChanges
+      .subscribe(multipleDays => {
         if (!multipleDays) {
           startControl.setValidators([Validators.required]);
-          endControl.clearValidators();
-          endControl.reset();
+          endControl.setValidators(null);
+          endControl.setValue(null);
         } else {
           startControl.setValidators([Validators.required]);
           endControl.setValidators([Validators.required]);
         }
-
         startControl.updateValueAndValidity();
         endControl.updateValueAndValidity();
       });
   }
 
   transformDate() {
-    const datesGroup = this.dates;
-    const startDateControl = datesGroup.get('startDate');
-    const endDateControl = datesGroup.get('endDate');
-
-    if (startDateControl.touched && startDateControl.valid && startDateControl.value) {
-      if (!datesGroup.get('multipleDays').value) {
+    let newStartDate: Date;
+    let newEndDate: Date;
+    if (
+      this.dates.controls['startDate'].touched &&
+      this.dates.controls['startDate'].valid &&
+      this.dates.controls['startDate'].value
+    ) {
+      newStartDate = this.dates.controls['startDate'].value.toDate();
+      if (!this.dates.controls['multipleDays'].value) {
         this.eventForm.patchValue({
           dates: {
-            startDate: startDateControl.value,
+            startDate: newStartDate,
           },
         });
       }
     }
 
     if (
-      endDateControl.touched &&
-      endDateControl.valid &&
-      endDateControl.value &&
-      datesGroup.get('multipleDays').value
+      this.dates.controls['endDate'].touched &&
+      this.dates.controls['endDate'].valid &&
+      this.dates.controls['endDate'].value &&
+      this.dates.controls['multipleDays'].value === true
     ) {
+      newEndDate = this.dates.controls['endDate'].value.toDate();
       this.eventForm.patchValue({
         dates: {
-          startDate: startDateControl.value,
-          endDate: endDateControl.value,
+          startDate: newStartDate,
+          endDate: newEndDate,
         },
       });
     }
@@ -241,9 +244,9 @@ export class AddEventComponent implements OnInit {
 
   checkRange() {
     if (this.dates.get('multipleDays').value) {
-      const startDate = this.dates.get('startDate').value;
-      const endDate = this.dates.get('endDate').value;
-      return endDate > startDate;
+      const start = this.dates.controls['startDate'].value;
+      const end = this.dates.controls['endDate'].value;
+      return end > start;
     }
     return true;
   }
@@ -264,10 +267,13 @@ export class AddEventComponent implements OnInit {
 
   onSave() {
     this.transformDate(); 
+    this.customUrl = this.eventForm.controls['url'].value.toLowerCase();
+    this.eventForm.patchValue({
+      url: this.customUrl
+    });
     this.eventData = {
       ...this.eventForm.value
     };
-    this.customUrl = this.eventForm.controls['url'].value;
     this.storeEvent(this.customUrl);
     this.eventForm.reset();
     this.snackbar.openSnackBar('Event hinzugefügt.', 'Ok', 2500);
@@ -284,20 +290,24 @@ export class AddEventComponent implements OnInit {
       }
     }
 
-  openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
-    const dialogRef = this.dialog.open(DialogWarningComponent, {
-      width: '350px',
-      data: { title: title, text: text, actionLabel: actionLabel, action: action}
-    });
-    dialogRef.afterClosed().subscribe(action => {
-      if (action === undefined) {
-        console.log('Der Vorgang wurde abgebrochen')
-      } else {
-        this.eventForm.reset()
-        console.log('Die Eingaben wurden zurückgesetzt.')
+    openWarnDialog(title: string, text: string, actionLabel: string, action: boolean) {
+      const dialogRef = this.dialog.open(DialogWarningComponent, {
+        width: '350px',
+        data: { title: title, text: text, actionLabel: actionLabel, action: action}
+      });
+      dialogRef.afterClosed().subscribe(action => {
+        if (action === undefined) {
+          console.log('Der Vorgang wurde abgebrochen');
+        } else {
+          this.eventForm.reset();
+          this.iconPath = '';
+          this.headerPath = '';
+          this.placeholderIcon = '';
+          this.placeholderHeader = '';
+          // ToDo Bilder vom Server löschen
+          console.log('Die Eingaben wurden zurückgesetzt.');
 
-      }
-    });
-  }
-
+        }
+      });
+    }
 }
