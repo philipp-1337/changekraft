@@ -17,8 +17,8 @@
               svgIcon="more_vert"></mat-icon>
           </button>
           <mat-card-header>
-            <div *ngIf="(event$ | async)?.images.iconUrl" class="justify-content-center align-self-center" mat-card-avatar
-              style="
+            <div *ngIf="(event$ | async)?.images.iconUrl" class="justify-content-center align-self-center"
+              mat-card-avatar style="
                 background-image: url('{{ (event$ | async)?.images.iconUrl }}'); 
                 background-size: cover;">
               <mat-icon *ngIf="!(event$ | async)?.images" svgIcon="invitation" class="header-icon"></mat-icon>
@@ -37,16 +37,14 @@
               </span>
             </mat-card-subtitle>
           </mat-card-header>
-          <img 
-            *ngIf="(event$ | async)?.images.headerUrl"
-            mat-card-image
-            style="
-              max-width: 100%;
-              height: 250px; 
-              background-position: center center; 
-              background-repeat: no-repeat;
-              background-image: url('{{ (event$ | async)?.images.headerUrl }}');
-              background-size: cover;">
+          <img *ngIf="(event$ | async)?.images.headerUrl" mat-card-image style="
+            background-image: url('{{ (event$ | async)?.images.headerUrl }}');
+            background-position: center center; 
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px; 
+            max-width: 100%;
+            width: 100%;">
           <mat-card-content>
             <p>
               {{ (event$ | async)?.desc }}

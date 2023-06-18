@@ -1,7 +1,7 @@
 <div class="container pb-3">
-  <div class="row" id="home">
+  <div class="row" id="home" *ngIf="(event$ | async) === null">
     <div class="col-12 mt-3">
-      <mat-card appearance="outlined" *ngIf="(event$ | async) === null">
+      <mat-card appearance="outlined">
         <mat-card-content>
           <mat-progress-bar mode="query"></mat-progress-bar>
         </mat-card-content>
@@ -9,14 +9,18 @@
     </div>
   </div>
   <ng-template [ngIf]="(event$ | async)">
-  <div class="row" id="home">
-      <div class="col-12">
+    <div class="row" id="home">
+      <div class="col-12 mt-3">
         <mat-card appearance="outlined">
           <mat-card-header>
-            <div class="justify-content-center align-self-center" mat-card-avatar>
-              <mat-icon
-                svgIcon="invitation"
-                class="header-icon"></mat-icon>
+            <div *ngIf="(event$ | async)?.images.iconUrl" class="justify-content-center align-self-center"
+              mat-card-avatar style="
+                background-image: url('{{ (event$ | async)?.images.iconUrl }}'); 
+                background-size: cover;">
+              <mat-icon *ngIf="!(event$ | async)?.images" svgIcon="invitation" class="header-icon"></mat-icon>
+            </div>
+            <div *ngIf="!(event$ | async)?.images" class="justify-content-center align-self-center" mat-card-avatar>
+              <mat-icon svgIcon="invitation" class="header-icon"></mat-icon>
             </div>
             <mat-card-title>{{(event$ | async)?.name}}</mat-card-title>
             <mat-card-subtitle class="mb-0">
@@ -29,28 +33,25 @@
               </span>
             </mat-card-subtitle>
           </mat-card-header>
+          <img *ngIf="(event$ | async)?.images.headerUrl" mat-card-image style="
+            background-image: url('{{ (event$ | async)?.images.headerUrl }}');
+            background-position: center center; 
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 250px; 
+            max-width: 100%;
+            width: 100%;">
           <mat-card-content>
             <p>
               {{ (event$ | async)?.desc }}
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button
-              mat-flat-button
-              type="button"
-              color="primary"
-              title="Anmeldung"
-              routerLink="rsvp/">RSPV
+            <button mat-flat-button type="button" color="primary" title="Anmeldung" routerLink="rsvp/">RSPV
             </button>
             <span class="bar-spacer"></span>
-            <button
-              *ngIf="authservice.isAuthenticated()"
-              mat-stroked-button
-              type="button"
-              color="accent"
-              title="Zurück"
-              [routerLink]="['../../admin/edit-event/' + eventId]"
-              [disabled]="!authservice.isAuthenticated()"> Zurück
+            <button *ngIf="authservice.isAuthenticated()" mat-stroked-button type="button" color="accent" title="Zurück"
+              [routerLink]="['../../admin/edit-event/' + eventId]" [disabled]="!authservice.isAuthenticated()"> Zurück
             </button>
           </mat-card-actions>
         </mat-card>
