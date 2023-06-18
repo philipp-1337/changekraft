@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogShare } from './dialog-share.interface';
 
@@ -8,30 +9,18 @@ import { DialogShare } from './dialog-share.interface';
   styleUrls: ['./dialog-share.component.scss']
 })
 export class DialogShareComponent {
-  buttonClicked = false;
   constructor(
     public dialogRef: MatDialogRef<DialogShareComponent>,
+    private clipboard: Clipboard,
     @Inject(MAT_DIALOG_DATA) public data: DialogShare) { }
 
   onCloseClick(): void {
     this.dialogRef.close();
   }
 
-  copyMessage(val: string) {
-    this.buttonClicked = true;
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = val;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
+  copyMessage(url: string){
+    this.clipboard.copy(url);
     setInterval(() => {
-      this.buttonClicked = false;
       this.onCloseClick();
     }, 400);
   }
