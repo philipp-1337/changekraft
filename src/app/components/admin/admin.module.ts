@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ExcelService } from 'src/app/services/excel.service';
+// import { ExcelService } from 'src/app/services/excel.service';
 import { AdminComponent } from './admin.component';
 import { AdminZusagenComponent } from './zusagen/zusagen.component';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
@@ -43,7 +43,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
         DashboardComponent
     ],
     providers: [
-        ExcelService,
+        // ExcelService,
         AngularFireAuthGuard,
         { provide: DateAdapter, useClass: GermanWeek },
         { provide: DateAdapter, useClass: MomentDateAdapter },

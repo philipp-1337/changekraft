@@ -8,7 +8,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument
 } from '@angular/fire/compat/firestore';
-import { ExcelService } from 'src/app/services/excel.service';
+// import { ExcelService } from 'src/app/services/excel.service';
 import { JoinClass } from 'src/app/shared/join.class';
 import { DialogDeleteComponent } from 'src/app/shared/dialog-delete/dialog-delete.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -39,7 +39,7 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
   event$: Observable<Event>;
 
   constructor(
-    private excelService: ExcelService,
+    // private excelService: ExcelService,
     private authservice: AuthService,
     private afs: AngularFirestore,
     public joinclass: JoinClass,
@@ -99,9 +99,9 @@ export class AdminZusagenComponent implements OnInit, OnDestroy {
       .catch(err => console.log(err, 'Löschen nicht erlaubt.'));
   }
 
-  exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.excelData, 'rsvp');
-  }
+  // exportAsXLSX(): void {
+  //   this.excelService.exportAsExcelFile(this.excelData, 'rsvp');
+  // }
 
   fetchDataforExcel() {
     this.subscription = this.rsvp$.subscribe(rsvp => {
