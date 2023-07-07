@@ -15,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWarningComponent } from 'src/app/shared/dialog-warning/dialog-warning.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 interface EventUrl {
   eventId: string;
@@ -25,7 +26,7 @@ interface EventUrl {
 @Component({
   selector: 'app-add-event',
   templateUrl: './add-event.component.html',
-  providers: [SnackbarClass]
+  providers: [SnackbarClass, NgxImageCompressService]
 
 })
 export class AddEventComponent implements OnInit {
@@ -56,7 +57,8 @@ export class AddEventComponent implements OnInit {
     private userService: UserService,
     private fb: UntypedFormBuilder,
     private readonly storage: AngularFireStorage = inject(AngularFireStorage),
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private imageCompress: NgxImageCompressService
   ) { }
 
   ngOnInit() {
@@ -103,42 +105,74 @@ export class AddEventComponent implements OnInit {
     });
   }
 
+  compressImage(file: File): Observable<File> {
+    return new Observable<File>((observer) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageDataUrl = reader.result as string;
+        this.imageCompress.compressFile(imageDataUrl, -1, 75, 75).then((result: string) => {
+          const compressedBlob = this.dataURItoBlob(result);
+          const compressedFile = new File([compressedBlob], file.name, { type: file.type });
+          observer.next(compressedFile);
+          observer.complete();
+        }).catch((error: any) => {
+          observer.error(error);
+        });
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  
+  dataURItoBlob(dataURI: string): Blob {
+    const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: mimeString });
+  }
+
   onImageSelected(event: any, imageType: string) {
     const file = event.target.files[0];
     const filename = file.name
       .replace(/[^a-z0-9\._-]/gi, '-')
       .toLowerCase()
       .replace(/-{2,}/g, '-');
-
+  
     if (file) {
-      const filePath = `images/${Date.now()}_${filename}`;
-      const fileRef = this.storage.ref(filePath);
-      const uploadTask = this.storage.upload(filePath, file);
-
-      uploadTask
-        .snapshotChanges()
-        .pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe((url) => {
-              if (imageType === 'icon') {
-                this.iconPath = url;
-                const tempPlaceholderIcon = this.iconPath.split('_')[1];
-                this.placeholderIcon = tempPlaceholderIcon.split('?')[0];
-              } else if (imageType === 'header') {
-                this.headerPath = url;
-                const tempPlaceholderHeader = this.headerPath.split('_')[1];
-                this.placeholderHeader = tempPlaceholderHeader.split('?')[0];
-              }
-
-              this.eventForm.patchValue({
-                images: {
-                  [`${imageType}Url`]: url,
-                },
+      // Compress the image
+      this.compressImage(file).subscribe((compressedFile: File) => {
+        const filePath = `images/${Date.now()}_${filename}`;
+        const fileRef = this.storage.ref(filePath);
+        const uploadTask = this.storage.upload(filePath, compressedFile);
+  
+        uploadTask
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe((url) => {
+                if (imageType === 'icon') {
+                  this.iconPath = url;
+                  const tempPlaceholderIcon = this.iconPath.split('_')[1];
+                  this.placeholderIcon = tempPlaceholderIcon.split('?')[0];
+                } else if (imageType === 'header') {
+                  this.headerPath = url;
+                  const tempPlaceholderHeader = this.headerPath.split('_')[1];
+                  this.placeholderHeader = tempPlaceholderHeader.split('?')[0];
+                }
+  
+                this.eventForm.patchValue({
+                  images: {
+                    [`${imageType}Url`]: url,
+                  },
+                });
               });
-            });
-          })
-        )
-        .subscribe();
+            })
+          )
+          .subscribe();
+      });
     }
   }
 
