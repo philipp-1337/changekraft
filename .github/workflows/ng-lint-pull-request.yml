@@ -27,7 +27,7 @@ jobs:
         run: npm list
 
       - name: Install dependencies
-        run: npm install --quiet --legacy-peer-deps
+        run: npm ci --quiet --legacy-peer-deps
 
       - name: Install Angular CLI
         run: npm i -g @angular/cli
