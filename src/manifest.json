@@ -1,8 +1,8 @@
 {
   "name": "changekraft",
   "short_name": "chngkrft",
-  "theme_color": "#3147ab",
-  "background_color": "#3147ab",
+  "theme_color": "#9575cd",
+  "background_color": "#9575cd",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
