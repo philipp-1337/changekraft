@@ -47,6 +47,24 @@
                   </mat-error>
               </mat-form-field>
             </div>
+            <div class="row mt-3">
+              <h3>Link</h3>
+              <mat-form-field class="w-100">
+                <mat-label>Adresse (inkl. https://)</mat-label>
+                <input matInput type="text" color="accent" id="link" formControlName="link"
+                  class="form-control" />
+              </mat-form-field>
+              <mat-form-field class="w-100" [ngClass]="{ 'mat-form-field-invalid': !urlAvailable }">
+                <mat-label>Link-Titel</mat-label>
+                <input matInput type="text" color="accent" id="linkLabel" formControlName="linkLabel" class="form-control"/>
+                <mat-error *ngIf="
+                    eventForm.controls['link'].touched &&
+                    !eventForm.controls['link'].valid &&
+                    eventForm.controls['linkLabel'].touched &&
+                    !eventForm.controls['linkLabel'].valid
+                  ">Bitte einen Link-Titel vergeben</mat-error>
+              </mat-form-field>
+            </div>
             <div formGroupName="dates" class="row mt-3">
               <h3>Datum </h3>
               <mat-checkbox id="multipleDays" name="multipleDays" labelPosition="before" formControlName="multipleDays">

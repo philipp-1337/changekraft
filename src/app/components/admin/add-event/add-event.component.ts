@@ -93,6 +93,8 @@ export class AddEventComponent implements OnInit {
         Validators.minLength(5)
       ]],
       desc: ['', [Validators.required]],
+      link: [''],
+      linkLabel: [''],
       dates: this.fb.group({
         multipleDays: [false],
         startDate: [''],
