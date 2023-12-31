@@ -47,8 +47,9 @@
             </p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-flat-button type="button" color="primary" title="Anmeldung" routerLink="rsvp/">RSPV
+            <button *ngIf="!(event$ | async)?.link" mat-flat-button type="button" color="primary" title="Anmeldung" routerLink="rsvp/">RSPV
             </button>
+            <a *ngIf="(event$ | async)?.link" mat-flat-button color="primary" href="{{ (event$ | async)?.link }}">{{ (event$ | async)?.linkLabel }}</a>
             <span class="bar-spacer"></span>
             <button *ngIf="authservice.isAuthenticated()" mat-stroked-button type="button" color="accent" title="Zurück"
               [routerLink]="['../../admin/edit-event/' + eventId]" [disabled]="!authservice.isAuthenticated()"> Zurück

@@ -8,6 +8,8 @@ export class Event {
     public name: string,
     public desc: string,
     public url: string,
+    public link: string,
+    public linkLabel: string,
     public dates: {
       multipleDays: boolean,
       startDate: Timestamp,
