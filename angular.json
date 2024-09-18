@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "changekraft:build"
+            "buildTarget": "changekraft:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "changekraft:build:production"
+              "buildTarget": "changekraft:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "changekraft:build"
+            "buildTarget": "changekraft:build"
           }
         },
         "test": {
