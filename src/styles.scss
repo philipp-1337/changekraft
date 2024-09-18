@@ -3,14 +3,14 @@
 @include mat.core();
 
 // Color Settings
-$rsvp-primary: mat.define-palette(mat.$teal-palette, 600);
-$rsvp-accent: mat.define-palette(mat.$deep-purple-palette, 300);
-$rsvp-warn: mat.define-palette(mat.$red-palette, 900);
+$rsvp-primary: mat.m2-define-palette(mat.$m2-teal-palette, 600);
+$rsvp-accent: mat.m2-define-palette(mat.$m2-deep-purple-palette, 300);
+$rsvp-warn: mat.m2-define-palette(mat.$m2-red-palette, 900);
 
 // Font Settings
 // @import './assets/fonts/raleway/raleway';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500&display=swap');
-$rsvp-typography-level: mat.define-typography-level(
+$rsvp-typography-level: mat.m2-define-typography-level(
   $font-family: Raleway,
   $font-weight: 400,
   $font-size: 1rem,
@@ -18,15 +18,15 @@ $rsvp-typography-level: mat.define-typography-level(
   $letter-spacing: normal,
 );
 
-$rsvp-typography-config: mat.define-typography-config(
-  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
-  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
-  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
-  $headline-4: mat.define-typography-level(34px, 40px, 400),
-  $headline-5: mat.define-typography-level(24px, 32px, 400),
+$rsvp-typography-config: mat.m2-define-typography-config(
+  $headline-1: mat.m2-define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-2: mat.m2-define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $headline-3: mat.m2-define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $headline-4: mat.m2-define-typography-level(34px, 40px, 400),
+  $headline-5: mat.m2-define-typography-level(24px, 32px, 400),
 );
 
-$rsvp-theme: mat.define-dark-theme((
+$rsvp-theme: mat.m2-define-dark-theme((
  color: (
    primary: $rsvp-primary,
    accent: $rsvp-accent,
@@ -52,7 +52,7 @@ $rsvp-theme: mat.define-dark-theme((
 }
 
 .text-error {
-  color: mat.get-color-from-palette($rsvp-warn);
+  color: mat.m2-get-color-from-palette($rsvp-warn);
 }
 
 .text-grey {
@@ -74,7 +74,7 @@ body { margin: 0; font-family: 'Raleway'; overflow-x: hidden; background: #30303
 input { font-size: 16px;}
 
 .active {
-  color: mat.get-color-from-palette($rsvp-primary);
+  color: mat.m2-get-color-from-palette($rsvp-primary);
 }
 
 .mat-badge-medium .mat-badge-content {
