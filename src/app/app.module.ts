@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -26,35 +26,29 @@ import { SnackbarClass } from './shared/snackbar.class';
 import { RouterModule } from '@angular/router';
 
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    CoreModule,
-    MaterialModule,
-    MaterialFileInputModule,
-    BrowserModule,
-    RouterModule,
-    SharedModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    })
-  ],
-  providers: [
-    { provide: LOCALE_ID, useValue: 'de' },
-    AngularFireAuthGuard,
-    UpdateService,
-    SnackbarClass
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [CoreModule,
+        MaterialModule,
+        MaterialFileInputModule,
+        BrowserModule,
+        RouterModule,
+        SharedModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireStorageModule,
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production
+        })], providers: [
+        { provide: LOCALE_ID, useValue: 'de' },
+        AngularFireAuthGuard,
+        UpdateService,
+        SnackbarClass,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
   constructor() {
     registerLocaleData(localeDe);
