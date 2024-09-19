@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { APP_INITIALIZER, NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
@@ -16,6 +16,7 @@ import { MaterialModule } from './shared/material.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
+import { PwaService } from './services/pwa.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -25,9 +26,11 @@ import { UpdateService } from './services/update.service';
 import { SnackbarClass } from './shared/snackbar.class';
 import { RouterModule } from '@angular/router';
 
+const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
 @NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], imports: [CoreModule,
+    bootstrap: [AppComponent], 
+    imports: [CoreModule,
         MaterialModule,
         MaterialFileInputModule,
         BrowserModule,
@@ -42,11 +45,14 @@ import { RouterModule } from '@angular/router';
         AppRoutingModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production
-        })], providers: [
+        })],
+    providers: [
         { provide: LOCALE_ID, useValue: 'de' },
         AngularFireAuthGuard,
         UpdateService,
         SnackbarClass,
+        PwaService,
+        { provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true },
         provideHttpClient(withInterceptorsFromDi())
     ] })
 export class AppModule {
