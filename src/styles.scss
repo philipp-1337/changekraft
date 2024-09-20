@@ -117,6 +117,37 @@ input { font-size: 16px;}
   }
 }
 
+.css-util {
+  &.text-align {
+    &.center {
+      text-align: center;
+    }
+  }
+
+  &.m-32 {
+    margin: 32px
+  }
+
+  &.ml-16 {
+    margin-left: 16px
+  }
+
+  &.position {
+    position: absolute !important;
+
+    &.center {
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    &.top-right {
+      right: 0 !important;
+      top: 0 !important;
+    }
+  }
+}
+
 .bottom {
   --safe-area-inset-bottom: env(safe-area-inset-bottom);
   height: calc(56px + var(--safe-area-inset-bottom));
