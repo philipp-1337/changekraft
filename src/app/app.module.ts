@@ -25,36 +25,39 @@ import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { UpdateService } from './services/update.service';
 import { SnackbarClass } from './shared/snackbar.class';
 import { RouterModule } from '@angular/router';
+import { PromptComponent } from './components/prompt-component/prompt-component.component';
 
 const initializer = (pwaService: PwaService) => () => pwaService.initPwaPrompt();
 
-@NgModule({ declarations: [AppComponent],
-    bootstrap: [AppComponent], 
-    imports: [CoreModule,
-        MaterialModule,
-        MaterialFileInputModule,
-        BrowserModule,
-        RouterModule,
-        SharedModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireStorageModule,
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        BrowserAnimationsModule,
-        LayoutModule,
-        AppRoutingModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: environment.production
-        })],
-    providers: [
-        { provide: LOCALE_ID, useValue: 'de' },
-        AngularFireAuthGuard,
-        UpdateService,
-        SnackbarClass,
-        PwaService,
-        { provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true },
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+@NgModule({
+  declarations: [AppComponent, PromptComponent],
+  bootstrap: [AppComponent],
+  imports: [CoreModule,
+    MaterialModule,
+    MaterialFileInputModule,
+    BrowserModule,
+    RouterModule,
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    })],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'de' },
+    AngularFireAuthGuard,
+    UpdateService,
+    SnackbarClass,
+    PwaService,
+    { provide: APP_INITIALIZER, useFactory: initializer, deps: [PwaService], multi: true },
+    provideHttpClient(withInterceptorsFromDi())
+  ]
+})
 export class AppModule {
   constructor() {
     registerLocaleData(localeDe);

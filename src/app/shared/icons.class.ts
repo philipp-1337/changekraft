@@ -18,6 +18,12 @@ export class IconsClass {
       )
     );
     iconRegistry.addSvgIcon(
+      'add_box',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/add_box_FILL0_wght400_GRAD0_opsz24.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
       'add',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/add_black_24dp.svg'
@@ -57,6 +63,12 @@ export class IconsClass {
       'account_circle_outline',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/outline-account_circle-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'close',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/close_FILL0_wght400_GRAD0_opsz48.svg'
       )
     );
     iconRegistry.addSvgIcon(
@@ -111,6 +123,12 @@ export class IconsClass {
       'invitation',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-insert_invitation-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'ios_share',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/ios_share_FILL0_wght400_GRAD0_opsz24.svg'
       )
     );
     iconRegistry.addSvgIcon(
@@ -177,6 +195,12 @@ export class IconsClass {
       'more_vert',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/fonts/material-icons/svg/baseline-more_vert-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'navigate_next',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/fonts/material-icons/svg/navigate_next_FILL0_wght400_GRAD0_opsz24.svg'
       )
     );
     iconRegistry.addSvgIcon(
