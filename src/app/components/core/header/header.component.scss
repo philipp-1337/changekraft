@@ -14,12 +14,20 @@
 }
 
 .mat-fab-overlay {
-  border-radius: 50%; 
+  border-radius: 50%;
   height: 56px;
-  width: 56px; 
+  width: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   .mat-icon-overlay {
-    transform: translateY(12px);
-    vertical-align: middle
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px; // Adjust this value if your icon has a different size
+    width: 24px; // Adjust this value if your icon has a different size
+    margin-top: 1px; // Fine-tune vertical alignment if needed
   }
 }
 
