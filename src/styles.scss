@@ -145,6 +145,12 @@ input { font-size: 16px;}
       right: 0 !important;
       top: 0 !important;
     }
+     
+    &.center-right { // Neue Klasse
+      right: 0 !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important; // Vertikal zentrieren
+    }
   }
 }
 
