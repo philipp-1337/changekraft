@@ -114,6 +114,10 @@ export class AuthService {
     );
   }
 
+  isAuthenticatedSync(): boolean {
+    return this.token != null;
+  }
+
   logout() {
     this.afAuth.signOut().then(() => {
       this.router.navigate(['/']);

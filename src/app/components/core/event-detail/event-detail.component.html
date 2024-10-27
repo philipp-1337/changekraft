@@ -51,8 +51,8 @@
             </button>
             <a *ngIf="(event$ | async)?.link" mat-flat-button color="primary" href="{{ (event$ | async)?.link }}">{{ (event$ | async)?.linkLabel }}</a>
             <span class="bar-spacer"></span>
-            <button *ngIf="authservice.isAuthenticated()" mat-stroked-button type="button" color="accent" title="Zurück"
-              [routerLink]="['../../admin/edit-event/' + eventId]" [disabled]="!authservice.isAuthenticated()"> Zurück
+            <button *ngIf="authservice.isAuthenticatedSync()" mat-stroked-button type="button" color="accent" title="Zurück"
+              [routerLink]="['../../admin/edit-event/' + eventId]" [disabled]="!authservice.isAuthenticatedSync()"> Zurück
             </button>
           </mat-card-actions>
         </mat-card>
