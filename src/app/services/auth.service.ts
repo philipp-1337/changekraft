@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { first, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
@@ -108,8 +108,10 @@ export class AuthService {
     return credentials;
   }
 
-  isAuthenticated() {
-    return this.token != null;
+  isAuthenticated(): Observable<boolean> {
+    return this.user.pipe(
+      map(user => !!user)
+    );
   }
 
   logout() {
